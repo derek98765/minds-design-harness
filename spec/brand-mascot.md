@@ -16,7 +16,8 @@ and helps. She is capable and warm, never sarcastic, never a robot butler.
 She is *always in motion* — the poses are expressive and mid-gesture. A static,
 front-facing Abby standing to attention is off-brand.
 
-Assets are in `assets/mascot/`.
+Poses are in `assets/mascot/poses/` (21 renders); the model sheet is in
+`assets/mascot/turnaround/`.
 
 ---
 
@@ -38,8 +39,8 @@ her into a corner to fill space reads as clip-art.
 
 ## Poses
 
-`assets/mascot/` holds a set of approved poses plus a four-view turnaround
-(front, back, left, right).
+`assets/mascot/poses/` holds 21 approved poses; `assets/mascot/turnaround/` holds the
+model sheet (front, back, left, right, plus a combined four-view reference).
 
 - Pick a pose whose gesture **matches what the copy says.** Pointing at the headline,
   arms crossed while "thinking", waving on a welcome screen.
@@ -54,8 +55,9 @@ does not exist, generate it from the reference — see [brand-imagery.md](brand-
 
 ## Hand stickers
 
-`assets/stickers/` holds the glossy blue hands — pointing, thumbs-up, OK, waving,
-holding a card, and similar.
+`assets/stickers/solo/` holds 8 bare gestures (pointing, OK, open palm, waving);
+`assets/stickers/props/` holds 6 compositions holding an object (a card, coins, a
+checklist, a phone).
 
 They are a **separate accent system** from Abby herself:
 
