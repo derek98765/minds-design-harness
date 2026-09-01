@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minds Design System — Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../kit/tokens.css">
+<style>
+  /* ── Showcase chrome. Not part of the design system. ───────────────── */
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--font-family-primary);
+    background: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+  .doc-nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; flex-wrap: wrap; gap: var(--space-16);
+    padding: var(--space-16) var(--space-24);
+    background: var(--color-base-white);
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--font-size-body-small);
+    font-weight: var(--font-weight-medium);
+  }
+  .doc-nav a { color: var(--color-brand-blue-500); text-decoration: none; }
+  .doc-nav a:hover { text-decoration: underline; }
+  .doc-section { padding: var(--space-72) var(--space-24); }
+  .doc-inner { max-width: 1200px; margin: 0 auto; }
+  .doc-h {
+    font-size: var(--font-size-h3); font-weight: var(--font-weight-extrabold);
+    line-height: var(--line-height-heading); margin: 0 0 var(--space-8);
+  }
+  .doc-sub {
+    font-size: var(--font-size-body-large); color: var(--color-text-muted);
+    line-height: var(--line-height-body); margin: 0 0 var(--space-40); max-width: 68ch;
+  }
+  .doc-label {
+    font-size: var(--font-size-caption); font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-caption); text-transform: uppercase;
+    color: var(--color-text-muted); margin: var(--space-40) 0 var(--space-16);
+  }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: var(--font-size-caption); background: var(--color-neutral-100);
+    padding: 2px 6px; border-radius: var(--radius-sm);
+  }
+  /* Swatches */
+  .ramp { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: var(--space-8); }
+  .sw { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border); background: var(--color-base-white); }
+  .sw-chip { height: 64px; }
+  .sw-meta { padding: var(--space-8); font-size: var(--font-size-caption); line-height: 1.4; }
+  .sw-name { font-weight: var(--font-weight-bold); display: block; }
+  .sw-hex { color: var(--color-text-muted); font-family: ui-monospace, monospace; }
+  /* Type ramp */
+  .type-row {
+    display: flex; align-items: baseline; gap: var(--space-24);
+    padding: var(--space-16) 0; border-bottom: 1px solid var(--color-border);
+  }
+  .type-tag {
+    flex: 0 0 130px; font-size: var(--font-size-caption); font-family: ui-monospace, monospace;
+    color: var(--color-text-muted);
+  }
+  /* Spacing bars */
+  .sp-row { display: flex; align-items: center; gap: var(--space-16); margin-bottom: var(--space-8); }
+  .sp-tag { flex: 0 0 110px; font-size: var(--font-size-caption); font-family: ui-monospace, monospace; }
+  .sp-bar { height: 20px; background: var(--color-brand-orange-500); border-radius: var(--radius-sm); }
+  .sp-bad .sp-bar { background: var(--color-error); }
+  .sp-note { font-size: var(--font-size-caption); color: var(--color-text-muted); }
+  /* Component grid */
+  .row { display: flex; flex-wrap: wrap; gap: var(--space-12); align-items: center; }
+  .panel {
+    background: var(--color-base-white); border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); padding: var(--space-24);
+  }
+  .panel-dark { background: var(--color-brand-blue-500); border-color: transparent; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-24); }
+
+  /* ── The system itself ─────────────────────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--font-family-primary); font-weight: var(--font-weight-extrabold);
+    border-radius: var(--radius-full); border: 1px solid transparent;
+    cursor: pointer; white-space: nowrap; text-decoration: none;
+    transition: background-color var(--duration-base), color var(--duration-base),
+                border-color var(--duration-base), filter var(--duration-base);
+  }
+  /* Button type sizes are their own scale, not the body ramp — see DESIGN.md §4. design-harness-ignore */
+  .btn-sm { padding: 8px 32px; font-size: 16px; }   /* design-harness-ignore */
+  .btn-md { padding: 16px 32px; font-size: 18px; }  /* design-harness-ignore */
+  .btn-lg { padding: 12px 40px; font-size: 18px; }  /* design-harness-ignore */
+  .btn-xl { padding: 20px 64px; font-size: 20px; }  /* design-harness-ignore */
+  .btn-primary { background: var(--color-brand-orange-500); color: var(--color-base-white); }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .btn-secondary { background: var(--color-brand-blue-500); color: var(--color-base-white); }
+  .btn-secondary:hover { filter: brightness(1.25); }
+  .btn-tertiary { background: var(--color-neutral-900); color: var(--color-base-white); }
+  .btn-tertiary:hover { background: var(--color-neutral-600); }
+  .btn-tertiary-light { background: var(--color-base-white); color: var(--color-neutral-900); }
+  .btn-outline-primary { border-color: var(--color-brand-orange-500); color: var(--color-brand-orange-500); background: transparent; }
+  .btn-outline-primary:hover { background: var(--color-brand-orange-500); color: var(--color-base-white); }
+  .btn-outline-secondary { border-color: var(--color-brand-blue-500); color: var(--color-brand-blue-500); background: transparent; }
+  .btn-outline-secondary:hover { background: var(--color-brand-blue-500); color: var(--color-base-white); }
+  .btn-outline-muted { border-color: var(--color-neutral-400); color: var(--color-text); background: transparent; }
+  .btn-outline-muted:hover { border-color: var(--color-neutral-900); color: var(--color-neutral-900); }
+  .btn-outline-light { border-color: var(--color-beige-100); color: var(--color-beige-100); background: transparent; }
+  .btn-outline-light:hover { background: var(--color-base-white); color: var(--color-neutral-900); }
+  .btn-link { background: transparent; color: var(--color-brand-orange-500); padding: 0; text-decoration: underline; text-underline-offset: 4px; font-weight: var(--font-weight-semibold); }
+
+  .eyebrow {
+    font-size: var(--font-size-caption-large); font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-caption); text-transform: uppercase;
+    color: var(--color-brand-blue-500); margin: 0 0 var(--space-16);
+  }
+  .h1 { font-size: var(--font-size-h1); font-weight: 800; line-height: var(--line-height-heading); letter-spacing: var(--letter-spacing-h1); margin: 0; }
+  .h2 { font-size: var(--font-size-h2); font-weight: 800; line-height: var(--line-height-heading); letter-spacing: var(--letter-spacing-h2); margin: 0; }
+  .h4 { font-size: var(--font-size-h4); font-weight: 800; line-height: var(--line-height-heading); margin: 0 0 var(--space-12); }
+  .lede { font-size: var(--font-size-body-xlarge); line-height: var(--line-height-body); color: var(--color-text-muted); max-width: 60ch; }
+  .body { font-size: var(--font-size-body-large); line-height: var(--line-height-body); color: var(--color-text-muted); }
+
+  .card {
+    background: var(--color-base-white); border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); padding: var(--space-24);
+  }
+  .badge {
+    display: inline-flex; align-items: center; border-radius: var(--radius-full);
+    padding: 4px 12px; font-size: var(--font-size-caption);
+    font-weight: var(--font-weight-medium); letter-spacing: var(--letter-spacing-caption);
+    text-transform: uppercase;
+  }
+  .badge-orange { background: var(--color-brand-orange-100); color: var(--color-brand-orange-800); }
+  .badge-blue { background: var(--color-brand-blue-100); color: var(--color-brand-blue-700); }
+  .chip {
+    display: inline-flex; border-radius: var(--radius-full); padding: 8px 20px;
+    background: var(--color-base-white); color: var(--color-brand-blue-500);
+    border: 1px solid var(--color-border); font-size: var(--font-size-body-small);
+    font-weight: var(--font-weight-medium); cursor: pointer;
+    transition: background-color var(--duration-base), color var(--duration-base);
+  }
+  .chip:hover { background: var(--color-brand-blue-500); color: var(--color-base-white); }
+  .input {
+    width: 100%; font-family: var(--font-family-primary);
+    font-size: 16px; padding: 12px var(--space-16); /* 16px min stops iOS auto-zoom. design-harness-ignore */
+    border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    background: var(--color-base-white); color: var(--color-text);
+  }
+  .input:focus { outline: none; border-color: var(--color-brand-blue-500); }
+
+  /* Composed blocks */
+  .block { padding: var(--space-120) var(--space-24); }
+  .block-inner { max-width: 1200px; margin: 0 auto; }
+  .bg-canvas { background: var(--color-bg); }
+  .bg-white { background: var(--color-bg-alt); }
+  .bg-inverted { background: var(--color-bg-inverted); color: var(--color-text-on-dark); }
+  .split { display: grid; gap: var(--space-60); align-items: center; }
+  @media (min-width: 1025px) { .split { grid-template-columns: 1fr 1fr; gap: var(--space-96); } }
+  .media {
+    aspect-ratio: 4 / 3; border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--color-brand-blue-200), var(--color-beige-300));
+    display: grid; place-items: center; color: var(--color-brand-blue-700);
+    font-size: var(--font-size-body-small); font-weight: var(--font-weight-medium);
+  }
+  .stat-num { font-size: var(--font-size-h1); font-weight: 800; line-height: 1; letter-spacing: var(--letter-spacing-h1); }
+  .stat-label { font-size: var(--font-size-body-large); color: var(--color-brand-orange-300); margin-top: var(--space-8); }
+  .faq-item { border-bottom: 1px solid var(--color-border); padding: var(--space-24) 0; }
+  .faq-q { font-size: var(--font-size-h5); font-weight: 700; margin: 0 0 var(--space-8); }
+  .callout {
+    border-left: 3px solid var(--color-brand-orange-500);
+    padding: var(--space-12) var(--space-16); background: var(--color-brand-orange-50);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: var(--font-size-body-default); line-height: var(--line-height-body);
+  }
+</style>
+</head>
+<body>
+
+<nav class="doc-nav">
+  <strong>Minds Showcase</strong>
+  <a href="#color">Color</a>
+  <a href="#type">Type</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#radius">Radius &amp; Depth</a>
+  <a href="#components">Components</a>
+  <a href="#blocks">Composed blocks</a>
+</nav>
+
+<!-- ══════════════════════════ COLOR ══════════════════════════ -->
+<section class="doc-section bg-white" id="color">
+  <div class="doc-inner">
+    <h2 class="doc-h">Color</h2>
+    <p class="doc-sub">
+      Two brand colors do all the work: orange for action, indigo for structure.
+      Orange is rationed so strictly it reads as instruction rather than decoration —
+      it is never a surface color and never a heading color.
+    </p>
+
+    <p class="doc-label">Orange — the action color</p>
+    <div class="ramp" id="ramp-orange"></div>
+
+    <p class="doc-label">Blue — structure, eyebrows, links, inverted canvas</p>
+    <div class="ramp" id="ramp-blue"></div>
+
+    <p class="doc-label">Beige — the warm canvas family</p>
+    <div class="ramp" id="ramp-beige"></div>
+
+    <p class="doc-label">Neutral — text and borders</p>
+    <div class="ramp" id="ramp-neutral"></div>
+
+    <p class="doc-label">Semantic roles — prefer these in markup</p>
+    <div class="ramp" id="ramp-semantic"></div>
+
+    <div class="callout" style="margin-top:var(--space-40)">
+      <strong>Rule.</strong> Adjacent sections never share a background.
+      Warm canvas → white → warm canvas is the default rhythm. On the indigo canvas,
+      headings go light, body goes lighter, and the CTA stays orange.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ TYPE ══════════════════════════ -->
+<section class="doc-section bg-canvas" id="type">
+  <div class="doc-inner">
+    <h2 class="doc-h">Typography</h2>
+    <p class="doc-sub">
+      Manrope only. Extrabold or quiet, nothing between — headlines sit at 800, body at 400,
+      and the gap between them <em>is</em> the hierarchy. Tracking runs opposite by scale:
+      headlines tighten, eyebrows and captions open up. Every size below is responsive already.
+    </p>
+    <div id="type-ramp"></div>
+
+    <div class="callout" style="margin-top:var(--space-40)">
+      <strong>Don't.</strong> No all-caps headlines. No second font family. No serif display face.
+      Headlines may highlight exactly one phrase in indigo — never in orange.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ SPACING ══════════════════════════ -->
+<section class="doc-section bg-white" id="spacing">
+  <div class="doc-inner">
+    <h2 class="doc-h">Spacing</h2>
+    <p class="doc-sub">
+      Numbers are <strong>literal pixels</strong>, not Tailwind's 4× scale. These 21 values
+      are the only valid ones. Anything else fails silently — Tailwind resolves it against
+      its built-in scale, so the layout breaks without throwing an error.
+    </p>
+    <div id="sp-scale"></div>
+
+    <p class="doc-label">The silent failure, made visible</p>
+    <div id="sp-bad"></div>
+    <div class="callout" style="margin-top:var(--space-24)">
+      <!-- Names the invalid values on purpose, as documentation. design-harness-ignore -->
+      <strong>When in doubt, round down.</strong> Use <code>py-8</code> not <code>py-10</code>, <code>gap-12</code> not <code>gap-14</code>. <!-- design-harness-ignore -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ RADIUS & DEPTH ══════════════════════════ -->
+<section class="doc-section bg-canvas" id="radius">
+  <div class="doc-inner">
+    <h2 class="doc-h">Radius &amp; depth</h2>
+    <p class="doc-sub">
+      The shape system is uniformly soft — every button is a pill, nothing is square.
+      Depth is nearly absent: separation comes from background change and whitespace,
+      and shadows appear only where something genuinely floats.
+    </p>
+
+    <p class="doc-label">Radius</p>
+    <div class="row" id="radius-row"></div>
+
+    <p class="doc-label">Elevation</p>
+    <div class="row" style="gap:var(--space-24)" id="shadow-row"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ COMPONENTS ══════════════════════════ -->
+<section class="doc-section bg-white" id="components">
+  <div class="doc-inner">
+    <h2 class="doc-h">Components</h2>
+    <p class="doc-sub">
+      Reuse these. Do not build a one-off button, card, or input — every extra component
+      is a way for a page to drift off-brand.
+    </p>
+
+    <p class="doc-label">Buttons — filled</p>
+    <div class="row">
+      <button class="btn btn-md btn-primary">Get started</button>
+      <button class="btn btn-md btn-secondary">Learn more</button>
+      <button class="btn btn-md btn-tertiary">Continue</button>
+    </div>
+
+    <p class="doc-label">Buttons — outline</p>
+    <div class="row">
+      <button class="btn btn-md btn-outline-primary">Register</button>
+      <button class="btn btn-md btn-outline-secondary">See details</button>
+      <button class="btn btn-md btn-outline-muted">View all Minds</button>
+    </div>
+
+    <p class="doc-label">On a dark surface</p>
+    <div class="panel panel-dark row">
+      <button class="btn btn-md btn-primary">Get started</button>
+      <button class="btn btn-md btn-tertiary-light">Browse</button>
+      <button class="btn btn-md btn-outline-light">Talk to us</button>
+    </div>
+
+    <p class="doc-label">Sizes</p>
+    <div class="row">
+      <button class="btn btn-sm btn-primary">Small</button>
+      <button class="btn btn-md btn-primary">Medium</button>
+      <button class="btn btn-lg btn-primary">Large</button>
+      <button class="btn btn-xl btn-primary">XLarge</button>
+    </div>
+
+    <p class="doc-label">Badges &amp; chips</p>
+    <div class="row">
+      <span class="badge badge-orange">New</span>
+      <span class="badge badge-blue">Beta</span>
+      <button class="chip">Productivity</button>
+      <button class="chip">Research</button>
+    </div>
+
+    <p class="doc-label">Inputs — note the 16px minimum, which stops iOS auto-zoom</p>
+    <div class="grid-3">
+      <div>
+        <label class="body" style="display:block;margin-bottom:var(--space-8);font-size:var(--font-size-body-default)">Email</label>
+        <input class="input" type="email" placeholder="you@example.com">
+      </div>
+      <div>
+        <label class="body" style="display:block;margin-bottom:var(--space-8);font-size:var(--font-size-body-default)">Name</label>
+        <input class="input" type="text" placeholder="Your name">
+      </div>
+    </div>
+
+    <p class="doc-label">Cards</p>
+    <div class="grid-3">
+      <div class="card">
+        <h4 class="h4">Works while you sleep</h4>
+        <p class="body" style="margin:0">Your Mind keeps researching and drafting overnight, so the answer is waiting when you wake up.</p>
+      </div>
+      <div class="card">
+        <h4 class="h4">Learns your workflow</h4>
+        <p class="body" style="margin:0">It picks up how you work and adapts, instead of asking you to start over each session.</p>
+      </div>
+      <div class="card">
+        <h4 class="h4">Acts on your behalf</h4>
+        <p class="body" style="margin:0">Connect email and chat apps once, then let your Mind handle the follow-ups.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ COMPOSED BLOCKS ══════════════════════════ -->
+<section class="doc-section bg-canvas" id="blocks">
+  <div class="doc-inner">
+    <h2 class="doc-h">Composed blocks</h2>
+    <p class="doc-sub">
+      Getting a component right is easy; getting the page rhythm right is not. Everything
+      below this line is a real, full-width section at real spacing. Scroll it and watch the
+      background alternate — <strong>this is the part to copy.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- Hero — warm canvas -->
+<section class="block bg-canvas">
+  <div class="block-inner split">
+    <div>
+      <p class="eyebrow">One-click Minds</p>
+      <h1 class="h1">Your Mind handles it,<br><span style="color:var(--color-brand-blue-500)">while you get on with the day</span></h1>
+      <p class="lede" style="margin:var(--space-24) 0 var(--space-40)">
+        Set it up once through email or the apps you already use. No prompt engineering,
+        no dashboard to learn.
+      </p>
+      <div class="row">
+        <a class="btn btn-md btn-primary" href="#">Create your Mind</a>
+        <a class="btn btn-md btn-outline-muted" href="#">See how it works</a>
+      </div>
+    </div>
+    <div class="media">hero image — see spec/brand-imagery.md</div>
+  </div>
+</section>
+
+<!-- Feature grid — white -->
+<section class="block bg-white">
+  <div class="block-inner">
+    <p class="eyebrow">What your Mind can do</p>
+    <h2 class="h2" style="max-width:20ch">It learns your workflow. It does the heavy lifting.</h2>
+    <div class="grid-3" style="margin-top:var(--space-60)">
+      <div class="card">
+        <h4 class="h4">Books and reschedules</h4>
+        <p class="body" style="margin:0">Handles appointments, reminders, and the back-and-forth that eats a morning.</p>
+      </div>
+      <div class="card">
+        <h4 class="h4">Spots problems early</h4>
+        <p class="body" style="margin:0">Watches your calendar for collisions and flags them before they become a scramble.</p>
+      </div>
+      <div class="card">
+        <h4 class="h4">Drafts the follow-up</h4>
+        <p class="body" style="margin:0">Tracks who you owe a reply and writes the first version in your voice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stat band — inverted indigo -->
+<section class="block bg-inverted">
+  <div class="block-inner">
+    <h2 class="h2" style="max-width:24ch;margin-bottom:var(--space-60)">Built for the hours you don't have</h2>
+    <div class="grid-3">
+      <div>
+        <div class="stat-num">40k+</div>
+        <div class="stat-label">Minds created</div>
+      </div>
+      <div>
+        <div class="stat-num">6hrs</div>
+        <div class="stat-label">Saved each week</div>
+      </div>
+      <div>
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Always working</div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:var(--space-60)">
+      <a class="btn btn-md btn-primary" href="#">Get started free</a>
+      <a class="btn btn-md btn-outline-light" href="#">Talk to us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ — warm canvas -->
+<section class="block bg-canvas">
+  <div class="block-inner" style="max-width:820px">
+    <p class="eyebrow">Questions</p>
+    <h2 class="h2" style="margin-bottom:var(--space-40)">Before you start</h2>
+    <div class="faq-item">
+      <p class="faq-q">Do I need to know how to prompt?</p>
+      <p class="body" style="margin:0">No. Pick a one-click Mind and it arrives configured. You talk to it the way you'd talk to a colleague.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Where does it actually run?</p>
+      <p class="body" style="margin:0">Through the channels you already use — email, Telegram, and the apps you connect.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Can I change it later?</p>
+      <p class="body" style="margin:0">Yes. Every Mind can be renamed, retrained, and given new skills at any point.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer CTA — white -->
+<section class="block bg-white">
+  <div class="block-inner" style="text-align:center">
+    <h2 class="h2" style="max-width:22ch;margin:0 auto var(--space-24)">Start with one Mind and see what it clears</h2>
+    <p class="lede" style="margin:0 auto var(--space-40)">Free to try. No card, no setup call.</p>
+    <a class="btn btn-xl btn-primary" href="#">Create your Mind</a>
+  </div>
+</section>
+
+<footer style="padding:var(--space-40) var(--space-24);background:var(--color-bg);border-top:1px solid var(--color-border)">
+  <div class="doc-inner">
+    <p class="body" style="margin:0;font-size:var(--font-size-body-small)">
+      Minds design system showcase — see <code>spec/DESIGN.md</code> for the rules behind everything above.
+    </p>
+  </div>
+</footer>
+
+<script>
+// ── Render the token ramps from the live CSS variables ─────────────────
+// Reading from getComputedStyle means this page can never drift from
+// kit/tokens.css — if a token changes, the swatch changes with it.
+const css = getComputedStyle(document.documentElement);
+const val = n => css.getPropertyValue(n).trim();
+
+const STEPS = [50,100,200,300,400,500,600,700,800,900];
+function ramp(elId, prefix, darkFrom) {
+  document.getElementById(elId).innerHTML = STEPS.map(s => {
+    const v = `--color-${prefix}-${s}`;
+    return `<div class="sw">
+      <div class="sw-chip" style="background:${val(v)}"></div>
+      <div class="sw-meta">
+        <span class="sw-name">${prefix.replace('brand-','')}-${s}</span>
+        <span class="sw-hex">${val(v).toUpperCase()}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+ramp('ramp-orange','brand-orange');
+ramp('ramp-blue','brand-blue');
+ramp('ramp-beige','beige');
+ramp('ramp-neutral','neutral');
+
+const SEMANTIC = [
+  ['--color-primary','primary','Action / CTA'],
+  ['--color-accent','accent','Structure / links'],
+  ['--color-bg','bg','Default page surface'],
+  ['--color-bg-alt','bg-alt','Alternating section'],
+  ['--color-bg-inverted','bg-inverted','Indigo canvas'],
+  ['--color-text','text','Headings'],
+  ['--color-text-muted','text-muted','Body copy'],
+  ['--color-border','border','Hairlines'],
+];
+document.getElementById('ramp-semantic').innerHTML = SEMANTIC.map(([v,name,use]) =>
+  `<div class="sw">
+    <div class="sw-chip" style="background:${val(v)}"></div>
+    <div class="sw-meta">
+      <span class="sw-name">${name}</span>
+      <span class="sw-hex">${use}</span>
+    </div>
+  </div>`).join('');
+
+// ── Type ramp ────────────────────────────────────────────────────────
+const TYPE = [
+  ['h1','Heading 1',800,'56 → 48 → 40px'],
+  ['h2','Heading 2',800,'44 → 36 → 30px'],
+  ['h3','Heading 3',800,'34 → 28 → 24px'],
+  ['h4','Heading 4',800,'28 → 24 → 20px'],
+  ['h5','Heading 5',700,'22 → 20 → 18px'],
+  ['body-xlarge','Lede paragraph',400,'18 → 17 → 16px'],
+  ['body-large','Standard body',400,'16 → 16 → 15px'],
+  ['body-default','Dense UI copy',400,'14 → 14 → 13px'],
+  ['body-small','Metadata',400,'13px'],
+  ['caption-large','EYEBROW LABEL',500,'16 → 15 → 14px'],
+];
+document.getElementById('type-ramp').innerHTML = TYPE.map(([t,sample,w,resp]) => {
+  const isCap = t.startsWith('caption');
+  const lh = t.startsWith('h') ? 'heading' : (isCap ? 'caption' : 'body');
+  const tr = t==='h1' ? 'var(--letter-spacing-h1)' : t==='h2' ? 'var(--letter-spacing-h2)'
+           : isCap ? 'var(--letter-spacing-caption)' : '0';
+  return `<div class="type-row">
+    <div class="type-tag">text-${t}<br>${resp}</div>
+    <div style="font-size:var(--font-size-${t});font-weight:${w};line-height:var(--line-height-${lh});letter-spacing:${tr};${isCap?'color:var(--color-brand-blue-500)':''}">${sample}</div>
+  </div>`;
+}).join('');
+
+// ── Spacing bars ─────────────────────────────────────────────────────
+const VALID = [4,8,12,16,20,24,36,40,48,60,72,84,96,120];
+document.getElementById('sp-scale').innerHTML = VALID.map(n =>
+  `<div class="sp-row">
+     <div class="sp-tag">gap-${n}</div>
+     <div class="sp-bar" style="width:${n}px"></div>
+     <div class="sp-note">${n}px</div>
+   </div>`).join('');
+
+// The footgun, rendered side by side so the difference is visible, not described.
+// These are deliberately-invalid values shown as a warning, hence the ignore markers.
+const BAD = [[10,8],[14,12],[6,4],[28,24]];
+document.getElementById('sp-bad').innerHTML = BAD.map(([bad,good]) =>
+  `<div class="sp-row sp-bad">
+     <div class="sp-tag">py-${'' + bad}</div>
+     <div class="sp-bar" style="width:${bad*4}px"></div>
+     <div class="sp-note">renders <strong>${bad*4}px</strong> — not ${bad}px. Use <code>py-${'' + good}</code>.</div>
+   </div>`).join('');
+
+// ── Radius + shadow ──────────────────────────────────────────────────
+const RADII = [['sm','8px','Inline tags'],['md','12px','Images, inputs'],['lg','16px','Standard cards'],['xl','24px','Feature surfaces'],['full','pill','Every button']];
+document.getElementById('radius-row').innerHTML = RADII.map(([k,px,use]) =>
+  `<div style="text-align:center">
+     <div style="width:104px;height:80px;background:var(--color-brand-blue-200);border-radius:var(--radius-${k})"></div>
+     <div style="font-size:var(--font-size-caption);margin-top:var(--space-8)"><strong>${k}</strong> · ${px}<br><span style="color:var(--color-text-muted)">${use}</span></div>
+   </div>`).join('');
+
+const SHADOWS = [['none','Level 0 — the default'],['hover','Level 2 — genuine hover lift'],['feature','Level 3 — indigo lift'],['sticky','Docked bars']];
+document.getElementById('shadow-row').innerHTML = SHADOWS.map(([k,use]) =>
+  `<div style="text-align:center">
+     <div style="width:150px;height:80px;background:var(--color-base-white);border-radius:var(--radius-lg);box-shadow:var(--shadow-${k});border:1px solid ${k==='none'?'var(--color-border)':'transparent'}"></div>
+     <div style="font-size:var(--font-size-caption);margin-top:var(--space-12)"><strong>${k}</strong><br><span style="color:var(--color-text-muted)">${use}</span></div>
+   </div>`).join('');
+</script>
+</body>
+</html>
