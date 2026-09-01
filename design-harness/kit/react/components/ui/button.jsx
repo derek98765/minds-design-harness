@@ -13,6 +13,23 @@ import { cn } from "@/lib/utils";
  * Use `primary` (orange) on any background, and only ONE per section.
  * `secondary` / `tertiary` on light backgrounds; `tertiary-light` /
  * `outline-light` on the indigo canvas or over photography.
+ *
+ * Label text is always ONE line — `whitespace-nowrap` below is load-bearing.
+ * A wrapped label inflates the pill into a lozenge and destroys the silhouette.
+ * Do not remove it, and do not override it with `whitespace-normal`.
+ *
+ * Because the text cannot wrap, a too-long label overflows instead. The row is
+ * what has to give, so stack a pair of buttons on mobile rather than letting
+ * them share a line:
+ *
+ *   <div className="flex flex-col items-stretch gap-12
+ *                   sm:flex-row sm:flex-wrap sm:items-center">
+ *     <Button>Start free</Button>
+ *     <Button variant="outline-muted">See how it works</Button>
+ *   </div>
+ *
+ * If a single button still overflows at 390px when stacked, the label is too
+ * long — shorten the copy. Never shrink the padding or the type to make it fit.
  */
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap font-extrabold rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer",

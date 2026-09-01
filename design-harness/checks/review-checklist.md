@@ -50,7 +50,12 @@ Walk this before calling a page done. It takes about two minutes.
 ## 6. Mobile — check at 390px
 
 - [ ] Nothing overflows horizontally.
-- [ ] No text wraps awkwardly *inside* a button.
+- [ ] **No button label is on two lines, and none runs off the screen edge.** Buttons
+      carry `whitespace-nowrap`, so a label that is too long overflows rather than
+      wrapping — check the right edge, not just the button.
+- [ ] **Any side-by-side button pair has stacked into a vertical column.** That row is
+      what breaks first at 390px. If a stacked button *still* overflows, the label is
+      too long — propose shorter copy rather than shrinking the padding or type.
 - [ ] Split sections stack, with the image below the text.
 - [ ] Every form field renders at 16px or larger. Below that, iOS Safari zooms on
       focus and the page jumps.

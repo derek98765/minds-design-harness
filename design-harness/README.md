@@ -3,14 +3,29 @@
 Build campaign and landing pages that look like they came from the Minds design team,
 without being a designer.
 
+## Set it up
+
+Copy three things into your project folder:
+
+```
+your-project/
+├── CLAUDE.md          ← from this repo's root
+├── AGENTS.md          ← from this repo's root
+└── design-harness/    ← this whole folder
+```
+
+`CLAUDE.md` has to sit at the **top level of your project** — Claude Code only reads it
+from there, never from inside a subfolder. That file is what makes everything else apply
+automatically. (`AGENTS.md` is the same content, for tools that look for that name.)
+
 ## Use it
 
-Open Claude Code in this folder and describe the page you want:
+Open Claude Code in your project and describe the page you want:
 
 > Build a registration page for our Minds launch event on March 3rd.
 
-That's the whole workflow. Claude reads the rules in this repo automatically and builds
-to them. You don't need to know the design system — it does.
+That's the whole workflow. Claude picks up the rules and builds to them. You don't need
+to know the design system — it does.
 
 ## What you get
 
@@ -21,15 +36,16 @@ checked against the rules before it's handed to you.
 
 | You want | Start from |
 |---|---|
-| A static one-page site | `kit/html/starter.html` — copy it, replace the content |
-| Something with forms or logic | `kit/react/` |
-| To see what's available | Open `style-guide/index.html` in a browser |
+| A static one-page site | `design-harness/kit/html/starter.html` — copy it, replace the content |
+| Something with forms or logic | `design-harness/kit/react/` |
+| To see what's available | Open `design-harness/style-guide/index.html` in a browser |
 
-Then check your work:
+Then check your work — point it at what you changed, not the whole project:
 
 ```bash
-node checks/check-spacing.mjs your-page.html
-node checks/check-hardcoded.mjs your-page.html
+node design-harness/checks/check-spacing.mjs src
+node design-harness/checks/check-hardcoded.mjs src
+node design-harness/checks/check-button-text.mjs src
 ```
 
 ## The one thing worth knowing

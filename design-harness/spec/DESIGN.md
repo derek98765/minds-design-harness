@@ -146,6 +146,31 @@ bigger button.
 
 Rules: use `primary` on any background. `secondary` and `tertiary` on light backgrounds only. `tertiary-light` and `outline-light` on dark or colored backgrounds. Link variants carry no padding.
 
+#### Button text is always one line
+
+A button label never wraps. Wrapping inflates the pill into a two-line lozenge and
+destroys the silhouette that the generous padding exists to create. Every button
+carries `whitespace-nowrap` — it is load-bearing, not decoration, and must never be
+removed or overridden with `whitespace-normal`.
+
+Because the text cannot wrap, a label that is too wide **overflows** instead. So
+`whitespace-nowrap` alone is not the fix — the container has to give. When two buttons
+sit side by side and no longer fit, in this order:
+
+1. **Stack them vertically.** The row is what breaks first, so make the row responsive
+   rather than shrinking the buttons:
+   `flex flex-col items-stretch gap-12 sm:flex-row sm:flex-wrap sm:items-center`
+   A stacked pair is a normal, correct Minds layout — not a degraded fallback.
+2. **Shorten the label.** If a button still overflows at 390px once stacked, the copy is
+   the problem. Two or three words is the target — "Start free", not "Start your free
+   trial today". Stop and propose shorter wording to the user rather than choosing it
+   silently; the label is copy, and copy is their call. See
+   [voice-and-copy.md](voice-and-copy.md).
+
+Never shrink padding, reduce the font size, or drop to a smaller size variant to make a
+long label fit. Those all trade away the brand silhouette to rescue copy that should
+have been shorter.
+
 ### Cards
 - Background: white on the warm canvas; warm canvas on white sections.
 - Radius: `--radius-xl` (24px) for large feature surfaces, `--radius-lg` (16px) for standard cards, `--radius-md` (12px) for images and small tiles.
@@ -274,6 +299,8 @@ No parallax. No scroll-jacking. No spring physics or bounce. No animation that b
 - Don't add shadows to create hierarchy that spacing should create.
 - Don't introduce a second font family or a serif display face.
 - Don't build square buttons — every brand button is a pill.
+- Don't let button text wrap to two lines, and don't fix a long label by shrinking the
+  padding or type. Stack the button row on mobile, or propose shorter copy to the user.
 - Don't set an all-caps headline.
 - Don't write "Animoca Minds" as text.
 - Don't assume SVG `fontSize` matches CSS px. SVG font sizes are user units that scale with
@@ -297,10 +324,11 @@ Typography tokens step at two breakpoints; layout uses Tailwind defaults.
 - Split sections stack image-above-text on mobile.
 - Multi-column card grids collapse to a single column, or to a horizontally scrollable row where the content suits it.
 - Horizontal padding shrinks first; vertical section padding shrinks second.
+- Button rows stack vertically before their labels are allowed to wrap — button padding and type never shrink.
 - Nav collapses to a hamburger with a full-screen sheet.
 
 ### Touch
-All primary actions are pill buttons with generous padding, which keeps them comfortably tappable. Icon buttons are fully round with adequate hit area. **Verify at 390px** — text should never wrap inside a button and nothing should overflow the viewport.
+All primary actions are pill buttons with generous padding, which keeps them comfortably tappable. Icon buttons are fully round with adequate hit area. **Verify at 390px** — nothing should overflow the viewport, and no button text should wrap or run past the screen edge. 390px is where a side-by-side button pair fails first; stack the row there. See [Button text is always one line](#button-text-is-always-one-line).
 
 ## 10. Agent Prompt Guide
 
