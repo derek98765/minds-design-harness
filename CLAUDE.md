@@ -78,6 +78,16 @@ Never write "Animoca Minds" in body copy, headlines, or UI. The lockup
     too long — **stop and propose shorter wording to the user** instead of picking it
     yourself. Never shrink padding, type, or the size variant to fit a long label.
 
+11. **Never leave a placeholder box where a page needs a real image.** Check
+    `design-harness/assets/` first — Abby poses, hand stickers, and existing photography
+    live there. If nothing fits, generate one with the `codex-image-gen` skill following
+    the formula in [design-harness/spec/brand-imagery.md](design-harness/spec/brand-imagery.md), and save it to the
+    consuming project's own `src/images/` (not into `design-harness/assets/`, which is
+    the fixed brand library). `codex-image-gen` needs the `codex` CLI installed
+    (`npm install -g @openai/codex`) — if it's missing, stop and walk the user through
+    installing it (and Node/npm first, if needed) rather than falling back to a
+    placeholder.
+
 ## Before you say you're done
 
 Run the checks and fix anything they report:

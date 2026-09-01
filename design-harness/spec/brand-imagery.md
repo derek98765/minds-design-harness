@@ -80,6 +80,37 @@ Take the character ref and make a top-down shot of it with its arms crossed.
 Always pass the reference. Describing Abby in words produces a different character
 every time.
 
+### Generated images for a page (Codex / `gpt-image-2`)
+
+Use this when a page needs an image — a hero, a feature illustration, a card photo —
+and nothing in `assets/` fits. Never leave a placeholder box; generate the real image.
+
+Formula is the same as the Midjourney one above: **fixed brand style + custom subject.**
+Use the fixed style block from "Realistic people" for a photographic subject, or the
+Abby reference-image formula for anything featuring the mascot. Invoke it through the
+`codex-image-gen` skill:
+
+```
+codex exec --skip-git-repo-check -s workspace-write \
+  'Generate an image: Cinematic lifestyle photography, super bright high-key daylight.
+   A scene featuring soft cream neutrals and natural wood tones, accented by vibrant
+   pops of blue and orange. Shot on 50mm f/1.8 lens, shallow depth of field, soft
+   bokeh, sharp focus on skin textures. Minimal grain, 8k resolution. <SUBJECT>.
+   Save it as src/images/<name>.png in the current directory.'
+```
+
+- **Save into the consuming project's `src/images/`** — this harness gets copied into
+  a working project, and generated images belong with that project's other source
+  assets, not inside `design-harness/assets/` (that folder is the fixed brand library,
+  not a scratch space for generations).
+- Requires the `codex` CLI. If it isn't installed, stop and have the user run
+  `npm install -g @openai/codex` (installing Node/npm first if needed) rather than
+  shipping a placeholder — see the `codex-image-gen` skill for the full prerequisite
+  and troubleshooting steps.
+- Run the image through the same [Using an image on a page](#using-an-image-on-a-page)
+  and [Don'ts](#donts) rules below as any other photo — radius, aspect ratio, no text
+  baked in, no cool/grey tones.
+
 ---
 
 ## Using an image on a page

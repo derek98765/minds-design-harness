@@ -15,6 +15,20 @@ Only when the user wants OpenAI's `gpt-image-2` (the model behind ChatGPT image 
 - Signed in once via `codex login`, or `OPENAI_API_KEY` set for API-priced batches
 - Built-in image generation is enabled by default; no extra config needed
 
+### Installing codex if it's missing
+
+Run `which codex` first. If it's not found:
+
+1. Check for npm: `which npm`. If missing, install Node.js (which bundles npm) —
+   `brew install node` on macOS, or point the user to https://nodejs.org. Do not
+   proceed to step 2 until `npm --version` works.
+2. Install the Codex CLI globally: `npm install -g @openai/codex`.
+3. Sign in once: `codex login` (or export `OPENAI_API_KEY` for API-priced batches).
+
+If any of these steps needs elevated permissions or the user hasn't approved a global
+npm install, stop and ask rather than silently skipping image generation or falling
+back to a placeholder.
+
 ## How to invoke
 
 ```bash
