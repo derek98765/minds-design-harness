@@ -11,7 +11,7 @@ Copy three things into your project folder:
 your-project/
 ├── CLAUDE.md          ← from this repo's root
 ├── AGENTS.md          ← from this repo's root
-└── design-harness/    ← this whole folder
+└── harness/    ← this whole folder
 ```
 
 `CLAUDE.md` has to sit at the **top level of your project** — Claude Code only reads it
@@ -36,16 +36,16 @@ checked against the rules before it's handed to you.
 
 | You want | Start from |
 |---|---|
-| A static one-page site | `design-harness/kit/html/starter.html` — copy it, replace the content |
-| Something with forms or logic | `design-harness/kit/react/` |
-| To see what's available | Open `design-harness/style-guide/index.html` in a browser |
+| A static one-page site | `harness/kit/html/starter.html` — copy it, replace the content |
+| Something with forms or logic | `harness/kit/react/` |
+| To see what's available | Open `harness/style-guide/index.html` in a browser |
 
 Then check your work — point it at what you changed, not the whole project:
 
 ```bash
-node design-harness/checks/check-spacing.mjs src
-node design-harness/checks/check-hardcoded.mjs src
-node design-harness/checks/check-button-text.mjs src
+node harness/checks/check-spacing.mjs src
+node harness/checks/check-hardcoded.mjs src
+node harness/checks/check-button-text.mjs src
 ```
 
 ## The one thing worth knowing
