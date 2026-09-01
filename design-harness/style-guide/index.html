@@ -88,6 +88,9 @@
   .sp-note { font-size: var(--font-size-caption); color: var(--color-text-muted); }
   /* Component grid */
   .row { display: flex; flex-wrap: wrap; gap: var(--space-12); align-items: center; }
+  /* Two-up comparison rows (e.g. sm vs lg of the same component): each direct
+     child takes exactly 50%, so the pair lines up instead of sizing to content. */
+  .row-split > * { flex: 1 1 0; min-width: 0; }
   .panel {
     background: var(--color-base-white); border: 1px solid var(--color-border);
     border-radius: var(--radius-lg); padding: var(--space-24);
@@ -803,7 +806,7 @@
       </div>
     </div>
 
-    <div class="row" style="align-items:flex-start;margin-top:var(--space-40)">
+    <div class="row row-split" style="align-items:flex-start;margin-top:var(--space-40)">
       <div>
         <p class="doc-label" style="margin-top:0">Filter dropdown — grouped sections tinted with a checkmark</p>
         <div class="dropdown-anchor">
@@ -847,7 +850,9 @@
           </div>
         </div>
       </div>
-      <div class="row" style="align-items:flex-start">
+    </div>
+
+    <div class="row row-split" style="align-items:flex-start">
         <div>
           <p class="doc-label" style="margin-top:0">Pagination — sm (default), a rounded-square page marker, not a pill or circle</p>
           <nav class="pagination" id="pagination-demo">
@@ -878,7 +883,6 @@
             </button>
           </nav>
         </div>
-      </div>
     </div>
 
     <p class="doc-label">Radio card — selectable list item. Checked circle fills orange; the selected card fills indigo</p>
