@@ -62,7 +62,18 @@ Walk this before calling a page done. It takes about two minutes.
 - [ ] Read it aloud. If it sounds like software marketing rather than a person
       explaining something useful, rewrite it. See `spec/voice-and-copy.md`.
 
-## 6. Mobile — check at 390px
+## 6. Imagery
+
+- [ ] **No placeholder boxes.** Every image slot holds a real image — one from
+      `assets/`, or one generated with `codex-image-gen`.
+- [ ] A generated (non-`assets/`) image follows the fixed style formula in
+      `spec/brand-imagery.md` — warm high-key daylight, cream/wood tones with blue and
+      orange accents, no cool grey or blue-toned photography, no heavy filters.
+- [ ] No text is baked into an image. Overlay it in HTML instead.
+- [ ] Image radius matches the scale — `--radius-md` for small tiles, `--radius-xl` for
+      large feature surfaces — and it isn't full-bleed edge to edge on desktop.
+
+## 7. Mobile — check at 390px
 
 - [ ] Nothing overflows horizontally.
 - [ ] **No button label is on two lines, and none runs off the screen edge.** Buttons
@@ -76,7 +87,7 @@ Walk this before calling a page done. It takes about two minutes.
       focus and the page jumps.
 - [ ] Tap targets are comfortably large.
 
-## 7. Last look
+## 8. Last look
 
 - [ ] Compare against `style-guide/index.html`. Does your page look like it belongs in
       the same family?
