@@ -38,7 +38,7 @@ Key Characteristics:
 > token classes (`bg-beige-100`, `text-brand-orange-500`).
 
 The palette runs 50–900 in four families. The full ramps are rendered in
-`showcase/index.html`; the values that carry the brand are below.
+`style-guide/index.html`; the values that carry the brand are below.
 
 ### Core
 - **Brand Orange 500** (#fd8d1d) — `brand-orange-500`: Primary CTA, active state, key highlight. The action color; use sparingly so it always means "act."
