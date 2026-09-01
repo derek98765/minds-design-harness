@@ -20,7 +20,11 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, extname, relative, basename } from 'node:path';
 
-const EXTS = new Set(['.html', '.jsx', '.tsx', '.js', '.ts', '.css', '.vue', '.svelte', '.astro', '.mdx']);
+const EXTS = new Set(['.html', '.jsx', '.tsx', '.js', '.ts', '.css', '.vue', '.svelte', '.astro', '.mdx', '.md']);
+// Markdown is prose and documentation — it legitimately quotes hex values and px
+// sizes while explaining them. Only the brand-name rule applies there.
+const PROSE_EXTS = new Set(['.md']);
+const PROSE_RULES = new Set(['brand-name']);
 const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'build', '.next', 'coverage', 'brand', 'assets']);
 // Files allowed to contain raw values, because they define them.
 const EXEMPT = new Set(['tokens.css']);
@@ -64,7 +68,12 @@ const RULES = [
   {
     id: 'brand-name',
     re: /Animoca\s+Minds/gi,
-    skipLine: l => /logo|lockup|By Animoca Brands|legacy|CHECK|brand-name/i.test(l),
+    // Exempt lines that state the rule rather than break it — the spec files have to
+    // quote the wrong name in order to prohibit it. A negation ("never", "don't",
+    // "not") near a quoted occurrence is the reliable signal.
+    skipLine: l =>
+      /logo|lockup|By Animoca Brands|legacy|CHECK|brand-name/i.test(l) ||
+      /\b(never|not|don'?t|avoid|instead of|rather than|wrong)\b/i.test(l),
     msg: 'wrong brand name',
     fix: 'the brand is "Minds" — "By Animoca Brands" belongs only inside logo artwork',
   },
@@ -94,11 +103,14 @@ function checkFile(file) {
   //   design-harness-ignore-file: hardcoded
   if (/design-harness-ignore-file:\s*hardcoded/.test(raw)) return found;
 
+  const isProse = PROSE_EXTS.has(extname(file));
+
   lines.forEach((line, i) => {
     // Per-line opt-out: append `design-harness-ignore` in a comment.
     if (/design-harness-ignore\b/.test(line)) return;
 
     for (const rule of RULES) {
+      if (isProse && !PROSE_RULES.has(rule.id)) continue;
       if (rule.skipLine(line)) continue;
       for (const m of line.matchAll(rule.re)) {
         if (rule.skipMatch?.(m[0])) continue;
