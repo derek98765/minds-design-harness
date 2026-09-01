@@ -70,7 +70,7 @@ A lady busy at work, expression positive with small smile
 
 Formula: **Abby's reference image + custom image subject**
 
-Attach `assets/mascot/turnaround/abby-ref-02-4views.png` as the character reference, then
+Attach `assets/mascot/turnaround/abby-ref-02-4views.webp` as the character reference, then
 describe only the change:
 
 ```
@@ -95,6 +95,10 @@ every time.
 - Do not overlay text directly on a photo unless there is a genuinely empty area with
   enough contrast. The type is the loudest element on a Minds page and it needs a clean
   surface — the warm canvas usually serves better.
+- A CTA placed over a photo uses the `tertiary-light` (solid white) or `outline-light`
+  button variant, not `primary` or `secondary` — see DESIGN.md §4 Buttons. Solid white is
+  there for contrast against the image, so confirm it actually reads at the button's
+  exact placement, not just against the photo's average tone.
 
 ---
 

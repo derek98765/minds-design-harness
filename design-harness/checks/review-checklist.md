@@ -20,14 +20,29 @@ Walk this before calling a page done. It takes about two minutes.
 - [ ] **Exactly one orange action per section.** If there are two, one is wrong.
 - [ ] Orange is not a background for any large surface.
 - [ ] Orange is not the colour of any heading.
-- [ ] Every orange element is something you can actually click.
+- [ ] Every large or headline-adjacent orange element is something you can actually click.
+      Exceptions: an eyebrow label on the indigo section canvas; a micro accent — a small
+      status badge, a pagination dot, an icon-button hover fill; a checked checkbox, radio,
+      or toggle; and a numbered-step circle on the indigo canvas or (sparingly) on white.
+      All stay small or are a selection/marker state, not a substitute for the one orange
+      CTA rule above.
+- [ ] **Numbered-step circles are the same color throughout one list**, chosen for contrast:
+      blue on warm canvas, blue by default on white, orange on the indigo canvas.
+- [ ] **A CTA button uses `secondary` (blue), not `primary` (orange), if it's inside a card**
+      or the page background is a warm brown/orange photo. Otherwise, a CTA sitting directly
+      on the section canvas defaults to orange.
+- [ ] **The active/selected state in tabs, dropdowns, and filter toggles is blue, not
+      orange.** Active tab label + underline, the selected dropdown item, the selected icon
+      in a segmented filter — all blue. Orange stays for a binary checked control (checkbox,
+      radio, on/off switch) and for actions, not for "which option is currently chosen."
 
 ## 3. Type
 
 - [ ] Headlines are extrabold (800). Body is regular (400). Nothing drifts to 500/600
       except eyebrows, buttons, and small labels.
 - [ ] **No all-caps headlines.** Eyebrows are uppercase; headlines never are.
-- [ ] At most one phrase per headline is highlighted, and it is indigo — never orange.
+- [ ] At most one phrase per headline is highlighted, and it is indigo — except on the
+      indigo section canvas, where it may be orange instead (blue-on-blue disappears there).
 - [ ] Body copy is muted (`neutral-600`), not full black.
 - [ ] Prose is constrained to a comfortable measure — paragraphs never run the full
       width of a wide screen.
