@@ -68,13 +68,20 @@
   /* Spacing bars */
   .sp-row { display: flex; align-items: center; gap: var(--space-16); margin-bottom: var(--space-8); }
   .sp-tag { flex: 0 0 110px; font-size: var(--font-size-caption); font-family: ui-monospace, monospace; }
-  /* Measured span, not a solid block: transparent body, solid stroke at each end. */
+  /* Measured span: 30% fill so the width still reads as a bar, with a solid
+     stroke at each end marking exactly where the span starts and stops.
+     color-mix keeps the token the source of truth instead of a second hex. */
   .sp-bar {
-    height: 20px; background: transparent; border-radius: 0;
+    height: 20px; border-radius: 0;
+    background: color-mix(in srgb, var(--color-brand-orange-500) 30%, transparent);
     border-left: 2px solid var(--color-brand-orange-500);
     border-right: 2px solid var(--color-brand-orange-500);
   }
-  .sp-bad .sp-bar { border-left-color: var(--color-error); border-right-color: var(--color-error); }
+  .sp-bad .sp-bar {
+    background: color-mix(in srgb, var(--color-error) 30%, transparent);
+    border-left-color: var(--color-error);
+    border-right-color: var(--color-error);
+  }
   .sp-note { font-size: var(--font-size-caption); color: var(--color-text-muted); }
   /* Component grid */
   .row { display: flex; flex-wrap: wrap; gap: var(--space-12); align-items: center; }
