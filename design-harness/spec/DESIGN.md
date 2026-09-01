@@ -171,6 +171,9 @@ Never shrink padding, reduce the font size, or drop to a smaller size variant to
 long label fit. Those all trade away the brand silhouette to rescue copy that should
 have been shorter.
 
+`checks/check-button-text.mjs` catches both halves — a button missing
+`whitespace-nowrap`, and a button row that never stacks.
+
 ### Cards
 - Background: white on the warm canvas; warm canvas on white sections.
 - Radius: `--radius-xl` (24px) for large feature surfaces, `--radius-lg` (16px) for standard cards, `--radius-md` (12px) for images and small tiles.
