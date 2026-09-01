@@ -324,5 +324,7 @@ Read these only when the task calls for it — they are situational, not core.
 | Drawing a new icon rather than reusing one | [brand-iconography.md](brand-iconography.md) |
 | Writing or rewriting headlines and body copy | [voice-and-copy.md](voice-and-copy.md) |
 
-The full brand guideline PDFs are in `brand/`. They are slow and expensive to read —
-consult them only when these markdown specs genuinely don't answer the question.
+The source brand guideline PDFs are in `brand-guideline/` — a 1-page lite version and
+the 34-page full version, with [its own README](../brand-guideline/README.md) on which
+to read when. They are slow and expensive to read, so consult them only when these
+markdown specs genuinely don't answer the question.

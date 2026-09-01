@@ -74,8 +74,11 @@ Do not read these by default — they are situational.
 | Drawing a new icon (not reusing an existing one) | [spec/brand-iconography.md](spec/brand-iconography.md) |
 | Writing or rewriting headlines and body copy | [spec/voice-and-copy.md](spec/voice-and-copy.md) |
 
-`brand/` holds the full brand guideline PDFs. Consult them only if the markdown specs
-genuinely don't answer the question — they are slow and expensive to read.
+`brand-guideline/` holds the two source PDFs. Consult them only if the markdown specs
+genuinely don't answer the question — they are slow and expensive to read. Start with
+`brand-guideline-lite.pdf` (1 page); reach for `brand-guideline-full.pdf` (34 pages)
+only when the lite version doesn't cover it. The full version wins if they conflict.
+See [brand-guideline/README.md](brand-guideline/README.md).
 
 ## What "good" looks like
 

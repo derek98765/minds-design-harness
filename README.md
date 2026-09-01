@@ -47,13 +47,14 @@ renders at 40px and the layout breaks with no error. When in doubt, round down.
 ## What's in here
 
 ```
-spec/         The design rules. DESIGN.md is the core; the brand-*.md files
-              cover logo, mascot, imagery, icons, and copy voice.
-kit/          The parts — tokens.css, HTML starter, React components.
-showcase/     Every token and component rendered on one page. The visual contract.
-checks/       Scripts that catch mistakes, plus a human review checklist.
-assets/       Logos, Abby the mascot, hand stickers, photography.
-brand/        The full brand guideline PDFs, for when you need the detail.
+spec/             The design rules. DESIGN.md is the core; the brand-*.md files
+                  cover logo, mascot, imagery, icons, and copy voice.
+kit/              The parts — tokens.css, HTML starter, React components.
+showcase/         Every token and component rendered on one page. The visual contract.
+checks/           Scripts that catch mistakes, plus a human review checklist.
+assets/           Logos, Abby the mascot, hand stickers, photography.
+brand-guideline/  The two brand guideline PDFs — full and lite. See its README
+                  for which to read when.
 ```
 
 ## Questions a designer would ask you
