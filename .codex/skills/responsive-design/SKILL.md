@@ -27,6 +27,9 @@ content, useful touch targets, and the project's visual rhythm at every breakpoi
   preserving the intended reading and action order.
 - Make awkwardly near-full-width grouped controls full-width on mobile and redistribute
   their children. Do not apply this blindly to pills or individual buttons.
+- Stack a row of two or more buttons before their labels are allowed to wrap. Button
+  text is always one line, so a label that no longer fits overflows rather than
+  wrapping — the row has to give, never the button's padding or type size.
 - Never hide important content merely to suppress overflow. Reshape it or use a control
   suited to the smaller viewport.
 
@@ -90,6 +93,7 @@ Run the project checks on every changed file or directory:
 ```bash
 node harness/checks/check-spacing.mjs <your-file-or-dir>
 node harness/checks/check-hardcoded.mjs <your-file-or-dir>
+node harness/checks/check-button-text.mjs <your-file-or-dir>
 ```
 
 Then complete [../../../harness/checks/review-checklist.md](../../../harness/checks/review-checklist.md)
