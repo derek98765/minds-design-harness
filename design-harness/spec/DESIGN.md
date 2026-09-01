@@ -459,7 +459,7 @@ Read these only when the task calls for it — they are situational, not core.
 | The logo — placement, sizing, a header or footer | [brand-logo.md](brand-logo.md) |
 | Abby the mascot, or hand-sticker accents | [brand-mascot.md](brand-mascot.md) |
 | Choosing or generating photography and hero imagery | [brand-imagery.md](brand-imagery.md) |
-| Drawing a new icon rather than reusing one | [brand-iconography.md](brand-iconography.md) |
+| A specific Mind's icon, or drawing a new icon | [brand-iconography.md](brand-iconography.md) |
 | Writing or rewriting headlines and body copy | [voice-and-copy.md](voice-and-copy.md) |
 
 The source brand guideline PDFs are in `brand-guideline/` — a 1-page lite version and

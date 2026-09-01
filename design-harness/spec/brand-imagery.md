@@ -44,12 +44,30 @@ consumers should not lead with a builder image — and a feature launch usually 
 
 ## Generating new imagery
 
-The brand guideline fixes the style prompt. **Do not edit the fixed portion** — that is
-what keeps every generated image consistent.
+Never leave a placeholder box — check `assets/` first, and if nothing fits, generate
+the real image. The brand guideline fixes the style prompt. **Do not edit the fixed
+portion** — that is what keeps every generated image consistent.
 
-### Realistic people (Midjourney)
+**Every generation scenario reaches for an existing file as its reference image
+first.** Which folder depends on what you're generating:
 
-Formula: **fixed brand style + custom image subject**
+| Generating… | Reference folder | Formula |
+|---|---|---|
+| A realistic photo of a human with a Mind | `assets/photos/everyday-user/` or `assets/photos/builder/` | Fixed style prompt + subject, using the closest matching photo as reference |
+| A realistic product photo (a Mind with a physical product) | `assets/photos/product/` | Fixed style prompt + subject, using the closest matching photo as reference |
+| A new icon | `assets/icons/` | Handled by the dedicated `generate-minds-icons` skill — see below, do not freehand this one |
+| A one-click Mind's toy-figurine image | `assets/toy-figurines/` | Handled by the dedicated `generate-one-click-mind-images` skill — see below, do not freehand this one |
+| A default Mind image (Abby herself, not a one-click Mind) | `assets/mascot/` | Abby reference-image formula, using `assets/mascot/turnaround/abby-ref-02-4views.webp` |
+
+Pick the closest existing file in the folder as the attached reference — for a
+realistic photo that means matching audience and setting (a kitchen scene stays close
+to another kitchen scene, not a studio shot); for Abby/toy-figurine generation it means
+matching pose or product category. This keeps lighting, materials, and character
+consistent with what's already shipped rather than drifting on every new generation.
+
+### Realistic people or product photos (Midjourney, or Codex/`gpt-image-2`)
+
+Formula: **fixed brand style + reference image + custom subject**
 
 Fixed brand style — keep this exactly as written:
 
@@ -60,44 +78,61 @@ orange. Shot on 50mm f/1.8 lens, shallow depth of field, soft bokeh, sharp focus
 skin textures. Minimal grain, 8k resolution.
 ```
 
-Then append only the subject, e.g.:
+Attach the closest matching file from `photos/everyday-user/`, `photos/builder/`, or
+`photos/product/` (per the table above) as a style/composition reference, then append
+only the subject, e.g.:
 
 ```
 A lady busy at work, expression positive with small smile
 ```
 
-### Abby (Gemini or ChatGPT)
-
-Formula: **Abby's reference image + custom image subject**
-
-Attach `assets/mascot/turnaround/abby-ref-02-4views.webp` as the character reference, then
-describe only the change:
-
-```
-Take the character ref and make a top-down shot of it with its arms crossed.
-```
-
-Always pass the reference. Describing Abby in words produces a different character
-every time.
-
-### Generated images for a page (Codex / `gpt-image-2`)
-
-Use this when a page needs an image — a hero, a feature illustration, a card photo —
-and nothing in `assets/` fits. Never leave a placeholder box; generate the real image.
-
-Formula is the same as the Midjourney one above: **fixed brand style + custom subject.**
-Use the fixed style block from "Realistic people" for a photographic subject, or the
-Abby reference-image formula for anything featuring the mascot. Invoke it through the
-`codex-image-gen` skill:
+Via the `codex-image-gen` skill:
 
 ```
 codex exec --skip-git-repo-check -s workspace-write \
+  -i design-harness/assets/photos/everyday-user/<closest-match>.webp \
   'Generate an image: Cinematic lifestyle photography, super bright high-key daylight.
    A scene featuring soft cream neutrals and natural wood tones, accented by vibrant
    pops of blue and orange. Shot on 50mm f/1.8 lens, shallow depth of field, soft
    bokeh, sharp focus on skin textures. Minimal grain, 8k resolution. <SUBJECT>.
    Save it as src/images/<name>.png in the current directory.'
 ```
+
+### Abby herself (Gemini, ChatGPT, or Codex/`gpt-image-2`)
+
+Formula: **reference image + custom subject** — no separate style prompt needed, the
+reference carries the style.
+
+Attach `assets/mascot/turnaround/abby-ref-02-4views.webp` as the character reference,
+then describe only the change:
+
+```
+Take the character ref and make a top-down shot of it with its arms crossed.
+```
+
+Always pass the reference. Describing Abby in words alone produces a different
+character every time.
+
+### One-click Mind toy figurines
+
+Do not freehand this one either. Use the `generate-one-click-mind-images` skill — it
+interviews for (or proposes and gets approval on) the Mind's outfit and its 4
+accessory items before generating anything, attaches the closest matching file from
+`assets/toy-figurines/` as the reference, and enforces the exact 800×942px transparent
+output every shipped figurine uses. See the "One-Click Mind blister packs" section of
+[brand-mascot.md](brand-mascot.md) for the anatomy this has to match.
+
+### New icons
+
+Do not freehand icon generation with the formulas above. Use the `generate-minds-icons`
+skill instead — it wraps `codex-image-gen` with the post-processing an icon needs that
+the general photo/character formulas above don't provide: a fixed 240×240px canvas, a
+transparent background, and quantization to exactly two flat colors (indigo + one
+orange accent). It uses the closest match in `assets/icons/` as the generation
+reference, same as any other category here. See
+[brand-iconography.md](brand-iconography.md) for the color rules an icon must satisfy.
+
+### Saving a generated image
 
 - **Save into the consuming project's `src/images/`** — this harness gets copied into
   a working project, and generated images belong with that project's other source
@@ -109,7 +144,8 @@ codex exec --skip-git-repo-check -s workspace-write \
   and troubleshooting steps.
 - Run the image through the same [Using an image on a page](#using-an-image-on-a-page)
   and [Don'ts](#donts) rules below as any other photo — radius, aspect ratio, no text
-  baked in, no cool/grey tones.
+  baked in, no cool/grey tones. Toy-figurine and mascot generations are exempt from the
+  radius/crop rules below — they're placed as full character art, not cropped photos.
 
 ---
 

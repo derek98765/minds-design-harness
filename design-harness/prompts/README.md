@@ -45,7 +45,9 @@ Needs a form, so use the React lane.
 > Lead with the outcome, not the technology. Show three things it handles,
 > how to get started, and an FAQ.
 
-Static — use the HTML lane. See `spec/brand-mascot.md` if you want Abby on it.
+Static — use the HTML lane. Check `assets/toy-figurines/` first — 18 Minds already
+have a produced blister-pack figure; see `assets/README.md`. See `spec/brand-mascot.md`
+for the full rules on Abby and the blister-pack art direction.
 
 ### New feature or sub-product
 
