@@ -51,11 +51,11 @@ const buttonVariants = cva(
           "bg-transparent !px-0 font-semibold text-brand-blue-500 underline underline-offset-4 hover:text-brand-blue-400",
       },
       size: {
-        sm: "px-36 py-8 text-[16px]",
-        "sm-tall": "px-36 py-12 text-[16px]",
-        md: "px-36 py-16 text-[18px]",
-        lg: "px-40 py-12 text-[18px]",
-        xl: "px-60 py-20 text-[20px]",
+        // Each step grows in BOTH height and width — never one at the cost of the other.
+        sm: "px-24 py-8 text-[16px]",
+        md: "px-36 py-12 text-[18px]",
+        lg: "px-40 py-16 text-[18px]",
+        xl: "px-48 py-20 text-[20px]",
         // Link variants carry no padding.
         none: "p-0 text-[16px]",
       },

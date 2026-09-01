@@ -126,7 +126,18 @@ Every brand button is `rounded-full`. Text is extrabold (800) at all sizes.
 | `outline-light` | transparent | `beige-100` | 1px `beige-100` | fills white, text `neutral-900` |
 | `link-primary` | transparent | `brand-orange-500` | — | underlined, brightness 110% |
 
-Sizes (vertical/horizontal padding at font size): `sm` 8/32px at 16px · `md` 16/32px at 18px (default) · `lg` 12/40px at 18px · `xl` 20/64px at 20px. Padding is deliberately generous — the wide horizontal padding is part of the brand silhouette.
+Sizes:
+
+| Size | Padding (v/h) | Font | Renders ≈ |
+|------|---------------|------|-----------|
+| `sm` | 8 / 24px | 16px | 40px tall |
+| `md` | 12 / 36px | 18px | 50px tall — **the default** |
+| `lg` | 16 / 40px | 18px | 58px tall |
+| `xl` | 20 / 48px | 20px | 69px tall |
+
+Padding is deliberately generous — the wide horizontal padding is part of the brand
+silhouette. Every step grows in **both** height and width; a size that is wider but
+shorter than the one below it is a bug, not a variant.
 
 Rules: use `primary` on any background. `secondary` and `tertiary` on light backgrounds only. `tertiary-light` and `outline-light` on dark or colored backgrounds. Link variants carry no padding.
 
