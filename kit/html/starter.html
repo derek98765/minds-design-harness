@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Minds campaign page starter.
+
+     HOW TO USE
+     1. Copy this file, rename it (e.g. launch-event.html).
+     2. Change the <title> below.
+     3. Replace the section content. Grab more sections from blocks.html.
+     4. Check it: node ../../checks/check-spacing.mjs your-file.html
+                  node ../../checks/check-hardcoded.mjs your-file.html
+
+     THE ONE RULE THAT BREAKS PAGES
+     Spacing numbers are literal pixels and only these 21 exist:
+     1 2 3 4 8 12 16 20 24 36 40 48 60 72 84 96 108 120 160 200 240
+     Anything else silently renders at 4x - a value of 10 becomes 40px. Round down.
+     ═══════════════════════════════════════════════════════════════════════ -->
+
+<title>Minds — change this title</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="../tokens.css">
+
+<script>
+// Bridge the tokens into Tailwind's CDN build.
+//
+// Every value below POINTS AT tokens.css via var() rather than repeating a
+// hex or px value. That means tokens.css stays the single source of truth:
+// change a token there and this page follows, with nothing to keep in sync.
+// It also means the responsive type steps in tokens.css apply automatically.
+const ramp = (name) => Object.fromEntries(
+  [50,100,200,300,400,500,600,700,800,900].map(s => [s, `var(--color-${name}-${s})`])
+);
+const scale = (...ns) => Object.fromEntries(ns.map(n => [n, `var(--space-${n})`]));
+
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { sans: ['Manrope', 'sans-serif'] },
+      colors: {
+        'brand-orange': ramp('brand-orange'),
+        'brand-blue':   ramp('brand-blue'),
+        'beige':        ramp('beige'),
+        'neutral':      ramp('neutral'),
+      },
+      // Literal-pixel spacing — only these 21 exist.
+      spacing: scale(1,2,3,4,8,12,16,20,24,36,40,48,60,72,84,96,108,120,160,200,240),
+      fontSize: {
+        'h1':['var(--font-size-h1)',{lineHeight:'var(--line-height-heading)',letterSpacing:'var(--letter-spacing-h1)'}],
+        'h2':['var(--font-size-h2)',{lineHeight:'var(--line-height-heading)',letterSpacing:'var(--letter-spacing-h2)'}],
+        'h3':['var(--font-size-h3)',{lineHeight:'var(--line-height-heading)'}],
+        'h4':['var(--font-size-h4)',{lineHeight:'var(--line-height-heading)'}],
+        'h5':['var(--font-size-h5)',{lineHeight:'var(--line-height-heading)'}],
+        'body-xlarge':['var(--font-size-body-xlarge)',{lineHeight:'var(--line-height-body)'}],
+        'body-large':['var(--font-size-body-large)',{lineHeight:'var(--line-height-body)'}],
+        'body-default':['var(--font-size-body-default)',{lineHeight:'var(--line-height-body)'}],
+        'body-small':['var(--font-size-body-small)',{lineHeight:'var(--line-height-body)'}],
+        'caption-large':['var(--font-size-caption-large)',{lineHeight:'var(--line-height-caption)',letterSpacing:'var(--letter-spacing-caption)'}],
+        'caption':['var(--font-size-caption)',{lineHeight:'var(--line-height-caption)',letterSpacing:'var(--letter-spacing-caption)'}],
+      },
+      borderRadius: {
+        'sm':'var(--radius-sm)','md':'var(--radius-md)',
+        'lg':'var(--radius-lg)','xl':'var(--radius-xl)',
+      },
+      boxShadow: {
+        'hover':'var(--shadow-hover)',
+        'feature':'var(--shadow-feature)',
+      },
+      maxWidth: { 'page':'1200px', 'prose':'60ch' },
+    },
+  },
+};
+</script>
+</head>
+
+<body class="font-sans bg-beige-100 text-neutral-900 antialiased">
+
+<!-- ── HERO — warm canvas ─────────────────────────────────────────────── -->
+<section class="bg-beige-100 px-24 py-96 md:py-120">
+  <div class="mx-auto max-w-page grid gap-60 lg:grid-cols-2 lg:gap-96 items-center">
+    <div>
+      <p class="text-caption-large font-medium uppercase text-brand-blue-500 mb-16">Eyebrow label</p>
+      <h1 class="text-h1 font-extrabold">
+        Your headline goes here,<br>
+        <span class="text-brand-blue-500">with one phrase in indigo</span>
+      </h1>
+      <p class="text-body-xlarge text-neutral-600 max-w-prose mt-24 mb-40">
+        One or two plain sentences saying what the reader actually gets.
+        Concrete outcomes, not feature lists.
+      </p>
+      <div class="flex flex-wrap gap-12">
+        <!-- Exactly ONE orange CTA per section. -->
+        <a href="#" class="inline-flex items-center justify-center rounded-full bg-brand-orange-500 px-36 py-16 text-[18px] font-extrabold text-white transition hover:brightness-110">Primary action</a>
+        <a href="#" class="inline-flex items-center justify-center rounded-full border border-neutral-400 px-36 py-16 text-[18px] font-extrabold text-neutral-900 transition hover:border-neutral-900">Secondary</a>
+      </div>
+    </div>
+    <div class="aspect-[4/3] rounded-md bg-gradient-to-br from-brand-blue-200 to-beige-300"></div>
+  </div>
+</section>
+
+<!-- ── FEATURES — white (background MUST change between sections) ─────── -->
+<section class="bg-white px-24 py-96 md:py-120">
+  <div class="mx-auto max-w-page">
+    <p class="text-caption-large font-medium uppercase text-brand-blue-500 mb-16">Section eyebrow</p>
+    <h2 class="text-h2 font-extrabold max-w-[20ch]">A section headline that earns its size</h2>
+    <div class="grid gap-24 md:grid-cols-3 mt-60">
+      <div class="rounded-lg border border-neutral-200 bg-beige-100 p-24">
+        <h3 class="text-h4 font-extrabold mb-12">First benefit</h3>
+        <p class="text-body-large text-neutral-600">What it does for the reader, in one plain sentence.</p>
+      </div>
+      <div class="rounded-lg border border-neutral-200 bg-beige-100 p-24">
+        <h3 class="text-h4 font-extrabold mb-12">Second benefit</h3>
+        <p class="text-body-large text-neutral-600">What it does for the reader, in one plain sentence.</p>
+      </div>
+      <div class="rounded-lg border border-neutral-200 bg-beige-100 p-24">
+        <h3 class="text-h4 font-extrabold mb-12">Third benefit</h3>
+        <p class="text-body-large text-neutral-600">What it does for the reader, in one plain sentence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLOSING CTA — warm canvas ──────────────────────────────────────── -->
+<section class="bg-beige-100 px-24 py-96 md:py-120">
+  <div class="mx-auto max-w-page text-center">
+    <h2 class="text-h2 font-extrabold max-w-[22ch] mx-auto mb-24">The last thing you want them to do</h2>
+    <p class="text-body-xlarge text-neutral-600 mb-40">One short line removing the final objection.</p>
+    <a href="#" class="inline-flex items-center justify-center rounded-full bg-brand-orange-500 px-60 py-20 text-[20px] font-extrabold text-white transition hover:brightness-110">Primary action</a>
+  </div>
+</section>
+
+</body>
+</html>

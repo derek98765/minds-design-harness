@@ -1,0 +1,446 @@
+/* ==========================================================================
+   Minds — Design Tokens
+   Source of truth: brand/260716_Minds_Brand_Guideline.pdf
+
+   DO NOT hardcode values that exist here. Always reference these tokens.
+
+   Works in BOTH lanes with no build step:
+   - Plain HTML  → var(--color-brand-orange-500)
+   - React/Tailwind v4 → bg-brand-orange-500, text-h1, gap-16
+   ========================================================================== */
+
+/* ==========================================================================
+   Colors — Orange
+   The action color. Rationed strictly so it always means "act."
+   Never a surface color. Never a heading color.
+   ========================================================================== */
+:root {
+  --color-brand-orange-50: #fceadc;
+  --color-brand-orange-100: #fad5b8;
+  --color-brand-orange-200: #fcc090;
+  --color-brand-orange-300: #ffac68;
+  --color-brand-orange-400: #fe9d43;
+  --color-brand-orange-500: #fd8d1d; /* Core brand orange */
+  --color-brand-orange-600: #de7f24;
+  --color-brand-orange-700: #cb772a;
+  --color-brand-orange-800: #ac6831;
+  --color-brand-orange-900: #8d572b;
+}
+
+/* ==========================================================================
+   Colors — Blue
+   Structure: eyebrows, links, quiet UI, inverted section canvas.
+   ========================================================================== */
+:root {
+  --color-brand-blue-50: #f5f7fb;
+  --color-brand-blue-100: #e3e7f5;
+  --color-brand-blue-200: #d1d8f0;
+  --color-brand-blue-300: #9ca7ca;
+  --color-brand-blue-400: #596caa;
+  --color-brand-blue-500: #394f95; /* Core brand blue */
+  --color-brand-blue-600: #324790;
+  --color-brand-blue-700: #2b3f8c;
+  --color-brand-blue-800: #233276;
+  --color-brand-blue-900: #1a2660;
+}
+
+/* ==========================================================================
+   Colors — Beige
+   The warm canvas family. Beige 100 is the default page surface.
+   ========================================================================== */
+:root {
+  --color-beige-50: #f7f4f0;
+  --color-beige-100: #ece7e0; /* Warm canvas — the default page surface */
+  --color-beige-200: #ece7db;
+  --color-beige-300: #ece5d1;
+  --color-beige-400: #ebe2c8;
+  --color-beige-500: #c3b9a2;
+  --color-beige-600: #9c917d;
+  --color-beige-700: #817664;
+  --color-beige-800: #675b4b;
+  --color-beige-900: #4c4032;
+}
+
+/* ==========================================================================
+   Colors — Neutrals
+   ========================================================================== */
+:root {
+  --color-neutral-50: #f2f2f2;
+  --color-neutral-100: #e5e5e5;
+  --color-neutral-200: #cccccc; /* Dividers, card outlines */
+  --color-neutral-300: #aaaaaa;
+  --color-neutral-400: #888888; /* Muted outlines, ghost-button borders */
+  --color-neutral-500: #71706e;
+  --color-neutral-600: #5a5855; /* Body copy on light surfaces */
+  --color-neutral-700: #42413f;
+  --color-neutral-800: #2a2a2a;
+  --color-neutral-900: #1a1a1a; /* Headings, high-contrast text */
+}
+
+/* ==========================================================================
+   Colors — Base
+   ========================================================================== */
+:root {
+  --color-base-white: #ffffff;
+  --color-base-black: #0d0d0d;
+}
+
+/* ==========================================================================
+   Colors — Semantic roles
+   Prefer these in markup: they say WHAT a color is for, not what it looks like.
+   ========================================================================== */
+:root {
+  --color-primary: var(--color-brand-orange-500);
+  --color-accent: var(--color-brand-blue-500);
+
+  --color-text: var(--color-neutral-900);
+  --color-text-muted: var(--color-neutral-600);
+  --color-text-on-dark: var(--color-beige-100);
+
+  --color-bg: var(--color-beige-100); /* Warm canvas — default */
+  --color-bg-alt: var(--color-base-white); /* Alternating section surface */
+  --color-bg-inverted: var(--color-brand-blue-500); /* Indigo section canvas */
+
+  --color-border: var(--color-neutral-200);
+  --color-border-soft: #bdc5dc;
+
+  --color-success: #31a963;
+  --color-error: #dd3131;
+  --color-warning: #f5c800;
+}
+
+/* ==========================================================================
+   Typography — Family & Weights
+   Manrope for all Latin text. Noto Sans TC/SC for Chinese.
+   There is no secondary or display family.
+   ========================================================================== */
+:root {
+  --font-family-primary: 'Manrope', sans-serif;
+  --font-family-zh-tc: 'Noto Sans TC', 'Manrope', sans-serif;
+  --font-family-zh-sc: 'Noto Sans SC', 'Manrope', sans-serif;
+
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+}
+
+/* ==========================================================================
+   Typography — Font Sizes (Desktop default)
+   Responsive steps are built in below — a single text-h1 scales automatically.
+   ========================================================================== */
+:root {
+  --font-size-h1: 56px;
+  --font-size-h2: 44px;
+  --font-size-h3: 34px;
+  --font-size-h4: 28px;
+  --font-size-h5: 22px;
+
+  --font-size-body-xlarge: 18px;
+  --font-size-body-large: 16px;
+  --font-size-body-default: 14px;
+  --font-size-body-small: 13px;
+  --font-size-body-xsmall: 12px;
+
+  --font-size-caption-large: 16px;
+  --font-size-caption: 12px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  :root {
+    --font-size-h1: 48px;
+    --font-size-h2: 36px;
+    --font-size-h3: 28px;
+    --font-size-h4: 24px;
+    --font-size-h5: 20px;
+
+    --font-size-body-xlarge: 17px;
+    --font-size-body-large: 16px;
+    --font-size-body-default: 14px;
+    --font-size-body-small: 13px;
+    --font-size-body-xsmall: 12px;
+
+    --font-size-caption-large: 15px;
+    --font-size-caption: 12px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  :root {
+    --font-size-h1: 40px;
+    --font-size-h2: 30px;
+    --font-size-h3: 24px;
+    --font-size-h4: 20px;
+    --font-size-h5: 18px;
+
+    --font-size-body-xlarge: 16px;
+    --font-size-body-large: 15px;
+    --font-size-body-default: 13px;
+    --font-size-body-small: 13px;
+    --font-size-body-xsmall: 12px;
+
+    --font-size-caption-large: 14px;
+    --font-size-caption: 11px;
+  }
+}
+
+/* ==========================================================================
+   Typography — Line Heights & Letter Spacing
+   Tracking runs opposite by scale: headlines tighten, captions open up.
+   ========================================================================== */
+:root {
+  --line-height-heading: 115%;
+  --line-height-body: 155%;
+  --line-height-caption: 140%;
+
+  --letter-spacing-h1: -0.28px;
+  --letter-spacing-h2: -0.22px;
+  --letter-spacing-h3: 0;
+  --letter-spacing-h4: 0;
+  --letter-spacing-h5: 0;
+  --letter-spacing-body: 0;
+  --letter-spacing-caption: 0.24px;
+}
+
+/* ==========================================================================
+   Spacing — LITERAL PIXELS, not Tailwind's 4x scale.
+   gap-8 = 8px. gap-16 = 16px.
+
+   These 21 values are the ONLY valid spacing numbers. A number outside this
+   list silently falls back to Tailwind's 4px scale with no error
+   (py-10 renders 40px), which breaks layouts quietly.
+   When between values, round DOWN to the nearest token.
+   ========================================================================== */
+:root {
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-3: 3px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-36: 36px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-60: 60px;
+  --space-72: 72px;
+  --space-84: 84px;
+  --space-96: 96px;
+  --space-108: 108px;
+  --space-120: 120px;
+  --space-160: 160px;
+  --space-200: 200px;
+  --space-240: 240px;
+}
+
+/* ==========================================================================
+   Border Radius
+   The shape system is uniformly soft. Every button is a pill.
+   ========================================================================== */
+:root {
+  --radius-sm: 8px; /* Micro surfaces, inline tags */
+  --radius-md: 12px; /* Images, small tiles, inputs */
+  --radius-lg: 16px; /* Standard cards */
+  --radius-xl: 24px; /* Large surfaces, feature cards */
+  --radius-full: 9999px; /* All buttons, pills, chips, avatars */
+}
+
+/* ==========================================================================
+   Elevation
+   Depth is deliberately minimal. Separation comes from background change and
+   whitespace. Shadows appear only where something truly floats.
+   Never stack shadows to create hierarchy that spacing should be doing.
+   ========================================================================== */
+:root {
+  --shadow-none: none; /* Level 0 — sections, most cards. The default. */
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.1); /* Level 2 — genuine hover lift */
+  --shadow-feature: 0 10px 30px -12px rgba(57, 79, 149, 0.18); /* Level 3 — indigo lift */
+  --shadow-sticky: 0 -4px 16px rgba(0, 0, 0, 0.08); /* Sticky bottom bars */
+}
+
+/* ==========================================================================
+   Motion
+   Motion confirms content has arrived. It never performs.
+   No parallax, no scroll-jacking, no spring physics, no bounce.
+   ========================================================================== */
+:root {
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-layout: 300ms;
+  --duration-reveal: 700ms;
+}
+
+/* ==========================================================================
+   Tailwind v4 @theme bridge
+   Maps tokens into Tailwind so utilities work: bg-brand-orange-500,
+   text-h1, gap-16, rounded-xl, shadow-hover.
+
+   NOTE: This block is only read by Tailwind v4 (the React lane).
+   The plain-HTML lane ignores it harmlessly.
+   ========================================================================== */
+@theme inline {
+  /* Orange */
+  --color-brand-orange-50: var(--color-brand-orange-50);
+  --color-brand-orange-100: var(--color-brand-orange-100);
+  --color-brand-orange-200: var(--color-brand-orange-200);
+  --color-brand-orange-300: var(--color-brand-orange-300);
+  --color-brand-orange-400: var(--color-brand-orange-400);
+  --color-brand-orange-500: var(--color-brand-orange-500);
+  --color-brand-orange-600: var(--color-brand-orange-600);
+  --color-brand-orange-700: var(--color-brand-orange-700);
+  --color-brand-orange-800: var(--color-brand-orange-800);
+  --color-brand-orange-900: var(--color-brand-orange-900);
+
+  /* Blue */
+  --color-brand-blue-50: var(--color-brand-blue-50);
+  --color-brand-blue-100: var(--color-brand-blue-100);
+  --color-brand-blue-200: var(--color-brand-blue-200);
+  --color-brand-blue-300: var(--color-brand-blue-300);
+  --color-brand-blue-400: var(--color-brand-blue-400);
+  --color-brand-blue-500: var(--color-brand-blue-500);
+  --color-brand-blue-600: var(--color-brand-blue-600);
+  --color-brand-blue-700: var(--color-brand-blue-700);
+  --color-brand-blue-800: var(--color-brand-blue-800);
+  --color-brand-blue-900: var(--color-brand-blue-900);
+
+  /* Beige */
+  --color-beige-50: var(--color-beige-50);
+  --color-beige-100: var(--color-beige-100);
+  --color-beige-200: var(--color-beige-200);
+  --color-beige-300: var(--color-beige-300);
+  --color-beige-400: var(--color-beige-400);
+  --color-beige-500: var(--color-beige-500);
+  --color-beige-600: var(--color-beige-600);
+  --color-beige-700: var(--color-beige-700);
+  --color-beige-800: var(--color-beige-800);
+  --color-beige-900: var(--color-beige-900);
+
+  /* Neutral */
+  --color-neutral-50: var(--color-neutral-50);
+  --color-neutral-100: var(--color-neutral-100);
+  --color-neutral-200: var(--color-neutral-200);
+  --color-neutral-300: var(--color-neutral-300);
+  --color-neutral-400: var(--color-neutral-400);
+  --color-neutral-500: var(--color-neutral-500);
+  --color-neutral-600: var(--color-neutral-600);
+  --color-neutral-700: var(--color-neutral-700);
+  --color-neutral-800: var(--color-neutral-800);
+  --color-neutral-900: var(--color-neutral-900);
+
+  /* Base + semantic */
+  --color-base-white: var(--color-base-white);
+  --color-base-black: var(--color-base-black);
+  --color-primary: var(--color-primary);
+  --color-accent: var(--color-accent);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-on-dark: var(--color-text-on-dark);
+  --color-bg: var(--color-bg);
+  --color-bg-alt: var(--color-bg-alt);
+  --color-bg-inverted: var(--color-bg-inverted);
+  --color-border: var(--color-border);
+  --color-border-soft: var(--color-border-soft);
+  --color-success: var(--color-success);
+  --color-error: var(--color-error);
+  --color-warning: var(--color-warning);
+
+  /* Font family */
+  --font-primary: var(--font-family-primary);
+
+  /* Font sizes */
+  --text-h1: var(--font-size-h1);
+  --text-h2: var(--font-size-h2);
+  --text-h3: var(--font-size-h3);
+  --text-h4: var(--font-size-h4);
+  --text-h5: var(--font-size-h5);
+  --text-body-xlarge: var(--font-size-body-xlarge);
+  --text-body-large: var(--font-size-body-large);
+  --text-body-default: var(--font-size-body-default);
+  --text-body-small: var(--font-size-body-small);
+  --text-body-xsmall: var(--font-size-body-xsmall);
+  --text-caption-large: var(--font-size-caption-large);
+  --text-caption: var(--font-size-caption);
+
+  /* Font weights */
+  --font-weight-light: var(--font-weight-light);
+  --font-weight-regular: var(--font-weight-regular);
+  --font-weight-medium: var(--font-weight-medium);
+  --font-weight-semibold: var(--font-weight-semibold);
+  --font-weight-bold: var(--font-weight-bold);
+  --font-weight-extrabold: var(--font-weight-extrabold);
+
+  /* Line height + tracking */
+  --leading-heading: var(--line-height-heading);
+  --leading-body: var(--line-height-body);
+  --leading-caption: var(--line-height-caption);
+  --tracking-h1: var(--letter-spacing-h1);
+  --tracking-h2: var(--letter-spacing-h2);
+  --tracking-caption: var(--letter-spacing-caption);
+
+  /* Spacing — the only 21 valid values */
+  --spacing-1: var(--space-1);
+  --spacing-2: var(--space-2);
+  --spacing-3: var(--space-3);
+  --spacing-4: var(--space-4);
+  --spacing-8: var(--space-8);
+  --spacing-12: var(--space-12);
+  --spacing-16: var(--space-16);
+  --spacing-20: var(--space-20);
+  --spacing-24: var(--space-24);
+  --spacing-36: var(--space-36);
+  --spacing-40: var(--space-40);
+  --spacing-48: var(--space-48);
+  --spacing-60: var(--space-60);
+  --spacing-72: var(--space-72);
+  --spacing-84: var(--space-84);
+  --spacing-96: var(--space-96);
+  --spacing-108: var(--space-108);
+  --spacing-120: var(--space-120);
+  --spacing-160: var(--space-160);
+  --spacing-200: var(--space-200);
+  --spacing-240: var(--space-240);
+
+  /* Radius */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-full: var(--radius-full);
+
+  /* Shadows */
+  --shadow-hover: var(--shadow-hover);
+  --shadow-feature: var(--shadow-feature);
+  --shadow-sticky: var(--shadow-sticky);
+}
+
+/* ==========================================================================
+   LEGACY NAME MAPPING — for porting code to/from animocaminds-frontend
+   The main app uses an older, offset neutral scale. Same colors, different
+   labels. When moving code between repos, translate:
+
+     app neutral-50   #ece7e0  →  harness beige-100        (warm canvas)
+     app neutral-100  #f5f5f5  →  harness neutral-100      (approx #e5e5e5)
+     app neutral-200  #cccccc  →  harness neutral-200      (identical)
+     app neutral-400  #888888  →  harness neutral-400      (identical)
+     app neutral-600  #5a5755  →  harness neutral-600      (#5a5855, approx)
+     app neutral-900  #1a1a1a  →  harness neutral-900      (identical)
+
+     app brand-orange-01 → harness brand-orange-500   (identical #fd8d1d)
+     app brand-orange-03 → harness brand-orange-300   (identical #ffac68)
+     app brand-blue-01   → harness brand-blue-500     (identical #394f95)
+     app brand-blue-02   → harness brand-blue-400     (identical #596caa)
+     app brand-blue-03   → harness brand-blue-300     (identical #9ca7ca)
+
+     app semantic-bg-light → harness --color-bg
+     app semantic-text-muted → harness --color-text-muted
+
+   Brand orange and blue are identical in both. Only the neutral/beige
+   LABELS differ — the harness follows the official brand guideline.
+   ========================================================================== */
