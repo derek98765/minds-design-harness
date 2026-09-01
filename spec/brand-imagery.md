@@ -24,17 +24,21 @@ glass boardroom, cool grey offices, or anyone pointing at a laptop in delight.
 
 ---
 
-## Two audiences
+## Three sets
 
-`assets/photos/` is split the way the brand splits:
+`assets/photos/` is split three ways:
 
-| Set | Who | Scenes |
+| Set | Shows | Reach for it when |
 |---|---|---|
-| **everyday-user** | Busy parents, small business owners — the primary audience | Kitchens, laundry, family, a home desk, a café |
-| **builder** | Developers and founders — secondary | Studios, workshops, a laptop mid-build |
+| **`product/`** | Abby with the product itself — building a Mind, a Mind just created, the connected-apps network | Launching a one-click Mind, or announcing a feature. **The usual right answer for a product page.** |
+| **`everyday-user/`** | Real people mid-task with Abby in the scene — kitchens, laundry, family, a home desk, a café | The primary consumer audience: busy parents, small business owners |
+| **`builder/`** | Studios, multi-monitor setups, a laptop mid-build | The secondary audience: developers and founders |
 
-Pick from the set that matches the page's reader. A one-click-Mind landing page for
-consumers should not lead with a builder image.
+Pick the set that matches the page's reader. A one-click-Mind landing page for
+consumers should not lead with a builder image — and a feature launch usually wants
+`product/` rather than a person at a desk.
+
+`assets/README.md` lists every file with what it shows.
 
 ---
 
@@ -66,7 +70,7 @@ A lady busy at work, expression positive with small smile
 
 Formula: **Abby's reference image + custom image subject**
 
-Attach the four-view turnaround from `assets/mascot/` as the character reference, then
+Attach `assets/mascot/turnaround/abby-ref-02-4views.png` as the character reference, then
 describe only the change:
 
 ```
