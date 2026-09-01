@@ -119,7 +119,7 @@ Do not read these by default — they are situational.
 | The Minds logo — placement, sizing, a header/footer | [design-harness/spec/brand-logo.md](design-harness/spec/brand-logo.md) |
 | Abby the mascot, or hand-sticker accents | [design-harness/spec/brand-mascot.md](design-harness/spec/brand-mascot.md) |
 | Choosing or generating photography / hero imagery | [design-harness/spec/brand-imagery.md](design-harness/spec/brand-imagery.md) |
-| Drawing a new icon (not reusing an existing one) | [design-harness/spec/brand-iconography.md](design-harness/spec/brand-iconography.md) |
+| A specific Mind's icon, or drawing a new icon | [design-harness/spec/brand-iconography.md](design-harness/spec/brand-iconography.md) |
 | Writing or rewriting headlines and body copy | [design-harness/spec/voice-and-copy.md](design-harness/spec/voice-and-copy.md) |
 
 `design-harness/brand-guideline/` holds the two source PDFs. Consult them only if the markdown specs

@@ -71,6 +71,77 @@ where the meaning matches:
 
 ---
 
+## Mind icons — `icons/`
+
+30 dual-tone app icons, one per named Mind/agent persona (indigo base, orange picking
+out one detail — the same dual-tone rule as [../spec/brand-iconography.md](../spec/brand-iconography.md)). Use
+one when a page references a specific Mind by name — a card in a Minds directory, a
+"Meet [Mind name]" section, a launched-Mind confirmation.
+
+| File | Mind |
+|---|---|
+| `finance_buddy.webp` | Finance Buddy — piggy bank |
+| `meal_planner.webp` | Meal Planner — bowl of food |
+| `travel_planner.webp` | Travel Planner |
+| `minds_page.webp` · `minds_video.webp` · `minds_hosting_and_soil.webp` | Minds platform features (page, video, hosting) |
+| `email_task_wizard.webp` · `email_unsubscribe_wizard.webp` | Email Minds |
+| `plant_care.webp` · `pet_health_tracker.webp` · `womens_health_tracker.webp` · `nutrition_tracker.webp` | Everyday-life trackers |
+| `retirement_simulator.webp` · `superior_trade.webp` · `hk_price_hunter.webp` · `event_deal_flow_scout.webp` | Money and deals |
+| `schoolwork_companion.webp` · `hobby_guide.webp` · `my_bestie.webp` · `fortune_seer.webp` | Companionship and learning |
+| `sales_negotiation.webp` · `scrum_master.webp` · `qa_tester.webp` · `linkedin_recruiter_research.webp` · `professional_slide_pdf.webp` · `agentic_genealogy_research.webp` | Work and builder Minds |
+| `etsy_shop_strategist.webp` · `trend_hunter.webp` · `humanizer.webp` · `follow_up.webp` · `passive_autonomous_soul.webp` | Other named Minds |
+
+**Defaults** — use when a Mind doesn't have its own icon yet, or the context is generic
+rather than one specific Mind:
+
+| File | Use |
+|---|---|
+| `app-icon-default.svg` | A generic Mind/app placeholder — geometric four-square mark. |
+| `skill-icon-default.svg` | A generic skill/capability placeholder — leaf/plant mark. |
+
+Never invent a new icon for a named Mind that already has one here — reuse the file.
+For a Mind that isn't in this list, use a default rather than drawing a new one; see
+[../spec/brand-iconography.md](../spec/brand-iconography.md) before drawing anything from scratch.
+
+---
+
+## One-Click Mind toy figurines — `toy-figurines/`
+
+18 produced blister-pack renders — Abby dressed and posed for a specific one-click
+Mind, packaged as a collector toy with themed accessory icons down the side. This is
+the art direction for **launching or featuring a one-click Mind**: a launch page hero,
+a card in a Minds directory or pricing grid, a "meet this Mind" section.
+
+| File | Mind |
+|---|---|
+| `mind_general_assistant.png` | General Assistant |
+| `mind_chief_of_staff.png` | Chief of Staff |
+| `mind_bizz.png` | Business/exec assistant — suit, phone, briefcase |
+| `mind_GTM.png` | Go-to-market / growth marketing |
+| `mind_sales.png` | Sales |
+| `mind_recruiter.png` | Recruiter |
+| `mind_scrum_master.png` | Scrum Master |
+| `mind_product_builder.png` | Product Builder |
+| `mind_content.png` | Content creation |
+| `mind_research.png` | Research |
+| `mind_decision.png` | Decision support / advisor |
+| `mind_email_manager.png` | Email Manager |
+| `mind_follow_up.png` | Follow-Up |
+| `mind_personal_chef.png` | Personal Chef |
+| `mind_fitness_coach.png` | Fitness Coach |
+| `mind_learning_coach.png` | Learning Coach |
+| `mind_football.png` | Football commentator/analyst |
+| `mind_superior_trader.png` | Trading |
+| `mind_game_designer.png` | Game Designer |
+
+These are full produced compositions (packaging, banner, accessory-item pockets, seal)
+— never assembled in CSS, never edited or recolored. If the Mind you need isn't in
+this list, use the `generate-one-click-mind-images` skill rather than faking one; see
+the "One-Click Mind blister packs" section of [../spec/brand-mascot.md](../spec/brand-mascot.md) for the anatomy
+and rules.
+
+---
+
 ## Photography — `photos/`
 
 Three sets. Pick the one matching your page's reader.

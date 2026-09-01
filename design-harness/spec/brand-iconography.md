@@ -66,7 +66,12 @@ Rules:
 
 Check in order:
 
-1. Does the existing icon set already cover it?
+1. Does `assets/icons/` already cover it? 30 named Mind-persona icons live there
+   (`finance_buddy.webp`, `meal_planner.webp`, etc.), plus `app-icon-default.svg` and
+   `skill-icon-default.svg` as generic fallbacks. See [../assets/README.md](../assets/README.md) for the full
+   list. If the page is representing a specific named Mind, reuse its icon rather than
+   drawing a new one — and if that Mind isn't in the set yet, use a default instead of
+   inventing one.
 2. Does a **hand sticker** communicate it better? For a warm, human accent beside a
    headline, a sticker often beats a UI icon — see [brand-mascot.md](brand-mascot.md).
 3. Is an icon needed at all? Minds pages lean on type and whitespace. An icon per bullet

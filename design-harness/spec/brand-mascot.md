@@ -73,18 +73,25 @@ They are a **separate accent system** from Abby herself:
 ## One-Click Mind blister packs
 
 The One-Click Minds have their own art direction: a collector-toy blister pack, warm
-beige card, orange banner, the Mind's job in bold condensed caps, and skill icons down
-the right side showing what it can do.
+beige card, orange banner strip, and 4 accessory items in clear pockets down the right
+side showing what the Mind can do.
 
-Anatomy of the pack:
-- **Top banner** — the Mind's name and type (GENERAL ASSISTANT, SALES MIND, PERSONAL CHEF)
-- **"COLLECTOR SERIES"** strip in orange
-- **The figure** — Abby dressed for the job
-- **Skill icons** — the tools that Mind is capable of using
-- **Limited Edition seal** — bottom right
+Anatomy of the pack (matching the shipped files — see `assets/toy-figurines/`):
+- **Top banner** — plain warm-beige card with a euro-slot hang-hole; no name/type text
+- **Orange strip** — a solid band beneath the banner, no "COLLECTOR SERIES" text
+- **The figure** — Abby dressed and posed for the job, holding one or two signature props
+- **4 accessory items** — small objects or UI snippets in individual clear pockets,
+  each showing a distinct thing the Mind does
+- **Limited Edition seal** — gold circular seal, bottom right
 
-This is a produced asset. Do not assemble a new blister pack in CSS or by editing an
-existing one — request it as artwork.
+18 of these are already produced and live in `assets/toy-figurines/` — see
+[../assets/README.md](../assets/README.md) for the full list. Check there first for any one-click Mind you're
+featuring (a launch page, a Minds directory, a pricing card) and reuse the matching
+file. This is a produced asset: do not assemble a new blister pack in CSS, edit an
+existing one, or recolor/recompose the figure. For a Mind that isn't in the set yet,
+use the `generate-one-click-mind-images` skill rather than freehanding it — it
+interviews for the outfit and 4 items (or proposes them for approval) and generates a
+new figurine matching this anatomy.
 
 ---
 
