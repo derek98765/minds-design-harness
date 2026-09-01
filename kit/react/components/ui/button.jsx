@@ -51,11 +51,13 @@ const buttonVariants = cva(
           "bg-transparent !px-0 font-semibold text-brand-blue-500 underline underline-offset-4 hover:text-brand-blue-400",
       },
       size: {
-        // Each step grows in BOTH height and width — never one at the cost of the other.
+        // sm -> lg grow in both height and width. xl holds lg's vertical padding
+        // and gains width and type instead: bumping both would make it tower,
+        // because the larger font adds line-box height on top of the padding.
         sm: "px-24 py-8 text-[16px]",
         md: "px-36 py-12 text-[18px]",
         lg: "px-40 py-16 text-[18px]",
-        xl: "px-48 py-20 text-[20px]",
+        xl: "px-48 py-16 text-[20px]",
         // Link variants carry no padding.
         none: "p-0 text-[16px]",
       },

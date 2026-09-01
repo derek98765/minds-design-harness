@@ -133,11 +133,16 @@ Sizes:
 | `sm` | 8 / 24px | 16px | 40px tall |
 | `md` | 12 / 36px | 18px | 50px tall — **the default** |
 | `lg` | 16 / 40px | 18px | 58px tall |
-| `xl` | 20 / 48px | 20px | 69px tall |
+| `xl` | 16 / 48px | 20px | 61px tall |
 
 Padding is deliberately generous — the wide horizontal padding is part of the brand
-silhouette. Every step grows in **both** height and width; a size that is wider but
-shorter than the one below it is a bug, not a variant.
+silhouette. A size must never be *shorter* than the one below it; that's a bug, not a
+variant.
+
+`xl` deliberately keeps `lg`'s vertical padding and grows through width and type size
+instead. Raising both would make it tower over `lg`, because the larger font adds line-box
+height on top of the extra padding — the button ends up reading as a slab rather than a
+bigger button.
 
 Rules: use `primary` on any background. `secondary` and `tertiary` on light backgrounds only. `tertiary-light` and `outline-light` on dark or colored backgrounds. Link variants carry no padding.
 
