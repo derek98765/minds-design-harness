@@ -23,7 +23,7 @@ checked against the rules before it's handed to you.
 |---|---|
 | A static one-page site | `kit/html/starter.html` — copy it, replace the content |
 | Something with forms or logic | `kit/react/` |
-| To see what's available | Open `showcase/index.html` in a browser |
+| To see what's available | Open `style-guide/index.html` in a browser |
 
 Then check your work:
 
@@ -50,7 +50,8 @@ renders at 40px and the layout breaks with no error. When in doubt, round down.
 spec/             The design rules. DESIGN.md is the core; the brand-*.md files
                   cover logo, mascot, imagery, icons, and copy voice.
 kit/              The parts — tokens.css, HTML starter, React components.
-showcase/         Every token and component rendered on one page. The visual contract.
+style-guide/      One HTML page showing every colour, text size, button and
+                  section, live in a browser. Open it to see what "on-brand" looks like.
 checks/           Scripts that catch mistakes, plus a human review checklist.
 assets/           Logos, Abby the mascot, hand stickers, photography.
 brand-guideline/  The two brand guideline PDFs — full and lite. See its README

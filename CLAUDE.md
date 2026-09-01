@@ -3,6 +3,11 @@
 You are building a **Minds** campaign or landing page. Follow these exactly.
 They override your defaults.
 
+## Keep agent instructions mirrored
+
+`CLAUDE.md` and `AGENT.md` are mirrors. Whenever you change either file, make the
+same change to the other file in the same commit so their contents remain identical.
+
 ## Before you write any UI
 
 Read [spec/DESIGN.md](spec/DESIGN.md). It is short and it is the system.
@@ -82,6 +87,6 @@ See [brand-guideline/README.md](brand-guideline/README.md).
 
 ## What "good" looks like
 
-[showcase/index.html](showcase/index.html) renders every token, component, and composed
-section. When unsure whether your output is on-brand, compare it against the showcase
+[style-guide/index.html](style-guide/index.html) renders every token, component, and composed
+section. When unsure whether your output is on-brand, compare it against the style-guide
 blocks rather than guessing.

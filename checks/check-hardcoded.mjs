@@ -99,7 +99,7 @@ function checkFile(file) {
   const lines = raw.split('\n');
 
   // A file-wide opt-out for pages that must show raw values to teach them
-  // (the showcase renders the footgun on purpose). Put this anywhere in the file:
+  // (the style guide renders the footgun on purpose). Put this anywhere in the file:
   //   design-harness-ignore-file: hardcoded
   if (/design-harness-ignore-file:\s*hardcoded/.test(raw)) return found;
 

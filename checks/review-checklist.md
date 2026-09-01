@@ -58,7 +58,7 @@ Walk this before calling a page done. It takes about two minutes.
 
 ## 7. Last look
 
-- [ ] Compare against `showcase/index.html`. Does your page look like it belongs in
+- [ ] Compare against `style-guide/index.html`. Does your page look like it belongs in
       the same family?
 - [ ] If something feels off but you can't name it, it is usually **spacing** or
       **too much orange**. Check those first.
