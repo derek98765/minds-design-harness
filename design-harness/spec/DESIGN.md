@@ -41,8 +41,10 @@ The palette runs 50–900 in four families. The full ramps are rendered in
 `style-guide/index.html`; the values that carry the brand are below.
 
 ### Core
-- **Brand Orange 500** (#fd8d1d) — `brand-orange-500`: Primary CTA, active state, key highlight. The action color; use sparingly so it always means "act."
-- **Brand Blue 500** (#394f95) — `brand-blue-500`: Eyebrow labels, links, quiet UI, inverted section canvas.
+- **Brand Orange 500** (#fd8d1d) — `brand-orange-500`: Primary CTA, checked-control state, key
+  highlight. The action color; use sparingly so it always means "act."
+- **Brand Blue 500** (#394f95) — `brand-blue-500`: Eyebrow labels, links, quiet UI, inverted
+  section canvas, and the selected/active state in tabs, dropdowns, and filter toggles.
 - **Warm Canvas** (#ece7e0) — `beige-100`: The default page surface. Warm, not gray.
 - **Pure White** (#ffffff) — the alternating section surface and card background.
 
@@ -51,7 +53,8 @@ The palette runs 50–900 in four families. The full ramps are rendered in
 - **Neutral 600** (#5a5855) — body copy on light surfaces. The default reading color.
 - **Neutral 400** (#888888) — muted outlines, tertiary labels, ghost-button borders.
 - **Neutral 200** (#cccccc) — dividers and card outlines.
-- On the indigo canvas, text goes `beige-100` with orange reserved for the CTA.
+- On the indigo canvas, text goes `beige-100`, with orange reserved for the CTA and the
+  small set of things that go orange only here — see Usage Rules below.
 
 ### Semantic roles
 Prefer these — they say what a color is *for*:
@@ -62,7 +65,15 @@ plus `--color-success` (#31a963), `--color-error` (#dd3131), `--color-warning` (
 ### Usage Rules
 - Adjacent sections never share a background. Warm canvas → white → warm canvas is the default rhythm.
 - On the indigo canvas, headings go light, body goes a light neutral, and the CTA stays orange.
+  The eyebrow and one highlighted headline phrase may also go orange here — the only surface
+  where either can; on warm canvas or white, both stay blue. (A micro accent like a status
+  badge or pagination dot may be orange on any surface — see Pills, Chips & Badges.)
 - Orange is for action and highlight only. It is not a surface color and not a heading color.
+- Never use orange as a section or large block background. It reads as instruction because it
+  is rationed to a single CTA, a headline eyebrow, a genuinely small accent, a checked form
+  control (see Inputs), or a numbered-step circle (see Numbered Steps) — a full-bleed orange
+  section erases that meaning and reads as
+  decoration instead. Warm canvas, white, and indigo are the only section backgrounds.
 - No dark mode exists. Do not introduce dark variants or `prefers-color-scheme` blocks.
 - Third-party brand colors (Telegram blue, WeChat green) are for channel identity only — never as UI accents.
 
@@ -99,9 +110,14 @@ Use the token classes (`text-h1`, `text-body-large`) — never raw px. The respo
 ### Principles
 - **Extrabold or quiet, nothing between.** Headlines sit at 800; body sits at 400. The gap between them is the hierarchy. Mid-weights (500/600) appear only on eyebrows, buttons, and small labels.
 - **Tracking runs opposite by scale.** Headlines tighten (H1 −0.28px, H2 −0.22px); eyebrows and captions open up (+0.24px). Everything between sits at zero.
-- **Headlines may highlight one phrase in indigo.** One phrase per headline, and never in orange — orange belongs to actions.
+- **Headlines may highlight one phrase.** One phrase per headline, colored `brand-blue-500`
+  by default. On the indigo section canvas, the highlight may instead be orange — the same
+  exception as the eyebrow, and for the same reason: blue-on-blue disappears there. It does
+  not apply on warm canvas or white; there, the highlight stays blue.
 - **Body text stays muted.** `neutral-600` on light surfaces, a light neutral on indigo. Readable but never competing with the headline.
-- **Eyebrows are uppercase medium.** `caption-large`, weight 500, +0.24px tracking, colored `brand-blue-500`.
+- **Eyebrows are uppercase medium.** `caption-large`, weight 500, +0.24px tracking, colored
+  `brand-blue-500` by default. On the indigo section canvas, the eyebrow may instead be
+  orange — the same exception as the headline highlight above.
 
 ### Don'ts
 - **No all-caps headlines.** Eyebrows are uppercase; headlines never are.
@@ -144,7 +160,20 @@ instead. Raising both would make it tower over `lg`, because the larger font add
 height on top of the extra padding — the button ends up reading as a slab rather than a
 bigger button.
 
-Rules: use `primary` on any background. `secondary` and `tertiary` on light backgrounds only. `tertiary-light` and `outline-light` on dark or colored backgrounds. Link variants carry no padding.
+Rules: `primary` (orange) is the default — use it for a CTA sitting directly on the page
+canvas (warm canvas, white, or indigo). Switch to `secondary` (blue) in two cases instead:
+the page background itself is a warm brown/orange photo tone (an orange button would
+disappear into it or read as too many oranges at once), or the button sits **inside a
+card** rather than directly on the section canvas — a card is already a contained,
+secondary context, so its action reads as blue. `tertiary` on light backgrounds only.
+`tertiary-light` and `outline-light` on dark or colored backgrounds — this includes a dark
+or busy photograph, not just a flat indigo/neutral fill. The white pill is there for
+contrast: check it actually reads against the image at the button's placement, not just
+against the photo's average tone. Link variants carry no padding.
+
+This is about picking `primary` vs `secondary`, not about how many orange CTAs a section
+gets — that's still exactly one. A blue button inside a card doesn't create a second orange
+CTA to police; it's simply not competing for orange in the first place.
 
 #### Button text is always one line
 
@@ -187,16 +216,75 @@ have been shorter.
 - Radius: `--radius-md`, or `rounded-full` for search fields.
 - Focus: `brand-blue-500` border.
 - **Font size must be ≥16px on mobile.** Below that, iOS Safari zooms on focus and the page jumps. Use `text-[16px] md:text-body-default`.
+- Checkbox, radio, and on/off switch: unchecked stays neutral (white fill,
+  `neutral-200`/`neutral-400` border); the checked/on state fills `brand-orange-500`. This
+  is a binary yes/no control, not a CTA or a decorative accent, so it doesn't count against
+  the one-orange-action rule. Don't confuse this with a *toggle-tab* filter group (All /
+  Online / Offline, etc.) — that's a choice among options, colored blue; see Tabs,
+  Dropdowns & Selection State below.
 
 ### Pills, Chips & Badges
 - Radius: `rounded-full` always.
 - Neutral chip: white background, `brand-blue-500` text, `neutral-200` border; hover fills indigo with white text.
 - Tint badges: `brand-orange-100` or `brand-blue-100` surface with matching dark text.
 - Font: caption weight 500, uppercase for status labels.
+- **Solid `brand-orange-500` is allowed on a micro accent that isn't a CTA**, alongside the
+  eyebrow exception above: a small status badge (`New`, `Customizable`), a carousel/pagination
+  active-dot, or an icon-button hover fill. These read as a small mark, not a competing shape —
+  keep them pill/dot-sized. This does not extend to a full-width label bar or any large fill;
+  that crosses into surface territory and stays off-limits.
 
 ### Icon Buttons
 - `rounded-full`, white background, `neutral-200` border.
 - Hover fills with `brand-orange-500` or `brand-blue-500` and flips the icon to white.
+
+### Numbered Steps
+A small filled circle (`rounded-full`) holding a digit, paired with a bold step title and a
+muted description below it — "how it works" lists, setup instructions, onboarding flows.
+
+- The circle fill is `brand-orange-500` or `brand-blue-500`, chosen for contrast against the
+  section background — never for decoration or to add variety within one list. Every circle
+  in the same list uses the same color.
+- **Warm canvas (`beige-100`):** blue. Orange-on-beige doesn't hold contrast as well as
+  blue-on-beige at this small a size.
+- **White:** blue by default. Orange is acceptable only when it does not add a second
+  orange element competing with the section's one CTA.
+- **Indigo canvas:** orange. Blue-on-blue disappears; orange is the only one that reads.
+- This is a UI marker, not a CTA or a headline highlight, so an orange circle does not count
+  against the one-orange-action-per-section rule — the same reasoning as the micro-accent
+  and checked-control exceptions above.
+- Digit in white, caption-large weight 500. Circle stays small — a marker, not a badge.
+
+### Tabs, Dropdowns & Selection State
+The color that marks "this is the current choice" in navigation and filtering UI is
+`brand-blue-500`, not orange — orange stays reserved for actions you take, this is state
+you're already in.
+
+- **Tabs — two valid shapes, same color rule:**
+  - **Pill tabs** (`kit/react/components/ui/tabs.jsx`): the active tab is a solid
+    `brand-blue-500` pill with white text, on a quiet `beige-100` track. Use for a tight,
+    contained group of tabs — e.g. switching a card or panel's content.
+  - **Underline tabs**: the active tab's label goes `brand-blue-500` with a `brand-blue-500`
+    underline bar beneath it; inactive tabs stay `neutral-600` or `neutral-900` with no
+    underline, on a shared `neutral-200` baseline. Use for top-level page or section
+    navigation (e.g. "Minds (21)" / "My Network"). Two sizes:
+    - `sm` (default) — `body-small`, `gap-20`, `py-8`, 2px active bar. A secondary nav row.
+    - `lg` — `body-large`, `gap-36`, `py-12`, 4px active bar. A page's primary section
+      switcher, sized to hold its own next to a headline. React: pass `size="lg"` to both
+      `TabsListUnderline` and every `TabsTriggerUnderline` in it — the two scales are tuned
+      as a pair. HTML: add `.lg` to both `.utabs-list` and every `.utabs-trigger` in it.
+  - Don't mix the two shapes within one tab group, and don't mix `sm` and `lg` triggers
+    within one list.
+- **Dropdown menus:** the currently-selected option is `brand-blue-500` text (optionally
+  medium weight); unselected options stay default text color.
+- **Segmented / toggle-tab controls** (e.g. an All / Online / Offline filter — a choice among
+  several options, not a binary on/off switch): the selected option's icon and text go
+  `brand-blue-500`; unselected options stay neutral.
+- This is a selected-state color, not a CTA, so it does not count against the
+  one-orange-action-per-section rule and does not need contrast-driven swapping to orange —
+  unlike numbered-step circles, this one doesn't flip on the indigo canvas, since indigo
+  UI controls of this kind are rare and should be re-evaluated case by case rather than
+  assumed to follow the same swap.
 
 ### Component Reuse
 Reuse what ships in `kit/react/components/ui/` before writing anything new. Do not create
@@ -297,7 +385,10 @@ No parallax. No scroll-jacking. No spring physics or bounce. No animation that b
   Always step *down* — `py-8` not `py-10`, `gap-12` not `gap-14`.
 - Don't hardcode hex values, px sizes, or layout properties via `style={{}}`. Inline styles override responsive classes and cause bugs.
 - Don't add a dark mode or `prefers-color-scheme` blocks.
-- Don't use orange as a surface or heading color, and never as a headline highlight.
+- Don't use orange as a surface or heading color. As a headline highlight or eyebrow color,
+  orange only works on the indigo section canvas — on warm canvas or white it stays blue.
+- Don't use orange as a section or large block background — not even an inverted section.
+  Warm canvas, white, and indigo are the only backgrounds a section takes.
 - Don't separate sections with hairline rules — background change and whitespace do that job.
 - Don't add shadows to create hierarchy that spacing should create.
 - Don't introduce a second font family or a serif display face.

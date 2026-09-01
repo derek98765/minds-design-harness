@@ -37,24 +37,46 @@ Never write "Animoca Minds" in body copy, headlines, or UI. The lockup
 4. **Reuse what's in `design-harness/kit/`.** Do not build a one-off button, card, or input.
 
 5. **Orange is for action only.** Exactly one orange CTA per section. If there are two,
-   one of them is wrong. Orange is never a surface color and never a heading color.
+   one of them is wrong. Orange is never a section/large-block background and never a heading
+   color. Five exceptions, all specific to the indigo section canvas — blue-on-blue disappears
+   there, so it's the one surface where orange substitutes for blue: the headline highlight
+   (still at most one phrase); the eyebrow above a headline; a numbered-step circle (blue by
+   default elsewhere, including white — every circle in one list stays the same color); a
+   genuinely small, non-clickable accent anywhere — a status badge, a pagination dot, an
+   icon-button hover fill; and a checked checkbox, radio, or on/off switch, which fills orange
+   as its binary yes/no state on any background. None of these extend to a large fill or a
+   full-width bar.
 
-6. **Adjacent sections never share a background.** The rhythm is warm canvas → white →
+   **Which CTA color:** `primary` (orange) is the default for a CTA sitting directly on the
+   section canvas. Use `secondary` (blue) instead when the CTA is inside a card, or when the
+   page background is a warm brown/orange photo tone — orange would either disappear into it
+   or read as a second orange competing with the section's real CTA. This doesn't relax the
+   one-orange-CTA rule; a blue button in a card was never competing for orange to begin with.
+
+6. **Blue marks the selected state in tabs, dropdowns, and filter toggles — not orange.**
+   Active tab label + underline, the selected item in a dropdown menu, the selected icon in a
+   segmented/toggle-tab filter (e.g. All / Online / Offline) — all `brand-blue-500`. Don't
+   confuse a toggle-**tab** filter group (a choice among options, blue) with an on/off
+   **switch** (a binary checked state, orange) — same word, opposite color, different
+   component. This selected-state blue isn't a CTA and doesn't compete with the one-orange
+   rule above.
+
+7. **Adjacent sections never share a background.** The rhythm is warm canvas → white →
    warm canvas. Structure comes from background change and whitespace, never from
    hairline rules.
 
-7. **No dark mode.** Do not add `prefers-color-scheme` blocks or dark variants.
+8. **No dark mode.** Do not add `prefers-color-scheme` blocks or dark variants.
 
-8. **Mobile inputs must render at ≥16px.** iOS Safari auto-zooms below that. Use
+9. **Mobile inputs must render at ≥16px.** iOS Safari auto-zooms below that. Use
    `text-[16px] md:text-body-default` on any `input`, `textarea`, or `select`.
 
-9. **Button text is always one line.** Every button carries `whitespace-nowrap` — never
-   remove it. Since the label then overflows instead of wrapping, the row has to give:
-   put two side-by-side buttons in
-   `flex flex-col items-stretch gap-12 sm:flex-row sm:flex-wrap sm:items-center`
-   so they stack on mobile. If a stacked button still overflows at 390px, the label is
-   too long — **stop and propose shorter wording to the user** instead of picking it
-   yourself. Never shrink padding, type, or the size variant to fit a long label.
+10. **Button text is always one line.** Every button carries `whitespace-nowrap` — never
+    remove it. Since the label then overflows instead of wrapping, the row has to give:
+    put two side-by-side buttons in
+    `flex flex-col items-stretch gap-12 sm:flex-row sm:flex-wrap sm:items-center`
+    so they stack on mobile. If a stacked button still overflows at 390px, the label is
+    too long — **stop and propose shorter wording to the user** instead of picking it
+    yourself. Never shrink padding, type, or the size variant to fit a long label.
 
 ## Before you say you're done
 
@@ -101,3 +123,11 @@ See [design-harness/brand-guideline/README.md](design-harness/brand-guideline/RE
 [design-harness/style-guide/index.html](design-harness/style-guide/index.html) renders every token, component, and composed
 section. When unsure whether your output is on-brand, compare it against the style-guide
 blocks rather than guessing.
+
+## Before starting a new page's UI
+
+Look at [design-harness/ui-examples/](design-harness/ui-examples/) — full-page screenshots of real, shipped Minds
+pages (home, for-everyone, about, a campaign page, bazaar, tutorials). Where the style
+guide shows components in isolation, this shows how they compose into a real page:
+section rhythm, density, and how much content actually fills a section. Skim it before
+laying out a new page, especially one similar to a page already in there.
