@@ -346,8 +346,8 @@
     border-radius: var(--radius-sm); border: none; background: none; cursor: pointer;
     font-family: var(--font-family-primary); font-size: var(--font-size-body-small); color: var(--color-text-muted);
   }
-  .pagination-arrow.lg, .pagination-page.lg { width: 40px; height: 40px; font-size: var(--font-size-body-large); }
-  .pagination-arrow.lg svg, .pagination-page.lg svg { width: 20px; height: 20px; }
+  .pagination-arrow.lg, .pagination-page.lg { width: 36px; height: 36px; font-size: var(--font-size-body-default); }
+  .pagination-arrow.lg svg, .pagination-page.lg svg { width: 18px; height: 18px; }
   .pagination-arrow:hover:not(:disabled), .pagination-page:hover { background: var(--color-beige-100); }
   .pagination-arrow:disabled { opacity: 0.4; cursor: default; }
   .pagination-page { font-weight: var(--font-weight-semibold); }
@@ -805,7 +805,7 @@
 
     <div class="row" style="align-items:flex-start">
       <div>
-        <p class="doc-label">Filter dropdown — grouped sections tinted with a checkmark</p>
+        <p class="doc-label" style="margin-top:0">Filter dropdown — grouped sections tinted with a checkmark</p>
         <div class="dropdown-anchor">
           <button class="pill-trigger" id="filter-trigger">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="6" cy="6" r="1.5" fill="currentColor" stroke="none"/><circle cx="14" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="10" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg>
@@ -847,33 +847,37 @@
           </div>
         </div>
       </div>
-      <div>
-        <p class="doc-label" style="margin-top:0">Pagination — sm (default), a rounded-square page marker, not a pill or circle</p>
-        <nav class="pagination" id="pagination-demo">
-          <button class="pagination-arrow" data-page-prev disabled>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button class="pagination-page active" data-page="1">1</button>
-          <button class="pagination-page" data-page="2">2</button>
-          <button class="pagination-page" data-page="3">3</button>
-          <button class="pagination-page" data-page="4">4</button>
-          <button class="pagination-arrow" data-page-next>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-        </nav>
-        <p class="doc-label">Pagination — lg, for a page's primary list</p>
-        <nav class="pagination lg" id="pagination-demo-lg">
-          <button class="pagination-arrow lg" data-page-prev disabled>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button class="pagination-page lg active" data-page="1">1</button>
-          <button class="pagination-page lg" data-page="2">2</button>
-          <button class="pagination-page lg" data-page="3">3</button>
-          <button class="pagination-page lg" data-page="4">4</button>
-          <button class="pagination-arrow lg" data-page-next>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-        </nav>
+      <div class="row" style="align-items:flex-start">
+        <div>
+          <p class="doc-label" style="margin-top:0">Pagination — sm (default), a rounded-square page marker, not a pill or circle</p>
+          <nav class="pagination" id="pagination-demo">
+            <button class="pagination-arrow" data-page-prev disabled>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="pagination-page active" data-page="1">1</button>
+            <button class="pagination-page" data-page="2">2</button>
+            <button class="pagination-page" data-page="3">3</button>
+            <button class="pagination-page" data-page="4">4</button>
+            <button class="pagination-arrow" data-page-next>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </nav>
+        </div>
+        <div>
+          <p class="doc-label" style="margin-top:0">Pagination — lg, for a page's primary list</p>
+          <nav class="pagination lg" id="pagination-demo-lg">
+            <button class="pagination-arrow lg" data-page-prev disabled>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="pagination-page lg active" data-page="1">1</button>
+            <button class="pagination-page lg" data-page="2">2</button>
+            <button class="pagination-page lg" data-page="3">3</button>
+            <button class="pagination-page lg" data-page="4">4</button>
+            <button class="pagination-arrow lg" data-page-next>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </nav>
+        </div>
       </div>
     </div>
 

@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
  */
 const SIZE = {
   sm: { box: "size-24", text: "text-body-small", icon: 16, gap: "gap-4" },
-  lg: { box: "size-40", text: "text-body-large", icon: 20, gap: "gap-8" },
+  lg: { box: "size-36", text: "text-body-default", icon: 18, gap: "gap-8" },
 };
 
 function getPageNumbers(page, pageCount) {
