@@ -37,8 +37,8 @@ from: what job it does, who uses it, and any concrete details about how it works
 sentences is enough — don't demand more than that). Then, from that description,
 propose:
 - **The outfit** — what Abby wears and holds, matching her job the way the shipped
-  set does (`mind_personal_chef.png` → chef's hat, apron, knife and pan;
-  `mind_recruiter.png` → suit, tie, lanyard, clipboard and phone; `mind_content.png` →
+  set does (`mind_personal_chef.webp` → chef's hat, apron, knife and pan;
+  `mind_recruiter.webp` → suit, tie, lanyard, clipboard and phone; `mind_content.webp` →
   streetwear jacket, selfie stick, lightbulb). One or two signature props in Abby's
   hands, plus clothing that reads instantly as the job.
 - **The 4 accessory items** for the side slots — each a small object or UI snippet
@@ -61,7 +61,7 @@ lighting, packaging style, and Abby's head/crown consistent with the shipped set
 
 ```bash
 codex exec --skip-git-repo-check -s workspace-write \
-  -i design-harness/assets/toy-figurines/<closest-match>.png \
+  -i design-harness/assets/toy-figurines/<closest-match>.webp \
   'Take the attached collector-toy blister-pack reference and make a new one for a
    different one-click Mind, in exactly the same style, proportions, and packaging
    (translucent beige blister card, orange banner strip, euro-slot hang-hole, 4 clear

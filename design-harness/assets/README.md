@@ -114,25 +114,25 @@ a card in a Minds directory or pricing grid, a "meet this Mind" section.
 
 | File | Mind |
 |---|---|
-| `mind_general_assistant.png` | General Assistant |
-| `mind_chief_of_staff.png` | Chief of Staff |
-| `mind_bizz.png` | Business/exec assistant — suit, phone, briefcase |
-| `mind_GTM.png` | Go-to-market / growth marketing |
-| `mind_sales.png` | Sales |
-| `mind_recruiter.png` | Recruiter |
-| `mind_scrum_master.png` | Scrum Master |
-| `mind_product_builder.png` | Product Builder |
-| `mind_content.png` | Content creation |
-| `mind_research.png` | Research |
-| `mind_decision.png` | Decision support / advisor |
-| `mind_email_manager.png` | Email Manager |
-| `mind_follow_up.png` | Follow-Up |
-| `mind_personal_chef.png` | Personal Chef |
-| `mind_fitness_coach.png` | Fitness Coach |
-| `mind_learning_coach.png` | Learning Coach |
-| `mind_football.png` | Football commentator/analyst |
-| `mind_superior_trader.png` | Trading |
-| `mind_game_designer.png` | Game Designer |
+| `mind_general_assistant.webp` | General Assistant |
+| `mind_chief_of_staff.webp` | Chief of Staff |
+| `mind_bizz.webp` | Business/exec assistant — suit, phone, briefcase |
+| `mind_GTM.webp` | Go-to-market / growth marketing |
+| `mind_sales.webp` | Sales |
+| `mind_recruiter.webp` | Recruiter |
+| `mind_scrum_master.webp` | Scrum Master |
+| `mind_product_builder.webp` | Product Builder |
+| `mind_content.webp` | Content creation |
+| `mind_research.webp` | Research |
+| `mind_decision.webp` | Decision support / advisor |
+| `mind_email_manager.webp` | Email Manager |
+| `mind_follow_up.webp` | Follow-Up |
+| `mind_personal_chef.webp` | Personal Chef |
+| `mind_fitness_coach.webp` | Fitness Coach |
+| `mind_learning_coach.webp` | Learning Coach |
+| `mind_football.webp` | Football commentator/analyst |
+| `mind_superior_trader.webp` | Trading |
+| `mind_game_designer.webp` | Game Designer |
 
 These are full produced compositions (packaging, banner, accessory-item pockets, seal)
 — never assembled in CSS, never edited or recolored. If the Mind you need isn't in
