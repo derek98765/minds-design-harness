@@ -68,8 +68,13 @@
   /* Spacing bars */
   .sp-row { display: flex; align-items: center; gap: var(--space-16); margin-bottom: var(--space-8); }
   .sp-tag { flex: 0 0 110px; font-size: var(--font-size-caption); font-family: ui-monospace, monospace; }
-  .sp-bar { height: 20px; background: var(--color-brand-orange-500); border-radius: var(--radius-sm); }
-  .sp-bad .sp-bar { background: var(--color-error); }
+  /* Measured span, not a solid block: transparent body, solid stroke at each end. */
+  .sp-bar {
+    height: 20px; background: transparent; border-radius: 0;
+    border-left: 2px solid var(--color-brand-orange-500);
+    border-right: 2px solid var(--color-brand-orange-500);
+  }
+  .sp-bad .sp-bar { border-left-color: var(--color-error); border-right-color: var(--color-error); }
   .sp-note { font-size: var(--font-size-caption); color: var(--color-text-muted); }
   /* Component grid */
   .row { display: flex; flex-wrap: wrap; gap: var(--space-12); align-items: center; }
@@ -547,7 +552,7 @@ document.getElementById('sp-scale').innerHTML = VALID.map(n =>
 
 // The footgun, rendered side by side so the difference is visible, not described.
 // These are deliberately-invalid values shown as a warning, hence the ignore markers.
-const BAD = [[10,8],[14,12],[6,4],[28,24]];
+const BAD = [[6,4],[10,8],[14,12],[28,24]];
 document.getElementById('sp-bad').innerHTML = BAD.map(([bad,good]) =>
   `<div class="sp-row sp-bad">
      <div class="sp-tag">py-${'' + bad}</div>
