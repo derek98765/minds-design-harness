@@ -11,9 +11,9 @@ content, useful touch targets, and the project's visual rhythm at every breakpoi
 ## Preflight
 
 1. Read [../../../AGENTS.md](../../../AGENTS.md) and
-   [../../../harness/spec/DESIGN.md](../../../harness/spec/DESIGN.md).
-2. Inspect [../../../harness/kit/tokens.css](../../../harness/kit/tokens.css),
-   relevant components in `harness/kit/`, and the complete target component or page.
+   [../../../design-harness/spec/DESIGN.md](../../../design-harness/spec/DESIGN.md).
+2. Inspect [../../../design-harness/kit/tokens.css](../../../design-harness/kit/tokens.css),
+   relevant components in `design-harness/kit/`, and the complete target component or page.
 3. Confirm actual breakpoints and whether typography tokens already scale. Do not add
    local font overrides that defeat responsive tokens.
 4. Reuse components and tokens. Project rules against hardcoded values and invalid
@@ -91,10 +91,10 @@ tables, modals, sticky content, safe areas, keyboard focus, and floating dev con
 Run the project checks on every changed file or directory:
 
 ```bash
-node harness/checks/check-spacing.mjs <your-file-or-dir>
-node harness/checks/check-hardcoded.mjs <your-file-or-dir>
-node harness/checks/check-button-text.mjs <your-file-or-dir>
+node design-harness/checks/check-spacing.mjs <your-file-or-dir>
+node design-harness/checks/check-hardcoded.mjs <your-file-or-dir>
+node design-harness/checks/check-button-text.mjs <your-file-or-dir>
 ```
 
-Then complete [../../../harness/checks/review-checklist.md](../../../harness/checks/review-checklist.md)
+Then complete [../../../design-harness/checks/review-checklist.md](../../../design-harness/checks/review-checklist.md)
 before reporting responsive work finished.

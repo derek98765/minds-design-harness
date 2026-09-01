@@ -10,7 +10,7 @@ same change to the other file in the same commit so their contents remain identi
 
 ## Before you write any UI
 
-Read [harness/spec/DESIGN.md](harness/spec/DESIGN.md). It is short and it is the system.
+Read [design-harness/spec/DESIGN.md](design-harness/spec/DESIGN.md). It is short and it is the system.
 
 ## The brand is "Minds"
 
@@ -29,12 +29,12 @@ Never write "Animoca Minds" in body copy, headlines, or UI. The lockup
    Common mistakes: `py-5`, `gap-6`, `py-10`, `gap-10`, `py-14`, `gap-14`, `gap-28`, `py-28`.
 
 2. **Never hardcode a color, size, radius, or shadow.** Everything lives in
-   [harness/kit/tokens.css](harness/kit/tokens.css). Use `bg-brand-orange-500`, not `#fd8d1d`.
+   [design-harness/kit/tokens.css](design-harness/kit/tokens.css). Use `bg-brand-orange-500`, not `#fd8d1d`.
 
 3. **Never use inline `style={{}}` for anything in the token system.** It overrides
    responsive classes and causes bugs that look like design mistakes.
 
-4. **Reuse what's in `harness/kit/`.** Do not build a one-off button, card, or input.
+4. **Reuse what's in `design-harness/kit/`.** Do not build a one-off button, card, or input.
 
 5. **Orange is for action only.** Exactly one orange CTA per section. If there are two,
    one of them is wrong. Orange is never a surface color and never a heading color.
@@ -61,22 +61,22 @@ Never write "Animoca Minds" in body copy, headlines, or UI. The lockup
 Run the checks and fix anything they report:
 
 ```bash
-node harness/checks/check-spacing.mjs <your-file-or-dir>
-node harness/checks/check-hardcoded.mjs <your-file-or-dir>
-node harness/checks/check-button-text.mjs <your-file-or-dir>
+node design-harness/checks/check-spacing.mjs <your-file-or-dir>
+node design-harness/checks/check-hardcoded.mjs <your-file-or-dir>
+node design-harness/checks/check-button-text.mjs <your-file-or-dir>
 ```
 
 Point them at the page or folder you changed (e.g. `src`), not the whole project.
 
-Then walk [harness/checks/review-checklist.md](harness/checks/review-checklist.md) — it covers what a
+Then walk [design-harness/checks/review-checklist.md](design-harness/checks/review-checklist.md) — it covers what a
 script cannot judge. Verify the page at 390px wide before calling it finished.
 
 ## Which lane to build in
 
 | Situation | Lane |
 |---|---|
-| Static one-pager, no form logic, needs to open in a browser | `harness/kit/html/starter.html` |
-| Has forms, state, routing, or data | `harness/kit/react/` |
+| Static one-pager, no form logic, needs to open in a browser | `design-harness/kit/html/starter.html` |
+| Has forms, state, routing, or data | `design-harness/kit/react/` |
 
 ## Read these only when the task calls for it
 
@@ -84,20 +84,20 @@ Do not read these by default — they are situational.
 
 | If the page involves… | Read |
 |---|---|
-| The Minds logo — placement, sizing, a header/footer | [harness/spec/brand-logo.md](harness/spec/brand-logo.md) |
-| Abby the mascot, or hand-sticker accents | [harness/spec/brand-mascot.md](harness/spec/brand-mascot.md) |
-| Choosing or generating photography / hero imagery | [harness/spec/brand-imagery.md](harness/spec/brand-imagery.md) |
-| Drawing a new icon (not reusing an existing one) | [harness/spec/brand-iconography.md](harness/spec/brand-iconography.md) |
-| Writing or rewriting headlines and body copy | [harness/spec/voice-and-copy.md](harness/spec/voice-and-copy.md) |
+| The Minds logo — placement, sizing, a header/footer | [design-harness/spec/brand-logo.md](design-harness/spec/brand-logo.md) |
+| Abby the mascot, or hand-sticker accents | [design-harness/spec/brand-mascot.md](design-harness/spec/brand-mascot.md) |
+| Choosing or generating photography / hero imagery | [design-harness/spec/brand-imagery.md](design-harness/spec/brand-imagery.md) |
+| Drawing a new icon (not reusing an existing one) | [design-harness/spec/brand-iconography.md](design-harness/spec/brand-iconography.md) |
+| Writing or rewriting headlines and body copy | [design-harness/spec/voice-and-copy.md](design-harness/spec/voice-and-copy.md) |
 
-`harness/brand-guideline/` holds the two source PDFs. Consult them only if the markdown specs
+`design-harness/brand-guideline/` holds the two source PDFs. Consult them only if the markdown specs
 genuinely don't answer the question — they are slow and expensive to read. Start with
 `brand-guideline-lite.pdf` (1 page); reach for `brand-guideline-full.pdf` (34 pages)
 only when the lite version doesn't cover it. The full version wins if they conflict.
-See [harness/brand-guideline/README.md](harness/brand-guideline/README.md).
+See [design-harness/brand-guideline/README.md](design-harness/brand-guideline/README.md).
 
 ## What "good" looks like
 
-[harness/style-guide/index.html](harness/style-guide/index.html) renders every token, component, and composed
+[design-harness/style-guide/index.html](design-harness/style-guide/index.html) renders every token, component, and composed
 section. When unsure whether your output is on-brand, compare it against the style-guide
 blocks rather than guessing.
