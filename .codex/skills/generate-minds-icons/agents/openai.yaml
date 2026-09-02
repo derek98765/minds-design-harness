@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate Minds Icons"
+  short_description: "Create brand-compliant Minds persona icons"
+  default_prompt: "Use $generate-minds-icons to create a new icon for a Minds persona."

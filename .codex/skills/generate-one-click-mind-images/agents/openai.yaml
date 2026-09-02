@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate One-Click Mind Images"
+  short_description: "Create Minds blister-pack figurine artwork"
+  default_prompt: "Use $generate-one-click-mind-images to create a new one-click Mind figurine image."
