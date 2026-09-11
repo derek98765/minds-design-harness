@@ -194,7 +194,7 @@ sit side by side and no longer fit, in this order:
    the problem. Two or three words is the target — "Start free", not "Start your free
    trial today". Stop and propose shorter wording to the user rather than choosing it
    silently; the label is copy, and copy is their call. See
-   [voice-and-copy.md](voice-and-copy.md).
+   [voice-and-copy.md](design-harness/spec/voice-and-copy.md).
 
 Never shrink padding, reduce the font size, or drop to a smaller size variant to make a
 long label fit. Those all trade away the brand silhouette to rescue copy that should
@@ -456,13 +456,13 @@ Read these only when the task calls for it — they are situational, not core.
 
 | If the page involves… | Read |
 |---|---|
-| The logo — placement, sizing, a header or footer | [brand-logo.md](brand-logo.md) |
-| Abby the mascot, or hand-sticker accents | [brand-mascot.md](brand-mascot.md) |
-| Choosing or generating photography and hero imagery | [brand-imagery.md](brand-imagery.md) |
-| A specific Mind's icon, or drawing a new icon | [brand-iconography.md](brand-iconography.md) |
-| Writing or rewriting headlines and body copy | [voice-and-copy.md](voice-and-copy.md) |
+| The logo — placement, sizing, a header or footer | [brand-logo.md](design-harness/spec/brand-logo.md) |
+| Abby the mascot, or hand-sticker accents | [brand-mascot.md](design-harness/spec/brand-mascot.md) |
+| Choosing or generating photography and hero imagery | [brand-imagery.md](design-harness/spec/brand-imagery.md) |
+| A specific Mind's icon, or drawing a new icon | [brand-iconography.md](design-harness/spec/brand-iconography.md) |
+| Writing or rewriting headlines and body copy | [voice-and-copy.md](design-harness/spec/voice-and-copy.md) |
 
 The source brand guideline PDFs are in `brand-guideline/` — a 1-page lite version and
-the 34-page full version, with [its own README](../brand-guideline/README.md) on which
+the 34-page full version, with [its own README](design-harness/brand-guideline/README.md) on which
 to read when. They are slow and expensive to read, so consult them only when these
 markdown specs genuinely don't answer the question.

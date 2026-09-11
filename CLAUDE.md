@@ -10,7 +10,7 @@ same change to the other file in the same commit so their contents remain identi
 
 ## Before you write any UI
 
-Read [design-harness/spec/DESIGN.md](design-harness/spec/DESIGN.md). It is short and it is the system.
+Read [DESIGN.md](DESIGN.md). It is short and it is the system.
 
 ## The brand is "Minds"
 
