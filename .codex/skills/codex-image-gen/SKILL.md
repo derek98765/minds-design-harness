@@ -24,7 +24,7 @@ process or require an API key for ordinary generation.
 
 Before generating campaign or landing-page imagery, read:
 
-- [../../../design-harness/spec/DESIGN.md](../../../design-harness/spec/DESIGN.md)
+- [../../../DESIGN.md](../../../DESIGN.md)
 - [../../../design-harness/spec/brand-imagery.md](../../../design-harness/spec/brand-imagery.md)
 - [../../../design-harness/spec/brand-mascot.md](../../../design-harness/spec/brand-mascot.md) when Abby or hand
   stickers are involved

@@ -11,7 +11,7 @@ content, useful touch targets, and the project's visual rhythm at every breakpoi
 ## Preflight
 
 1. Read [../../../AGENTS.md](../../../AGENTS.md) and
-   [../../../design-harness/spec/DESIGN.md](../../../design-harness/spec/DESIGN.md).
+   [../../../DESIGN.md](../../../DESIGN.md).
 2. Inspect [../../../design-harness/kit/tokens.css](../../../design-harness/kit/tokens.css),
    relevant components in `design-harness/kit/`, and the complete target component or page.
 3. Confirm actual breakpoints and whether typography tokens already scale. Do not add

@@ -63,8 +63,8 @@ renders at 40px and the layout breaks with no error. When in doubt, round down.
 ## What's in here
 
 ```
-spec/             The design rules. DESIGN.md is the core; the brand-*.md files
-                  cover logo, mascot, imagery, icons, and copy voice.
+spec/             The design rules. Brand-*.md files cover logo, mascot, imagery,
+                  icons, and copy voice. The core rules live in ../DESIGN.md.
 kit/              The parts — tokens.css, HTML starter, React components.
 style-guide/      One HTML page showing every colour, text size, button and
                   section, live in a browser. Open it to see what "on-brand" looks like.
