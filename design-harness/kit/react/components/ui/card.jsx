@@ -2,24 +2,15 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Minds card.
- *
- * Background rule: white cards on the warm canvas, warm-canvas cards on white.
- * Never the same tone as the section behind them.
- *
- * Shadow is none by default — separation comes from background change and
- * whitespace, not elevation. Pass `hover` only where the card genuinely lifts.
+ * Minds card. Frosted glass on the cool wash: translucent white, lit top
+ * edge, blue-grey drop. Needs a non-flat ground behind it (the page wash
+ * plus .canvas-blooms on marketing pages).
  */
 const Card = React.forwardRef(
-  ({ className, surface = "white", hover = false, ...props }, ref) => (
+  ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(
-        "rounded-lg border border-neutral-200 p-24",
-        surface === "white" ? "bg-white" : "bg-beige-100",
-        hover && "transition-shadow hover:shadow-hover",
-        className
-      )}
+      className={cn("glass-card p-24 text-[var(--text-body-cool)]", className)}
       {...props}
     />
   )
@@ -37,7 +28,7 @@ const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
 CardTitle.displayName = "CardTitle";
 
 const CardDescription = React.forwardRef(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn("text-body-large text-neutral-600 leading-body", className)} {...props} />
+  <p ref={ref} className={cn("text-body-large text-[var(--text-body-cool)] leading-body", className)} {...props} />
 ));
 CardDescription.displayName = "CardDescription";
 

@@ -6,9 +6,9 @@ Files are in `assets/logo/`:
 
 | File | Use |
 |---|---|
-| `minds-blue.svg` | Default. On the warm canvas, on white, on any light surface. |
-| `minds-white.svg` | On the indigo canvas, on photography, on any dark surface. |
-| `minds-blue.png` / `minds-white.png` | Only where SVG is not an option (email, some social). |
+| `minds-blue.svg` | Default. On the cool wash, on white, on glass. |
+| `minds-white.svg` | On photography and on any dark surface. The homepage hero uses this. |
+| `mark.svg` | The antenna head alone. Favicon, and any lockup below 120px wide. |
 
 Prefer the SVG everywhere on the web — it stays sharp at every size.
 
@@ -48,8 +48,8 @@ This matters most in a centered footer or a splash screen.
 
 Always place the logo on a background with strong contrast. The safe pairings:
 
-- Blue logo on warm canvas, white, or any pale surface
-- White logo on the indigo canvas or on a dark photograph
+- Blue logo on the cool wash, on white, or on glass
+- White logo on photography or on a dark surface
 
 **Never place the blue logo on orange** — the contrast is too low and it is a
 documented don't.

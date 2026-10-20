@@ -45,9 +45,8 @@ Needs a form, so use the React lane.
 > Lead with the outcome, not the technology. Show three things it handles,
 > how to get started, and an FAQ.
 
-Static — use the HTML lane. Check `assets/toy-figurines/` first — 18 Minds already
-have a produced blister-pack figure; see `assets/README.md`. See `spec/brand-mascot.md`
-for the full rules on Abby and the blister-pack art direction.
+Static — use the HTML lane. Use the shipped character in `assets/one-click/`
+(card, full-body, or side-view). See `spec/brand-mascot.md`. Do not draw a new figure.
 
 ### New feature or sub-product
 
