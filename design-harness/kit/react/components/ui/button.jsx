@@ -10,9 +10,9 @@ import { cn } from "@/lib/utils";
  * Text is extrabold at all sizes; the generous horizontal padding is part of
  * the brand silhouette, not an accident.
  *
- * Use `primary` (orange) on any background, and only ONE per section.
- * `secondary` / `tertiary` on light backgrounds; `tertiary-light` /
- * `outline-light` on the indigo canvas or over photography.
+ * `primary` is the lit orange CTA — one per view, the thing the screen asks for.
+ * `secondary` is the lit blue CTA for the other filled actions.
+ * `quiet` is the white secondary button beside a primary.
  *
  * Label text is always ONE line — `whitespace-nowrap` below is load-bearing.
  * A wrapped label inflates the pill into a lozenge and destroys the silhouette.
@@ -36,36 +36,30 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // ── Filled ────────────────────────────────────────────────────────
-        // The action color. One per section.
-        primary:
-          "bg-brand-orange-500 text-white hover:brightness-110",
-        // Structure. Light backgrounds only.
-        secondary:
-          "bg-brand-blue-500 text-white hover:brightness-125",
+        // The loud action. One per view. Gradient and shadow travel together.
+        primary: "btn-lit-orange",
+        // The working filled action when the view already has its orange.
+        secondary: "btn-lit-blue",
+        // White pill beside a primary.
+        quiet: "btn-secondary-v2",
         tertiary:
           "bg-neutral-900 text-white hover:bg-neutral-600",
-        // For dark / coloured backgrounds.
         "tertiary-light":
           "bg-white text-neutral-900 hover:bg-neutral-50",
 
-        // ── Outline ───────────────────────────────────────────────────────
         "outline-primary":
           "border border-brand-orange-500 bg-transparent text-brand-orange-500 hover:bg-brand-orange-500 hover:text-white",
         "outline-secondary":
           "border border-brand-blue-500 bg-transparent text-brand-blue-500 hover:bg-brand-blue-500 hover:text-white",
-        // The quiet companion to a primary CTA.
         "outline-muted":
           "border border-neutral-400 bg-transparent text-neutral-900 hover:border-neutral-900",
-        // For dark / coloured backgrounds.
         "outline-light":
-          "border border-beige-100 bg-transparent text-beige-100 hover:bg-white hover:text-neutral-900",
+          "border border-white/80 bg-white/40 text-neutral-900 backdrop-blur-md hover:bg-white",
 
-        // ── Link ──────────────────────────────────────────────────────────
         "link-primary":
-          "bg-transparent !px-0 font-semibold text-brand-orange-500 underline underline-offset-4 hover:brightness-110",
+          "bg-transparent !px-0 font-semibold text-[var(--btn-text-orange)] underline underline-offset-4 hover:text-[var(--btn-text-orange-hover)]",
         "link-secondary":
-          "bg-transparent !px-0 font-semibold text-brand-blue-500 underline underline-offset-4 hover:text-brand-blue-400",
+          "bg-transparent !px-0 font-semibold text-[var(--btn-text-blue)] underline underline-offset-4 hover:text-[var(--btn-text-blue-hover)]",
       },
       size: {
         // sm -> lg grow in both height and width. xl holds lg's vertical padding

@@ -36,7 +36,7 @@ const RULES = [
     re: /#[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3}(?:[0-9a-fA-F]{2})?)?\b/g,
     skipLine: l => /--color-|@color|tokens\.css/.test(l),
     msg: 'hardcoded hex color',
-    fix: 'use a token — bg-brand-orange-500, text-neutral-600, var(--color-bg)',
+    fix: 'use a v2 token — var(--orange), var(--text-body-cool), var(--line-cool)',
   },
   {
     id: 'font-px',

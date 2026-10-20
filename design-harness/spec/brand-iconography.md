@@ -1,78 +1,33 @@
-# Iconography
+# Icons
 
-Read this only when you need to **draw a new icon**. If an existing icon works, reuse it —
-most pages should never reach this file.
+Read this when a control needs an icon.
 
----
-
-## Three principles
-
-1. **Clarity** — an icon must communicate its meaning immediately. Prefer a literal
-   metaphor over a clever abstract one. A calendar means a calendar.
-2. **Consistency** — the 24px grid, the 1.5px stroke, and shared corner radii are what
-   make a set feel like one family rather than a collection.
-3. **Simplicity** — reduce to the essence. Decorative detail muddies the shape at small
-   sizes, which is where icons actually live.
+A Mind is not an icon. The Master Mind and the one-click Minds are the 3D
+characters in `assets/`. The old dual-tone persona icons (a piggy bank for
+Finance Buddy, a bowl for Meal Planner, and the rest of that set) are retired.
+Do not draw a new one.
 
 ---
 
-## Geometry
+## UI icons
 
-| Spec | Value |
+Interface icons — nav, rows, menus, empty states — are Lucide, stroke 1.5,
+`currentColor`, sized to the control. On glass they use the cool grey text
+tokens (`--text-label-cool` at rest, `--blue-lit` when selected or hovered).
+
+Do not mix a filled brand illustration into a row of stroke icons. The
+antenna-head mark (`assets/logo/mark.svg`) is the logo mark, used for the
+favicon and for the Minds nav item. It is not a generic icon.
+
+---
+
+## When a picture is needed instead
+
+| Need | Use |
 |---|---|
-| Artboard | **24 × 24px** |
-| Live area | **20 × 20px** |
-| Padding | **2px** on every side |
-| Stroke | **1.5px** |
+| "Which Mind is this?" | The Mind's card, full-body, or side-view |
+| "This is Minds" | `assets/logo/` |
+| A small control | A Lucide icon |
 
-Keep all artwork inside the 20px live area. The 2px padding stops icons clipping at the
-edges and keeps them optically balanced against each other.
-
-**The 1.5px stroke is the defining characteristic of the set.** It sits deliberately
-between a 1px stroke (which disappears on lower-density screens) and a 2px stroke (which
-reads as chunky). Do not vary it between icons.
-
----
-
-## Color
-
-Every icon exists in two treatments:
-
-**Dual-tone** — indigo as the base with orange picking out one meaningful detail. Use on
-light surfaces where the icon carries some weight, such as a feature grid.
-
-**Single-color** — one flat color throughout. Use white on the indigo canvas, or indigo
-where the icon is purely functional and shouldn't compete.
-
-Rules:
-- Orange in a dual-tone icon highlights **one** element, the same way orange works
-  everywhere else in the system. Never color the whole icon orange.
-- On the indigo canvas, icons go white — not orange.
-- Never introduce a third color into an icon.
-
----
-
-## In use
-
-- Feature-grid icons typically sit at 24px in a tinted rounded square
-  (`brand-orange-100` or `brand-blue-100`) with `--radius-md`.
-- Inline icons beside text align to the text's optical center, not its bounding box.
-- Icon buttons are `rounded-full`, white with a `neutral-200` border, filling with
-  orange or indigo on hover and flipping the icon to white.
-
----
-
-## Before drawing a new one
-
-Check in order:
-
-1. Does `assets/icons/` already cover it? 30 named Mind-persona icons live there
-   (`finance_buddy.webp`, `meal_planner.webp`, etc.), plus `app-icon-default.svg` and
-   `skill-icon-default.svg` as generic fallbacks. See [../assets/README.md](../assets/README.md) for the full
-   list. If the page is representing a specific named Mind, reuse its icon rather than
-   drawing a new one — and if that Mind isn't in the set yet, use a default instead of
-   inventing one.
-2. Does a **hand sticker** communicate it better? For a warm, human accent beside a
-   headline, a sticker often beats a UI icon — see [brand-mascot.md](brand-mascot.md).
-3. Is an icon needed at all? Minds pages lean on type and whitespace. An icon per bullet
-   point is usually decoration, not clarification.
+If a Lucide icon does not say the thing, use a word. Do not generate a custom
+glyph to fill one button.

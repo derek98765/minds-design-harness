@@ -1,102 +1,78 @@
-# Abby & the hand stickers
+# Characters
 
-Read this when a page uses the mascot or the hand-sticker accents.
+Read this when a page uses the Master Mind or a one-click Mind.
 
----
-
-## Who Abby is
-
-Abby is the character behind the brand — a glossy metallic-blue sphere with a small
-crown of antennae, two dot eyes, simple limbs and rounded boots. She is the friendly
-face of the identity.
-
-Abby embodies three values: **Empathy, Foresight, Acuity.** She anticipates, adapts,
-and helps. She is capable and warm, never sarcastic, never a robot butler.
-
-She is *always in motion* — the poses are expressive and mid-gesture. A static,
-front-facing Abby standing to attention is off-brand.
-
-Poses are in `assets/mascot/poses/` (21 renders); the model sheet is in
-`assets/mascot/turnaround/`.
+The cast is 3D. A glossy blue body, three ball-tipped antennae, simple limbs,
+and a costume that says the job. The old flat Abby, the hand stickers, and the
+beige blister packs are retired. Do not place those, and do not generate a
+new character to fill a gap.
 
 ---
 
-## When to use which asset
+## Master Mind
 
-This is the decision most pages get wrong:
+`assets/master-mind/`. He is the homepage hero and the figure in the
+launch-a-Mind modal when someone is making their own Mind.
 
-| You need | Use | Why |
-|---|---|---|
-| A warm human hero image | **Lifestyle photography** with Abby composited in | Real people doing real tasks; Abby is the companion in the scene |
-| Personality without people | **Abby alone** on a plain warm background | Product moments, empty states, confirmations |
-| A small accent beside text | **A hand sticker** | Punctuates a point without a full character |
-| A decorative shape | **None of the above** | Abby is a character, not a graphic element |
+Costume is fixed: olive beanie, orange utility vest over a white puffer,
+cargo pants, sneakers, walkie-talkie. The homepage plays `hero-idle.mp4` and
+`hero-walk.mp4` inside the living-room scene. The launch modal plays
+`launch-idle.mp4`, which is the same idle framed tighter on him.
 
-**Do not use Abby as decoration.** She is a character with a personality — dropping
-her into a corner to fill space reads as clip-art.
-
----
-
-## Poses
-
-`assets/mascot/poses/` holds 21 approved poses; `assets/mascot/turnaround/` holds the
-model sheet (front, back, left, right, plus a combined four-view reference).
-
-- Pick a pose whose gesture **matches what the copy says.** Pointing at the headline,
-  arms crossed while "thinking", waving on a welcome screen.
-- One Abby per section. Two in the same viewport reads as chaos.
-- The turnaround is a *reference sheet* for generating new imagery — not artwork to
-  place on a page.
-
-Never redraw, recolor, or restyle Abby. She is fixed artwork. If you need a pose that
-does not exist, generate it from the reference — see [brand-imagery.md](brand-imagery.md).
+Use a still (`full-body.webp`, `profile.png`, a poster) when the page cannot
+play video. Do not invent a new pose.
 
 ---
 
-## Hand stickers
+## One-click Minds
 
-`assets/stickers/solo/` holds 8 bare gestures (pointing, OK, open palm, waving);
-`assets/stickers/props/` holds 6 compositions holding an object (a card, coins, a
-checklist, a phone).
+`assets/one-click/`. Nineteen specialists have a collector card. Each also has
+a full-body cutout, a side-view still, and a side-view clip.
 
-They are a **separate accent system** from Abby herself:
+| You need | Use |
+|---|---|
+| A tile or a chooser, the card is the point | `cards/toycard-<id>.webp`, or `-s` when the card is small |
+| The figure with the name set in HTML | `figurines/<name>-notext.webp` |
+| A portrait on a page, no packaging | `full-body/<id>.webp` or `side-view/` |
+| Motion | The matching `.mp4` in `side-view/` |
 
-- Use them beside a stat, a list item, a feature title, or a testimonial — small,
-  punctuating a single point.
-- One or two per page. They lose all impact in a row of six.
-- They pair naturally with orange props (a pencil, a card, a star) — that is the
-  established look, not an accident.
-- Do not mix a hand sticker into a scene that already has a full Abby.
+The card is a finished picture: blue card, blister, accessory pockets, orange
+edition block. Ship the file. Do not redraw the pockets, recolor the card, or
+typeset a new name on top of a card that already has one.
 
----
-
-## One-Click Mind blister packs
-
-The One-Click Minds have their own art direction: a collector-toy blister pack, warm
-beige card, orange banner strip, and 4 accessory items in clear pockets down the right
-side showing what the Mind can do.
-
-Anatomy of the pack (matching the shipped files — see `assets/toy-figurines/`):
-- **Top banner** — plain warm-beige card with a euro-slot hang-hole; no name/type text
-- **Orange strip** — a solid band beneath the banner, no "COLLECTOR SERIES" text
-- **The figure** — Abby dressed and posed for the job, holding one or two signature props
-- **4 accessory items** — small objects or UI snippets in individual clear pockets,
-  each showing a distinct thing the Mind does
-- **Limited Edition seal** — gold circular seal, bottom right
-
-18 of these are already produced and live in `assets/toy-figurines/` — see
-[../assets/README.md](../assets/README.md) for the full list. Check there first for any one-click Mind you're
-featuring (a launch page, a Minds directory, a pricing card) and reuse the matching
-file. This is a produced asset: do not assemble a new blister pack in CSS, edit an
-existing one, or recolor/recompose the figure. For a Mind that isn't in the set yet,
-use the `generate-one-click-mind-images` skill rather than freehanding it — it
-interviews for the outfit and 4 items (or proposes them for approval) and generates a
-new figurine matching this anatomy.
+`toycard-new.webp` is the generic card. Use it only for a Mind that has no
+card of its own.
 
 ---
 
-## Backgrounds for Abby
+## Marketing scenes
 
-Abby sits on warm, quiet surfaces: the beige canvas, a soft gradient, or a real
-photographed environment. She does not sit on the orange brand color — the blue and
-orange fight at that saturation.
+`assets/characters/`. These are the figures and rooms from the homepage,
+About, Everyday Examples, and For Everyone. The product cuts above are for
+UI. These files are for a marketing page that needs the same scene the site
+already ships.
+
+`characters/poses/` is the uncostumed character. Reach for a pose when a
+section needs the figure alone, with no job costume and no room around it.
+
+The file list is in [../assets/README.md](../assets/README.md).
+
+---
+
+## How many figures
+
+One hero figure per section. A homepage scene may show the cast in the
+background of a single illustration, the way the living-room hero does. A row
+of cards is a catalogue, not a crowd of loose figures. Do not drop a character
+into a corner to fill space.
+
+---
+
+## What not to do
+
+- Do not redraw, recolor, or restyle a shipped character.
+- Do not composite the old photography of real people with a flat Abby.
+- Do not use hand stickers. That accent system is gone.
+- Do not generate a new Mind image from a prompt when a file in `assets/`
+  already exists. New character art is produced with the app's own pipeline,
+  not from this harness.

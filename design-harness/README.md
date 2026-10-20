@@ -29,7 +29,7 @@ to know the design system — it does.
 
 ## What you get
 
-A page that uses the right colours, type, spacing, and section rhythm, and that has been
+A page on the v2 system: cool wash, glass, lit controls, the right type and spacing,
 checked against the rules before it's handed to you.
 
 ## If you want to build by hand instead
@@ -63,23 +63,22 @@ renders at 40px and the layout breaks with no error. When in doubt, round down.
 ## What's in here
 
 ```
-spec/             The design rules. Brand-*.md files cover logo, mascot, imagery,
-                  icons, and copy voice. The core rules live in ../DESIGN.md.
+spec/             The design rules. Brand-*.md files cover logo, characters,
+                  imagery, icons, and copy voice. The core rules live in ../DESIGN.md.
 kit/              The parts — tokens.css, HTML starter, React components.
-style-guide/      One HTML page showing every colour, text size, button and
-                  section, live in a browser. Open it to see what "on-brand" looks like.
+style-guide/      One HTML page of the v2 tokens, glass, and lit controls.
 checks/           Scripts that catch mistakes, plus a human review checklist.
-assets/           Logos, Abby the mascot, hand stickers, photography.
-brand-guideline/  The two brand guideline PDFs — full and lite. See its README
-                  for which to read when.
+assets/           Logo, the Master Mind, and the one-click Mind characters.
+ui-examples/      A frame of the current homepage hero. The old page screenshots
+                  are gone.
 ```
 
 ## Questions a designer would ask you
 
 If you're unsure whether a page is right, the fast answers:
 
-- **Backgrounds alternate?** Warm canvas → white → warm canvas. Never two the same in a row.
-- **How much orange?** One action per section. That's it.
+- **What is the ground?** The cool wash. Blooms behind glass on a marketing page.
+- **How much orange?** One lit-orange action per view. Other filled actions are lit blue.
 - **Checked on a phone?** 390px wide. Always.
 
 The full list is in [checks/review-checklist.md](checks/review-checklist.md).

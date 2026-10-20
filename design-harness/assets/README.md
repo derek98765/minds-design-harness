@@ -1,11 +1,14 @@
 # Assets
 
-The full Minds image library — 77 files. Folders are organised so the structure
-narrows the choice for you.
+The current Minds character library, copied from the shipped app. These are 3D
+cartoon characters. The old flat Abby poses, hand stickers, lifestyle photos,
+and dual-tone persona icons are gone.
 
-> **Before you ship any of these:** they are full-resolution source files, several
-> over 5MB. Compress and resize first. A slow page loses the reader before the design
-> matters.
+Marketing scenes live in `characters/`. Product cuts of the Master Mind and
+the one-click catalogue live in `master-mind/` and `one-click/`.
+
+Compress before you ship a large file on a page. Several side-view clips are
+the full source.
 
 ---
 
@@ -13,184 +16,129 @@ narrows the choice for you.
 
 | File | Use |
 |---|---|
-| `minds-blue.svg` | **Default.** Warm canvas, white, any light surface. |
-| `minds-white.svg` | Indigo canvas, photography, any dark surface. |
-| `minds-blue.png` · `minds-white.png` | Only where SVG isn't supported. |
+| `minds-blue.svg` | Default on the cool wash, on white, on glass. |
+| `minds-white.svg` | On photography and on any dark surface. |
+| `mark.svg` | The antenna head alone. Favicon and sizes below 120px wide. |
 
-Prefer SVG. Minimum 120px wide — below that use the icon mark alone.
-Rules and the eight don'ts: [../spec/brand-logo.md](../spec/brand-logo.md).
+Rules: [../spec/brand-logo.md](../spec/brand-logo.md).
 
 ---
 
-## Abby the mascot — `mascot/`
+## Master Mind — `master-mind/`
 
-**`poses/`** — 21 renders of Abby in different gestures. Match the gesture to what
-the copy says, and use one Abby per section. Good starting points:
+The flagship character. Glossy blue, three antennae, large eyes, olive beanie
+with a mountain patch, white puffer, orange utility vest, cargo pants, chunky
+sneakers, a walkie-talkie in one hand. This is the figure on the homepage hero
+and in the launch modal's custom-Mind column.
 
-| File | Gesture | Good for |
-|---|---|---|
-| `abby-09.png` | Arms crossed, front-facing | The default hero pose |
-| `abby-16.png` | Waving | Welcome screens, confirmations |
-| `abby-05.png` | Pointing | Beside a headline, pointing into it |
-| `abby-02.png` | Open-handed, mid-explanation | Alongside a feature |
-| `abby-19.png` | Arms raised | Success and completion states |
-| `abby-04.png` | Leaning, mid-motion | Where the layout needs energy |
+| File | Use |
+|---|---|
+| `hero-idle.mp4` + `hero-idle-poster.webp` | Homepage hero, idle. |
+| `hero-walk.mp4` + `hero-walk-poster.webp` | Homepage hero, walk. |
+| `launch-idle.mp4` + `launch-idle-poster.webp` | Launch-a-Mind modal. A crop of the hero idle, framed on the figure. |
+| `full-body.webp` | Cutout on black. Product UI, cards, empty states. |
+| `side-view.webp` + `side-view.mp4` | Three-quarter still and clip. |
+| `profile.png` | The still used on Profile. |
 
-**`turnaround/`** — the model sheet. `abby-ref-02-4views.png` is the one you attach
-as a character reference when generating new Abby imagery. Not for placement on a page.
+Do not redraw him, recolor him, or swap the costume. If a page needs the
+Master Mind, use one of these files.
+
+---
+
+## One-click Minds — `one-click/`
+
+Each specialist is the same blue character in a job costume. Four cuts:
+
+| Folder | What it is |
+|---|---|
+| `full-body/` | Transparent-style full figure, one file per Mind. |
+| `side-view/` | Three-quarter still (`.webp`) and clip (`.mp4`). |
+| `figurines/` | Text-free figure art (`*-notext.webp`). The product draws the name in CSS. |
+| `cards/` | Collector cards, full size and a `-s` cut (480px wide) for small tiles. |
+| `transparent/` | Extra cutouts for General Assistant and Sales, used by the launch modal. |
+
+**Cards** are finished compositions: blue backing, the figure in a blister,
+accessory pockets down the side, an orange edition block. Use the file whole.
+Do not rebuild the card in CSS and do not edit the type baked into it.
+
+**Figurines** (`*-notext.webp`) are the figure without the card typography.
+Use these when the name is set in HTML.
+
+| Card id | Mind |
+|---|---|
+| `general-assistant` | General Assistant |
+| `sales-mind` | Sales |
+| `bizz-mind` | Bizz |
+| `superior-trader` | Superior Trader |
+| `game-designer` | Game Designer |
+| `email-manager` | Email Manager |
+| `scrum-master` | Scrum Master |
+| `fitness-coach` | Fitness Coach |
+| `chef-mind` | Personal Chef |
+| `recruiter-mind` | Recruiter |
+| `football-mind` | Football |
+| `decision-mind` | Decision |
+| `content-mind` | Content |
+| `research-mind` | Research |
+| `product-builder-mind` | Product Builder |
+| `learning-coach-mind` | Learning Coach |
+| `follow-up-mind` | Follow-Up |
+| `gtm-mind` | GTM |
+| `chief-of-staff-mind` | Chief of Staff |
+| `toycard-new` | Generic card, for a Mind that does not have its own yet |
+
+`cards/toycard-<id>.webp` is the full card. `toycard-<id>-s.webp` is the small
+cut for a tile around 110–160px tall. Four extra figurines have no card yet:
+`mind_brit_wit`, `mind_formula_1`, `mind_legal_assistant`, `mind_mystic`.
 
 Rules: [../spec/brand-mascot.md](../spec/brand-mascot.md).
 
 ---
 
-## Hand stickers — `stickers/`
+## Marketing cast — `characters/`
 
-A separate accent system from Abby. Small, punctuating one point. One or two per page.
-Don't mix a sticker into a scene that already has a full Abby.
+The 3D figures used on the homepage, About, Everyday Examples, and For
+Everyone. Same blue body and antennae as the product cast. Use the file
+whole. Do not crop a person out of a scene and do not restage it.
 
-**`solo/`** — 8 bare gestures, reusable anywhere:
+Lifestyle photos of real people with a small character dropped beside them
+are not in this folder. Those compositions are retired.
 
-| File | Gesture |
+### Poses — `characters/poses/`
+
+The character with no costume, on a plain ground. Eight turns (`abby-01` to
+`abby-08`), a wave (`build-your-own-mind-avatar.webp`), a figure holding an
+object (`hero-object.webp`), and the gift hands (`gift.webp`).
+
+### Homepage — `characters/homepage/`
+
+| Files | What they are |
 |---|---|
-| `hand-solo-01.png` | Open palm — neutral, welcoming. The safe default. |
-| `hand-solo-03.png` | OK sign — confirmation, "you're set" |
-| `hand-solo-08.png` | Pointing — at a headline or a single stat |
-| `hand-solo-02.png` · `04` · `05` · `06` · `07` | Other gestures — waving, grasping, fist |
+| `what-are-minds-*.webp` | Chef, email manager, fitness coach, general assistant, with their props. |
+| `pic-bizz.webp`, `pic-email-manager.webp`, `pic-general-ass.webp`, `pic-small-chef.webp` | Tight cutouts for the "meet them" row. |
+| `flywheel-relay.webp` | Four costumed figures in a loop. |
+| `minds-neighbours.webp` | Five figures looking down into the camera. |
+| `footer.webp`, `footer-mobile.webp` | The footer strip: work, making, play, a group. |
+| `idle-1-poster.webp` … `idle-6-poster.webp` | Homepage tour stills. Living room, kitchen, gym, and the rooms between. |
+| `transition-1-poster.webp` … `transition-7-poster.webp` | The frames between those rooms. |
+| `hero-everyday.webp` | Everyday-life collage. |
+| `cine-02-late-night-bed.webp` | Late-night scene. |
+| `rolla-and-sticks-figma-scene.webp` | Studio planning scene. |
 
-**`props/`** — 6 compositions holding an object. More specific, so they only fit
-where the meaning matches:
+### About — `characters/about/`
 
-| File | Shows |
-|---|---|
-| `hand-prop-04.png` | Thumbs-up with stars — testimonials, ratings |
-| `hand-prop-06.png` | Handshake over a checklist — sign-ups, agreements |
-| `hand-prop-01.png` | Wallet with cash — payment, value |
-| `hand-prop-02.png` | Coins — pricing, savings |
-| `hand-prop-03.png` | Holding a card — checkout, payment |
-| `hand-prop-05.png` | Phone with a checklist — mobile task flows |
+`about-hero-img.png` is the About hero collage (kitchen and desk).
+`abby-digital-hands.webp` is the Master Mind with the floating panels.
 
----
+### Everyday examples — `characters/everyday/`
 
-## Mind icons — `icons/`
+`everyday-hero.webp` is the page hero. The six stories are
+`collaboration.webp`, `care.webp`, `wellbeing.webp`, `shop.webp`,
+`event.webp`, and `game.webp`.
 
-30 dual-tone app icons, one per named Mind/agent persona (indigo base, orange picking
-out one detail — the same dual-tone rule as [../spec/brand-iconography.md](../spec/brand-iconography.md)). Use
-one when a page references a specific Mind by name — a card in a Minds directory, a
-"Meet [Mind name]" section, a launched-Mind confirmation.
+### For everyone — `characters/for-everyone/`
 
-| File | Mind |
-|---|---|
-| `finance_buddy.webp` | Finance Buddy — piggy bank |
-| `meal_planner.webp` | Meal Planner — bowl of food |
-| `travel_planner.webp` | Travel Planner |
-| `minds_page.webp` · `minds_video.webp` · `minds_hosting_and_soil.webp` | Minds platform features (page, video, hosting) |
-| `email_task_wizard.webp` · `email_unsubscribe_wizard.webp` | Email Minds |
-| `plant_care.webp` · `pet_health_tracker.webp` · `womens_health_tracker.webp` · `nutrition_tracker.webp` | Everyday-life trackers |
-| `retirement_simulator.webp` · `superior_trade.webp` · `hk_price_hunter.webp` · `event_deal_flow_scout.webp` | Money and deals |
-| `schoolwork_companion.webp` · `hobby_guide.webp` · `my_bestie.webp` · `fortune_seer.webp` | Companionship and learning |
-| `sales_negotiation.webp` · `scrum_master.webp` · `qa_tester.webp` · `linkedin_recruiter_research.webp` · `professional_slide_pdf.webp` · `agentic_genealogy_research.webp` | Work and builder Minds |
-| `etsy_shop_strategist.webp` · `trend_hunter.webp` · `humanizer.webp` · `follow_up.webp` · `passive_autonomous_soul.webp` | Other named Minds |
-
-**Defaults** — use when a Mind doesn't have its own icon yet, or the context is generic
-rather than one specific Mind:
-
-| File | Use |
-|---|---|
-| `app-icon-default.svg` | A generic Mind/app placeholder — geometric four-square mark. |
-| `skill-icon-default.svg` | A generic skill/capability placeholder — leaf/plant mark. |
-
-Never invent a new icon for a named Mind that already has one here — reuse the file.
-For a Mind that isn't in this list, use a default rather than drawing a new one; see
-[../spec/brand-iconography.md](../spec/brand-iconography.md) before drawing anything from scratch.
-
----
-
-## One-Click Mind toy figurines — `toy-figurines/`
-
-18 produced blister-pack renders — Abby dressed and posed for a specific one-click
-Mind, packaged as a collector toy with themed accessory icons down the side. This is
-the art direction for **launching or featuring a one-click Mind**: a launch page hero,
-a card in a Minds directory or pricing grid, a "meet this Mind" section.
-
-| File | Mind |
-|---|---|
-| `mind_general_assistant.webp` | General Assistant |
-| `mind_chief_of_staff.webp` | Chief of Staff |
-| `mind_bizz.webp` | Business/exec assistant — suit, phone, briefcase |
-| `mind_GTM.webp` | Go-to-market / growth marketing |
-| `mind_sales.webp` | Sales |
-| `mind_recruiter.webp` | Recruiter |
-| `mind_scrum_master.webp` | Scrum Master |
-| `mind_product_builder.webp` | Product Builder |
-| `mind_content.webp` | Content creation |
-| `mind_research.webp` | Research |
-| `mind_decision.webp` | Decision support / advisor |
-| `mind_email_manager.webp` | Email Manager |
-| `mind_follow_up.webp` | Follow-Up |
-| `mind_personal_chef.webp` | Personal Chef |
-| `mind_fitness_coach.webp` | Fitness Coach |
-| `mind_learning_coach.webp` | Learning Coach |
-| `mind_football.webp` | Football commentator/analyst |
-| `mind_superior_trader.webp` | Trading |
-| `mind_game_designer.webp` | Game Designer |
-
-These are full produced compositions (packaging, banner, accessory-item pockets, seal)
-— never assembled in CSS, never edited or recolored. If the Mind you need isn't in
-this list, use the `generate-one-click-mind-images` skill rather than faking one; see
-the "One-Click Mind blister packs" section of [../spec/brand-mascot.md](../spec/brand-mascot.md) for the anatomy
-and rules.
-
----
-
-## Photography — `photos/`
-
-Three sets. Pick the one matching your page's reader.
-
-### `product/` — Abby in product context (9)
-
-Abby with the product itself rather than with people. **This is usually the right set
-for a one-click Mind launch page or a feature announcement.**
-
-| File | Shows |
-|---|---|
-| `build-your-own-mind.png` | Accessory-pack concept — building a custom Mind |
-| `mind-created.png` | Abby surrounded by tools and skills — a Mind just made |
-| `network.png` | Connected-apps diagram — Telegram, Spotify, Gmail and more |
-| `abby-digital-hands.png` | Abby with a floating UI panel |
-| `abby-empty-result.png` | Abby shrugging — empty states |
-| `abby-kv.png` · `abby-machine.png` | Many Abbys in a production line — scale, automation |
-| `animoca-minds03.png` · `animoca-minds04.png` | Branded packaging concepts |
-
-### `everyday-user/` — real people, consumer audience (17)
-
-The primary audience: busy parents, small business owners. Warm interiors, natural
-daylight, someone mid-task with Abby in the scene.
-
-| File | Scene |
-|---|---|
-| `hero-everyday-mobile.png` | Home desk, warm orange wall — a strong hero |
-| `abby-kitchen.png` | Cooking, two Abbys helping |
-| `abby-laundry.png` | Laundry — everyday chores |
-| `abby-facial.png` | Spa treatment — self-care |
-| `abby-kids.png` · `family.png` | Children and family settings |
-| `etsy.png` | Small-business seller at a craft wall |
-| `telegram.png` | Phone in hand — messaging channel |
-| `laptop-hands.png` | Laptop close-up, Abby hands on the keyboard |
-| `circles.png` | Person surrounded by many Abbys |
-| `chat-placeholder-3.png` | Kitchen, phone in hand |
-| `venture-mind.png` | Headphones at a desk |
-| `animoca-minds01.png` · `05` · `09` · `10` · `11` | Café, studio, office and meeting scenes |
-
-### `builder/` — developers and founders (6)
-
-The secondary audience. Workshops, code, multi-monitor setups.
-
-| File | Scene |
-|---|---|
-| `hero-builders.png` | Dark studio, screen glow — a strong hero for this audience |
-| `intern.png` · `horse.png` | Multi-monitor development work |
-| `magic-project-guru.png` | Laptop on a sofa, two Abbys |
-| `animoca-minds08.png` · `animoca-minds12.png` | Desk work with floating UI |
-
-Direction and the locked AI-generation prompts:
-[../spec/brand-imagery.md](../spec/brand-imagery.md).
+`laptop-hands.webp` is the hero (the blue hands at a laptop).
+`scenarios/scenario-left.webp`, `scenario-center.webp`, and
+`scenario-right.webp` are the room scenes. `scenarios/avatar-*.webp` are the
+three portrait circles beside those stories.
