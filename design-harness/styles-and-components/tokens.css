@@ -2112,7 +2112,7 @@ body:has(.v2),
 /* ==========================================================================
    Tailwind v4 bridge
    New names are the v2 vocabulary. The brand-orange-* / beige-* / neutral-*
-   names are compatibility aliases so ui/ components written against v1 keep
+   names are compatibility aliases so styles-and-components/ components written against v1 keep
    resolving. New work should use the aliases (--blue-lit, --text-body-cool,
    --line-cool) or the recipe classes above, not the compatibility names.
    ========================================================================== */

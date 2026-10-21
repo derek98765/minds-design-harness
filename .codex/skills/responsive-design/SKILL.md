@@ -12,8 +12,8 @@ content, useful touch targets, and the project's visual rhythm at every breakpoi
 
 1. Read [../../../AGENTS.md](../../../AGENTS.md) and
    [../../../DESIGN.md](../../../DESIGN.md).
-2. Inspect [../../../design-harness/ui/tokens.css](../../../design-harness/ui/tokens.css),
-   relevant components in `design-harness/ui/`, and the complete target component or page.
+2. Inspect [../../../design-harness/styles-and-components/tokens.css](../../../design-harness/styles-and-components/tokens.css),
+   relevant components in `design-harness/styles-and-components/`, and the complete target component or page.
 3. Confirm actual breakpoints and whether typography tokens already scale. Do not add
    local font overrides that defeat responsive tokens.
 4. Reuse components and tokens. Project rules against hardcoded values and invalid

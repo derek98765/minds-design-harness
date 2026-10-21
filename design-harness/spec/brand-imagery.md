@@ -7,7 +7,7 @@ Read this when a page needs a hero, a scene, or a character image.
 ## The look
 
 Shipped imagery is 3D illustration, not photography of real people. The
-signature scene (`home-hero-idle.webp`) is a bright modern interior — wood,
+signature scene (`master-mind-waving-in-living-room-with-minds-behind.webp`) is a bright modern interior — wood,
 warm daylight, a living room and kitchen — populated by the blue cast. The
 Master Mind is in front. The specialist Minds are in the room behind him,
 each in their own costume.
