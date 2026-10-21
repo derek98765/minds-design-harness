@@ -4,14 +4,17 @@ import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
- * Minds radio. The circle follows the checked-control rule (DESIGN.md §4
- * Inputs): unchecked stays neutral, checked is a lit blue solid — the blue
- * gradient plus its shadow — with a white check. Never orange.
+ * Minds radio — matches the Profile Mind picker on Redeem (.pick-radio-v2 and
+ * .pick-tile-v2 in tokens.css).
  *
- * `RadioGroupCard` wraps the circle in a full selectable row/card, matching
- * the redeem-flow pattern: the card itself flips to a solid --blue-lit fill
- * with white text when selected. On that blue card the circle inverts to
- * white with a blue check, so it doesn't vanish into the fill.
+ * `RadioGroupItem` is a 20px ring that turns blue on hover and fills with a
+ * blue gradient and a white check when chosen. Never orange.
+ *
+ * `RadioGroupCard` is a selectable tile — the pattern for choosing one of a
+ * few rich options (a Mind, an Energy amount). At rest it's a pale frosted
+ * tile; hover goes white and lifts. CHOSEN is white with a 2px --blue-tint
+ * edge and a blue drop — not a solid blue fill. Pass `leading` for an avatar
+ * or icon before the title.
  */
 const RadioGroup = React.forwardRef(({ className, ...props }, ref) => (
   <RadioGroupPrimitive.Root ref={ref} className={cn("flex flex-col gap-8", className)} {...props} />
@@ -19,63 +22,42 @@ const RadioGroup = React.forwardRef(({ className, ...props }, ref) => (
 RadioGroup.displayName = "RadioGroup";
 
 const RadioGroupItem = React.forwardRef(({ className, ...props }, ref) => (
-  <RadioGroupPrimitive.Item
-    ref={ref}
-    className={cn(
-      "flex size-16 shrink-0 items-center justify-center rounded-full border border-neutral-400 bg-white",
-      "data-[state=checked]:border-transparent data-[state=checked]:bg-[image:var(--gradient-blue)] data-[state=checked]:shadow-[var(--shadow-lit-blue)]",
-      className
-    )}
-    {...props}
-  >
-    <RadioGroupPrimitive.Indicator>
-      <Check size={10} strokeWidth={3} className="text-white" />
+  <RadioGroupPrimitive.Item ref={ref} className={cn("pick-radio-v2", className)} {...props}>
+    <RadioGroupPrimitive.Indicator forceMount>
+      <Check size={12} strokeWidth={3.4} />
     </RadioGroupPrimitive.Indicator>
   </RadioGroupPrimitive.Item>
 ));
 RadioGroupItem.displayName = "RadioGroupItem";
 
-function RadioGroupCard({ value, selected, onSelect, title, subtitle, trailing, trailingLabel, className }) {
+function RadioGroupCard({ value, selected, onSelect, title, subtitle, leading, trailing, trailingLabel, className }) {
   return (
     <button
       type="button"
+      role="radio"
+      aria-checked={selected}
       onClick={() => onSelect(value)}
-      className={cn(
-        "flex items-center gap-8 rounded-md border p-12 text-left transition-colors cursor-pointer",
-        selected
-          ? "border-transparent bg-brand-blue-500"
-          : "border-neutral-200 bg-white hover:border-brand-blue-200",
-        className
-      )}
+      className={cn("pick-tile-v2", className)}
     >
-      <span
-        className={cn(
-          "flex size-16 shrink-0 items-center justify-center rounded-full border",
-          selected ? "border-white bg-white" : "border-neutral-400 bg-white"
-        )}
-      >
-        {selected && <Check size={10} strokeWidth={3} className="text-[var(--blue-lit)]" />}
+      <span className="pick-radio-v2" aria-hidden="true">
+        <Check size={12} strokeWidth={3.4} />
       </span>
+      {leading}
       <span className="flex min-w-0 flex-1 flex-col">
-        <span className={cn("truncate text-body-default font-bold leading-body", selected ? "text-white" : "text-neutral-900")}>
+        <span
+          className={cn(
+            "truncate t-sm",
+            selected ? "font-extrabold text-[var(--text-title-cool)]" : "font-semibold text-[var(--text-body-cool)]"
+          )}
+        >
           {title}
         </span>
-        {subtitle && (
-          <span className={cn("truncate text-body-small", selected ? "text-brand-blue-200" : "text-neutral-400")}>
-            {subtitle}
-          </span>
-        )}
+        {subtitle && <span className="truncate t-xs t-num text-[var(--text-muted-cool)]">{subtitle}</span>}
       </span>
       {trailing !== undefined && (
         <span className="flex shrink-0 flex-col items-end">
-          <span className={cn("text-body-default font-bold leading-body", selected ? "text-white" : "text-brand-blue-500")}>
-            {trailing}
-          </span>
-          {trailingLabel && (
-            <span className={cn("text-body-xsmall leading-body", selected ? "text-brand-blue-200" : "text-neutral-400")}>
-              {trailingLabel}
-            </span>
-          )}
+          <span className="t-sm t-num font-bold text-[var(--blue-lit)]">{trailing}</span>
+          {trailingLabel && <span className="t-xs text-[var(--text-muted-cool)]">{trailingLabel}</span>}
         </span>
       )}
     </button>

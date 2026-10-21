@@ -45,11 +45,11 @@ html body.sg{
   .wrap{margin:0;max-width:940px;padding-left:0;}
   .jump{display:none;}
 }
-.side-group{font-family:var(--mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.06em;margin:20px 0 6px;}
+.side-group{font-size:12px;font-weight:600;color:var(--ink-muted);margin:32px 0 8px;}
 .side-group:first-child{margin-top:0;}
-.side a{display:block;font-size:13px;color:var(--ink-secondary);text-decoration:none;padding:4px 0 4px 10px;border-left:2px solid transparent;}
+.side a{display:block;font-size:14.5px;color:var(--ink-secondary);text-decoration:none;padding:7px 0;}
 .side a:hover{color:var(--ink);}
-.side a.on{color:var(--ink);border-left-color:var(--page-accent-blue);}
+.side a.on{color:var(--page-accent-blue);font-weight:600;}
 .jump{margin:0 0 32px;border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;}
 .jump summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-secondary);}
 .jump .side-list{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:8px;}
@@ -78,32 +78,6 @@ h1{
   margin:0 0 8px;
 }
 .dek code,.story-dek code,.note code,td code{font-family:var(--mono);font-size:.9em;color:var(--ink);}
-.meta-row{
-  display:flex;
-  gap:48px;
-  flex-wrap:wrap;
-  margin:24px 0 48px;
-  padding-top:20px;
-  border-top:1px solid var(--border);
-}
-.meta{
-  font-family:var(--mono);
-  font-size:11px;
-  color:var(--ink-muted);
-  text-transform:uppercase;
-  letter-spacing:.06em;
-}
-.meta b{
-  display:block;
-  font-family:var(--sans);
-  font-size:20px;
-  font-weight:600;
-  color:var(--ink);
-  text-transform:none;
-  letter-spacing:0;
-  margin-top:2px;
-  font-variant-numeric:tabular-nums;
-}
 section{margin-bottom:44px;scroll-margin-top:24px;}
 .section-head{
   display:flex;
@@ -188,7 +162,6 @@ section{margin-bottom:44px;scroll-margin-top:24px;}
 .grid-gradients .swatch{grid-column:span 2;}
 .grid-gradients .chip{height:84px;}
 .chip-btn{display:flex;align-items:center;justify-content:center;background:transparent;}
-.demo-drop{display:block;width:96px;height:34px;border-radius:999px;background:var(--white);}
 .chip-text{display:flex;align-items:center;justify-content:center;
   font-weight:700;font-size:15px;letter-spacing:-0.01em;
   text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px;}
@@ -239,6 +212,9 @@ section{margin-bottom:44px;scroll-margin-top:24px;}
 .story-dek{font-size:14px;line-height:1.6;color:var(--ink-secondary);margin:0 0 14px;max-width:72ch;}
 .note{font-size:13px;line-height:1.55;color:var(--ink-secondary);margin:0 0 14px;padding:8px 12px;border-left:2px solid var(--warning);background:var(--warning-soft);border-radius:0 6px 6px 0;max-width:72ch;}
 .note b{color:var(--ink);}
+/* Flat ground for previews: .v2's wash is fixed to the viewport, so each canvas
+   would show a different slice of it. */
+.canvas.v2{background:var(--canvas-top);}
 .canvas{border:1px solid var(--border);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:22px;overflow-x:auto;}
 .vrow{display:flex;flex-direction:column;gap:10px;}
 .vlabel{font-family:var(--mono);font-size:10px;color:var(--text-muted-cool);text-transform:uppercase;letter-spacing:.05em;margin:0;}
@@ -252,122 +228,65 @@ section{margin-bottom:44px;scroll-margin-top:24px;}
 .props td{padding:7px 12px 7px 0;border-bottom:1px solid var(--border);color:var(--ink-secondary);vertical-align:top;}
 .props td:first-child{font-family:var(--mono);font-size:11.5px;color:var(--ink);white-space:nowrap;}
 
-/* ── Previews. Each mirrors its React component in ui/react/components/ui/,
-      with the v1 class names it uses resolved to the v2 tokens they map to
-      (see the Tailwind bridge at the bottom of tokens.css). Tokens only. ── */
+/* ── Preview layout helpers. The components themselves are drawn with the
+      tokens.css recipe classes the React components use (.btn-lit-*,
+      .field-v2, .tab-*-v2, .switch-v2 …) — these only arrange them. ── */
 .pv{font-family:var(--font-family-primary);color:var(--text-title-cool);}
-.pv-btn{display:inline-flex;align-items:center;justify-content:center;gap:2px;white-space:nowrap;font-family:var(--font-family-primary);font-weight:800;border-radius:var(--r-pill);border:0;cursor:pointer;text-decoration:none;transition:background-color var(--duration-base),color var(--duration-base),border-color var(--duration-base);}
+.pv-btn{display:inline-flex;align-items:center;justify-content:center;gap:2px;white-space:nowrap;font-family:var(--font-family-primary);font-weight:800;border-radius:var(--r-pill);border:0;cursor:pointer;text-decoration:none;}
 .pv-sm{padding:var(--space-8) var(--space-24);font-size:16px;}
 .pv-md{padding:var(--space-12) var(--space-36);font-size:18px;}
-.pv-lg{padding:var(--space-16) var(--space-40);font-size:18px;}
-.pv-xl{padding:var(--space-16) var(--space-48);font-size:20px;}
-.pv-btn:disabled{opacity:.5;pointer-events:none;}
 .pv-glass{background:var(--glass-ctl);color:var(--text-title-cool);box-shadow:inset 0 0 0 1px var(--glass-edge);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);}
 .pv-glass:hover{background:var(--glass-ctl-hover);}
-.pv-link{background:transparent;padding:0;font-weight:600;font-size:16px;text-decoration:underline;text-underline-offset:4px;}
-.pv-link.primary{color:var(--btn-text-orange);}
-.pv-link.primary:hover{color:var(--btn-text-orange-hover);}
-.pv-link.secondary{color:var(--btn-text-blue);}
-.pv-link.secondary:hover{color:var(--btn-text-blue-hover);}
+.pv-lg{padding:var(--space-16) var(--space-40);font-size:18px;}
+.pv-xl{padding:var(--space-16) var(--space-48);font-size:20px;}
+/* tokens.css styles disabled lit buttons; the rest take the component's opacity-50. */
+.pv .btn-secondary-v2:disabled,.pv .pv-glass:disabled{opacity:.5;cursor:not-allowed;}
+/* Button matrix: variants down, sizes across. Each row is a subgrid so a row
+   can carry its own ground (the glass row sits on a photo). */
+.bm{display:grid;grid-template-columns:repeat(6,auto);column-gap:16px;justify-content:start;min-width:max-content;}
+.bm-app{grid-template-columns:repeat(5,auto);}
+.bm-row{grid-column:1/-1;display:grid;grid-template-columns:subgrid;align-items:center;justify-items:start;padding:16px 12px;border-bottom:1px solid var(--line-cool);}
+.bm-row:last-child{border-bottom:0;}
+.bm-head{padding-top:0;}
+.bm-head span,.bm-name{font-family:var(--mono);font-size:10px;color:var(--text-muted-cool);text-transform:uppercase;letter-spacing:.05em;}
+.bm-name{color:var(--text-title-cool);font-size:11px;max-width:108px;}
+.bm-head i,.bm-name i{display:block;font-style:normal;text-transform:none;letter-spacing:0;color:var(--text-muted-cool);margin-top:2px;}
+/* The photo starts after the label column, so the label stays on the plain ground. */
+.bm-photo::before{content:"";grid-row:1;grid-column:2/-1;justify-self:stretch;align-self:stretch;margin:-12px -12px -12px -8px;border-radius:var(--r-md);background:url('../assets/artwork/illustrations/minds-only/home-hero-idle.webp') center/cover;}
+.bm-photo > *{grid-row:1;position:relative;}
+.bm-photo > :nth-child(1){grid-column:1;}
+.bm-photo > :nth-child(2){grid-column:2;}
+.bm-photo > :nth-child(3){grid-column:3;}
+.bm-photo > :nth-child(4){grid-column:4;}
+.bm-photo > :nth-child(5){grid-column:5;}
+.bm-photo > :nth-child(6){grid-column:6;}
 .pv-stack{display:flex;flex-direction:column;align-items:stretch;gap:var(--space-12);width:100%;max-width:320px;}
-
-.pv-card{padding:var(--space-24);color:var(--text-body-cool);max-width:420px;}
-.pv-card h3{font-size:var(--font-size-h4);font-weight:800;line-height:var(--line-height-heading);margin:0;color:var(--text-title-cool);}
-.pv-card .desc{font-size:var(--font-size-body-large);line-height:var(--line-height-body);margin:var(--space-8) 0 0;}
-.pv-card .content{margin-top:var(--space-16);font-size:var(--font-size-body-default);line-height:var(--line-height-body);}
-.pv-card .foot{margin-top:var(--space-24);display:flex;align-items:center;gap:var(--space-12);flex-wrap:wrap;}
+.pv-card{max-width:360px;color:var(--text-body-cool);}
+.pv-card .foot{margin-top:var(--space-16);display:flex;gap:var(--space-12);}
 .pv-shell-body{padding:var(--space-20);font-size:var(--font-size-body-default);color:var(--text-body-cool);max-width:420px;}
-
-.pv-label{font-weight:500;font-size:var(--font-size-body-large);line-height:var(--line-height-body);color:var(--text-title-cool);margin:0;}
-.pv-field{display:flex;align-items:center;gap:var(--space-12);width:100%;max-width:420px;background:var(--bg-field-cool);box-shadow:inset 0 0 0 1px var(--line-cool);border-radius:var(--r-md);padding:var(--space-12) var(--space-16);color:var(--text-label-cool);}
-.pv-field.pill{border-radius:var(--r-pill);}
-.pv-field:focus-within{box-shadow:0 0 0 1px var(--blue);}
-.pv-input{flex:1;min-width:0;background:transparent;border:0;outline:none;font-family:var(--font-family-primary);font-size:18px;line-height:var(--line-height-body);color:var(--text-title-cool);}
-.pv-input::placeholder,.pv-textarea::placeholder{color:var(--grey-cool-400);}
-.pv-textarea{width:100%;max-width:420px;min-height:96px;padding:var(--space-12);border-radius:var(--r-md);background:var(--white);color:var(--text-title-cool);border:1px solid var(--line-cool);outline:none;resize:vertical;font-family:var(--font-family-primary);font-size:16px;line-height:var(--line-height-body);}
-.pv-textarea:focus{border-color:var(--blue-lit);}
-@media (min-width:768px){.pv-textarea{font-size:var(--font-size-body-default);}}
-.pv-field-col{display:flex;flex-direction:column;gap:var(--space-8);width:100%;max-width:420px;}
-
-.pv-radio-group{display:flex;flex-direction:column;gap:var(--space-8);}
-.pv-radio-row{display:flex;align-items:center;gap:var(--space-12);font-size:var(--font-size-body-default);color:var(--text-body-cool);cursor:pointer;}
-.pv-radio{width:16px;height:16px;flex:none;border-radius:var(--r-pill);border:1px solid var(--grey-cool-400);background:var(--white);display:flex;align-items:center;justify-content:center;}
-.pv-radio svg{display:none;color:var(--white);}
-.on > .pv-radio,.pv-radio.on{border-color:transparent;background:var(--gradient-blue);box-shadow:var(--shadow-lit-blue);}
-.on > .pv-radio svg,.pv-radio.on svg{display:block;}
-.pv-rcard.on .pv-radio{background:var(--white);border-color:var(--white);box-shadow:none;}
-.pv-rcard.on .pv-radio svg{color:var(--blue-lit);}
-.pv-rcard{display:flex;align-items:center;gap:var(--space-8);width:100%;max-width:420px;border-radius:var(--r-md);border:1px solid var(--line-cool);background:var(--white);padding:var(--space-12);text-align:left;cursor:pointer;font-family:var(--font-family-primary);}
-.pv-rcard:hover{border-color:var(--blue-200);}
-.pv-rcard .txt{flex:1;min-width:0;display:flex;flex-direction:column;}
-.pv-rcard .t{font-size:var(--font-size-body-default);font-weight:700;line-height:var(--line-height-body);color:var(--text-title-cool);}
-.pv-rcard .s{font-size:var(--font-size-body-small);color:var(--grey-cool-400);}
-.pv-rcard .end{display:flex;flex-direction:column;align-items:flex-end;}
-.pv-rcard .tr{font-size:var(--font-size-body-default);font-weight:700;line-height:var(--line-height-body);color:var(--blue-lit);}
-.pv-rcard .tl{font-size:var(--font-size-body-xsmall);line-height:var(--line-height-body);color:var(--grey-cool-400);}
-.pv-rcard.on{background:var(--blue-lit);border-color:transparent;}
-.pv-rcard.on .t,.pv-rcard.on .tr{color:var(--white);}
-.pv-rcard.on .s,.pv-rcard.on .tl{color:var(--blue-200);}
-.pv-check-row{display:flex;align-items:center;gap:var(--space-12);font-size:var(--font-size-body-default);color:var(--text-body-cool);cursor:pointer;}
-.pv-check{width:20px;height:20px;flex:none;border-radius:var(--r-sm);background:var(--white);box-shadow:inset 0 0 0 1px var(--line-strong-cool);display:flex;align-items:center;justify-content:center;}
-.pv-check svg{display:none;color:var(--white);}
-.on > .pv-check{background:var(--gradient-blue);box-shadow:var(--shadow-lit-blue);}
-.on > .pv-check svg{display:block;}
-.pv-check.disabled,.pv-switch.disabled{opacity:.5;}
-.pv-switch{width:48px;height:24px;flex:none;border-radius:var(--r-pill);position:relative;background:var(--gradient-switch-off);box-shadow:inset 0 1px 0 var(--glass-card-line);}
-.pv-switch::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:var(--r-pill);background:var(--white);box-shadow:var(--elev-card);transition:transform var(--duration-fast);}
-.on > .pv-switch{background:var(--gradient-switch-on);}
-.on > .pv-switch::after{transform:translateX(24px);}
-
-.pv-tabs-pill{display:inline-flex;align-items:center;gap:var(--space-4);border-radius:var(--r-pill);background:var(--grey-cool-50);padding:var(--space-4);}
-.pv-tabs-pill button{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border:0;background:transparent;cursor:pointer;border-radius:var(--r-pill);padding:var(--space-8) var(--space-24);font-family:var(--font-family-primary);font-size:var(--font-size-body-default);font-weight:600;color:var(--text-muted-cool);}
-.pv-tabs-pill button:hover{color:var(--text-title-cool);}
-.pv-tabs-pill button.on{background:var(--blue-lit);color:var(--white);}
-.pv-tabs-line{display:flex;align-items:center;border-bottom:1px solid var(--line-cool);gap:var(--space-20);width:100%;}
-.pv-tabs-line.lg{gap:var(--space-36);}
-.pv-tabs-line button{border:0;border-bottom:2px solid transparent;background:transparent;cursor:pointer;padding:var(--space-8) 0;font-family:var(--font-family-primary);font-size:var(--font-size-body-small);font-weight:600;text-transform:uppercase;letter-spacing:.025em;color:var(--text-muted-cool);white-space:nowrap;}
-.pv-tabs-line.lg button{border-bottom-width:4px;padding:var(--space-12) 0;font-size:var(--font-size-body-large);}
-.pv-tabs-line button:hover{color:var(--text-title-cool);}
-.pv-tabs-line button.on{color:var(--blue-lit);border-bottom-color:var(--blue-lit);}
-
-.pv-trigger{display:inline-flex;align-items:center;gap:var(--space-8);height:36px;padding:0 var(--space-16);white-space:nowrap;border-radius:var(--r-pill);border:1px solid var(--line-cool);background:transparent;font-family:var(--font-family-primary);font-size:var(--font-size-body-small);font-weight:500;color:var(--text-title-cool);cursor:pointer;}
-.pv-trigger:hover{border-color:var(--grey-cool-400);}
-.pv-trigger .pre{color:var(--text-muted-cool);}
-.pv-count{display:flex;align-items:center;justify-content:center;height:16px;min-width:16px;padding:0 var(--space-4);border-radius:var(--r-pill);background:var(--blue-lit);color:var(--white);font-size:var(--font-size-caption);font-weight:700;line-height:1;}
-.pv-menu{min-width:160px;border-radius:var(--r-md);border:1px solid var(--line-cool);background:var(--white);padding:var(--space-4);box-shadow:var(--elev-lg);}
-.pv-menu-item{display:flex;align-items:center;justify-content:space-between;gap:var(--space-8);border-radius:var(--r-sm);padding:var(--space-8) var(--space-12);font-size:var(--font-size-body-small);color:var(--text-title-cool);cursor:pointer;}
-.pv-menu-item:hover{background:var(--grey-cool-50);}
-.pv-menu-item.on{font-weight:600;color:var(--blue-lit);}
-.pv-menu-item.on:hover{background:transparent;}
-.pv-filter{width:240px;padding:var(--space-12) 0;}
-.pv-filter .grp{padding:var(--space-4) var(--space-16) var(--space-2);font-size:var(--font-size-body-small);font-weight:700;text-transform:uppercase;letter-spacing:.025em;color:var(--text-title-cool);}
-.pv-filter .opt{display:flex;align-items:center;justify-content:space-between;padding:var(--space-8) var(--space-16);font-size:var(--font-size-body-small);color:var(--text-title-cool);}
-.pv-filter .opt.on{background:var(--blue-soft);font-weight:600;color:var(--blue-lit);}
-.pv-filter .div{margin:var(--space-12) 0;border-top:1px solid var(--line-cool);}
+.pv-field-col{display:flex;flex-direction:column;gap:var(--space-12);width:100%;}
+.pv-w-480{max-width:480px;}
+.pv-w-260{max-width:260px;}
+.pv-w-240{width:240px;}
+.pv-w-200{width:200px;}
+.pv-w-160{width:160px;}
+.pv-w-112{width:112px;}
+.pv-inline{display:inline-flex;align-items:center;gap:var(--space-8);}
+.pv-inline-4{display:inline-flex;align-items:center;gap:var(--space-4);}
+.pv-step-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-12);width:100%;}
+.pv-step-title{margin-right:auto;font-size:16px;line-height:1.35;font-weight:700;color:var(--text-title-cool);}
+.pv-code{width:280px;max-width:100%;letter-spacing:.04em;}
+.pv-code::placeholder{letter-spacing:normal;}
+.pv-radio-group{display:flex;flex-direction:column;gap:var(--space-12);}
+.pv-check-label{display:flex;align-items:flex-start;gap:var(--space-12);color:var(--text-body-cool);cursor:pointer;}
+.pv-check-label > button{margin-top:2px;}
+.pv-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--space-8);width:100%;max-width:640px;}
+.pv-tile-txt{display:flex;flex-direction:column;min-width:0;}
+.pv-tile-name{font-weight:600;color:var(--text-body-cool);}
+.pick-tile-v2[aria-checked="true"] .pv-tile-name{font-weight:800;color:var(--text-title-cool);}
 .pv-dd{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-8);}
-
-.pv-badge{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-4);border-radius:var(--r-pill);padding:var(--space-4) var(--space-12);font-family:var(--font-family-primary);font-size:var(--font-size-caption);font-weight:500;text-transform:uppercase;white-space:nowrap;}
-.pv-badge.orange{background:var(--orange-soft);color:var(--orange-hover);}
-.pv-badge.blue{background:var(--blue-soft);color:var(--blue);}
-.pv-badge.neutral{background:var(--grey-cool-50);color:var(--text-body-cool);}
-.pv-badge.success{background:var(--success-soft);color:var(--success);}
-.pv-badge.outline{border:1px solid var(--line-cool);background:var(--white);color:var(--text-title-cool);}
-
-.pv-avatar{flex:none;border-radius:var(--r-pill);overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--blue-soft);color:var(--blue);font-weight:700;font-size:var(--font-size-body-small);}
-.pv-avatar img{width:100%;height:100%;object-fit:cover;}
-.pv-avatar.sm{width:24px;height:24px;}
-.pv-avatar.md{width:40px;height:40px;}
-.pv-avatar.lg{width:48px;height:48px;}
-
-.pv-pages{display:flex;align-items:center;gap:var(--space-4);}
-.pv-pages.lg{gap:var(--space-8);}
-.pv-pages button,.pv-pages span{width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;border:0;border-radius:var(--r-sm);background:transparent;font-family:var(--font-family-primary);font-size:var(--font-size-body-small);font-weight:600;color:var(--text-muted-cool);cursor:pointer;padding:0;}
-.pv-pages.lg button,.pv-pages.lg span{width:36px;height:36px;font-size:var(--font-size-body-default);}
-.pv-pages button:hover{background:var(--grey-cool-50);}
-.pv-pages button[aria-current]{background:var(--blue-lit);color:var(--white);font-weight:700;}
-.pv-pages button:disabled{opacity:.4;cursor:default;background:transparent;}
-.pv-pages span{cursor:default;}
-
+.pv-count{display:flex;align-items:center;justify-content:center;height:16px;min-width:16px;padding:0 var(--space-4);border-radius:var(--r-pill);background:var(--gradient-blue);color:var(--white);font-size:var(--font-size-caption);font-weight:700;line-height:1;}
+.flex-pages{display:flex;align-items:center;gap:var(--space-8);font-family:var(--font-family-primary);}
 .pv-acc{display:flex;flex-direction:column;gap:var(--space-16);width:100%;max-width:640px;}
 .pv-acc-item{background:var(--white);border-radius:var(--r-sm);overflow:hidden;border:1px solid transparent;box-shadow:var(--elev-card);transition:box-shadow var(--duration-base),border-color var(--duration-base);}
 .pv-acc-item:hover{border-color:var(--line-cool);box-shadow:var(--elev-card-hover);}
@@ -382,24 +301,17 @@ section{margin-bottom:44px;scroll-margin-top:24px;}
 .pv-acc-item.open .pv-acc-body{display:block;}
 .pv-acc-body hr{margin:0 var(--space-24);border:0;border-top:1px solid var(--line-cool);}
 .pv-acc-body p{margin:0;padding:var(--space-20) var(--space-24) var(--space-24);font-size:var(--font-size-body-large);line-height:var(--line-height-body);color:var(--text-muted-cool);}
-
 .pv-sep{background:var(--line-cool);}
 .pv-sep.h{height:1px;width:100%;}
 .pv-sep.v{width:1px;align-self:stretch;}
-
-.pv-nav{display:flex;align-items:center;gap:var(--space-24);padding:var(--space-16) var(--space-24);background:var(--nav-glass);-webkit-backdrop-filter:var(--nav-liquid-filter);backdrop-filter:var(--nav-liquid-filter);border-bottom:1px solid var(--nav-glass-line);width:100%;min-width:0;}
-.pv-nav img{height:32px;width:auto;flex:none;}
-.pv-nav ul{display:none;flex:1;align-items:center;gap:var(--space-24);padding-left:var(--space-40);margin:0;list-style:none;}
-.pv-nav ul a{display:inline-flex;align-items:center;gap:var(--space-4);white-space:nowrap;text-decoration:none;font-size:var(--font-size-body-default);font-weight:500;color:var(--text-muted-cool);}
-.pv-nav ul a:hover{color:var(--text-title-cool);}
-.pv-nav .right{display:none;align-items:center;gap:var(--space-12);flex:none;}
-.pv-nav .lang{display:inline-flex;align-items:center;gap:var(--space-4);white-space:nowrap;border-radius:var(--r-pill);border:1px solid var(--line-cool);background:var(--white);padding:var(--space-8) var(--space-12);font-family:var(--font-family-primary);font-size:var(--font-size-body-default);font-weight:500;color:var(--text-title-cool);}
-.pv-nav .initial{display:flex;width:36px;height:36px;flex:none;align-items:center;justify-content:center;border-radius:var(--r-pill);background:var(--gradient-blue);box-shadow:var(--shadow-lit-blue);color:var(--white);font-weight:700;font-size:var(--font-size-body-default);}
-.pv-nav .burger{margin-left:auto;display:flex;width:40px;height:40px;align-items:center;justify-content:center;color:var(--text-title-cool);}
-@media (min-width:1024px){
-  .pv-nav ul,.pv-nav .right{display:flex;}
-  .pv-nav .burger{display:none;}
-}
+.pv-toasts{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-12);}
+.pv-nav-frame{width:100%;border-radius:var(--r-md);overflow:hidden;}
+.pv-nav-frame.is-scrolled{background:var(--grey-cool-50);padding-bottom:var(--space-12);}
+.pv-nav-logo{position:relative;flex:none;display:flex;}
+.pv-nav-logo img{height:40px;width:auto;}
+.pv-nav-links{display:none;align-items:center;gap:var(--space-24);padding-left:var(--space-40);}
+.pv-nav-right{display:none;align-items:center;gap:var(--space-12);margin-left:auto;}
+@media (min-width:1200px){.pv-nav-links,.pv-nav-right{display:flex;}}
 
 .toast{
   position:fixed;
@@ -439,21 +351,21 @@ footer{
 
 <aside class="side" aria-label="Sections">
   <div class="side-list" id="side-list">
-    <p class="side-group">Base colours</p>
+    <p class="side-group">Colours</p>
     <a href="#base-brand">Blue and orange</a>
     <a href="#base-neutral">Neutral</a>
     <a href="#base-others">Green, red, yellow</a>
-    <p class="side-group">Semantic tokens</p>
+    <p class="side-group">Tokens</p>
     <a href="#sem-brand">Brand tones</a>
     <a href="#sem-buttons">Buttons</a>
     <a href="#sem-status">System status</a>
     <a href="#sem-surfaces">Surfaces</a>
-    <a href="#sem-lines">Borders and dividers</a>
+    <a href="#sem-lines">Borders</a>
     <a href="#sem-text">Text</a>
     <a href="#sem-ring">Hover ring</a>
     <a href="#sem-glass">Glass panels</a>
-    <a href="#sem-graph">Network graph nodes</a>
-    <p class="side-group">Type and layout</p>
+    <a href="#sem-graph">Graph nodes</a>
+    <p class="side-group">Foundations</p>
     <a href="#f-type">Typography</a>
     <a href="#f-space">Spacing</a>
     <a href="#f-radius">Radius</a>
@@ -461,16 +373,20 @@ footer{
     <a href="#f-logo">Logo</a>
     <p class="side-group">Components</p>
     <a href="#c-button">Button</a>
+    <a href="#c-icon-button">Icon button</a>
     <a href="#c-card">Card</a>
-    <a href="#c-input">Input, Textarea, Label</a>
-    <a href="#c-radio">Radio group</a>
-    <a href="#c-checkbox">Checkbox</a>
-    <a href="#c-switch">Switch</a>
+    <a href="#c-input">Inputs</a>
+    <a href="#c-dropdown">Dropdowns</a>
     <a href="#c-tabs">Tabs</a>
-    <a href="#c-dropdown">Sort and filter dropdowns</a>
-    <a href="#c-badge">Badge</a>
-    <a href="#c-avatar">Avatar</a>
+    <a href="#c-checkbox">Checkbox</a>
+    <a href="#c-radio">Radio and tile</a>
+    <a href="#c-switch">Switch</a>
     <a href="#c-pagination">Pagination</a>
+    <a href="#c-badge">Status pill</a>
+    <a href="#c-avatar">Avatar</a>
+    <a href="#c-notice">Inline notice</a>
+    <a href="#c-toast">Toast</a>
+    <a href="#c-step">Step disc</a>
     <a href="#c-accordion">Accordion</a>
     <a href="#c-separator">Separator</a>
     <a href="#c-nav">Nav</a>
@@ -481,13 +397,6 @@ footer{
   <p class="crumb">design-harness<span class="sep">/</span>ui<span class="sep">/</span><span style="color:var(--ink)">style-guide.html</span></p>
   <h1>Minds Style Guide</h1>
   <p class="dek">Every token in <code>ui/tokens.css</code> and every component in <code>ui/react/</code>, on one page. Tokens come in two layers. BASE COLORS are raw ramps numbered by lightness (50 near-white &rarr; 900 darkest), saying only <em>how light</em>. SEMANTIC TOKENS say <em>what for</em>, each pointing at one base step, e.g. <code>--blue-lit</code> → <code>var(--blue-600)</code>. Pages use the semantic layer only — retune a role by repointing its token, never by editing a shared ramp step. Click a swatch to copy its <code>var(--name)</code>.</p>
-
-  <div class="meta-row">
-    <div class="meta">Base colors<b id="stat-base">—</b></div>
-    <div class="meta">Semantic tokens<b id="stat-semantic">—</b></div>
-    <div class="meta">Components<b id="stat-components">—</b></div>
-    <div class="meta">Scope root<b style="font-family:var(--mono);font-size:15px;">.v2</b></div>
-  </div>
 
   <details class="jump"><summary>Jump to a section</summary></details>
 
@@ -801,76 +710,114 @@ footer{
 
   <!-- ══════════════════════════ COMPONENTS ══════════════════════════ -->
   <p class="group-title">Components</p>
-  <p class="dek" style="margin-top:-6px;margin-bottom:28px;">Each component in <code>ui/react/components/ui/</code>, previewed as it renders, with the code to use it. Previews sit on the canvas wash because glass needs it.</p>
+  <p class="dek" style="margin-top:-6px;margin-bottom:28px;">Each component in <code>ui/react/components/ui/</code>, matched to how it ships on the Profile pages and the Launch a Mind modal in animocaminds-frontend. Every preview below is drawn with the same <code>tokens.css</code> recipe classes the React components use, so what you see is what a page gets.</p>
 
   <section class="story" id="c-button">
     <div class="section-head"><span class="section-title">Button</span><span class="section-count">button.jsx</span></div>
-    <p class="story-dek">Every button is a pill and its label is one line — <code>whitespace-nowrap</code> is load-bearing. One lit orange per view; other filled actions are lit blue; the white button sits beside a primary. Inside a card, use blue. If a label overflows at 390px, shorten the copy — never shrink the padding or type.</p>
-    <div class="canvas v2 canvas-blooms pv">
-      <div class="vrow"><p class="vlabel">variant · primary / secondary / quiet — use these</p>
-        <div class="vitems">
-          <button class="pv-btn pv-md btn-lit-orange">Launch a Mind</button>
+    <p class="story-dek">Every button is a pill and its label is one line. One lit orange per view; other filled actions are lit blue; the white button sits beside a primary. Inside a card, use blue. Marketing pages use the large sizes; product surfaces use the compact app sizes. Disabled orange goes flat and pale; disabled blue keeps its gradient at half strength.</p>
+    <div class="canvas v2 pv">
+      <div class="vrow"><p class="vlabel">marketing sizes · landing pages and campaign heroes</p>
+      <div class="bm" role="table" aria-label="Button variants by marketing size">
+        <div class="bm-row bm-head" role="row"><span role="columnheader">variant</span><span role="columnheader">sm<i>8 / 24 · 16px</i></span><span role="columnheader">md · default<i>12 / 36 · 18px</i></span><span role="columnheader">lg<i>16 / 40 · 18px</i></span><span role="columnheader">xl<i>16 / 48 · 20px</i></span><span role="columnheader">disabled<i>md</i></span></div>
+        <div class="bm-row" role="row"><span class="bm-name" role="rowheader">primary<i>lit orange · one per view</i></span>
+          <button class="pv-btn pv-sm btn-lit-orange">Start</button>
+          <button class="pv-btn pv-md btn-lit-orange">Start</button>
+          <button class="pv-btn pv-lg btn-lit-orange">Start</button>
+          <button class="pv-btn pv-xl btn-lit-orange">Start</button>
+          <button class="pv-btn pv-md btn-lit-orange" disabled>Start</button></div>
+        <div class="bm-row" role="row"><span class="bm-name" role="rowheader">secondary<i>lit blue · in cards</i></span>
+          <button class="pv-btn pv-sm btn-lit-blue">Chat</button>
           <button class="pv-btn pv-md btn-lit-blue">Chat</button>
+          <button class="pv-btn pv-lg btn-lit-blue">Chat</button>
+          <button class="pv-btn pv-xl btn-lit-blue">Chat</button>
+          <button class="pv-btn pv-md btn-lit-blue" disabled>Chat</button></div>
+        <div class="bm-row" role="row"><span class="bm-name" role="rowheader">quiet<i>white · beside a primary</i></span>
+          <button class="pv-btn pv-sm btn-secondary-v2">Log in</button>
           <button class="pv-btn pv-md btn-secondary-v2">Log in</button>
-        </div></div>
-      <div class="vrow"><p class="vlabel">variant · link-secondary / link-primary</p>
+          <button class="pv-btn pv-lg btn-secondary-v2">Log in</button>
+          <button class="pv-btn pv-xl btn-secondary-v2">Log in</button>
+          <button class="pv-btn pv-md btn-secondary-v2" disabled>Log in</button></div>
+        <div class="bm-row bm-photo" role="row"><span class="bm-name" role="rowheader">glass<i>over a photograph only</i></span>
+          <button class="pv-btn pv-sm pv-glass">View</button>
+          <button class="pv-btn pv-md pv-glass">View</button>
+          <button class="pv-btn pv-lg pv-glass">View</button>
+          <button class="pv-btn pv-xl pv-glass">View</button>
+          <button class="pv-btn pv-md pv-glass" disabled>View</button></div>
+      </div></div>
+      <div class="vrow"><p class="vlabel">app sizes · product surfaces like the Profile pages</p>
+      <div class="bm bm-app" role="table" aria-label="Button variants by app size">
+        <div class="bm-row bm-head" role="row"><span role="columnheader">variant</span><span role="columnheader">app-sm<i>32 tall · 13px</i></span><span role="columnheader">app-md<i>38 tall · 13px</i></span><span role="columnheader">app-lg<i>44 tall · 15px</i></span><span role="columnheader">disabled<i>app-md</i></span></div>
+        <div class="bm-row" role="row"><span class="bm-name" role="rowheader">primary<i>lit orange · one per view</i></span>
+          <button class="btn-app-sm-v2 btn-lit-orange">Create now</button>
+          <button class="btn-app-md-v2 btn-lit-orange">Create now</button>
+          <button class="btn-app-lg-v2 btn-lit-orange">Create now</button>
+          <button class="btn-app-md-v2 btn-lit-orange" disabled>Create now</button></div>
+        <div class="bm-row" role="row"><span class="bm-name" role="rowheader">secondary<i>lit blue</i></span>
+          <button class="btn-app-sm-v2 btn-lit-blue"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat</button>
+          <button class="btn-app-md-v2 btn-lit-blue"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat</button>
+          <button class="btn-app-lg-v2 btn-lit-blue"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat</button>
+          <button class="btn-app-md-v2 btn-lit-blue" disabled>Chat</button></div>
+        <div class="bm-row" role="row"><span class="bm-name" role="rowheader">quiet<i>white</i></span>
+          <button class="btn-app-sm-v2 btn-secondary-v2">Plan &amp; Energy</button>
+          <button class="btn-app-md-v2 btn-secondary-v2">Plan &amp; Energy</button>
+          <button class="btn-app-lg-v2 btn-secondary-v2">Plan &amp; Energy</button>
+          <button class="btn-app-md-v2 btn-secondary-v2" disabled>Plan &amp; Energy</button></div>
+      </div></div>
+      <div class="vrow"><p class="vlabel">text links · link-secondary / link-primary, size none — a hairline appears on hover</p>
         <div class="vitems">
-          <button class="pv-btn pv-link secondary">See how it works</button>
-          <button class="pv-btn pv-link primary">Get your link</button>
-        </div></div>
-      <div class="vrow"><p class="vlabel">size · sm / md / lg / xl</p>
-        <div class="vitems">
-          <button class="pv-btn pv-sm btn-lit-blue">Small</button>
-          <button class="pv-btn pv-md btn-lit-blue">Medium</button>
-          <button class="pv-btn pv-lg btn-lit-blue">Large</button>
-          <button class="pv-btn pv-xl btn-lit-blue">Extra large</button>
-        </div></div>
-      <div class="vrow"><p class="vlabel">disabled</p>
-        <div class="vitems">
-          <button class="pv-btn pv-md btn-lit-blue" disabled>Chat</button>
-          <button class="pv-btn pv-md btn-secondary-v2" disabled>Log in</button>
+          <button class="text-link-v2 t-sm">Manage<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="text-link-v2 t-sm">Explore Bazaar<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="text-link-orange-v2 t-sm">Turn it back on</button>
         </div></div>
       <div class="vrow"><p class="vlabel">a pair on mobile · stacks full width</p>
         <div class="pv-stack">
           <button class="pv-btn pv-md btn-lit-orange">Start free</button>
           <button class="pv-btn pv-md btn-secondary-v2">See how it works</button>
         </div></div>
-      <div class="vrow"><p class="vlabel">variant · glass — over a photograph only, when quiet doesn't hold</p>
-        <div class="vitems" style="padding:var(--space-48) var(--space-24);border-radius:var(--r-md);background:url('../assets/artwork/illustrations/minds-only/home-hero-idle.webp') center/cover">
-          <button class="pv-btn pv-md btn-lit-orange">Launch a Mind</button>
-          <button class="pv-btn pv-md pv-glass">See how it works</button>
-        </div></div>
     </div>
     <div class="code"><pre>import { Button } from "@/components/ui/button";
 
-&lt;div className="flex flex-col items-stretch gap-12 sm:flex-row sm:flex-wrap sm:items-center"&gt;
-  &lt;Button&gt;Launch a Mind&lt;/Button&gt;                     {/* variant="primary" size="md" */}
-  &lt;Button variant="quiet"&gt;Log in&lt;/Button&gt;
-&lt;/div&gt;
-&lt;Button variant="secondary" size="sm"&gt;Chat&lt;/Button&gt;
-&lt;Button variant="link-secondary" size="none"&gt;See how it works&lt;/Button&gt;
+&lt;Button&gt;Launch a Mind&lt;/Button&gt;                          {/* variant="primary" size="md" */}
+&lt;Button variant="secondary" size="app-sm"&gt;&lt;MessageSquare size={13} /&gt;Chat&lt;/Button&gt;
+&lt;Button variant="quiet" size="app-md"&gt;Plan &amp;amp; Energy&lt;/Button&gt;
+&lt;Button variant="link-secondary" size="none"&gt;Manage &lt;ChevronRight size={14} /&gt;&lt;/Button&gt;
 
-&lt;!-- HTML lane: tokens.css recipe classes --&gt;
-&lt;a class="btn btn-lit-orange"&gt;Launch a Mind&lt;/a&gt;</pre><button class="copy">Copy</button></div>
+&lt;!-- HTML lane --&gt;
+&lt;button class="btn-app-sm-v2 btn-lit-blue"&gt;Chat&lt;/button&gt;
+&lt;button class="text-link-v2"&gt;Manage&lt;/button&gt;</pre><button class="copy">Copy</button></div>
     <table class="props">
       <tr><th>prop</th><th>values</th><th>when</th></tr>
-      <tr><td>variant</td><td><code>primary</code> · <code>secondary</code> · <code>quiet</code> · <code>glass</code> · <code>link-primary</code> · <code>link-secondary</code></td><td>primary = lit orange, the action the screen exists for. secondary = lit blue. quiet = white beside a primary. glass = translucent, over photography only.</td></tr>
-      <tr><td>size</td><td><code>sm</code> 8/24 · <code>md</code> 12/36 · <code>lg</code> 16/40 · <code>xl</code> 16/48 · <code>none</code></td><td>md is the default. none is for link variants.</td></tr>
+      <tr><td>variant</td><td><code>primary</code> · <code>secondary</code> · <code>quiet</code> · <code>glass</code> · <code>link-primary</code> · <code>link-secondary</code></td><td>primary = lit orange, the action the screen exists for. secondary = lit blue. quiet = white beside a primary. glass = over photography only.</td></tr>
+      <tr><td>size</td><td><code>sm</code> · <code>md</code> · <code>lg</code> · <code>xl</code> · <code>app-sm</code> · <code>app-md</code> · <code>app-lg</code> · <code>none</code></td><td>sm–xl for marketing pages (md default). app-* for product surfaces. none for text links.</td></tr>
       <tr><td>asChild</td><td>boolean</td><td>Render as the child element, e.g. an <code>&lt;a&gt;</code>.</td></tr>
     </table>
   </section>
 
+  <section class="story" id="c-icon-button">
+    <div class="section-head"><span class="section-title">Icon button</span><span class="section-count">icon-button.jsx &middot; .icon-btn-v2</span></div>
+    <p class="story-dek">Round, white, a cool hairline and a soft drop — the "…" on every Mind card. Hover keeps the white fill and lights the icon and edge blue. Use it for repeated secondary actions; never repeat a text button down a list.</p>
+    <div class="canvas v2 pv">
+      <div class="vitems">
+        <button class="icon-btn-v2" aria-label="More actions"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+        <button class="icon-btn-v2" aria-label="Copy"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+      </div>
+    </div>
+    <div class="code"><pre>import { IconButton } from "@/components/ui/icon-button";
+
+&lt;IconButton label="More actions"&gt;&lt;MoreHorizontal size={16} strokeWidth={2.2} /&gt;&lt;/IconButton&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
   <section class="story" id="c-card">
     <div class="section-head"><span class="section-title">Card</span><span class="section-count">card.jsx &middot; .glass-shell recipe</span></div>
-    <p class="story-dek">Frosted glass on the wash: white at 0.85, a lit top edge and a blue-grey drop. Needs a non-flat ground behind it — on a flat colour the blur is invisible. The nested shell has no component; it is the <code>.glass-shell</code> + <code>.glass-shell-inner</code> recipe in tokens.css, for the rail and any panel that needs a lit rim.</p>
-    <div class="canvas v2 canvas-blooms pv">
-      <div class="vrow"><p class="vlabel">Card · Header · Title · Description · Content · Footer</p>
+    <p class="story-dek">Frosted glass: white at 0.85, a <code>--line-cool</code> hairline, a lit top edge and a blue-grey drop that deepens on hover, 20px in. Use a card only where it carries real content — a divider separates things more quietly. The nested shell is the <code>.glass-shell</code> recipe, for the rail and any panel that needs a lit rim.</p>
+    <div class="canvas v2 pv">
+      <div class="vrow"><p class="vlabel">Card</p>
         <div class="vitems">
-          <div class="glass-card pv-card">
-            <h3>Sales Mind</h3>
-            <p class="desc">Follows up on every lead so none go cold.</p>
-            <div class="content">Drafts the reply, books the call, and tells you who's ready to buy.</div>
-            <div class="foot"><button class="pv-btn pv-sm btn-lit-blue">Launch</button><button class="pv-btn pv-sm btn-secondary-v2">Details</button></div>
+          <div class="glass-card card-v2 pv-card">
+            <p class="t-label" style="margin:0 0 var(--space-8);color:var(--text-label-cool)">Channels</p>
+            <h3 class="t-h2" style="margin:0;font-size:revert;color:var(--text-title-cool)">Telegram</h3>
+            <p class="t-sm" style="margin:var(--space-4) 0 0;color:var(--text-muted-cool)">Not linked yet</p>
+            <div class="foot"><button class="btn-app-sm-v2 btn-secondary-v2">Link</button></div>
           </div>
         </div></div>
       <div class="vrow"><p class="vlabel">.glass-shell + .glass-shell-inner</p>
@@ -878,233 +825,334 @@ footer{
           <div class="glass-shell"><div class="glass-shell-inner pv-shell-body">The 3px gap is the rim. One bordered div flattens it.</div></div>
         </div></div>
     </div>
-    <div class="code"><pre>import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+    <div class="code"><pre>import { Card } from "@/components/ui/card";
 
-&lt;Card&gt;
-  &lt;CardHeader&gt;
-    &lt;CardTitle&gt;Sales Mind&lt;/CardTitle&gt;
-    &lt;CardDescription&gt;Follows up on every lead so none go cold.&lt;/CardDescription&gt;
-  &lt;/CardHeader&gt;
-  &lt;CardContent&gt;…&lt;/CardContent&gt;
-  &lt;CardFooter&gt;&lt;Button variant="secondary" size="sm"&gt;Launch&lt;/Button&gt;&lt;/CardFooter&gt;
-&lt;/Card&gt;</pre><button class="copy">Copy</button></div>
+&lt;Card&gt;…&lt;/Card&gt;
+
+&lt;!-- HTML lane --&gt;
+&lt;div class="glass-card card-v2"&gt;…&lt;/div&gt;</pre><button class="copy">Copy</button></div>
   </section>
 
   <section class="story" id="c-input">
-    <div class="section-head"><span class="section-title">Input, Textarea, Label</span><span class="section-count">input.jsx &middot; textarea.jsx &middot; label.jsx</span></div>
-    <p class="story-dek"><code>Input</code> is a bare field — no fill, no border — meant to sit inside a field shell that the page draws: <code>--bg-field-cool</code>, a <code>--line-cool</code> hairline, <code>--r-md</code> (pill for search), and a 1px <code>--blue</code> ring on focus. Fields render at 16px or more on mobile so iOS Safari doesn't zoom.</p>
-    <div class="canvas v2 canvas-blooms pv">
-      <div class="vrow"><p class="vlabel">Label + Input in a field shell · click to focus</p>
-        <div class="pv-field-col">
-          <label class="pv-label" for="pv-in-1">Mind name</label>
-          <div class="pv-field"><input class="pv-input" id="pv-in-1" placeholder="Street.Fashion"></div>
+    <div class="section-head"><span class="section-title">Inputs</span><span class="section-count">input.jsx &middot; textarea.jsx &middot; label.jsx</span></div>
+    <p class="story-dek">Pick by the field's job. <b>Input</b> is the page's primary input — the one thing a step asks for (Redeem's code, the Launch modal's Mind name): a raised white pill, a <code>--line-strong-cool</code> hairline, an inset <code>--blue-lit</code> ring on focus, bold typed text, and room for an inline action like Suggest. <b>SearchInput</b> filters content beside it, so it's a recessed grey well that turns white on focus. <b>Textarea</b> is white with <code>--r-lg</code> corners; its edge turns blue on focus. A small boxed value inside a card is the compact field. All render at 16px on phones.</p>
+    <div class="canvas v2 pv">
+      <div class="vrow"><p class="vlabel">Input · Redeem step · click to focus</p>
+        <div class="pv-step-row">
+          <span class="step-disc-v2">1</span>
+          <span class="pv-step-title">Enter your redemption code</span>
+          <input class="field-v2 pv-code" placeholder="Enter code here" aria-label="Redemption code" spellcheck="false">
         </div></div>
-      <div class="vrow"><p class="vlabel">search · pill shell</p>
-        <div class="pv-field pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input class="pv-input" placeholder="Search Minds…" aria-label="Search Minds"></div></div>
-      <div class="vrow"><p class="vlabel">Textarea</p>
-        <textarea class="pv-textarea" placeholder="What should this Mind handle for you?" aria-label="Brief"></textarea></div>
+      <div class="vrow"><p class="vlabel">Input size="lg" with an inline action · Launch modal</p>
+        <div class="field-v2 field-v2-lg pv-w-480"><input placeholder="Name your Mind" aria-label="Name your Mind" id="pv-name"><button type="button" class="field-action-v2" data-suggest><svg width="13" height="13" viewBox="0 0 24 24"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg>Suggest</button></div></div>
+      <div class="vrow"><p class="vlabel">SearchInput · click to focus</p>
+        <div class="search-v2 pv-w-260"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input placeholder="Search Minds…" aria-label="Search Minds"></div></div>
+      <div class="vrow"><p class="vlabel">Label + Textarea</p>
+        <div class="pv-field-col pv-w-480">
+          <label class="t-body" for="pv-task" style="color:var(--text-body-cool)">What can I help you with today?</label>
+          <textarea class="textarea-v2" id="pv-task" placeholder="Book a table for four on Saturday…"></textarea>
+        </div></div>
+      <div class="vrow"><p class="vlabel">compact field · Energy card limit</p>
+        <label class="t-sm pv-inline" style="color:var(--text-muted-cool)"><input class="field-v2-sm pv-w-112" type="number" placeholder="No limit" aria-label="Monthly limit">a month</label></div>
     </div>
-    <div class="code"><pre>import { Input } from "@/components/ui/input";
+    <div class="code"><pre>import { Input, SearchInput } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
-&lt;Label htmlFor="name"&gt;Mind name&lt;/Label&gt;
-&lt;div className="flex items-center gap-12 rounded-md px-16 py-12 bg-[var(--bg-field-cool)]
-                shadow-[inset_0_0_0_1px_var(--line-cool)] focus-within:shadow-[0_0_0_1px_var(--blue)]"&gt;
-  &lt;Input id="name" className="text-[16px] md:text-body-default" placeholder="Street.Fashion" /&gt;
-&lt;/div&gt;
-&lt;Textarea placeholder="What should this Mind handle for you?" /&gt;</pre><button class="copy">Copy</button></div>
-  </section>
+&lt;Input placeholder="Enter code here" /&gt;
+&lt;Input size="lg" placeholder="Name your Mind"
+  action={&lt;button className="field-action-v2"&gt;&lt;Sparkle size={13} /&gt;Suggest&lt;/button&gt;} /&gt;
+&lt;SearchInput placeholder="Search Minds…" value={q} onChange={e =&gt; setQ(e.target.value)} onClear={() =&gt; setQ("")} /&gt;
+&lt;Label htmlFor="task"&gt;What can I help you with today?&lt;/Label&gt;
+&lt;Textarea id="task" placeholder="Book a table for four on Saturday…" /&gt;
 
-  <section class="story" id="c-radio">
-    <div class="section-head"><span class="section-title">Radio group</span><span class="section-count">radio-group.jsx</span></div>
-    <p class="story-dek">A list of choices, or a selectable card row (the redeem flow). A checked circle is a lit blue solid — never orange. A selected card flips to a solid <code>--blue-lit</code> fill with white text, and its circle inverts to white so it stays visible.</p>
-    <div class="canvas v2 canvas-blooms pv">
-      <div class="vrow"><p class="vlabel">RadioGroup + RadioGroupItem · click to choose</p>
-        <div class="pv-radio-group" data-radio>
-          <div class="pv-radio-row on"><span class="pv-radio"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Send rewards to my default Mind</div>
-          <div class="pv-radio-row"><span class="pv-radio"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Choose a Mind each time</div>
-        </div></div>
-      <div class="vrow"><p class="vlabel">RadioGroupCard · click to choose</p>
-        <div class="pv-radio-group" data-rcard>
-          <button class="pv-rcard on" type="button"><span class="pv-radio on"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span><span class="txt"><span class="t">1,000 Energy</span><span class="s">Credited to your default Mind</span></span><span class="end"><span class="tr">500 pts</span><span class="tl">cost</span></span></button>
-          <button class="pv-rcard" type="button"><span class="pv-radio"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span><span class="txt"><span class="t">5,000 Energy</span><span class="s">Credited to your default Mind</span></span><span class="end"><span class="tr">2,200 pts</span><span class="tl">cost</span></span></button>
-        </div></div>
-    </div>
-    <div class="code"><pre>import { RadioGroup, RadioGroupItem, RadioGroupCard } from "@/components/ui/radio-group";
-
-&lt;RadioGroup value={v} onValueChange={setV}&gt;
-  &lt;label className="flex items-center gap-12"&gt;&lt;RadioGroupItem value="default" /&gt; Send rewards to my default Mind&lt;/label&gt;
-&lt;/RadioGroup&gt;
-
-&lt;RadioGroupCard value="1k" selected={v === "1k"} onSelect={setV}
-  title="1,000 Energy" subtitle="Credited to your default Mind" trailing="500 pts" trailingLabel="cost" /&gt;</pre><button class="copy">Copy</button></div>
-  </section>
-
-  <section class="story" id="c-checkbox">
-    <div class="section-head"><span class="section-title">Checkbox</span><span class="section-count">checkbox.jsx</span></div>
-    <p class="story-dek">An independent yes/no, like a setting. Unchecked is a white square with a cool hairline; checked is a lit blue solid with a white check. Never orange. Always pair it with a label.</p>
-    <div class="canvas v2 canvas-blooms pv">
-      <div class="vrow"><p class="vlabel">checked / unchecked · click</p>
-        <div class="pv-radio-group">
-          <div class="pv-check-row on" data-toggle><span class="pv-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>Top up automatically from your plan</div>
-          <div class="pv-check-row" data-toggle><span class="pv-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>Can use purchased Energy</div>
-        </div></div>
-      <div class="vrow"><p class="vlabel">disabled</p>
-        <div class="pv-check-row on"><span class="pv-check disabled"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>Managed by your plan</div></div>
-    </div>
-    <div class="code"><pre>import { Checkbox } from "@/components/ui/checkbox";
-
-&lt;label className="flex items-center gap-12"&gt;
-  &lt;Checkbox checked={autoTopUp} onCheckedChange={setAutoTopUp} /&gt;
-  Top up automatically from your plan
-&lt;/label&gt;</pre><button class="copy">Copy</button></div>
-  </section>
-
-  <section class="story" id="c-switch">
-    <div class="section-head"><span class="section-title">Switch</span><span class="section-count">switch.jsx</span></div>
-    <p class="story-dek">An on/off for a "running" state, like a Mind being online. On is the green lit gradient — a status, not a primary action, so neither blue nor orange. Don't use it for a choice among options; that's a segmented filter, marked in <code>--blue-lit</code>.</p>
-    <div class="canvas v2 canvas-blooms pv">
-      <div class="vrow"><p class="vlabel">on / off · click</p>
-        <div class="pv-radio-group">
-          <div class="pv-check-row on" data-toggle><span class="pv-switch"></span>Online</div>
-          <div class="pv-check-row" data-toggle><span class="pv-switch"></span>Offline</div>
-        </div></div>
-    </div>
-    <div class="code"><pre>import { Switch } from "@/components/ui/switch";
-
-&lt;label className="flex items-center gap-12"&gt;
-  &lt;Switch checked={online} onCheckedChange={setOnline} /&gt;
-  Online
-&lt;/label&gt;</pre><button class="copy">Copy</button></div>
-  </section>
-
-  <section class="story" id="c-tabs">
-    <div class="section-head"><span class="section-title">Tabs</span><span class="section-count">tabs.jsx</span></div>
-    <p class="story-dek">Two shapes on one Radix root. Pill tabs switch a card's or panel's content. Underline tabs are page or section navigation — <code>sm</code> for a secondary row, <code>lg</code> when the tabs must hold their own next to a headline. The current tab is <code>--blue-lit</code>, never orange. Don't mix shapes in one group.</p>
-    <div class="canvas v2 canvas-blooms pv">
-      <div class="vrow"><p class="vlabel">TabsList + TabsTrigger · pill · click</p>
-        <div class="vitems"><div class="pv-tabs-pill" data-tabs><button class="on">Skills</button><button>Apps</button><button>Artifacts</button></div></div></div>
-      <div class="vrow"><p class="vlabel">TabsListUnderline · size sm</p>
-        <div class="pv-tabs-line" data-tabs><button class="on">Refer a friend</button><button>Affiliate</button><button>History</button></div></div>
-      <div class="vrow"><p class="vlabel">TabsListUnderline · size lg</p>
-        <div class="pv-tabs-line lg" data-tabs><button class="on">Minds (21)</button><button>My Network</button></div></div>
-    </div>
-    <div class="code"><pre>import { Tabs, TabsList, TabsTrigger, TabsListUnderline, TabsTriggerUnderline, TabsContent } from "@/components/ui/tabs";
-
-&lt;Tabs defaultValue="skills"&gt;
-  &lt;TabsList&gt;
-    &lt;TabsTrigger value="skills"&gt;Skills&lt;/TabsTrigger&gt;
-    &lt;TabsTrigger value="apps"&gt;Apps&lt;/TabsTrigger&gt;
-  &lt;/TabsList&gt;
-  &lt;TabsContent value="skills"&gt;…&lt;/TabsContent&gt;
-&lt;/Tabs&gt;
-
-&lt;TabsListUnderline size="lg"&gt;
-  &lt;TabsTriggerUnderline size="lg" value="minds"&gt;Minds (21)&lt;/TabsTriggerUnderline&gt;
-&lt;/TabsListUnderline&gt;</pre><button class="copy">Copy</button></div>
+&lt;!-- HTML lane --&gt;
+&lt;input class="field-v2" placeholder="Enter code here"&gt;
+&lt;div class="search-v2"&gt;&lt;svg …/&gt;&lt;input placeholder="Search Minds…"&gt;&lt;/div&gt;
+&lt;textarea class="textarea-v2"&gt;&lt;/textarea&gt;
+&lt;input class="field-v2-sm" placeholder="No limit"&gt;</pre><button class="copy">Copy</button></div>
   </section>
 
   <section class="story" id="c-dropdown">
-    <div class="section-head"><span class="section-title">Sort and filter dropdowns</span><span class="section-count">sort-dropdown.jsx &middot; filter-dropdown.jsx &middot; dropdown-menu.jsx</span></div>
-    <p class="story-dek">A pill trigger that opens a white menu. In the sort menu the current option is <code>--blue-lit</code> and semibold — no fill, no check. In the filter menu each group's current option gets a <code>--blue-soft</code> tint and a check. The trigger's count badge shows how many groups moved off their default. Menus are shown open here.</p>
-    <div class="canvas v2 canvas-blooms pv">
-      <div class="vitems" style="align-items:flex-start;gap:24px">
+    <div class="section-head"><span class="section-title">Dropdowns</span><span class="section-count">dropdown-menu.jsx &middot; sort-dropdown.jsx &middot; filter-dropdown.jsx</span></div>
+    <p class="story-dek">A frosted pill trigger that turns <code>--blue-lit</code> on hover and while open. The menu is near-solid white glass with a blue-grey drop; the current option is a soft blue tint, blue and bold, with a check. A status option leads with a dot. Menus are shown open here.</p>
+    <div class="canvas v2 pv">
+      <div class="vitems" style="align-items:flex-start;gap:var(--space-24)">
         <div class="pv-dd">
-          <p class="vlabel">SortDropdown</p>
-          <button class="pv-trigger" type="button"><span class="pre">Sort:</span><span>Recently created</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
-          <div class="pv-menu">
-            <div class="pv-menu-item on">Recently created</div>
-            <div class="pv-menu-item">Last used</div>
-            <div class="pv-menu-item">Name A–Z</div>
+          <p class="vlabel">SortDropdown · open</p>
+          <button class="select-v2" type="button" data-state="open">Recently Created<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="menu-v2 pv-w-200">
+            <div class="menu-item-v2" data-selected="true">Recently Created<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div class="menu-item-v2">A → Z</div>
           </div>
         </div>
         <div class="pv-dd">
-          <p class="vlabel">FilterDropdown · activeCount 2</p>
-          <button class="pv-trigger" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></svg><span>Filters</span><span class="pv-count">2</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
-          <div class="pv-menu pv-filter">
-            <div class="grp">Status</div>
-            <div class="opt">All</div>
-            <div class="opt on">Online<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-            <div class="opt">Offline</div>
-            <div class="div"></div>
-            <div class="grp">Auth</div>
-            <div class="opt">All types</div>
-            <div class="opt on">API key<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <p class="vlabel">SortDropdown with status dots · open</p>
+          <button class="select-v2" type="button" data-state="open"><span class="select-dot-v2 dot-online-v2"></span>Online<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="menu-v2 pv-w-160">
+            <div class="menu-item-v2" data-selected="true"><span class="menu-dot-v2 dot-online-v2"></span>Online<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div class="menu-item-v2"><span class="menu-dot-v2 dot-offline-v2"></span>Offline</div>
+            <div class="menu-item-v2">All</div>
+          </div>
+        </div>
+        <div class="pv-dd">
+          <p class="vlabel">FilterDropdown · grouped · open</p>
+          <button class="select-v2" type="button" data-state="open"><span class="pv-inline-4"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></svg>Filters<span class="pv-count">2</span></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="menu-v2 pv-w-240">
+            <div class="menu-label-v2">Status</div>
+            <div class="menu-item-v2">All</div>
+            <div class="menu-item-v2" data-selected="true">Connected<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div class="menu-separator-v2"></div>
+            <div class="menu-label-v2">Auth</div>
+            <div class="menu-item-v2">All auth types</div>
+            <div class="menu-item-v2" data-selected="true">API key<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
           </div>
         </div>
       </div>
+      <div class="vrow"><p class="vlabel">at rest · hover me</p>
+        <div class="vitems"><button class="select-v2" type="button">Latest → Oldest<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button><button class="select-v2" type="button">All auth types<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button></div></div>
     </div>
     <div class="code"><pre>import { SortDropdown } from "@/components/ui/sort-dropdown";
 import { FilterDropdown } from "@/components/ui/filter-dropdown";
 
 &lt;SortDropdown value={sort} onChange={setSort}
-  options={[{ value: "created", label: "Recently created" }, { value: "used", label: "Last used" }]} /&gt;
-
-&lt;FilterDropdown activeCount={2} groups={[
-  { label: "Status", value: status, onChange: setStatus,
-    options: [{ value: "all", label: "All" }, { value: "online", label: "Online" }] },
-]} /&gt;</pre><button class="copy">Copy</button></div>
+  options={[{ value: "recent", label: "Recently Created" }, { value: "az", label: "A → Z" }]} /&gt;
+&lt;SortDropdown value={status} onChange={setStatus} menuClassName="w-160"
+  options={[{ value: "online", label: "Online", dot: "online" }, { value: "offline", label: "Offline", dot: "offline" }, { value: "all", label: "All" }]} /&gt;
+&lt;FilterDropdown activeCount={2} groups={[{ label: "Status", value, onChange, options }]} /&gt;</pre><button class="copy">Copy</button></div>
   </section>
 
-  <section class="story" id="c-badge">
-    <div class="section-head"><span class="section-title">Badge</span><span class="section-count">badge.jsx</span></div>
-    <p class="story-dek">Always a pill, always uppercase caption. A badge is a label, never an action — tint surfaces only.</p>
-    <div class="canvas v2 canvas-blooms pv">
-      <div class="vrow"><p class="vlabel">variant · blue (default) / orange / neutral / outline / success</p>
+  <section class="story" id="c-tabs">
+    <div class="section-head"><span class="section-title">Tabs</span><span class="section-count">tabs.jsx</span></div>
+    <p class="story-dek">Four shapes on one Radix root — set <code>variant</code> on <code>TabsList</code>. Selected is always blue, never orange. <b>pill</b> for two or three big choices: the selected pill is the blue gradient with white ink and a solid icon. <b>segment</b> for filters over a list: free-standing pills, only the selected one tinted. <b>track</b> for a small switcher inside a card. <b>line</b> for page sections: labels on a shared hairline, the selected one on a gradient bar. Don't mix shapes in one group.</p>
+    <div class="canvas v2 pv">
+      <div class="vrow"><p class="vlabel">variant="pill" · Launch modal · click</p>
+        <div class="vitems"><div class="tabs-pill-v2" role="tablist" data-tabs>
+          <button class="tab-pill-v2" role="tab" aria-selected="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>Templates</button>
+          <button class="tab-pill-v2" role="tab" aria-selected="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Custom</button>
+        </div></div></div>
+      <div class="vrow"><p class="vlabel">variant="segment" · My Minds · click</p>
         <div class="vitems">
-          <span class="pv-badge blue">Master Mind</span>
-          <span class="pv-badge orange">Limited</span>
-          <span class="pv-badge neutral">Draft</span>
-          <span class="pv-badge outline">Beta</span>
-          <span class="pv-badge success">Online</span>
+          <div class="tabs-segment-v2" role="tablist" data-tabs>
+            <button class="tab-segment-v2" role="tab" aria-selected="true">All<span class="tab-count-v2">101</span></button>
+            <button class="tab-segment-v2" role="tab" aria-selected="false"><span class="dot-online-v2"></span>Online<span class="tab-count-v2">45</span></button>
+            <button class="tab-segment-v2" role="tab" aria-selected="false"><span class="dot-offline-v2"></span>Offline<span class="tab-count-v2">56</span></button>
+          </div>
+          <div class="tabs-segment-v2" data-press>
+            <button class="tab-icon-v2" aria-pressed="true" aria-label="Grid view"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></button>
+            <button class="tab-icon-v2" aria-pressed="false" aria-label="List view"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></button>
+          </div>
+        </div></div>
+      <div class="vrow"><p class="vlabel">variant="track" · Mind detail · click</p>
+        <div class="vitems">
+          <div class="tabs-track-v2" role="tablist" data-tabs>
+            <button class="tab-track-v2" role="tab" aria-selected="true">Skills<span class="tab-count-v2">2</span></button>
+            <button class="tab-track-v2" role="tab" aria-selected="false">Apps<span class="tab-count-v2">0</span></button>
+          </div>
+          <div class="tabs-track-v2 tabs-track-v2-sm" role="tablist" data-tabs>
+            <button class="tab-track-v2" role="tab" aria-selected="false">1w</button>
+            <button class="tab-track-v2" role="tab" aria-selected="true">1m</button>
+            <button class="tab-track-v2" role="tab" aria-selected="false">3m</button>
+          </div>
+        </div></div>
+      <div class="vrow"><p class="vlabel">variant="line" · Referral · click</p>
+        <div class="tabs-line-v2" role="tablist" data-tabs>
+          <button class="tab-line-v2" role="tab" aria-selected="true">Refer a friend</button>
+          <button class="tab-line-v2" role="tab" aria-selected="false">Affiliate</button>
         </div></div>
     </div>
-    <div class="code"><pre>import { Badge } from "@/components/ui/badge";
+    <div class="code"><pre>import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
-&lt;Badge&gt;Master Mind&lt;/Badge&gt;
-&lt;Badge variant="orange"&gt;Limited&lt;/Badge&gt;
-&lt;Badge variant="outline"&gt;Beta&lt;/Badge&gt;</pre><button class="copy">Copy</button></div>
+&lt;Tabs defaultValue="custom"&gt;
+  &lt;TabsList variant="pill"&gt;
+    &lt;TabsTrigger value="templates"&gt;&lt;LayoutGrid size={16} /&gt;Templates&lt;/TabsTrigger&gt;
+    &lt;TabsTrigger value="custom"&gt;&lt;Wrench size={16} /&gt;Custom&lt;/TabsTrigger&gt;
+  &lt;/TabsList&gt;
+  &lt;TabsContent value="custom"&gt;…&lt;/TabsContent&gt;
+&lt;/Tabs&gt;
+
+&lt;TabsList variant="segment"&gt;
+  &lt;TabsTrigger value="all" count={101}&gt;All&lt;/TabsTrigger&gt;
+  &lt;TabsTrigger value="online" dot="online" count={45}&gt;Online&lt;/TabsTrigger&gt;
+&lt;/TabsList&gt;
+&lt;TabsList variant="track" size="sm"&gt;…&lt;/TabsList&gt;
+&lt;TabsList variant="line"&gt;…&lt;/TabsList&gt;</pre><button class="copy">Copy</button></div>
   </section>
 
-  <section class="story" id="c-avatar">
-    <div class="section-head"><span class="section-title">Avatar</span><span class="section-count">avatar.jsx</span></div>
-    <p class="story-dek">Always fully round. Use the square portraits in <code>assets/artwork/avatars/</code>. The fallback is the initial on <code>--blue-soft</code>.</p>
-    <div class="canvas v2 canvas-blooms pv">
-      <div class="vrow"><p class="vlabel">size · sm 24 / md 40 / lg 48</p>
-        <div class="vitems">
-          <span class="pv-avatar sm"><img src="../assets/artwork/avatars/minds/avatar-mind-general-assistant.webp" alt=""></span>
-          <span class="pv-avatar md"><img src="../assets/artwork/avatars/minds/avatar-mind-general-assistant.webp" alt=""></span>
-          <span class="pv-avatar lg"><img src="../assets/artwork/avatars/minds/avatar-mind-general-assistant.webp" alt=""></span>
-          <span class="pv-avatar lg"><img src="../assets/artwork/avatars/humans/avatar-human-aiko.webp" alt=""></span>
+  <section class="story" id="c-checkbox">
+    <div class="section-head"><span class="section-title">Checkbox</span><span class="section-count">checkbox.jsx</span></div>
+    <p class="story-dek">An independent yes/no, like a setting. 18px; frosted with a cool hairline at rest, the lit blue solid with a white check when on. Never orange. Pass <code>label</code> for the standard row: the box sits on the label's first line.</p>
+    <div class="canvas v2 pv">
+      <div class="vrow"><p class="vlabel">checked / unchecked · click</p>
+        <div class="pv-radio-group">
+          <label class="pv-check-label"><button class="checkbox-v2" role="checkbox" aria-checked="true" data-check><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button><span class="t-sm">Top up automatically from your plan</span></label>
+          <label class="pv-check-label"><button class="checkbox-v2" role="checkbox" aria-checked="false" data-check><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button><span class="t-sm">Can use purchased Energy</span></label>
         </div></div>
-      <div class="vrow"><p class="vlabel">AvatarFallback</p>
-        <div class="vitems"><span class="pv-avatar sm">D</span><span class="pv-avatar md">D</span><span class="pv-avatar lg">D</span></div></div>
+      <div class="vrow"><p class="vlabel">disabled</p>
+        <label class="pv-check-label"><button class="checkbox-v2" role="checkbox" aria-checked="true" disabled><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button><span class="t-sm">Managed by your plan</span></label></div>
     </div>
-    <div class="code"><pre>import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+    <div class="code"><pre>import { Checkbox } from "@/components/ui/checkbox";
 
-&lt;Avatar size="lg"&gt;
-  &lt;AvatarImage src={kaiPortrait} alt="" /&gt;
-  &lt;AvatarFallback&gt;K&lt;/AvatarFallback&gt;
-&lt;/Avatar&gt;</pre><button class="copy">Copy</button></div>
+&lt;Checkbox label="Top up automatically from your plan" checked={autoTopUp} onCheckedChange={setAutoTopUp} /&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-radio">
+    <div class="section-head"><span class="section-title">Radio and selectable tile</span><span class="section-count">radio-group.jsx</span></div>
+    <p class="story-dek">The radio is a 20px ring that turns blue on hover and fills with a blue gradient and a white check when chosen. A selectable tile is how you choose one of a few rich options, like the Mind picker on Redeem: a pale frosted tile at rest, white and lifted on hover, and when chosen white with a 2px <code>--blue-tint</code> edge and a blue drop — never a solid blue fill.</p>
+    <div class="canvas v2 pv">
+      <div class="vrow"><p class="vlabel">RadioGroupCard · click to choose</p>
+        <div class="pv-tiles" data-tiles>
+          <button class="pick-tile-v2" type="button" role="radio" aria-checked="true"><span class="pick-radio-v2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="avatar-ring-v2 avatar-lg-v2"><img src="../assets/artwork/avatars/minds/avatar-mind-master-mind.webp" alt=""></span><span class="pv-tile-txt"><span class="t-sm pv-tile-name">Street.Fashion</span><span class="t-xs t-num" style="color:var(--text-muted-cool)">70cd62…df11</span></span></button>
+          <button class="pick-tile-v2" type="button" role="radio" aria-checked="false"><span class="pick-radio-v2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="avatar-ring-v2 avatar-lg-v2"><img src="../assets/artwork/avatars/minds/avatar-mind-general-assistant.webp" alt=""></span><span class="pv-tile-txt"><span class="t-sm pv-tile-name">Kai-08233ccd</span><span class="t-xs t-num" style="color:var(--text-muted-cool)">6123553e…df11</span></span></button>
+        </div></div>
+      <div class="vrow"><p class="vlabel">RadioGroupItem · click</p>
+        <div class="pv-radio-group" data-radios>
+          <label class="pv-check-label"><button class="pick-radio-v2" role="radio" aria-checked="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button><span class="t-sm">Send rewards to my default Mind</span></label>
+          <label class="pv-check-label"><button class="pick-radio-v2" role="radio" aria-checked="false"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button><span class="t-sm">Choose a Mind each time</span></label>
+        </div></div>
+    </div>
+    <div class="code"><pre>import { RadioGroup, RadioGroupItem, RadioGroupCard } from "@/components/ui/radio-group";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+
+&lt;RadioGroupCard value={mind.id} selected={chosen === mind.id} onSelect={setChosen}
+  leading={&lt;Avatar size="lg"&gt;&lt;AvatarImage src={mind.portrait} alt="" /&gt;&lt;/Avatar&gt;}
+  title={mind.name} subtitle={shortId(mind.id)} /&gt;
+
+&lt;RadioGroup value={v} onValueChange={setV}&gt;
+  &lt;label className="flex items-center gap-12"&gt;&lt;RadioGroupItem value="default" /&gt;Send rewards to my default Mind&lt;/label&gt;
+&lt;/RadioGroup&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-switch">
+    <div class="section-head"><span class="section-title">Switch</span><span class="section-count">switch.jsx</span></div>
+    <p class="story-dek">An on/off for a "running" state, like a Mind being online. A bevelled green solid when on (a status, not an action, so neither blue nor orange), neutral grey when off; the knob reads as a hole punched through it. With labels, it sits in a lifted white shell and the active side goes bold. Don't use it for a choice among options — that's a segmented tab.</p>
+    <div class="canvas v2 pv">
+      <div class="vrow"><p class="vlabel">labels (default) · on / off · click</p>
+        <div class="vitems">
+          <div class="switch-shell-v2" data-state="checked"><span class="switch-label-off-v2">Off</span><button class="switch-v2" type="button" role="switch" aria-checked="true" aria-label="Online"><span class="switch-knob-v2"></span></button><span class="switch-label-on-v2">On</span></div>
+          <div class="switch-shell-v2" data-state="unchecked"><span class="switch-label-off-v2">Off</span><button class="switch-v2" type="button" role="switch" aria-checked="false" aria-label="Online"><span class="switch-knob-v2"></span></button><span class="switch-label-on-v2">On</span></div>
+        </div></div>
+      <div class="vrow"><p class="vlabel">labels={false} · click</p>
+        <div class="vitems">
+          <button class="switch-v2" type="button" role="switch" aria-checked="true" aria-label="Online"><span class="switch-knob-v2"></span></button>
+          <button class="switch-v2" type="button" role="switch" aria-checked="false" aria-label="Online"><span class="switch-knob-v2"></span></button>
+        </div></div>
+      <div class="vrow"><p class="vlabel">pending — a slow write is running</p>
+        <div class="vitems">
+          <div class="switch-shell-v2" data-state="checked" style="opacity:.5"><span class="switch-label-off-v2">Off</span><button class="switch-v2" type="button" role="switch" aria-checked="true" aria-label="Online" disabled style="opacity:1"><span class="switch-knob-v2"></span></button><span class="switch-label-on-v2">On</span></div>
+        </div></div>
+    </div>
+    <div class="code"><pre>import { Switch } from "@/components/ui/switch";
+
+&lt;Switch checked={online} onCheckedChange={setOnline} aria-label="Online" /&gt;
+&lt;Switch labels={false} checked={online} onCheckedChange={setOnline} aria-label="Online" /&gt;
+&lt;Switch checked={online} pending={saving} aria-label="Online" /&gt;</pre><button class="copy">Copy</button></div>
   </section>
 
   <section class="story" id="c-pagination">
     <div class="section-head"><span class="section-title">Pagination</span><span class="section-count">pagination.jsx</span></div>
-    <p class="story-dek">Rounded-square page buttons. The current page fills <code>--blue-lit</code> — a selected state, not a call to action, so not orange. More than 7 pages collapse to first, last and current ±1. <code>lg</code> for a page's main list, <code>sm</code> inside a dense card.</p>
-    <div class="canvas v2 canvas-blooms pv">
-      <div class="vrow"><p class="vlabel">size sm · 9 pages · click</p><div class="vitems"><nav class="pv-pages" data-pages="9" data-page="1" aria-label="Pagination"></nav></div></div>
-      <div class="vrow"><p class="vlabel">size lg · 9 pages · click</p><div class="vitems"><nav class="pv-pages lg" data-pages="9" data-page="5" aria-label="Pagination"></nav></div></div>
+    <p class="story-dek">36px circles: white with a cool hairline and a soft drop. The current page is the lit blue solid — a selected state, not a call to action, so not orange. The arrows have no box. Shows first, last and the current page ±1; below 768px only the current page, so the row never wraps.</p>
+    <div class="canvas v2 pv">
+      <div class="vrow"><p class="vlabel">9 pages · on page 1 · click</p><div class="vitems"><nav class="flex-pages" data-pages="9" data-page="1" aria-label="Pagination"></nav></div></div>
+      <div class="vrow"><p class="vlabel">9 pages · on page 5 · click</p><div class="vitems"><nav class="flex-pages" data-pages="9" data-page="5" aria-label="Pagination"></nav></div></div>
     </div>
     <div class="code"><pre>import { Pagination } from "@/components/ui/pagination";
 
-&lt;Pagination page={page} pageCount={9} onPageChange={setPage} size="lg" /&gt;</pre><button class="copy">Copy</button></div>
+&lt;Pagination page={page} pageCount={9} onPageChange={setPage} /&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-badge">
+    <div class="section-head"><span class="section-title">Status pill</span><span class="section-count">badge.jsx</span></div>
+    <p class="story-dek">Small (22px), bold, mixed case, on a soft wash of its own colour. A label, never an action. An optional dot leads in the pill's own colour.</p>
+    <div class="canvas v2 pv">
+      <div class="vrow"><p class="vlabel">variant · neutral / success / blue / warning / error</p>
+        <div class="vitems">
+          <span class="pill-v2">Draft</span>
+          <span class="pill-v2 success"><span class="pill-dot-v2"></span>On</span>
+          <span class="pill-v2 blue">Plus</span>
+          <span class="pill-v2 warning">Payment due</span>
+          <span class="pill-v2 error">Canceled</span>
+        </div></div>
+    </div>
+    <div class="code"><pre>import { Badge } from "@/components/ui/badge";
+
+&lt;Badge variant="success" dot&gt;On&lt;/Badge&gt;
+&lt;Badge variant="warning"&gt;Payment due&lt;/Badge&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-avatar">
+    <div class="section-head"><span class="section-title">Avatar</span><span class="section-count">avatar.jsx</span></div>
+    <p class="story-dek">Always round. A portrait sits inside a 1px blue-grey gradient ring on white; use the square portraits in <code>assets/artwork/avatars/</code>. The fallback — and the account avatar in the header — is the initial on the lit blue disc.</p>
+    <div class="canvas v2 pv">
+      <div class="vrow"><p class="vlabel">size · sm 32 / md 40 / lg 52 / xl 80</p>
+        <div class="vitems">
+          <span class="avatar-ring-v2 avatar-sm-v2"><img src="../assets/artwork/avatars/minds/avatar-mind-general-assistant.webp" alt=""></span>
+          <span class="avatar-ring-v2 avatar-md-v2"><img src="../assets/artwork/avatars/minds/avatar-mind-general-assistant.webp" alt=""></span>
+          <span class="avatar-ring-v2 avatar-lg-v2"><img src="../assets/artwork/avatars/minds/avatar-mind-general-assistant.webp" alt=""></span>
+          <span class="avatar-ring-v2 avatar-xl-v2"><img src="../assets/artwork/avatars/minds/avatar-mind-general-assistant.webp" alt=""></span>
+        </div></div>
+      <div class="vrow"><p class="vlabel">AvatarFallback · the account initial</p>
+        <div class="vitems"><span class="avatar-initial-v2 avatar-sm-v2">D</span><span class="avatar-initial-v2 avatar-md-v2">D</span><span class="avatar-initial-v2 avatar-lg-v2">D</span></div></div>
+    </div>
+    <div class="code"><pre>import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+
+&lt;Avatar size="lg"&gt;
+  &lt;AvatarImage src={portrait} alt="" /&gt;
+  &lt;AvatarFallback&gt;D&lt;/AvatarFallback&gt;
+&lt;/Avatar&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-notice">
+    <div class="section-head"><span class="section-title">Inline notice</span><span class="section-count">notice.jsx</span></div>
+    <p class="story-dek">A state the reader should know about on this screen. A soft tinted wash with a matching hairline, a small gradient badge, a bold title, a quieter line and an optional inline action. Warning is the orange family; info is blue.</p>
+    <div class="canvas v2 pv">
+      <div class="notice-v2"><span class="notice-mark-v2" aria-hidden="true">!</span><p style="margin:0"><b>This Mind is offline.</b> To chat or let it work for you, <button class="notice-action-v2" type="button">turn it back on</button>.</p></div>
+      <div class="notice-v2 info"><span class="notice-mark-v2" aria-hidden="true">i</span><p style="margin:0"><b>Takes about a minute.</b> A new Mind prepares its wallet before it can receive Energy.</p></div>
+    </div>
+    <div class="code"><pre>import { Notice } from "@/components/ui/notice";
+
+&lt;Notice title="This Mind is offline." action="turn it back on" onAction={turnOn}&gt;
+  To chat or let it work for you,
+&lt;/Notice&gt;
+&lt;Notice tone="info" title="Takes about a minute."&gt;…&lt;/Notice&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-toast">
+    <div class="section-head"><span class="section-title">Toast</span><span class="section-count">toast.jsx</span></div>
+    <p class="story-dek">The result of something the user just did — floats over the page, then goes. A near-white card with a soft wash of the state colour, a solid badge with the glyph knocked out (warning is a triangle, so it doesn't rely on colour alone), a bold title, a quieter line, an optional small lit orange action, and a quiet close button. A state the user should know about on this screen is an inline notice instead.</p>
+    <div class="canvas v2 pv">
+      <div class="pv-toasts">
+        <div class="toast-v2 toast-success-v2" role="status"><span class="toast-mark-v2"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><defs><linearGradient id="tg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" class="toast-stop-a-v2"/><stop offset="100%" class="toast-stop-b-v2"/></linearGradient></defs><circle cx="10" cy="10" r="10" fill="url(#tg1)"/><path d="M5.9 10.2l2.7 2.7 5.5-5.6" fill="none" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="toast-body-v2"><span class="toast-title-v2">Redeemed</span><span class="toast-desc-v2">1,000 Energy is on its way to Street.Fashion.</span></div><button type="button" aria-label="Dismiss" class="toast-close-v2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+        <div class="toast-v2 toast-info-v2" role="status"><span class="toast-mark-v2"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><defs><linearGradient id="tg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" class="toast-stop-a-v2"/><stop offset="100%" class="toast-stop-b-v2"/></linearGradient></defs><circle cx="10" cy="10" r="10" fill="url(#tg2)"/><path d="M10 9.2v4.9M10 6.2v.1" fill="none" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="toast-body-v2"><span class="toast-title-v2">Link copied</span></div><button type="button" aria-label="Dismiss" class="toast-close-v2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+        <div class="toast-v2 toast-warning-v2" role="status"><span class="toast-mark-v2"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><defs><linearGradient id="tg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" class="toast-stop-a-v2"/><stop offset="100%" class="toast-stop-b-v2"/></linearGradient></defs><path d="M8.7 2.9a1.5 1.5 0 0 1 2.6 0l6.9 12.3a1.5 1.5 0 0 1-1.3 2.2H3.1a1.5 1.5 0 0 1-1.3-2.2z" fill="url(#tg3)"/><path d="M10 7.6v3.8M10 14.1v.1" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg></span><div class="toast-body-v2"><span class="toast-title-v2">Running low on Energy</span><span class="toast-desc-v2">Street.Fashion has 12 Energy left this month.</span><button type="button" class="toast-action-v2">Top up</button></div><button type="button" aria-label="Dismiss" class="toast-close-v2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+        <div class="toast-v2 toast-error-v2" role="status"><span class="toast-mark-v2"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><defs><linearGradient id="tg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" class="toast-stop-a-v2"/><stop offset="100%" class="toast-stop-b-v2"/></linearGradient></defs><circle cx="10" cy="10" r="10" fill="url(#tg4)"/><path d="M7 7l6 6M13 7l-6 6" fill="none" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="toast-body-v2"><span class="toast-title-v2">Couldn’t save</span><span class="toast-desc-v2">Check your connection and try again.</span><button type="button" class="toast-action-v2">Retry</button></div><button type="button" aria-label="Dismiss" class="toast-close-v2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+        <div class="toast-v2 toast-info-v2" role="status"><span class="toast-mark-v2"><svg class="toast-spin-v2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg></span><div class="toast-body-v2"><span class="toast-title-v2">Creating your Mind…</span></div><button type="button" aria-label="Dismiss" class="toast-close-v2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+      </div>
+    </div>
+    <div class="code"><pre>import { toast } from "@/components/ui/toast";
+// Mount sonner's &lt;Toaster /&gt; once in the app.
+
+toast("Link copied");
+toast.success("Redeemed", { description: "1,000 Energy is on its way to Street.Fashion." });
+toast.warning("Running low on Energy", { action: { label: "Top up", onClick: openPlan } });
+toast.error("Couldn’t save", { action: { label: "Retry", onClick: save } });
+const id = toast.loading("Creating your Mind…");  // stays until toast.dismiss(id)</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-step">
+    <div class="section-head"><span class="section-title">Step disc</span><span class="section-count">.step-disc-v2</span></div>
+    <p class="story-dek">The numbered ordinal in a short flow (Redeem, Referral). A lighter, softer orange than the CTA so it doesn't compete with it. It always shows its number — never a tick — because nothing proves a step is done until the user submits.</p>
+    <div class="canvas v2 pv">
+      <div class="pv-step-row"><span class="step-disc-v2">1</span><span class="pv-step-title">Enter your redemption code</span></div>
+      <div class="pv-step-row"><span class="step-disc-v2">2</span><span class="pv-step-title">Choose a Mind to receive it</span></div>
+    </div>
+    <div class="code"><pre>&lt;span class="step-disc-v2"&gt;1&lt;/span&gt;</pre><button class="copy">Copy</button></div>
   </section>
 
   <section class="story" id="c-accordion">
     <div class="section-head"><span class="section-title">Accordion</span><span class="section-count">accordion.jsx</span></div>
-    <p class="story-dek">FAQ rows. White, a soft drop; hover adds a hairline. The open row takes a <code>--blue-lit</code> edge and title, and swaps plus for minus.</p>
-    <div class="canvas v2 canvas-blooms pv">
+    <p class="story-dek">FAQ rows on marketing pages (not used on Profile). White, a soft drop; hover adds a hairline. The open row takes a <code>--blue-lit</code> edge and title, and swaps plus for minus.</p>
+    <div class="canvas v2 pv">
       <div class="pv-acc" data-acc>
         <div class="pv-acc-item open"><button type="button">What is a Mind?<svg class="minus" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg><svg class="plus" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></button><div class="pv-acc-body"><hr><p>A personal AI that does a job for you, remembers what you told it, and keeps working while you're away.</p></div></div>
         <div class="pv-acc-item"><button type="button">How much does it cost?<svg class="minus" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg><svg class="plus" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></button><div class="pv-acc-body"><hr><p>You pay for the Energy a Mind uses. Every plan includes some each month.</p></div></div>
@@ -1122,8 +1170,8 @@ import { FilterDropdown } from "@/components/ui/filter-dropdown";
 
   <section class="story" id="c-separator">
     <div class="section-head"><span class="section-title">Separator</span><span class="section-count">separator.jsx</span></div>
-    <p class="story-dek">A 1px <code>--line-cool</code> rule, inside a component. Never between page sections — sections are separated by a background change and whitespace.</p>
-    <div class="canvas v2 canvas-blooms pv">
+    <p class="story-dek">A 1px <code>--line-cool</code> rule inside a component or between the steps of a form. Never between page sections — those are separated by whitespace and what they contain.</p>
+    <div class="canvas v2 pv">
       <div class="vrow"><p class="vlabel">horizontal</p><div class="pv-sep h"></div></div>
       <div class="vrow"><p class="vlabel">vertical</p><div class="vitems" style="height:24px;font-size:var(--font-size-body-small);color:var(--text-muted-cool)">622.02 Energy<div class="pv-sep v"></div>Auto top-up on</div></div>
     </div>
@@ -1135,24 +1183,27 @@ import { FilterDropdown } from "@/components/ui/filter-dropdown";
 
   <section class="story" id="c-nav">
     <div class="section-head"><span class="section-title">Nav</span><span class="section-count">nav.jsx</span></div>
-    <p class="story-dek">The v2 site header: a translucent glass bar (<code>--nav-glass</code>, <code>--nav-liquid-filter</code>, a <code>--nav-glass-line</code> hairline) with cool grey links, the language pill, the lit orange CTA and the account initial as a small lit blue disc. Links collapse to a menu button below 1024px — resize the window to see it. Compare <code>sample-screens/</code>.</p>
-    <div class="canvas v2 canvas-blooms pv">
-      <div class="pv-nav">
-        <img src="../assets/brand/logo/logo-minds-blue.svg" alt="Minds">
-        <ul><li><a href="#c-nav">For Builders</a></li><li><a href="#c-nav">About Minds</a></li><li><a href="#c-nav">Minds Bazaar</a></li><li><a href="#c-nav">Pricing</a></li></ul>
-        <div class="right">
-          <span class="lang"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>EN</span>
-          <a class="pv-btn pv-sm btn-lit-orange" href="#c-nav">Launch a Mind</a>
-          <span class="initial">D</span>
-        </div>
-        <span class="burger"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
-      </div>
+    <p class="story-dek">The header the Profile pages ship. At rest a solid white 60px bar; once the page scrolls past 12px it becomes a white floating pill inset from the edges. Cool grey links, the language pill, the lit orange CTA, and the account initial on the lit blue disc. Links collapse to a menu button below 1024px.</p>
+    <div class="canvas v2 pv">
+      <div class="vrow"><p class="vlabel">at rest</p>
+        <div class="nav-v2 pv-nav-frame"><div class="nav-bar-v2">
+          <a class="pv-nav-logo" href="#c-nav"><img src="../assets/brand/logo/logo-minds-blue.svg" alt="Minds"><span class="nav-beta-v2">BETA</span></a>
+          <span class="pv-nav-links"><a class="nav-link-v2" href="#c-nav">For Builders</a><a class="nav-link-v2" href="#c-nav">About Minds</a><a class="nav-link-v2" href="#c-nav">Pricing</a></span>
+          <span class="pv-nav-right"><button class="nav-lang-v2" type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>EN<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button><a class="nav-cta-v2 btn-lit-orange" href="#c-nav">Create a Mind</a><span class="avatar-initial-v2" style="width:36px;height:36px;font-size:14px">D</span></span>
+        </div></div></div>
+      <div class="vrow"><p class="vlabel">scrolled · .is-scrolled</p>
+        <div class="nav-v2 is-scrolled pv-nav-frame"><div class="nav-bar-v2">
+          <a class="pv-nav-logo" href="#c-nav"><img src="../assets/brand/logo/logo-minds-blue.svg" alt="Minds"><span class="nav-beta-v2">BETA</span></a>
+          <span class="pv-nav-links"><a class="nav-link-v2" href="#c-nav">For Builders</a><a class="nav-link-v2" href="#c-nav">About Minds</a><a class="nav-link-v2" href="#c-nav">Pricing</a></span>
+          <span class="pv-nav-right"><button class="nav-lang-v2" type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>EN<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button><a class="nav-cta-v2 btn-lit-orange" href="#c-nav">Create a Mind</a><span class="avatar-initial-v2" style="width:36px;height:36px;font-size:14px">D</span></span>
+        </div></div></div>
     </div>
     <div class="code"><pre>import { Nav } from "@/components/ui/nav";
 
-&lt;Nav logo={&lt;img src={logoBlue} alt="Minds" className="h-36" /&gt;}
+&lt;Nav className="sticky top-0 z-50" beta
+  logo={&lt;img src={logoBlue} alt="Minds" className="h-40" /&gt;}
   links={[{ label: "Pricing", href: "/pricing" }]}
-  cta={{ label: "Launch a Mind", href: "/launch" }} avatarInitial="D" /&gt;</pre><button class="copy">Copy</button></div>
+  cta={{ label: "Create a Mind", href: "/launch" }} avatarInitial="D" /&gt;</pre><button class="copy">Copy</button></div>
   </section>
 
   <footer>
@@ -1248,8 +1299,13 @@ Object.keys(DATA).forEach(id => {
     const chip = document.createElement('div');
     if (sample === '@shadow') {
       chip.className = 'chip chip-btn light-line';
+      // Shown on the lit button it belongs to, never on its own.
+      const [cls, text] = name.indexOf('orange') !== -1 ? ['btn-lit-orange', 'Start']
+        : name.indexOf('secondary') !== -1 ? ['btn-secondary-v2', 'Log in']
+        : ['btn-lit-blue', 'Chat'];
       const d = document.createElement('span');
-      d.className = 'demo-drop';
+      d.className = 'pv-btn pv-sm ' + cls;
+      d.textContent = text;
       d.style.boxShadow = value;
       chip.appendChild(d);
     } else if (sample) {
@@ -1290,17 +1346,13 @@ Object.keys(DATA).forEach(id => {
   });
 });
 
-// Section counts and the stats row, from DATA so they can't be wrong.
+// Section counts, from DATA so they can't be wrong.
 document.querySelectorAll('[data-count]').forEach(el => {
   const parts = el.dataset.count.split(',').map(p => p.split(':'));
   el.textContent = parts.length === 1 && !parts[0][1]
     ? DATA[parts[0][0]].length
     : parts.map(([id, lbl]) => lbl + ' — ' + DATA[id].length).join(', ');
 });
-const count = ids => ids.reduce((s, id) => s + DATA[id].length, 0);
-document.getElementById('stat-base').textContent = count(BASE_IDS);
-document.getElementById('stat-semantic').textContent = count(Object.keys(DATA).filter(id => !BASE_IDS.includes(id)));
-document.getElementById('stat-components').textContent = document.querySelectorAll('.story').length;
 
 // Spacing, radius, elevation
 const SPACING = [1,2,3,4,8,12,16,20,24,36,40,48,60,72,84,96,108,120,160,200,240];
@@ -1326,7 +1378,8 @@ function tiles(id, names, style){
   return names.length;
 }
 document.getElementById('radius-count').textContent = tiles('radius', ['--r-sm','--r-md','--r-lg','--r-xl','--r-pill'],
-  n => ({ borderRadius: 'var(' + n + ')', boxShadow: 'inset 0 0 0 1px var(--line-strong-cool)' }));
+  // One corner only, so the curve reads on its own.
+  n => ({ borderTopLeftRadius: 'var(' + n + ')', borderTop: '2px solid var(--line-strong-cool)', borderLeft: '2px solid var(--line-strong-cool)', background: 'none' }));
 document.getElementById('elev-count').textContent = tiles('elevation', ['--elev-card','--elev-card-hover','--elev-card-selected','--elev-lg','--glass-shadow'],
   n => ({ borderRadius: 'var(--r-lg)', boxShadow: 'var(' + n + ')' }));
 
@@ -1359,37 +1412,49 @@ const spy = new IntersectionObserver(entries => {
 links.forEach(a => { const s = document.querySelector(a.getAttribute('href')); s && spy.observe(s); });
 
 // Preview interactions
-document.querySelectorAll('[data-tabs]').forEach(g => g.addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return;
-  g.querySelectorAll('button').forEach(o => o.classList.toggle('on', o === b));
+const pressOne = (group, sel, attr) => group.addEventListener('click', e => {
+  const b = e.target.closest(sel); if (!b || b.disabled) return;
+  group.querySelectorAll(sel).forEach(o => o.setAttribute(attr, o === b));
+});
+document.querySelectorAll('[data-tabs]').forEach(g => pressOne(g, '[role="tab"]', 'aria-selected'));
+document.querySelectorAll('[data-press]').forEach(g => pressOne(g, 'button', 'aria-pressed'));
+document.querySelectorAll('[data-tiles]').forEach(g => pressOne(g, '.pick-tile-v2', 'aria-checked'));
+document.querySelectorAll('[data-radios]').forEach(g => pressOne(g, '.pick-radio-v2', 'aria-checked'));
+document.querySelectorAll('[data-radios] .pv-check-label').forEach(l => l.addEventListener('click', e => { if (!e.target.closest('button')) l.querySelector('button').click(); }));
+document.querySelectorAll('[data-check]').forEach(c => c.addEventListener('click', e => {
+  e.preventDefault();
+  c.setAttribute('aria-checked', c.getAttribute('aria-checked') !== 'true');
 }));
-document.querySelectorAll('[data-radio]').forEach(g => g.addEventListener('click', e => {
-  const r = e.target.closest('.pv-radio-row'); if (!r) return;
-  g.querySelectorAll('.pv-radio-row').forEach(o => o.classList.toggle('on', o === r));
+document.querySelectorAll('[data-suggest]').forEach(b => b.addEventListener('click', () => {
+  const input = b.parentElement.querySelector('input'); input.value = 'Saturday.Planner'; input.focus();
 }));
-document.querySelectorAll('[data-rcard]').forEach(g => g.addEventListener('click', e => {
-  const c = e.target.closest('.pv-rcard'); if (!c) return;
-  g.querySelectorAll('.pv-rcard').forEach(o => { o.classList.toggle('on', o === c); o.querySelector('.pv-radio').classList.toggle('on', o === c); });
+document.querySelectorAll('.pv .switch-v2:not(:disabled)').forEach(sw => sw.addEventListener('click', () => {
+  const on = sw.getAttribute('aria-checked') !== 'true';
+  sw.setAttribute('aria-checked', on);
+  const shell = sw.closest('.switch-shell-v2');
+  if (shell) shell.dataset.state = on ? 'checked' : 'unchecked';
 }));
-document.querySelectorAll('[data-toggle]').forEach(el => el.addEventListener('click', () => el.classList.toggle('on')));
 document.querySelectorAll('[data-acc]').forEach(g => g.addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   const item = b.parentElement, wasOpen = item.classList.contains('open');
   g.querySelectorAll('.pv-acc-item').forEach(o => o.classList.remove('open'));
   if (!wasOpen) item.classList.add('open');
 }));
-// Pagination: same collapse rule as pagination.jsx's getPageNumbers()
-const CHEV = d => '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="' + d + '"/></svg>';
+// Pagination: same window rule as pagination.jsx's pageWindow() — first, last,
+// current ±1 (current only below 768px) — drawn with the tokens.css classes.
+const CHEV = d => '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="' + d + '"/></svg>';
 function renderPages(nav){
   const page = +nav.dataset.page, count = +nav.dataset.pages;
-  const pages = count <= 7 ? Array.from({ length: count }, (_, i) => i + 1)
-    : [...new Set([1, count, page, page - 1, page + 1])].filter(p => p >= 1 && p <= count).sort((a, b) => a - b);
-  let html = '<button type="button" data-go="' + (page - 1) + '"' + (page <= 1 ? ' disabled' : '') + ' aria-label="Previous page">' + CHEV('m15 18-6-6 6-6') + '</button>';
+  const span = matchMedia('(max-width: 767px)').matches ? 0 : 1;
+  const set = new Set([1, count]);
+  for (let i = page - span; i <= page + span; i++) if (i > 1 && i < count) set.add(i);
+  const pages = [...set].sort((a, b) => a - b);
+  let html = '<button type="button" class="page-arrow-v2" data-go="' + (page - 1) + '"' + (page <= 1 ? ' disabled' : '') + ' aria-label="Previous page">' + CHEV('m15 18-6-6 6-6') + '</button>';
   pages.forEach((p, i) => {
-    if (i && p - pages[i - 1] > 1) html += '<span>…</span>';
-    html += '<button type="button" data-go="' + p + '"' + (p === page ? ' aria-current="page"' : '') + '>' + p + '</button>';
+    if (i && p - pages[i - 1] > 1) html += '<span class="page-gap-v2">…</span>';
+    html += '<button type="button" class="page-btn-v2" data-go="' + p + '"' + (p === page ? ' aria-current="page"' : '') + '>' + p + '</button>';
   });
-  html += '<button type="button" data-go="' + (page + 1) + '"' + (page >= count ? ' disabled' : '') + ' aria-label="Next page">' + CHEV('m9 18 6-6-6-6') + '</button>';
+  html += '<button type="button" class="page-arrow-v2" data-go="' + (page + 1) + '"' + (page >= count ? ' disabled' : '') + ' aria-label="Next page">' + CHEV('m9 18 6-6-6-6') + '</button>';
   nav.innerHTML = html;
 }
 document.querySelectorAll('[data-pages]').forEach(nav => {
