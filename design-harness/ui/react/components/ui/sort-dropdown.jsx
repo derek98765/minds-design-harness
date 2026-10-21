@@ -1,6 +1,4 @@
 import * as React from "react";
-import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -9,30 +7,32 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 /**
- * Minds sort dropdown — a pill trigger showing the current choice, opening a
- * flat list of options. The active option goes brand-blue-500 + semibold;
- * no checkmark, no fill — see DESIGN.md §4 Tabs, Dropdowns & Selection State.
+ * Minds single-choice dropdown — sort order ("Recently Created"), a status
+ * filter ("Online"), and the like. The glass trigger shows the current
+ * option; the menu lists the rest, the current one tinted blue with a check.
+ * See dropdown-menu.jsx for the look.
  *
- * `options` is `{ value, label }[]`.
+ * `options` is `{ value, label, dot? }[]`. `dot` ("online" | "offline") puts a
+ * status dot before the label, in the menu and on the trigger, e.g.
+ * `{ value: "online", label: "Online", dot: "online" }`.
+ * `menuClassName` sizes the panel; it defaults to w-200.
  */
-function SortDropdown({ options, value, onChange, prefix = "Sort:", className }) {
+function SortDropdown({ options, value, onChange, size, className, menuClassName = "w-200" }) {
   const current = options.find((o) => o.value === value) ?? options[0];
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger
-        className={cn(
-          "inline-flex h-36 shrink-0 cursor-pointer items-center gap-8 whitespace-nowrap rounded-full border border-neutral-200 px-16 text-body-small font-medium text-neutral-900 hover:border-neutral-400",
-          className
-        )}
-      >
-        <span className="hidden text-neutral-600 md:inline">{prefix}</span>
-        <span>{current?.label}</span>
-        <ChevronDown size={14} strokeWidth={2.5} />
+      <DropdownMenuTrigger dot={current?.dot} size={size} className={className}>
+        {current?.label}
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-160">
+      <DropdownMenuContent className={menuClassName}>
         {options.map((o) => (
-          <DropdownMenuItem key={o.value} active={o.value === value} onSelect={() => onChange(o.value)}>
+          <DropdownMenuItem
+            key={o.value}
+            dot={o.dot}
+            selected={o.value === value}
+            onSelect={() => onChange(o.value)}
+          >
             {o.label}
           </DropdownMenuItem>
         ))}

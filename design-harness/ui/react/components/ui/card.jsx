@@ -2,15 +2,18 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Minds card. Frosted glass on the cool wash: translucent white, lit top
- * edge, blue-grey drop. Needs a non-flat ground behind it (the page wash
- * plus .canvas-blooms on marketing pages).
+ * Minds card — the Profile pages' Card (kit.jsx). Frosted glass on the cool
+ * wash: translucent white, a --line-cool hairline, a lit top edge and a
+ * blue-grey drop that deepens on hover, 20px in (.glass-card + .card-v2).
+ * Needs a non-flat ground behind it (the page wash, plus .canvas-blooms on
+ * marketing pages). Use a card only where it carries real content — a
+ * divider separates things more quietly.
  */
 const Card = React.forwardRef(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn("glass-card p-24 text-[var(--text-body-cool)]", className)}
+      className={cn("glass-card card-v2 text-[var(--text-body-cool)]", className)}
       {...props}
     />
   )

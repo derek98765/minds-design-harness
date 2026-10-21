@@ -17,6 +17,11 @@ import { cn } from "@/lib/utils";
  * photograph where the white `quiet` button doesn't hold.
  * `link-primary` / `link-secondary` are text buttons.
  *
+ * Sizes: `sm`–`xl` are for marketing pages. `app-sm` / `app-md` / `app-lg` are
+ * the compact sizes product surfaces use (the Profile pages' Chat, Nudge,
+ * Manage Circle…). Repeated secondary actions down a list are icon buttons
+ * (icon-button.jsx), never a text button repeated per row.
+ *
  * Label text is always ONE line — `whitespace-nowrap` below is load-bearing.
  * A wrapped label inflates the pill into a lozenge and destroys the silhouette.
  * Do not remove it, and do not override it with `whitespace-normal`.
@@ -49,12 +54,13 @@ const buttonVariants = cva(
         glass:
           "bg-[var(--glass-ctl)] text-[var(--text-title-cool)] shadow-[inset_0_0_0_1px_var(--glass-edge)] backdrop-blur-md hover:bg-[var(--glass-ctl-hover)]",
 
-        "link-primary":
-          "bg-transparent !px-0 font-semibold text-[var(--btn-text-orange)] underline underline-offset-4 hover:text-[var(--btn-text-orange-hover)]",
-        "link-secondary":
-          "bg-transparent !px-0 font-semibold text-[var(--btn-text-blue)] underline underline-offset-4 hover:text-[var(--btn-text-blue-hover)]",
+        // Text links: no underline at rest, a hairline under them on hover
+        // (.text-link-v2 in tokens.css). Pair with size="none".
+        "link-primary": "text-link-orange-v2",
+        "link-secondary": "text-link-v2",
       },
       size: {
+        // MARKETING sizes — landing pages and campaign heroes.
         // sm -> lg grow in both height and width. xl holds lg's vertical padding
         // and gains width and type instead: bumping both would make it tower,
         // because the larger font adds line-box height on top of the padding.
@@ -62,6 +68,11 @@ const buttonVariants = cva(
         md: "px-36 py-12 text-[18px]",
         lg: "px-40 py-16 text-[18px]",
         xl: "px-48 py-16 text-[20px]",
+        // APP sizes — product surfaces like Profile: 32 / 38 / 44px tall,
+        // 13-15px bold (the frontend's kit.jsx Btn).
+        "app-sm": "btn-app-sm-v2",
+        "app-md": "btn-app-md-v2",
+        "app-lg": "btn-app-lg-v2",
         // Link variants carry no padding.
         none: "p-0 text-[16px]",
       },

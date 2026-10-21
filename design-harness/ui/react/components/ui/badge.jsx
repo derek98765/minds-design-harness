@@ -1,30 +1,21 @@
 import * as React from "react";
-import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 /**
- * Minds badge. Always a pill, always uppercase caption type.
- * Tint surfaces only — a badge is a label, never an action.
+ * Minds status pill — the Profile pages' Pill (kit.jsx; .pill-v2 in
+ * tokens.css). Small (22px), bold, mixed case, on a soft wash of its own
+ * colour. A label, never an action.
+ *
+ * `variant`: neutral (default) · success · blue · warning · error.
+ * `dot` adds a leading dot in the pill's own colour — e.g. a Telegram row's
+ * green "On".
  */
-const badgeVariants = cva(
-  "inline-flex items-center justify-center gap-4 rounded-full px-12 py-4 text-caption font-medium uppercase whitespace-nowrap",
-  {
-    variants: {
-      variant: {
-        orange: "bg-brand-orange-100 text-brand-orange-800",
-        blue: "bg-brand-blue-100 text-brand-blue-700",
-        neutral: "bg-neutral-100 text-neutral-700",
-        success: "bg-[var(--success-soft)] text-[var(--success)]",
-        outline: "border border-neutral-200 bg-white text-neutral-900",
-      },
-    },
-    defaultVariants: { variant: "blue" },
-  }
-);
-
-const Badge = React.forwardRef(({ className, variant, ...props }, ref) => (
-  <span ref={ref} className={cn(badgeVariants({ variant, className }))} {...props} />
+const Badge = React.forwardRef(({ className, variant = "neutral", dot = false, children, ...props }, ref) => (
+  <span ref={ref} className={cn("pill-v2", variant !== "neutral" && variant, className)} {...props}>
+    {dot && <span className="pill-dot-v2" />}
+    {children}
+  </span>
 ));
 Badge.displayName = "Badge";
 
-export { Badge, badgeVariants };
+export { Badge };

@@ -951,7 +951,7 @@ body:has(.v2),
   box-shadow: var(--btn-primary-orange-shadow);
   border: 0;
 }
-.btn-lit-orange:hover { filter: brightness(1.06); }
+.btn-lit-orange:hover { background: linear-gradient(180deg, var(--orange) 0%, var(--orange-hover) 100%); }
 .btn-lit-blue {
   color: var(--white);
   background: var(--btn-primary-blue-bg);
@@ -997,10 +997,1117 @@ body:has(.v2),
   box-shadow: inset 0 1px 0 var(--glass-edge);
 }
 
+/* ==========================================================================
+   On/off switch — the Profile page's OnlineToggle (MindDetail.jsx)
+   A bevelled solid, not a flat capsule: a hairline of the body colour
+   darkened, the face receding under the top rim, a brighter inset LIP along
+   the bottom (the one thing that reads as thickness), and a tinted drop. The
+   knob reads as a hole punched through it — its inset runs along its top.
+   GREEN when on: ON is a status ("this Mind is running"), not an action.
+
+     <button class="switch-v2" role="switch" aria-checked="true">
+       <span class="switch-knob-v2"></span></button>
+
+   Optional label shell — the lifted white pill holding "Off" and "On":
+     <div class="switch-shell-v2" data-state="checked">
+       <span class="switch-label-off-v2">Off</span> [switch] <span class="switch-label-on-v2">On</span>
+     </div>
+   ========================================================================== */
+.switch-v2 {
+  position: relative;
+  flex: none;
+  width: 44px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  background: var(--gradient-switch-off);
+  box-shadow:
+    inset 0 0 0 1px rgba(123, 123, 127, 0.45),
+    inset 0 2px 5px -2px rgba(84, 84, 88, 0.4),
+    inset 0 -6px 8px -4px rgba(255, 255, 255, 0.8),
+    0 3px 8px rgba(113, 113, 117, 0.22);
+  transition: background var(--duration-layout);
+}
+.switch-v2[aria-checked="true"],
+.switch-v2[data-state="checked"] {
+  background: var(--gradient-switch-on);
+  box-shadow:
+    inset 0 0 0 1px rgba(30, 130, 80, 0.45),
+    inset 0 2px 5px -2px rgba(20, 100, 60, 0.45),
+    inset 0 -6px 8px -4px rgba(255, 255, 255, 0.85),
+    0 4px 10px rgba(61, 212, 127, 0.35);
+}
+.switch-v2:disabled { cursor: not-allowed; opacity: 0.5; }
+.switch-knob-v2 {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--r-pill);
+  background: var(--white);
+  box-shadow:
+    inset 0 2px 4px rgba(84, 84, 88, 0.24),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(84, 84, 88, 0.22);
+  transition: transform var(--duration-layout) ease-out;
+  pointer-events: none;
+}
+.switch-v2[aria-checked="true"] .switch-knob-v2,
+.switch-v2[data-state="checked"] .switch-knob-v2 {
+  transform: translateX(20px);
+  box-shadow:
+    inset 0 2px 4px rgba(20, 100, 60, 0.24),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(20, 100, 60, 0.24);
+}
+.switch-shell-v2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 var(--space-8);
+  flex: none;
+  border-radius: var(--r-md);
+  background: var(--white);
+  border: 1px solid var(--line-cool);
+  box-shadow: 0 4px 14px rgba(96, 118, 200, 0.16);
+  transition: opacity var(--duration-base);
+}
+.switch-label-off-v2,
+.switch-label-on-v2 {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--text-label-neutral);
+  user-select: none;
+  transition: color var(--duration-base);
+}
+.switch-shell-v2[data-state="unchecked"] .switch-label-off-v2 { font-weight: 800; color: var(--text-body-neutral); }
+.switch-shell-v2[data-state="checked"] .switch-label-on-v2 { font-weight: 800; color: var(--success); }
+
+/* Disabled orange drops the lit treatment entirely — flat, shadowless and
+   pale; a fading gradient with a rim and a drop still reads as a live button
+   (Launch modal's "Create now", Redeem's "Confirm to Redeem"). Disabled blue
+   keeps its gradient at half strength (Chat on an offline Mind). */
+.btn-lit-orange:disabled {
+  background: var(--orange);
+  box-shadow: none;
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn-lit-blue:disabled { opacity: 0.5; cursor: not-allowed; filter: none; }
+
+/* App-size buttons — the Profile pages' Btn sizes (kit.jsx). Compact,
+   bold, for product surfaces; marketing pages keep the larger sizes in
+   DESIGN.md §4. Combine with a fill: .btn-lit-blue, .btn-secondary-v2 … */
+.btn-app-sm-v2,
+.btn-app-md-v2,
+.btn-app-lg-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  border-radius: var(--r-pill);
+  font-family: inherit;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--duration-base), color var(--duration-base);
+}
+.btn-app-sm-v2 { height: 32px; padding: 0 var(--space-12); font-size: 13px; }
+.btn-app-md-v2 { height: 38px; padding: 0 var(--space-16); font-size: 13px; }
+.btn-app-lg-v2 { height: 44px; padding: 0 var(--space-24); font-size: 15px; }
+
+/* Text link — no underline at rest; a 1px rule appears under it on hover,
+   and the colour LIGHTENS (blue) rather than darkens. */
+.text-link-v2,
+.text-link-orange-v2 {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: var(--btn-text-blue);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 140ms ease, border-color 140ms ease;
+}
+.text-link-v2:hover { color: var(--btn-text-blue-hover); border-bottom-color: var(--btn-text-blue-hover); }
+.text-link-orange-v2 { color: var(--btn-text-orange); }
+.text-link-orange-v2:hover { color: var(--btn-text-orange-hover); border-bottom-color: var(--btn-text-orange-hover); }
+
+/* Icon button — round, white, cool hairline, soft drop (the Mind card's "…").
+   Hover keeps the white fill and lights the icon and edge blue. Use for
+   repeated secondary actions — never a text button repeated down a list. */
+.icon-btn-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-cool);
+  background: var(--white);
+  color: var(--text-muted-neutral);
+  box-shadow: 0 1px 3px rgba(96, 118, 200, 0.12);
+  cursor: pointer;
+  transition: color var(--duration-base), border-color var(--duration-base);
+}
+.icon-btn-v2:hover { color: var(--blue); border-color: var(--line-hover-cool); }
+
+/* Card hairline — the Profile Card is .glass-card plus this edge and 20px in. */
+.card-v2 { border: 1px solid var(--line-cool); padding: var(--space-20); }
+
+/* ==========================================================================
+   Text fields — the Profile pages' inputs. Two kinds, chosen by job:
+
+   FIELD — the page's primary input, the one thing a step asks for (Redeem's
+   code, the Launch modal's Mind name). A RAISED white pill to type into:
+   --line-strong-cool hairline, an inset 1px --blue-lit ring on focus, bold
+   typed text. Put .field-v2 on the <input> itself, or on a wrapper holding an
+   <input> plus an inline action (the Launch modal's "Suggest").
+   .field-v2-lg is the taller Launch-modal size.
+
+   SEARCH — a filter over content beside it, so a RECESSED grey well:
+   --bg-field-neutral with a --line-neutral hairline, white with the same
+   inset ring on focus. The same on every Profile page.
+
+   TEXTAREA — white, --r-lg corners, the field's hairline; the edge itself
+   turns --blue-lit on focus.
+
+   All of them render at 16px on phones so iOS Safari doesn't zoom.
+   ========================================================================== */
+.field-v2 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  width: 100%;
+  height: 44px;
+  padding: 0 var(--space-20);
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-strong-cool);
+  background: var(--white);
+  color: var(--text-title-cool);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  outline: none;
+  transition: box-shadow var(--duration-base);
+}
+.field-v2-lg { height: 52px; }
+@media (max-width: 767px) { .field-v2-lg { height: 60px; padding: 0 var(--space-16); } }
+.field-v2:focus,
+.field-v2:focus-within { outline: none; box-shadow: inset 0 0 0 1px var(--blue-lit); }
+.field-v2 input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+.field-v2 input:focus { box-shadow: none; }
+.field-v2::placeholder,
+.field-v2 input::placeholder { font-weight: 400; color: var(--text-label-neutral); }
+.field-action-v2 {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--btn-text-orange);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--duration-base);
+}
+.field-action-v2:hover { color: var(--btn-text-orange-hover); }
+.field-action-v2 svg { fill: currentColor; stroke-width: 0; }
+
+.search-v2 { position: relative; width: 100%; }
+.search-v2 > svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  color: var(--text-label-neutral);
+  pointer-events: none;
+}
+.search-v2 input {
+  width: 100%;
+  height: 40px;
+  padding: 0 32px 0 var(--space-40);
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-neutral);
+  background: var(--bg-field-neutral);
+  color: var(--text-title-neutral);
+  font-family: inherit;
+  font-size: 16px;
+  outline: none;
+  transition: background-color var(--duration-base), box-shadow var(--duration-base);
+}
+.search-v2 input::placeholder { color: var(--text-label-neutral); }
+.search-v2 input:focus { background: var(--bg-card); box-shadow: inset 0 0 0 1px var(--blue-lit); }
+@media (min-width: 768px) { .search-v2 input { font-size: 14px; } }
+
+.textarea-v2 {
+  display: block;
+  width: 100%;
+  min-height: 120px;
+  padding: var(--space-16) var(--space-20);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line-strong-cool);
+  background: var(--white);
+  color: var(--text-title-cool);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: var(--line-height-body);
+  outline: none;
+  resize: vertical;
+  transition: border-color var(--duration-base);
+}
+.textarea-v2::placeholder { color: var(--text-label-neutral); }
+.textarea-v2:focus { border-color: var(--blue-lit); box-shadow: none; }
+@media (max-width: 767px) { .textarea-v2 { padding: var(--space-8) var(--space-12); } }
+
+/* ==========================================================================
+   Dropdown — the Profile pages' GlassTrigger + glass menu (GlassMenu.jsx).
+   The trigger is a frosted pill (--glass-ctl) with a neutral hairline; it
+   turns --blue-lit on hover and while open. The panel is near-solid white
+   glass with a cool hairline and a three-layer blue-grey drop. A row is warm
+   body ink at rest, blue on hover; the selected row is a --glass-pill tint,
+   --blue-lit, bold, with a check. An optional status dot leads a label.
+   Every token here is on :root, so it still resolves inside a portal.
+   ========================================================================== */
+.select-v2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 var(--space-16);
+  max-width: 100%;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-neutral);
+  background: var(--glass-ctl);
+  -webkit-backdrop-filter: blur(10px) saturate(1.35);
+  backdrop-filter: blur(10px) saturate(1.35);
+  box-shadow: 0 1px 4px rgba(96, 118, 200, 0.08);
+  color: var(--text-body-neutral);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--duration-base), border-color var(--duration-base), background-color var(--duration-base);
+}
+.select-v2-sm { height: 32px; padding: 0 var(--space-12); }
+.select-v2:hover { color: var(--blue-lit); background: var(--glass-ctl-hover); }
+.select-v2[data-state="open"],
+.select-v2[aria-expanded="true"] { color: var(--blue-lit); border-color: var(--blue-lit); }
+.select-v2 > svg:last-child { flex: none; color: var(--text-muted-cool); }
+.select-dot-v2,
+.menu-dot-v2 { width: 7px; height: 7px; flex: none; border-radius: var(--r-pill); }
+/* Status dots — green for online, warm grey for offline. */
+.dot-online-v2 { background: var(--success); }
+.dot-offline-v2 { background: var(--grey-warm-400); }
+
+.menu-v2 {
+  min-width: 160px;
+  padding: 6px;
+  border-radius: 18px;
+  border: 1px solid rgba(176, 188, 214, 0.62);
+  background: var(--glass-outer);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  box-shadow:
+    0 24px 64px rgba(96, 118, 200, 0.16),
+    0 8px 24px rgba(96, 118, 200, 0.1),
+    0 2px 6px rgba(96, 118, 200, 0.06);
+}
+.menu-item-v2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 11px;
+  color: var(--text-body-warm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+.menu-item-v2:hover,
+.menu-item-v2[data-highlighted] { background: rgba(205, 218, 248, 0.22); color: var(--blue-lit); font-weight: 700; }
+.menu-item-v2[aria-selected="true"],
+.menu-item-v2[data-selected="true"] { background: var(--glass-pill); color: var(--blue-lit); font-weight: 700; }
+.menu-item-v2 > svg:last-child { margin-left: auto; flex: none; }
+.menu-separator-v2 { height: 1px; margin: 6px 4px; background: rgba(176, 188, 214, 0.5); }
+.menu-label-v2 {
+  padding: var(--space-8) 10px var(--space-4);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-label-cool);
+}
+
+/* Step disc — the numbered ordinal on Redeem and Referral. A lighter, softer
+   orange than the CTA so it doesn't compete with it; it's an ordinal, not an
+   action, and never turns into a tick. */
+.step-disc-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-pill);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(180deg, #ffb468 0%, #ffa03a 55%, var(--orange) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 0 0 1px rgba(220, 130, 30, 0.22),
+    0 2px 5px rgba(216, 120, 20, 0.18);
+}
+
+/* Compact field — a small boxed value inside a card (the Energy card's
+   monthly "No limit" box). A rounded rectangle, not a pill; the edge itself
+   turns --blue on focus. */
+.field-v2-sm {
+  height: 36px;
+  padding: 0 var(--space-12);
+  border-radius: var(--r-md);
+  border: 1px solid var(--line-strong-cool);
+  background: var(--white);
+  color: var(--text-title-cool);
+  font-family: inherit;
+  font-size: 16px;
+  outline: none;
+}
+.field-v2-sm::placeholder { color: var(--text-label-neutral); }
+.field-v2-sm:focus { border-color: var(--blue); }
+@media (min-width: 768px) { .field-v2-sm { font-size: 14px; } }
+.v2 .field-v2-sm:focus-visible { box-shadow: none; }
+.search-clear-v2 {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted-cool);
+  cursor: pointer;
+}
+.search-clear-v2:hover { color: var(--text-title-cool); }
+
+/* ==========================================================================
+   Checkbox — the Energy card's settings (checkbox-v2 in the frontend).
+   18px, frosted at rest with a cool hairline; checked is the lit blue solid.
+   Never orange.
+   ========================================================================== */
+.checkbox-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  color: var(--white);
+  background: var(--glass-ctl);
+  -webkit-backdrop-filter: blur(10px) saturate(1.35);
+  backdrop-filter: blur(10px) saturate(1.35);
+  box-shadow: inset 0 0 0 1px #b9c3dc, 0 1px 3px rgba(96, 118, 200, 0.12);
+  cursor: pointer;
+  transition: background var(--duration-fast), box-shadow var(--duration-fast);
+}
+.checkbox-v2:hover { background: var(--glass-ctl-hover); box-shadow: inset 0 0 0 1px var(--line-hover-cool), 0 1px 4px rgba(96, 118, 200, 0.18); }
+.checkbox-v2[data-state="checked"],
+.checkbox-v2[aria-checked="true"] { background: var(--btn-primary-blue-bg); box-shadow: var(--btn-primary-blue-shadow); }
+.checkbox-v2 > * { visibility: hidden; }
+.checkbox-v2[data-state="checked"] > *,
+.checkbox-v2[aria-checked="true"] > * { visibility: visible; }
+.checkbox-v2:disabled { opacity: 0.5; cursor: not-allowed; }
+.v2 .checkbox-v2:focus-visible { box-shadow: inset 0 0 0 1px var(--blue-tint), 0 0 0 3px rgba(96, 118, 200, 0.28); }
+
+/* ==========================================================================
+   Selectable tile + radio — the Mind picker on Redeem (pick-tile-v2).
+   At rest a pale frosted tile; hover goes white and lifts. SELECTED is white
+   with a 2px --blue-tint edge and a blue drop — never a solid blue fill.
+   Padding steps down 1px as the border steps up, so the tile doesn't move.
+   The radio is a 20px ring that fills with a blue gradient and a white check.
+   ========================================================================== */
+.pick-tile-v2 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  width: 100%;
+  padding: calc(var(--space-12) + 1px);
+  border: 1px solid var(--line-cool);
+  border-radius: var(--r-md);
+  background: rgba(243, 246, 252, 0.5);
+  box-shadow: inset 0 1px 0 var(--glass-card-line), var(--elev-card);
+  color: var(--text-body-cool);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 150ms, box-shadow 150ms, background 150ms;
+}
+.pick-tile-v2:hover { background: var(--white); border-color: var(--line-hover-cool); box-shadow: inset 0 1px 0 var(--glass-card-line), var(--elev-card-hover); }
+.pick-tile-v2[aria-pressed="true"],
+.pick-tile-v2[aria-checked="true"],
+.pick-tile-v2[data-state="checked"] {
+  background: var(--white);
+  border: 2px solid var(--blue-tint);
+  padding: var(--space-12);
+  box-shadow: 0 2px 6px rgba(66, 92, 179, 0.12), 0 8px 22px rgba(66, 92, 179, 0.14);
+}
+.pick-radio-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border-radius: var(--r-pill);
+  border: 2px solid var(--line-strong-cool);
+  background: var(--white);
+  color: var(--white);
+  cursor: pointer;
+  transition: border-color var(--duration-fast), background var(--duration-fast);
+}
+.pick-tile-v2:hover .pick-radio-v2,
+.pick-radio-v2:hover { border-color: var(--blue-lit); }
+.pick-radio-v2 > * { visibility: hidden; }
+.pick-radio-v2[data-state="checked"],
+.pick-radio-v2[aria-checked="true"],
+.pick-tile-v2[aria-pressed="true"] .pick-radio-v2,
+.pick-tile-v2[aria-checked="true"] .pick-radio-v2,
+.pick-tile-v2[data-state="checked"] .pick-radio-v2 {
+  border-width: 0;
+  background: linear-gradient(180deg, var(--blue-lit) 0%, var(--blue) 100%);
+}
+.pick-radio-v2[data-state="checked"] > *,
+.pick-radio-v2[aria-checked="true"] > *,
+.pick-tile-v2[aria-pressed="true"] .pick-radio-v2 > *,
+.pick-tile-v2[aria-checked="true"] .pick-radio-v2 > *,
+.pick-tile-v2[data-state="checked"] .pick-radio-v2 > * { visibility: visible; }
+
+/* ==========================================================================
+   Status pill — kit.jsx Pill. Small, bold, mixed case; a label, never an
+   action. Optional leading dot in the pill's own colour.
+   ========================================================================== */
+.pill-v2 {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex: none;
+  height: 22px;
+  padding: 0 var(--space-8);
+  border-radius: var(--r-pill);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  background: var(--bg-subtle-warm);
+  color: var(--text-muted-warm);
+}
+.pill-v2.success { background: var(--success-soft); color: var(--success); }
+.pill-v2.blue { background: var(--blue-soft); color: var(--blue); }
+.pill-v2.warning { background: var(--warning-soft); color: var(--warning); }
+.pill-v2.error { background: var(--error-soft); color: var(--error); }
+.pill-dot-v2 { width: 6px; height: 6px; flex: none; border-radius: var(--r-pill); background: currentColor; }
+
+/* ==========================================================================
+   Avatar — a Mind's portrait sits inside a 1px gradient ring on white.
+   The account initial is the lit blue disc (the header avatar).
+   ========================================================================== */
+.avatar-ring-v2 {
+  display: inline-block;
+  flex: none;
+  padding: 1px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(135deg, #d5e0f5 0%, #b9c6e8 55%, #9daed9 100%);
+  box-shadow: 0 1px 3px rgba(96, 118, 200, 0.1);
+}
+.avatar-ring-v2 > * {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--white);
+  object-fit: cover;
+}
+.avatar-sm-v2 { width: 32px; height: 32px; font-size: 12px; }
+.avatar-md-v2 { width: 40px; height: 40px; font-size: 13px; }
+.avatar-lg-v2 { width: 52px; height: 52px; font-size: 15px; }
+.avatar-xl-v2 { width: 80px; height: 80px; font-size: 22px; }
+.avatar-initial-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  border-radius: var(--r-pill);
+  background: var(--btn-primary-blue-bg);
+  box-shadow: var(--btn-primary-blue-shadow);
+  color: var(--white);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Inline notice — "This Mind is offline" (inline-notice-v2). A soft tinted
+   wash with a matching hairline, a small gradient badge, a bold title and a
+   quieter line. Warning uses the orange family; info is blue.
+   ========================================================================== */
+.notice-v2 {
+  --notice-tint: var(--orange);
+  --notice-tint-2: var(--orange-lit);
+  --notice-wash: var(--light-yellow-02);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  padding: var(--space-12) var(--space-16);
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in srgb, var(--secondary-yellow-02) 52%, var(--notice-wash));
+  background: linear-gradient(100deg, color-mix(in srgb, var(--notice-wash) 45%, var(--white)) 0%, var(--notice-wash) 76%, color-mix(in srgb, var(--notice-tint-2) 8%, var(--notice-wash)) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 1px 2px color-mix(in srgb, var(--notice-tint) 12%, transparent);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-muted-warm);
+}
+.notice-v2.info {
+  --notice-tint: var(--blue-lit);
+  --notice-tint-2: var(--blue-tint);
+  --notice-wash: var(--blue-soft);
+  border-color: color-mix(in srgb, var(--blue-tint) 64%, var(--blue-soft));
+}
+.notice-mark-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(150deg, var(--notice-tint-2), var(--notice-tint));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 1px 4px color-mix(in srgb, var(--notice-tint) 34%, transparent);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 800;
+}
+.notice-v2 b { color: var(--text-title-warm); font-weight: 700; }
+.notice-action-v2 {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--notice-tint);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  cursor: pointer;
+}
+.notice-action-v2:hover { text-decoration-thickness: 2px; }
+
+/* ==========================================================================
+   Toast — the Profile pages' floating notification (toastV2.jsx, .toast-v2).
+   The result of something the user just did. A near-opaque white card with a
+   low-alpha wash of the state colour fading out by the far corner, a hairline
+   tinted toward that colour, and a two-layer drop. The badge is a SOLID
+   gradient shape with the glyph knocked out in white — warning is a triangle,
+   so it doesn't rely on amber-vs-red alone. Bold title, quieter description,
+   an optional small lit orange action, and a quiet close button last.
+   Each state sets three values: tint (dark stop), tint-2 (light stop), wash.
+   ========================================================================== */
+.toast-v2 {
+  --notify-tint-v2: var(--blue-lit);
+  --notify-tint-2-v2: var(--blue-tint);
+  --notify-wash-v2: var(--blue-soft);
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  width: 356px;
+  max-width: 100%;
+  min-width: min(288px, 100%);
+  padding: 14px 14px 14px var(--space-16);
+  border-radius: var(--r-lg);
+  background:
+    linear-gradient(118deg, var(--notify-wash-v2) 0%, color-mix(in srgb, var(--notify-wash-v2) 55%, #ffffff) 42%, #ffffff 82%),
+    rgba(255, 255, 255, 0.96);
+  border: 1px solid color-mix(in srgb, var(--notify-tint-v2) 20%, var(--line-cool));
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 2px 6px rgba(46, 58, 94, 0.1),
+    0 16px 36px rgba(46, 58, 94, 0.16);
+  font-family: var(--font-family-primary);
+}
+.toast-success-v2 { --notify-tint-v2: var(--secondary-green-01); --notify-tint-2-v2: var(--secondary-green-02); --notify-wash-v2: var(--light-green-02); }
+.toast-warning-v2 { --notify-tint-v2: var(--secondary-yellow-01); --notify-tint-2-v2: var(--secondary-yellow-02); --notify-wash-v2: var(--light-yellow-02); }
+.toast-error-v2 { --notify-tint-v2: var(--secondary-red-01); --notify-tint-2-v2: var(--secondary-red-02); --notify-wash-v2: var(--light-red-02); }
+.toast-mark-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 20px;
+  min-height: calc(14px * 1.4);
+  color: var(--notify-tint-v2);
+}
+/* The badge's gradient stops — classes, not attributes, so they resolve the
+   state colours set on this toast. */
+.toast-stop-a-v2 { stop-color: var(--notify-tint-2-v2); }
+.toast-stop-b-v2 { stop-color: var(--notify-tint-v2); }
+.toast-body-v2 { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.toast-title-v2 { font-size: 14px; font-weight: 700; line-height: 1.4; color: var(--text-title-neutral); }
+.toast-desc-v2 { font-size: 13px; font-weight: 400; line-height: 1.45; color: var(--text-muted-neutral); }
+.toast-close-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  min-height: calc(14px * 1.4);
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--text-label-neutral);
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+.toast-close-v2:hover { background: rgba(0, 0, 0, 0.05); color: var(--text-muted-neutral); }
+.v2 .toast-close-v2:focus-visible,
+.toast-close-v2:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--blue-lit); }
+.toast-action-v2 {
+  align-self: flex-start;
+  margin-top: var(--space-8);
+  padding: 6px 14px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--btn-primary-orange-bg);
+  box-shadow: var(--btn-primary-orange-shadow);
+  color: var(--white);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background 140ms ease;
+}
+.toast-action-v2:hover { background: linear-gradient(180deg, var(--orange) 0%, var(--orange-hover) 100%); }
+/* Sonner's own wrapper: strip its chrome and pin both edges so the card
+   fills sonner's 356px column and stays centred. */
+[data-sonner-toast]:has(> .toast-v2) {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  width: var(--width) !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+[data-sonner-toast] > .toast-v2 { width: 100%; }
+@keyframes toast-spin-v2 { to { transform: rotate(360deg); } }
+.toast-spin-v2 { animation: toast-spin-v2 1s linear infinite; }
+
+/* ==========================================================================
+   Nav — the header on the Profile pages (Navigation.jsx, .nav-*-v2).
+   At rest a SOLID WHITE 60px bar under a 10px top gutter. Once the page
+   scrolls past 12px it becomes a white FLOATING PILL inset from the edges,
+   with a faint hairline and a soft drop (add .is-scrolled). Links are cool
+   grey; the CTA is the lit orange; the account initial is the lit blue disc.
+   ========================================================================== */
+.nav-v2 {
+  padding: 10px 0 0;
+  background: var(--white);
+  transition: padding var(--duration-layout), background-color var(--duration-layout);
+}
+.nav-v2.is-scrolled { padding: 10px var(--space-24) 0; background: transparent; }
+@media (max-width: 767px) { .nav-v2.is-scrolled { padding: 10px var(--space-8) 0; } }
+.nav-bar-v2 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: 60px;
+  padding: var(--space-8) var(--space-24);
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: var(--white);
+  transition: border-radius var(--duration-layout), border-color var(--duration-layout), box-shadow var(--duration-layout);
+}
+@media (min-width: 1440px) { .nav-bar-v2 { padding: var(--space-8) var(--space-40); } }
+.nav-v2.is-scrolled .nav-bar-v2 {
+  border-radius: var(--r-pill);
+  border-color: rgba(21, 20, 15, 0.08);
+  box-shadow:
+    inset 0 0 2px 1px rgba(255, 255, 255, 0.55),
+    inset 0 0 10px 4px rgba(255, 255, 255, 0.22),
+    0 6px 24px rgba(17, 17, 26, 0.06),
+    0 12px 40px rgba(17, 17, 26, 0.05);
+}
+.nav-link-v2 {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted-cool);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 23px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--duration-base);
+}
+.nav-link-v2:hover { color: var(--text-title-cool); }
+.nav-lang-v2 {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  flex: none;
+  height: 40px;
+  padding: 0 var(--space-12);
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-cool);
+  background: transparent;
+  color: var(--text-body-neutral);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color var(--duration-base), color var(--duration-base);
+}
+.nav-lang-v2:hover { border-color: var(--line-hover-cool); color: var(--text-title-neutral); }
+/* The CTA: pair with .btn-lit-orange. */
+.nav-cta-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 var(--space-20);
+  border-radius: var(--r-pill);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+}
+.nav-cta-v2.btn-lit-orange:hover { background: var(--btn-primary-orange-bg); filter: brightness(1.06); }
+.nav-beta-v2 {
+  position: absolute;
+  top: 5px;
+  left: 100%;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  color: var(--blue);
+}
+
+/* ==========================================================================
+   Tabs — four shapes. Selected is always blue, never orange. Each accepts
+   aria-selected="true", aria-pressed="true" or Radix's data-state="active".
+     PILL      — two or three big choices (Launch modal: Templates | Custom)
+     SEGMENTED — filters over a list (My Minds: All / Online / Offline)
+     TRACK     — a small switcher inside a card (Mind detail: Skills | Apps)
+     LINE      — page sections (Referral: Refer a friend | Affiliate)
+   ========================================================================== */
+
+/* PILL TABS — the Launch a Mind modal's Templates | Custom (LaunchMindModal.jsx).
+   A light cool-grey track; blue labels at rest; the selected pill is the
+   brand gradient with white ink and a soft blue drop — the same fill as every
+   other primary surface, so "this tab is active" reads as the same kind of
+   signal. Icons go solid when selected. Full width on phones, each tab an
+   equal share; hugs its pills from 768px. */
+.tabs-pill-v2 {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--r-pill);
+  /* Between --grey-cool-50 and -100: the 50 step vanishes on a cool panel,
+     the 100 step reads as too dark a block. */
+  background: color-mix(in srgb, var(--grey-cool-100) 40%, var(--grey-cool-50));
+}
+.tab-pill-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  height: 36px;
+  padding: 0 var(--space-12);
+  border-radius: var(--r-pill);
+  /* Transparent border on every pill so selecting one doesn't widen it. */
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--blue-lit);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--duration-base), color var(--duration-base);
+}
+.tab-pill-v2:hover { background: rgba(205, 218, 248, 0.4); color: var(--blue-700); }
+.tab-pill-v2[aria-selected="true"],
+.tab-pill-v2[data-state="active"] {
+  background: var(--gradient-blue);
+  background-origin: border-box;
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(61, 91, 208, 0.28);
+}
+.tab-pill-v2[aria-selected="true"] svg,
+.tab-pill-v2[data-state="active"] svg { fill: currentColor; stroke-width: 0; }
+@media (max-width: 767px) {
+  .tabs-pill-v2 { display: flex; width: 100%; }
+  .tab-pill-v2 { flex: 1; height: 40px; padding: 0 var(--space-8); font-size: 14px; }
+}
+
+/* SEGMENTED — My Minds' All / Online / Offline (MindsTab.jsx Segmented).
+   Free-standing pills, NO shared track: only the selected one carries a
+   shape — a faint blue tint with a faint blue edge. Counts sit at 60%
+   opacity; a status option can lead with a dot (.dot-online-v2 /
+   .dot-offline-v2). The same pill, icon-only and 36px square, is the
+   grid/list view toggle (.tab-icon-v2). */
+.tabs-segment-v2 { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
+.tab-segment-v2,
+.tab-icon-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 var(--space-16);
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted-cool);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--duration-base), color var(--duration-base);
+}
+.tab-icon-v2 { width: 36px; padding: 0; }
+.tab-segment-v2:hover,
+.tab-icon-v2:hover { background: rgba(205, 218, 248, 0.22); color: var(--blue-lit); }
+.tab-segment-v2[aria-selected="true"],
+.tab-segment-v2[data-state="active"],
+.tab-segment-v2[aria-pressed="true"],
+.tab-icon-v2[aria-pressed="true"],
+.tab-icon-v2[data-state="on"] {
+  background: rgba(205, 218, 248, 0.22);
+  border-color: rgba(61, 91, 208, 0.14);
+  color: var(--blue-lit);
+}
+.tab-count-v2 { font-weight: 600; opacity: 0.6; font-variant-numeric: tabular-nums; }
+.tab-segment-v2 .dot-online-v2,
+.tab-segment-v2 .dot-offline-v2 { width: 7px; height: 7px; flex: none; border-radius: var(--r-pill); }
+.tab-segment-v2 .dot-offline-v2 { background: var(--text-label-cool); }
+
+/* TRACK — a small switcher inside a card (Mind detail's Total | Skills,
+   1w 1m 3m, Skills | Apps). A frosted track holds the options; the selected
+   one is a --glass-pill tint. .tabs-track-v2-sm is the chart-range size. */
+.tabs-track-v2 {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  flex: none;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-cool);
+  background: var(--glass-ctl);
+  -webkit-backdrop-filter: blur(10px) saturate(1.35);
+  backdrop-filter: blur(10px) saturate(1.35);
+  box-shadow: 0 1px 4px rgba(96, 118, 200, 0.08);
+}
+.tab-track-v2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 var(--space-12);
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--text-muted-cool);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--duration-base), color var(--duration-base);
+}
+.tabs-track-v2-sm { padding: var(--space-2); }
+.tabs-track-v2-sm .tab-track-v2 { height: 26px; font-size: 12px; }
+.tab-track-v2:hover { background: rgba(205, 218, 248, 0.22); color: var(--blue-lit); }
+.tab-track-v2[aria-selected="true"],
+.tab-track-v2[aria-pressed="true"],
+.tab-track-v2[data-state="active"] { background: var(--glass-pill); color: var(--blue-lit); }
+
+/* LINE TABS — the Referral page's Refer a friend | Affiliate (ReferralTab.jsx).
+   For page-level sections. A shared hairline runs under the whole row so it
+   reads as one control. The active label is --blue-lit and sits on a 2px bar
+   that is a horizontal slice of the blue gradient, not a flat rule. The label
+   sits 12px above the line; an invisible 44px overlay keeps the hit target. */
+.tabs-line-v2 {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-24);
+  border-bottom: 1px solid var(--line-cool);
+}
+.tab-line-v2 {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  padding: 0 0 var(--space-12);
+  border: 0;
+  background: transparent;
+  color: var(--text-muted-cool);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--duration-base);
+}
+.tab-line-v2::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: 44px;
+  transform: translateY(-50%);
+}
+.tab-line-v2:hover { color: var(--text-title-cool); }
+.tab-line-v2[aria-selected="true"],
+.tab-line-v2[data-state="active"] { color: var(--blue-lit); }
+.tab-line-v2[aria-selected="true"]::before,
+.tab-line-v2[data-state="active"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  border-radius: var(--r-pill);
+  z-index: 1;
+  background: linear-gradient(90deg, #637ac5 0%, var(--blue-lit) 55%, #324890 100%);
+}
+
+/* ==========================================================================
+   Pagination — the Profile page's Pagination (kit.jsx)
+   36px CIRCLES, not rounded squares: white with a cool hairline and a soft
+   drop. The current page is the lit blue solid (the Chat button's
+   construction) — a selected state, not a call to action. The arrows carry
+   NO container: they navigate around the numbers, they are not peers of them.
+   ========================================================================== */
+.page-btn-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-cool);
+  background: var(--white);
+  color: var(--text-body-neutral);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(96, 118, 200, 0.12);
+  cursor: pointer;
+  transition: color var(--duration-base), border-color var(--duration-base);
+}
+.page-btn-v2:hover { color: var(--blue); border-color: var(--line-hover-cool); }
+.page-btn-v2[aria-current="page"] {
+  border: 0;
+  color: var(--white);
+  background: var(--gradient-blue);
+  box-shadow: var(--shadow-lit-blue);
+}
+.page-arrow-v2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 32px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted-cool);
+  cursor: pointer;
+  transition: color var(--duration-base);
+}
+.page-arrow-v2:hover { color: var(--blue-lit); }
+.page-arrow-v2:disabled { opacity: 0.3; cursor: not-allowed; color: var(--text-muted-cool); }
+.page-gap-v2 {
+  min-width: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted-cool);
+  user-select: none;
+}
+
 .v2 :focus-visible {
   outline: none;
   box-shadow: 0 0 0 1px var(--blue);
 }
+/* Text fields draw their own focus (an inset --blue-lit ring, or a blue edge
+   on the textarea) — don't stack the generic outer ring on top of it. */
+.v2 input.field-v2:focus-visible,
+.v2 .search-v2 input:focus-visible { box-shadow: inset 0 0 0 1px var(--blue-lit); }
+.v2 .field-v2 input:focus-visible,
+.v2 .textarea-v2:focus-visible { box-shadow: none; }
 
 /* ==========================================================================
    Tailwind v4 bridge
