@@ -29,23 +29,23 @@ Never write "Animoca Minds" in body copy, headlines, or UI. The lockup
    Common mistakes: `py-5`, `gap-6`, `py-10`, `gap-10`, `py-14`, `gap-14`, `gap-28`, `py-28`.
 
 2. **Never hardcode a color, size, radius, or shadow.** Everything lives in
-   [design-harness/kit/tokens.css](design-harness/kit/tokens.css). Use `bg-brand-orange-500`, not `#fd8d1d`.
+   [design-harness/ui/tokens.css](design-harness/ui/tokens.css). Use `var(--orange)` or `bg-orange`, not `#fd8d1d`.
 
 3. **Never use inline `style={{}}` for anything in the token system.** It overrides
    responsive classes and causes bugs that look like design mistakes.
 
-4. **Reuse what's in `design-harness/kit/`.** Do not build a one-off button, card, or input.
+4. **Reuse what's in `design-harness/ui/`.** Do not build a one-off button, card, or input.
 
 5. **Orange is for action only.** Exactly one orange CTA per section. If there are two,
    one of them is wrong. Orange is never a section/large-block background and never a heading
-   color. Five exceptions, all specific to the indigo section canvas — blue-on-blue disappears
-   there, so it's the one surface where orange substitutes for blue: the headline highlight
-   (still at most one phrase); the eyebrow above a headline; a numbered-step circle (blue by
-   default elsewhere, including white — every circle in one list stays the same color); a
-   genuinely small, non-clickable accent anywhere — a status badge, a pagination dot, an
-   icon-button hover fill; and a checked checkbox, radio, or on/off switch, which fills orange
-   as its binary yes/no state on any background. None of these extend to a large fill or a
-   full-width bar.
+   color. The headline highlight (at most one phrase) is `--blue-lit`, and the eyebrow above a
+   headline is cool grey (`--text-muted-cool`). Outside the CTA, orange appears only as a small,
+   non-clickable accent — a status badge, an icon-button hover fill — or as the soft blooms in
+   the page background. Never a large fill or a full-width bar.
+
+   **Checked controls are not orange.** A checked checkbox or radio is lit blue
+   (`--gradient-blue` + `--shadow-lit-blue`). An on/off switch that means "running" is green
+   (`--gradient-switch-on`).
 
    **Which CTA color:** `primary` (orange) is the default for a CTA sitting directly on the
    section canvas. Use `secondary` (blue) instead when the CTA is inside a card, or when the
@@ -55,15 +55,17 @@ Never write "Animoca Minds" in body copy, headlines, or UI. The lockup
 
 6. **Blue marks the selected state in tabs, dropdowns, and filter toggles — not orange.**
    Active tab label + underline, the selected item in a dropdown menu, the selected icon in a
-   segmented/toggle-tab filter (e.g. All / Online / Offline) — all `brand-blue-500`. Don't
+   segmented/toggle-tab filter (e.g. All / Online / Offline) — all `--blue-lit`. Don't
    confuse a toggle-**tab** filter group (a choice among options, blue) with an on/off
-   **switch** (a binary checked state, orange) — same word, opposite color, different
+   **switch** (a binary "running" state, green) — same word, different color, different
    component. This selected-state blue isn't a CTA and doesn't compete with the one-orange
    rule above.
 
-7. **Adjacent sections never share a background.** The rhythm is warm canvas → white →
-   warm canvas. Structure comes from background change and whitespace, never from
-   hairline rules.
+7. **The ground is one cool wash; sections don't alternate backgrounds.** Every page sits on
+   the v2 wash (`.v2`, plus `.canvas-blooms` on marketing pages so glass has something to
+   frost). A section changes by what it contains — a photograph, a glass band, a bloom — not
+   by swapping beige and white, and never by a hairline rule. The v1 warm canvas and indigo
+   band are retired.
 
 8. **No dark mode.** Do not add `prefers-color-scheme` blocks or dark variants.
 
@@ -79,14 +81,14 @@ Never write "Animoca Minds" in body copy, headlines, or UI. The lockup
     yourself. Never shrink padding, type, or the size variant to fit a long label.
 
 11. **Never leave a placeholder box where a page needs a real image.** Check
-    `design-harness/assets/` first — Abby poses, hand stickers, and existing photography
-    live there. If nothing fits, generate one with the `codex-image-gen` skill following
-    the formula in [design-harness/spec/brand-imagery.md](design-harness/spec/brand-imagery.md), and save it to the
-    consuming project's own `src/images/` (not into `design-harness/assets/`, which is
-    the fixed brand library). `codex-image-gen` needs the `codex` CLI installed
-    (`npm install -g @openai/codex`) — if it's missing, stop and walk the user through
-    installing it (and Node/npm first, if needed) rather than falling back to a
-    placeholder.
+    `design-harness/assets/` first — `artwork/` has info-graphics, avatars, and
+    illustrations, `minds-mascot/` has clean Mind cutouts and toy cards, `brand/` has the
+    logos and icons. If nothing fits, **stop and ask the user**: say what the page needs
+    and which files came closest. Do not generate an image yourself. If the user then
+    asks for a new icon or toy card, use the `generate-minds-icons` or
+    `generate-one-click-mind-images` skill, and save the result to the consuming
+    project's own `src/images/` (not into `design-harness/assets/`, which is the fixed
+    brand library).
 
 ## Before you say you're done
 
@@ -107,8 +109,8 @@ script cannot judge. Verify the page at 390px wide before calling it finished.
 
 | Situation | Lane |
 |---|---|
-| Static one-pager, no form logic, needs to open in a browser | `design-harness/kit/html/starter.html` |
-| Has forms, state, routing, or data | `design-harness/kit/react/` |
+| Static one-pager, no form logic, needs to open in a browser | `design-harness/ui/html/starter.html` |
+| Has forms, state, routing, or data | `design-harness/ui/react/` |
 
 ## Read these only when the task calls for it
 
@@ -117,8 +119,8 @@ Do not read these by default — they are situational.
 | If the page involves… | Read |
 |---|---|
 | The Minds logo — placement, sizing, a header/footer | [design-harness/spec/brand-logo.md](design-harness/spec/brand-logo.md) |
-| Abby the mascot, or hand-sticker accents | [design-harness/spec/brand-mascot.md](design-harness/spec/brand-mascot.md) |
-| Choosing or generating photography / hero imagery | [design-harness/spec/brand-imagery.md](design-harness/spec/brand-imagery.md) |
+| The Master Mind or a one-click Mind character | [design-harness/spec/brand-mascot.md](design-harness/spec/brand-mascot.md) |
+| Choosing a hero, scene, or character image | [design-harness/spec/brand-imagery.md](design-harness/spec/brand-imagery.md) |
 | A specific Mind's icon, or drawing a new icon | [design-harness/spec/brand-iconography.md](design-harness/spec/brand-iconography.md) |
 | Writing or rewriting headlines and body copy | [design-harness/spec/voice-and-copy.md](design-harness/spec/voice-and-copy.md) |
 
@@ -130,14 +132,14 @@ See [design-harness/brand-guideline/README.md](design-harness/brand-guideline/RE
 
 ## What "good" looks like
 
-[design-harness/style-guide/index.html](design-harness/style-guide/index.html) renders every token, component, and composed
-section. When unsure whether your output is on-brand, compare it against the style-guide
-blocks rather than guessing.
+[design-harness/ui/style-guide.html](design-harness/ui/style-guide.html) shows every token and every component in
+`design-harness/ui/react/`, with how to use each one. When unsure whether your output is
+on-brand, compare it against the style guide rather than guessing.
 
 ## Before starting a new page's UI
 
-Look at [design-harness/ui-examples/](design-harness/ui-examples/) — full-page screenshots of real, shipped Minds
-pages (home, for-everyone, about, a campaign page, bazaar, tutorials). Where the style
+Look at [design-harness/sample-screens/](design-harness/sample-screens/) — full-page screenshots of real, shipped Minds
+pages (the homepage, the launch-a-Mind modal, and the signed-in profile pages). Where the style
 guide shows components in isolation, this shows how they compose into a real page:
 section rhythm, density, and how much content actually fills a section. Skim it before
 laying out a new page, especially one similar to a page already in there.

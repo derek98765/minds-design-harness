@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minds — change this title</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="../tokens.css">
+<script>
+const scale = (...ns) => Object.fromEntries(ns.map(n => [n, `var(--space-${n})`]));
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { sans: ['Manrope', 'sans-serif'] },
+      spacing: scale(1,2,3,4,8,12,16,20,24,36,40,48,60,72,84,96,108,120,160,200,240),
+      fontSize: {
+        'h1':['var(--font-size-h1)',{lineHeight:'var(--line-height-heading)',letterSpacing:'var(--letter-spacing-h1)',fontWeight:'800'}],
+        'h2':['var(--font-size-h2)',{lineHeight:'var(--line-height-heading)',letterSpacing:'var(--letter-spacing-h2)',fontWeight:'800'}],
+        'body-xlarge':['var(--font-size-body-xlarge)',{lineHeight:'var(--line-height-body)'}],
+        'body-large':['var(--font-size-body-large)',{lineHeight:'var(--line-height-body)'}],
+        'caption-large':['var(--font-size-caption-large)',{lineHeight:'var(--line-height-caption)',letterSpacing:'var(--letter-spacing-caption)'}],
+      },
+      maxWidth: { 'page':'1120px', 'prose':'60ch' },
+    },
+  },
+};
+</script>
+<style>
+  /* Button size md (DESIGN.md §4): 12/36 padding, 18px extrabold — the 18px
+     lives on the element as text-[18px], the button type scale. */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    white-space: nowrap; border-radius: var(--r-pill);
+    padding: var(--space-12) var(--space-36); font-weight: 800;
+    text-decoration: none; cursor: pointer;
+  }
+</style>
+</head>
+<body class="v2 font-sans antialiased">
+
+<section class="px-24 py-96 md:py-120">
+  <div class="mx-auto max-w-page">
+    <p class="text-caption-large font-medium mb-16" style="color: var(--text-muted-cool)">Eyebrow</p>
+    <h1 class="text-h1 max-w-[16ch]" style="color: var(--text-title-cool)">
+      Your headline goes here, with <span style="color: var(--blue-lit)">one phrase in blue</span>
+    </h1>
+    <p class="text-body-xlarge max-w-prose mt-24 mb-40" style="color: var(--text-body-cool)">
+      One or two plain sentences saying what the reader actually gets.
+    </p>
+    <div class="flex flex-col items-stretch gap-12 sm:flex-row sm:flex-wrap sm:items-center">
+      <a href="#" class="btn btn-lit-orange text-[18px]">Primary action</a>
+      <a href="#" class="btn btn-secondary-v2 text-[18px]">Secondary</a>
+    </div>
+  </div>
+</section>
+
+<section class="px-24 pb-120">
+  <div class="mx-auto max-w-page">
+    <h2 class="text-h2 max-w-[20ch] mb-40" style="color: var(--text-title-cool)">A section that earns its size</h2>
+    <div class="grid gap-24 md:grid-cols-3">
+      <article class="glass-card p-24">
+        <h3 class="t-h2 mb-12" style="color: var(--text-title-cool)">First benefit</h3>
+        <p class="text-body-large m-0" style="color: var(--text-body-cool)">What it does for the reader, in one plain sentence.</p>
+      </article>
+      <article class="glass-card p-24">
+        <h3 class="t-h2 mb-12" style="color: var(--text-title-cool)">Second benefit</h3>
+        <p class="text-body-large m-0" style="color: var(--text-body-cool)">What it does for the reader, in one plain sentence.</p>
+      </article>
+      <article class="glass-card p-24">
+        <h3 class="t-h2 mb-12" style="color: var(--text-title-cool)">Third benefit</h3>
+        <p class="text-body-large m-0" style="color: var(--text-body-cool)">What it does for the reader, in one plain sentence.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

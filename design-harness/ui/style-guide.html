@@ -1,0 +1,1404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minds Style Guide</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+/* Page chrome — the reading layout from animocaminds-frontend's tokens-v2.html.
+   Its colours point at tokens.css so nothing here is a second source of truth. */
+@font-face{
+  font-family:"Manrope";
+  src:url("../assets/brand/fonts/Manrope-Variable.woff2") format("woff2");
+  font-weight:200 800;
+  font-display:swap;
+}
+:root{
+  --page-bg:var(--white);
+  --border:var(--grey-warm-100);
+  --border-strong:var(--grey-warm-200);
+  --ink:var(--grey-warm-950);
+  --ink-secondary:var(--grey-warm-600);
+  --ink-muted:var(--grey-warm-400);
+  --page-accent-blue:var(--blue-lit);
+  --radius:10px;
+  --mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans:'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+*{box-sizing:border-box;}
+/* html body.sg beats tokens.css's body:has(.v2), which would otherwise paint
+   the whole page with the canvas wash as soon as a preview carries .v2. */
+html body.sg{
+  margin:0;
+  background:var(--page-bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+}
+.shell{max-width:1240px;margin:0 auto;}
+.wrap{max-width:920px;margin:0 auto;padding:56px 28px 96px;}
+.side{display:none;}
+@media (min-width:1100px){
+  .shell{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;padding-left:28px;}
+  .side{display:block;position:sticky;top:0;height:100vh;overflow-y:auto;padding:56px 0 40px;}
+  .wrap{margin:0;max-width:940px;padding-left:0;}
+  .jump{display:none;}
+}
+.side-group{font-family:var(--mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.06em;margin:20px 0 6px;}
+.side-group:first-child{margin-top:0;}
+.side a{display:block;font-size:13px;color:var(--ink-secondary);text-decoration:none;padding:4px 0 4px 10px;border-left:2px solid transparent;}
+.side a:hover{color:var(--ink);}
+.side a.on{color:var(--ink);border-left-color:var(--page-accent-blue);}
+.jump{margin:0 0 32px;border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;}
+.jump summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-secondary);}
+.jump .side-list{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:8px;}
+.jump .side-group{width:100%;margin:12px 0 0;}
+.jump a{font-size:13px;color:var(--ink-secondary);text-decoration:none;padding:2px 0;}
+
+.crumb{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--ink-muted);
+  margin:0 0 20px;
+  letter-spacing:.01em;
+}
+.crumb .sep{margin:0 6px;color:var(--border-strong);}
+h1{
+  font-size:34px;
+  font-weight:600;
+  letter-spacing:-0.015em;
+  margin:0 0 10px;
+  text-wrap:balance;
+}
+.dek{
+  font-size:15px;
+  line-height:1.6;
+  color:var(--ink-secondary);
+  margin:0 0 8px;
+}
+.dek code,.story-dek code,.note code,td code{font-family:var(--mono);font-size:.9em;color:var(--ink);}
+.meta-row{
+  display:flex;
+  gap:48px;
+  flex-wrap:wrap;
+  margin:24px 0 48px;
+  padding-top:20px;
+  border-top:1px solid var(--border);
+}
+.meta{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-muted);
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.meta b{
+  display:block;
+  font-family:var(--sans);
+  font-size:20px;
+  font-weight:600;
+  color:var(--ink);
+  text-transform:none;
+  letter-spacing:0;
+  margin-top:2px;
+  font-variant-numeric:tabular-nums;
+}
+section{margin-bottom:44px;scroll-margin-top:24px;}
+.section-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+.section-title{
+  font-size:13px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  color:var(--ink-secondary);
+}
+.section-count{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-muted);
+  text-align:right;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(112px,1fr));
+  gap:10px;
+}
+.row-absolute{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(112px,1fr));
+  gap:10px;
+  padding-bottom:14px;
+  margin-bottom:14px;
+  border-bottom:1px dashed var(--border);
+}
+.row-absolute .swatch{grid-column:span 2;}
+.group-title{
+  font-size:20px;
+  font-weight:700;
+  color:var(--ink);
+  margin:56px 0 16px;
+  letter-spacing:-0.01em;
+  scroll-margin-top:24px;
+}
+.group-title:first-of-type{margin-top:0;}
+.subgroup-label{
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--ink-muted);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  margin:0 0 6px;
+}
+.subgroup{margin-bottom:16px;}
+.subgroup-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 20px;
+  margin-bottom:16px;
+}
+.subgroup-row .subgroup{margin-bottom:0;}
+@media (max-width:520px){
+  .subgroup-row{grid-template-columns:1fr;gap:16px;}
+}
+.swatch{
+  background:none;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:0;
+  cursor:pointer;
+  text-align:left;
+  font-family:inherit;
+  overflow:hidden;
+  transition:border-color .15s ease, transform .1s ease;
+}
+.swatch:hover{border-color:var(--border-strong);}
+.swatch:active{transform:scale(.98);}
+.swatch:focus-visible{outline:2px solid var(--page-accent-blue);outline-offset:2px;}
+.chip{height:52px;position:relative;}
+.chip.light-line{border-bottom:1px solid var(--border);}
+.grid-gradients .swatch{grid-column:span 2;}
+.grid-gradients .chip{height:84px;}
+.chip-btn{display:flex;align-items:center;justify-content:center;background:transparent;}
+.demo-drop{display:block;width:96px;height:34px;border-radius:999px;background:var(--white);}
+.chip-text{display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:15px;letter-spacing:-0.01em;
+  text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px;}
+.chip-aa{display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;}
+.label{padding:7px 9px 9px;}
+.varname{
+  font-family:var(--mono);
+  font-size:10.5px;
+  color:var(--ink);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.hex{
+  font-family:var(--mono);
+  font-size:9.5px;
+  color:var(--ink-muted);
+  margin-top:2px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.stale .hex:last-child{color:var(--error);}
+.copied .varname{color:var(--page-accent-blue);}
+.copied .hex{color:var(--page-accent-blue);}
+
+/* ── Foundations: type, spacing, radius, elevation, logo ── */
+.type-row{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--border);}
+.type-row:last-child{border-bottom:0;}
+@media (max-width:640px){.type-row{grid-template-columns:1fr;gap:4px;}}
+.type-tag{font-family:var(--mono);font-size:10.5px;color:var(--ink);}
+.type-tag i{display:block;font-style:normal;color:var(--ink-muted);font-size:9.5px;margin-top:2px;}
+.space-row{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center;padding:3px 0;}
+.space-row span:first-child{font-family:var(--mono);font-size:10.5px;color:var(--ink-secondary);}
+.space-bar{height:10px;background:var(--blue-tint);border-radius:2px;max-width:100%;}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:20px;}
+.tile{height:84px;background:var(--white);}
+.tile-name{font-family:var(--mono);font-size:10.5px;color:var(--ink);margin-top:10px;}
+.tile-val{font-family:var(--mono);font-size:9.5px;color:var(--ink-muted);margin-top:2px;line-height:1.4;}
+.logo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+.logo-tile{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.logo-tile .stage{height:112px;display:flex;align-items:center;justify-content:center;padding:20px;}
+.logo-tile .stage.dark{background:var(--text-title-cool);}
+.logo-tile .stage img{max-height:44px;max-width:160px;}
+.logo-tile .label{border-top:1px solid var(--border);}
+
+/* ── Component stories ── */
+.story-dek{font-size:14px;line-height:1.6;color:var(--ink-secondary);margin:0 0 14px;max-width:72ch;}
+.note{font-size:13px;line-height:1.55;color:var(--ink-secondary);margin:0 0 14px;padding:8px 12px;border-left:2px solid var(--warning);background:var(--warning-soft);border-radius:0 6px 6px 0;max-width:72ch;}
+.note b{color:var(--ink);}
+.canvas{border:1px solid var(--border);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:22px;overflow-x:auto;}
+.vrow{display:flex;flex-direction:column;gap:10px;}
+.vlabel{font-family:var(--mono);font-size:10px;color:var(--text-muted-cool);text-transform:uppercase;letter-spacing:.05em;margin:0;}
+.vitems{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+.code{position:relative;margin-top:10px;}
+.code pre{margin:0;font-family:var(--mono);font-size:11.5px;line-height:1.6;color:var(--ink);background:var(--bg-subtle-warm);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;overflow-x:auto;}
+.code .copy{position:absolute;top:8px;right:8px;font-family:var(--mono);font-size:10.5px;color:var(--ink-secondary);background:var(--white);border:1px solid var(--border);border-radius:6px;padding:3px 8px;cursor:pointer;}
+.code .copy:hover{color:var(--ink);border-color:var(--border-strong);}
+.props{width:100%;border-collapse:collapse;margin-top:10px;font-size:12.5px;}
+.props th{text-align:left;font-family:var(--mono);font-size:10px;font-weight:400;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.05em;padding:6px 12px 6px 0;border-bottom:1px solid var(--border);}
+.props td{padding:7px 12px 7px 0;border-bottom:1px solid var(--border);color:var(--ink-secondary);vertical-align:top;}
+.props td:first-child{font-family:var(--mono);font-size:11.5px;color:var(--ink);white-space:nowrap;}
+
+/* ── Previews. Each mirrors its React component in ui/react/components/ui/,
+      with the v1 class names it uses resolved to the v2 tokens they map to
+      (see the Tailwind bridge at the bottom of tokens.css). Tokens only. ── */
+.pv{font-family:var(--font-family-primary);color:var(--text-title-cool);}
+.pv-btn{display:inline-flex;align-items:center;justify-content:center;gap:2px;white-space:nowrap;font-family:var(--font-family-primary);font-weight:800;border-radius:var(--r-pill);border:0;cursor:pointer;text-decoration:none;transition:background-color var(--duration-base),color var(--duration-base),border-color var(--duration-base);}
+.pv-sm{padding:var(--space-8) var(--space-24);font-size:16px;}
+.pv-md{padding:var(--space-12) var(--space-36);font-size:18px;}
+.pv-lg{padding:var(--space-16) var(--space-40);font-size:18px;}
+.pv-xl{padding:var(--space-16) var(--space-48);font-size:20px;}
+.pv-btn:disabled{opacity:.5;pointer-events:none;}
+.pv-glass{background:var(--glass-ctl);color:var(--text-title-cool);box-shadow:inset 0 0 0 1px var(--glass-edge);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);}
+.pv-glass:hover{background:var(--glass-ctl-hover);}
+.pv-link{background:transparent;padding:0;font-weight:600;font-size:16px;text-decoration:underline;text-underline-offset:4px;}
+.pv-link.primary{color:var(--btn-text-orange);}
+.pv-link.primary:hover{color:var(--btn-text-orange-hover);}
+.pv-link.secondary{color:var(--btn-text-blue);}
+.pv-link.secondary:hover{color:var(--btn-text-blue-hover);}
+.pv-stack{display:flex;flex-direction:column;align-items:stretch;gap:var(--space-12);width:100%;max-width:320px;}
+
+.pv-card{padding:var(--space-24);color:var(--text-body-cool);max-width:420px;}
+.pv-card h3{font-size:var(--font-size-h4);font-weight:800;line-height:var(--line-height-heading);margin:0;color:var(--text-title-cool);}
+.pv-card .desc{font-size:var(--font-size-body-large);line-height:var(--line-height-body);margin:var(--space-8) 0 0;}
+.pv-card .content{margin-top:var(--space-16);font-size:var(--font-size-body-default);line-height:var(--line-height-body);}
+.pv-card .foot{margin-top:var(--space-24);display:flex;align-items:center;gap:var(--space-12);flex-wrap:wrap;}
+.pv-shell-body{padding:var(--space-20);font-size:var(--font-size-body-default);color:var(--text-body-cool);max-width:420px;}
+
+.pv-label{font-weight:500;font-size:var(--font-size-body-large);line-height:var(--line-height-body);color:var(--text-title-cool);margin:0;}
+.pv-field{display:flex;align-items:center;gap:var(--space-12);width:100%;max-width:420px;background:var(--bg-field-cool);box-shadow:inset 0 0 0 1px var(--line-cool);border-radius:var(--r-md);padding:var(--space-12) var(--space-16);color:var(--text-label-cool);}
+.pv-field.pill{border-radius:var(--r-pill);}
+.pv-field:focus-within{box-shadow:0 0 0 1px var(--blue);}
+.pv-input{flex:1;min-width:0;background:transparent;border:0;outline:none;font-family:var(--font-family-primary);font-size:18px;line-height:var(--line-height-body);color:var(--text-title-cool);}
+.pv-input::placeholder,.pv-textarea::placeholder{color:var(--grey-cool-400);}
+.pv-textarea{width:100%;max-width:420px;min-height:96px;padding:var(--space-12);border-radius:var(--r-md);background:var(--white);color:var(--text-title-cool);border:1px solid var(--line-cool);outline:none;resize:vertical;font-family:var(--font-family-primary);font-size:16px;line-height:var(--line-height-body);}
+.pv-textarea:focus{border-color:var(--blue-lit);}
+@media (min-width:768px){.pv-textarea{font-size:var(--font-size-body-default);}}
+.pv-field-col{display:flex;flex-direction:column;gap:var(--space-8);width:100%;max-width:420px;}
+
+.pv-radio-group{display:flex;flex-direction:column;gap:var(--space-8);}
+.pv-radio-row{display:flex;align-items:center;gap:var(--space-12);font-size:var(--font-size-body-default);color:var(--text-body-cool);cursor:pointer;}
+.pv-radio{width:16px;height:16px;flex:none;border-radius:var(--r-pill);border:1px solid var(--grey-cool-400);background:var(--white);display:flex;align-items:center;justify-content:center;}
+.pv-radio svg{display:none;color:var(--white);}
+.on > .pv-radio,.pv-radio.on{border-color:transparent;background:var(--gradient-blue);box-shadow:var(--shadow-lit-blue);}
+.on > .pv-radio svg,.pv-radio.on svg{display:block;}
+.pv-rcard.on .pv-radio{background:var(--white);border-color:var(--white);box-shadow:none;}
+.pv-rcard.on .pv-radio svg{color:var(--blue-lit);}
+.pv-rcard{display:flex;align-items:center;gap:var(--space-8);width:100%;max-width:420px;border-radius:var(--r-md);border:1px solid var(--line-cool);background:var(--white);padding:var(--space-12);text-align:left;cursor:pointer;font-family:var(--font-family-primary);}
+.pv-rcard:hover{border-color:var(--blue-200);}
+.pv-rcard .txt{flex:1;min-width:0;display:flex;flex-direction:column;}
+.pv-rcard .t{font-size:var(--font-size-body-default);font-weight:700;line-height:var(--line-height-body);color:var(--text-title-cool);}
+.pv-rcard .s{font-size:var(--font-size-body-small);color:var(--grey-cool-400);}
+.pv-rcard .end{display:flex;flex-direction:column;align-items:flex-end;}
+.pv-rcard .tr{font-size:var(--font-size-body-default);font-weight:700;line-height:var(--line-height-body);color:var(--blue-lit);}
+.pv-rcard .tl{font-size:var(--font-size-body-xsmall);line-height:var(--line-height-body);color:var(--grey-cool-400);}
+.pv-rcard.on{background:var(--blue-lit);border-color:transparent;}
+.pv-rcard.on .t,.pv-rcard.on .tr{color:var(--white);}
+.pv-rcard.on .s,.pv-rcard.on .tl{color:var(--blue-200);}
+.pv-check-row{display:flex;align-items:center;gap:var(--space-12);font-size:var(--font-size-body-default);color:var(--text-body-cool);cursor:pointer;}
+.pv-check{width:20px;height:20px;flex:none;border-radius:var(--r-sm);background:var(--white);box-shadow:inset 0 0 0 1px var(--line-strong-cool);display:flex;align-items:center;justify-content:center;}
+.pv-check svg{display:none;color:var(--white);}
+.on > .pv-check{background:var(--gradient-blue);box-shadow:var(--shadow-lit-blue);}
+.on > .pv-check svg{display:block;}
+.pv-check.disabled,.pv-switch.disabled{opacity:.5;}
+.pv-switch{width:48px;height:24px;flex:none;border-radius:var(--r-pill);position:relative;background:var(--gradient-switch-off);box-shadow:inset 0 1px 0 var(--glass-card-line);}
+.pv-switch::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:var(--r-pill);background:var(--white);box-shadow:var(--elev-card);transition:transform var(--duration-fast);}
+.on > .pv-switch{background:var(--gradient-switch-on);}
+.on > .pv-switch::after{transform:translateX(24px);}
+
+.pv-tabs-pill{display:inline-flex;align-items:center;gap:var(--space-4);border-radius:var(--r-pill);background:var(--grey-cool-50);padding:var(--space-4);}
+.pv-tabs-pill button{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border:0;background:transparent;cursor:pointer;border-radius:var(--r-pill);padding:var(--space-8) var(--space-24);font-family:var(--font-family-primary);font-size:var(--font-size-body-default);font-weight:600;color:var(--text-muted-cool);}
+.pv-tabs-pill button:hover{color:var(--text-title-cool);}
+.pv-tabs-pill button.on{background:var(--blue-lit);color:var(--white);}
+.pv-tabs-line{display:flex;align-items:center;border-bottom:1px solid var(--line-cool);gap:var(--space-20);width:100%;}
+.pv-tabs-line.lg{gap:var(--space-36);}
+.pv-tabs-line button{border:0;border-bottom:2px solid transparent;background:transparent;cursor:pointer;padding:var(--space-8) 0;font-family:var(--font-family-primary);font-size:var(--font-size-body-small);font-weight:600;text-transform:uppercase;letter-spacing:.025em;color:var(--text-muted-cool);white-space:nowrap;}
+.pv-tabs-line.lg button{border-bottom-width:4px;padding:var(--space-12) 0;font-size:var(--font-size-body-large);}
+.pv-tabs-line button:hover{color:var(--text-title-cool);}
+.pv-tabs-line button.on{color:var(--blue-lit);border-bottom-color:var(--blue-lit);}
+
+.pv-trigger{display:inline-flex;align-items:center;gap:var(--space-8);height:36px;padding:0 var(--space-16);white-space:nowrap;border-radius:var(--r-pill);border:1px solid var(--line-cool);background:transparent;font-family:var(--font-family-primary);font-size:var(--font-size-body-small);font-weight:500;color:var(--text-title-cool);cursor:pointer;}
+.pv-trigger:hover{border-color:var(--grey-cool-400);}
+.pv-trigger .pre{color:var(--text-muted-cool);}
+.pv-count{display:flex;align-items:center;justify-content:center;height:16px;min-width:16px;padding:0 var(--space-4);border-radius:var(--r-pill);background:var(--blue-lit);color:var(--white);font-size:var(--font-size-caption);font-weight:700;line-height:1;}
+.pv-menu{min-width:160px;border-radius:var(--r-md);border:1px solid var(--line-cool);background:var(--white);padding:var(--space-4);box-shadow:var(--elev-lg);}
+.pv-menu-item{display:flex;align-items:center;justify-content:space-between;gap:var(--space-8);border-radius:var(--r-sm);padding:var(--space-8) var(--space-12);font-size:var(--font-size-body-small);color:var(--text-title-cool);cursor:pointer;}
+.pv-menu-item:hover{background:var(--grey-cool-50);}
+.pv-menu-item.on{font-weight:600;color:var(--blue-lit);}
+.pv-menu-item.on:hover{background:transparent;}
+.pv-filter{width:240px;padding:var(--space-12) 0;}
+.pv-filter .grp{padding:var(--space-4) var(--space-16) var(--space-2);font-size:var(--font-size-body-small);font-weight:700;text-transform:uppercase;letter-spacing:.025em;color:var(--text-title-cool);}
+.pv-filter .opt{display:flex;align-items:center;justify-content:space-between;padding:var(--space-8) var(--space-16);font-size:var(--font-size-body-small);color:var(--text-title-cool);}
+.pv-filter .opt.on{background:var(--blue-soft);font-weight:600;color:var(--blue-lit);}
+.pv-filter .div{margin:var(--space-12) 0;border-top:1px solid var(--line-cool);}
+.pv-dd{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-8);}
+
+.pv-badge{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-4);border-radius:var(--r-pill);padding:var(--space-4) var(--space-12);font-family:var(--font-family-primary);font-size:var(--font-size-caption);font-weight:500;text-transform:uppercase;white-space:nowrap;}
+.pv-badge.orange{background:var(--orange-soft);color:var(--orange-hover);}
+.pv-badge.blue{background:var(--blue-soft);color:var(--blue);}
+.pv-badge.neutral{background:var(--grey-cool-50);color:var(--text-body-cool);}
+.pv-badge.success{background:var(--success-soft);color:var(--success);}
+.pv-badge.outline{border:1px solid var(--line-cool);background:var(--white);color:var(--text-title-cool);}
+
+.pv-avatar{flex:none;border-radius:var(--r-pill);overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--blue-soft);color:var(--blue);font-weight:700;font-size:var(--font-size-body-small);}
+.pv-avatar img{width:100%;height:100%;object-fit:cover;}
+.pv-avatar.sm{width:24px;height:24px;}
+.pv-avatar.md{width:40px;height:40px;}
+.pv-avatar.lg{width:48px;height:48px;}
+
+.pv-pages{display:flex;align-items:center;gap:var(--space-4);}
+.pv-pages.lg{gap:var(--space-8);}
+.pv-pages button,.pv-pages span{width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;border:0;border-radius:var(--r-sm);background:transparent;font-family:var(--font-family-primary);font-size:var(--font-size-body-small);font-weight:600;color:var(--text-muted-cool);cursor:pointer;padding:0;}
+.pv-pages.lg button,.pv-pages.lg span{width:36px;height:36px;font-size:var(--font-size-body-default);}
+.pv-pages button:hover{background:var(--grey-cool-50);}
+.pv-pages button[aria-current]{background:var(--blue-lit);color:var(--white);font-weight:700;}
+.pv-pages button:disabled{opacity:.4;cursor:default;background:transparent;}
+.pv-pages span{cursor:default;}
+
+.pv-acc{display:flex;flex-direction:column;gap:var(--space-16);width:100%;max-width:640px;}
+.pv-acc-item{background:var(--white);border-radius:var(--r-sm);overflow:hidden;border:1px solid transparent;box-shadow:var(--elev-card);transition:box-shadow var(--duration-base),border-color var(--duration-base);}
+.pv-acc-item:hover{border-color:var(--line-cool);box-shadow:var(--elev-card-hover);}
+.pv-acc-item.open{border-color:var(--blue-lit);box-shadow:none;}
+.pv-acc-item button{display:flex;align-items:center;justify-content:space-between;gap:var(--space-16);width:100%;padding:var(--space-16) var(--space-24);border:0;background:transparent;cursor:pointer;text-align:left;font-family:var(--font-family-primary);font-size:var(--font-size-body-xlarge);font-weight:500;line-height:var(--line-height-body);color:var(--text-title-cool);}
+.pv-acc-item.open button{color:var(--blue-lit);}
+.pv-acc-item .minus{display:none;color:var(--blue-lit);}
+.pv-acc-item.open .minus{display:block;}
+.pv-acc-item.open .plus{display:none;}
+.pv-acc-item:hover .plus{color:var(--blue-lit);}
+.pv-acc-body{display:none;}
+.pv-acc-item.open .pv-acc-body{display:block;}
+.pv-acc-body hr{margin:0 var(--space-24);border:0;border-top:1px solid var(--line-cool);}
+.pv-acc-body p{margin:0;padding:var(--space-20) var(--space-24) var(--space-24);font-size:var(--font-size-body-large);line-height:var(--line-height-body);color:var(--text-muted-cool);}
+
+.pv-sep{background:var(--line-cool);}
+.pv-sep.h{height:1px;width:100%;}
+.pv-sep.v{width:1px;align-self:stretch;}
+
+.pv-nav{display:flex;align-items:center;gap:var(--space-24);padding:var(--space-16) var(--space-24);background:var(--nav-glass);-webkit-backdrop-filter:var(--nav-liquid-filter);backdrop-filter:var(--nav-liquid-filter);border-bottom:1px solid var(--nav-glass-line);width:100%;min-width:0;}
+.pv-nav img{height:32px;width:auto;flex:none;}
+.pv-nav ul{display:none;flex:1;align-items:center;gap:var(--space-24);padding-left:var(--space-40);margin:0;list-style:none;}
+.pv-nav ul a{display:inline-flex;align-items:center;gap:var(--space-4);white-space:nowrap;text-decoration:none;font-size:var(--font-size-body-default);font-weight:500;color:var(--text-muted-cool);}
+.pv-nav ul a:hover{color:var(--text-title-cool);}
+.pv-nav .right{display:none;align-items:center;gap:var(--space-12);flex:none;}
+.pv-nav .lang{display:inline-flex;align-items:center;gap:var(--space-4);white-space:nowrap;border-radius:var(--r-pill);border:1px solid var(--line-cool);background:var(--white);padding:var(--space-8) var(--space-12);font-family:var(--font-family-primary);font-size:var(--font-size-body-default);font-weight:500;color:var(--text-title-cool);}
+.pv-nav .initial{display:flex;width:36px;height:36px;flex:none;align-items:center;justify-content:center;border-radius:var(--r-pill);background:var(--gradient-blue);box-shadow:var(--shadow-lit-blue);color:var(--white);font-weight:700;font-size:var(--font-size-body-default);}
+.pv-nav .burger{margin-left:auto;display:flex;width:40px;height:40px;align-items:center;justify-content:center;color:var(--text-title-cool);}
+@media (min-width:1024px){
+  .pv-nav ul,.pv-nav .right{display:flex;}
+  .pv-nav .burger{display:none;}
+}
+
+.toast{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%) translateY(8px);
+  background:var(--ink);
+  color:var(--page-bg);
+  font-family:var(--mono);
+  font-size:12px;
+  padding:9px 16px;
+  border-radius:8px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .15s ease, transform .15s ease;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+footer{
+  margin-top:56px;
+  padding-top:20px;
+  border-top:1px solid var(--border);
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-muted);
+  line-height:1.7;
+}
+@media (max-width:520px){
+  .wrap{padding:36px 18px 72px;}
+  h1{font-size:27px;}
+  .grid, .row-absolute{grid-template-columns:repeat(auto-fill,minmax(94px,1fr));}
+  .canvas{padding:16px;}
+}
+</style>
+</head>
+<body class="sg">
+<div class="shell">
+
+<aside class="side" aria-label="Sections">
+  <div class="side-list" id="side-list">
+    <p class="side-group">Base colours</p>
+    <a href="#base-brand">Blue and orange</a>
+    <a href="#base-neutral">Neutral</a>
+    <a href="#base-others">Green, red, yellow</a>
+    <p class="side-group">Semantic tokens</p>
+    <a href="#sem-brand">Brand tones</a>
+    <a href="#sem-buttons">Buttons</a>
+    <a href="#sem-status">System status</a>
+    <a href="#sem-surfaces">Surfaces</a>
+    <a href="#sem-lines">Borders and dividers</a>
+    <a href="#sem-text">Text</a>
+    <a href="#sem-ring">Hover ring</a>
+    <a href="#sem-glass">Glass panels</a>
+    <a href="#sem-graph">Network graph nodes</a>
+    <p class="side-group">Type and layout</p>
+    <a href="#f-type">Typography</a>
+    <a href="#f-space">Spacing</a>
+    <a href="#f-radius">Radius</a>
+    <a href="#f-elev">Elevation</a>
+    <a href="#f-logo">Logo</a>
+    <p class="side-group">Components</p>
+    <a href="#c-button">Button</a>
+    <a href="#c-card">Card</a>
+    <a href="#c-input">Input, Textarea, Label</a>
+    <a href="#c-radio">Radio group</a>
+    <a href="#c-checkbox">Checkbox</a>
+    <a href="#c-switch">Switch</a>
+    <a href="#c-tabs">Tabs</a>
+    <a href="#c-dropdown">Sort and filter dropdowns</a>
+    <a href="#c-badge">Badge</a>
+    <a href="#c-avatar">Avatar</a>
+    <a href="#c-pagination">Pagination</a>
+    <a href="#c-accordion">Accordion</a>
+    <a href="#c-separator">Separator</a>
+    <a href="#c-nav">Nav</a>
+  </div>
+</aside>
+
+<main class="wrap" id="top">
+  <p class="crumb">design-harness<span class="sep">/</span>ui<span class="sep">/</span><span style="color:var(--ink)">style-guide.html</span></p>
+  <h1>Minds Style Guide</h1>
+  <p class="dek">Every token in <code>ui/tokens.css</code> and every component in <code>ui/react/</code>, on one page. Tokens come in two layers. BASE COLORS are raw ramps numbered by lightness (50 near-white &rarr; 900 darkest), saying only <em>how light</em>. SEMANTIC TOKENS say <em>what for</em>, each pointing at one base step, e.g. <code>--blue-lit</code> → <code>var(--blue-600)</code>. Pages use the semantic layer only — retune a role by repointing its token, never by editing a shared ramp step. Click a swatch to copy its <code>var(--name)</code>.</p>
+
+  <div class="meta-row">
+    <div class="meta">Base colors<b id="stat-base">—</b></div>
+    <div class="meta">Semantic tokens<b id="stat-semantic">—</b></div>
+    <div class="meta">Components<b id="stat-components">—</b></div>
+    <div class="meta">Scope root<b style="font-family:var(--mono);font-size:15px;">.v2</b></div>
+  </div>
+
+  <details class="jump"><summary>Jump to a section</summary></details>
+
+  <!-- ══════════════════════════ BASE COLORS ══════════════════════════ -->
+  <p class="group-title">Base Colors</p>
+
+  <section id="base-brand">
+    <div class="section-head">
+      <span class="section-title">Blue and Orange</span>
+      <span class="section-count" data-count="g-blue:blue,g-orange:orange,g-gradients:gradients"></span>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">blue &middot; 50 &rarr; 900</p>
+      <div class="grid" id="g-blue"></div>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">orange &middot; 50 &rarr; 700</p>
+      <div class="grid" id="g-orange"></div>
+    </div>
+    <div class="subgroup" style="margin-bottom:0;">
+      <p class="subgroup-label">gradients &middot; shown left to right; the real tokens run top to bottom</p>
+      <div class="grid grid-gradients" id="g-gradients"></div>
+    </div>
+  </section>
+
+  <section id="base-neutral">
+    <div class="section-head">
+      <span class="section-title">Neutral</span>
+      <span class="section-count" data-count="g-absolute:absolute,g-ramps:warm · cool · neutral"></span>
+    </div>
+    <div class="row-absolute" id="g-absolute"></div>
+    <div class="grid" id="g-ramps"></div>
+  </section>
+
+  <section id="base-others">
+    <div class="section-head">
+      <span class="section-title">Others</span>
+      <span class="section-count" data-count="g-green:green,g-red:red,g-yellow:yellow"></span>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">green</p>
+      <div class="grid" id="g-green"></div>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">red</p>
+      <div class="grid" id="g-red"></div>
+    </div>
+    <div class="subgroup" style="margin-bottom:0;">
+      <p class="subgroup-label">yellow</p>
+      <div class="grid" id="g-yellow"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ SEMANTIC TOKENS ══════════════════════════ -->
+  <p class="group-title">Semantic Tokens</p>
+
+  <section id="sem-brand">
+    <div class="section-head">
+      <span class="section-title">Brand Tones</span>
+      <span class="section-count" data-count="g-brand-blue:blue,g-brand-orange:orange"></span>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">blue &middot; --blue-lit is what CTAs, links and active states use; --blue is navy for text on white</p>
+      <div class="grid" id="g-brand-blue"></div>
+    </div>
+    <div class="subgroup" style="margin-bottom:0;">
+      <p class="subgroup-label">orange &middot; the loud action, one per view</p>
+      <div class="grid" id="g-brand-orange"></div>
+    </div>
+  </section>
+
+  <section id="sem-buttons">
+    <div class="section-head">
+      <span class="section-title">Buttons</span>
+      <span class="section-count" data-count="g-btn-blue:blue,g-btn-orange:orange,g-btn-secondary:secondary,g-btn-text:text"></span>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">blue primary buttons &middot; fill + shadow, set both or neither</p>
+      <div class="grid grid-gradients" id="g-btn-blue"></div>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">orange primary buttons</p>
+      <div class="grid grid-gradients" id="g-btn-orange"></div>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">secondary buttons &middot; the white button beside a primary</p>
+      <div class="grid" id="g-btn-secondary"></div>
+    </div>
+    <div class="subgroup" style="margin-bottom:0;">
+      <p class="subgroup-label">text buttons</p>
+      <div class="grid" id="g-btn-text"></div>
+    </div>
+  </section>
+
+  <section id="sem-status">
+    <div class="section-head">
+      <span class="section-title">System status</span>
+      <span class="section-count" data-count="g-status-success:success,g-status-warning:warnings,g-status-notice:notice,g-status-error:errors,g-status-switch:switch"></span>
+    </div>
+    <div class="subgroup-row">
+      <div class="subgroup">
+        <p class="subgroup-label">success</p>
+        <div class="grid" id="g-status-success"></div>
+      </div>
+      <div class="subgroup">
+        <p class="subgroup-label">warnings</p>
+        <div class="grid" id="g-status-warning"></div>
+      </div>
+    </div>
+    <div class="subgroup-row">
+      <div class="subgroup">
+        <p class="subgroup-label">notice</p>
+        <div class="grid" id="g-status-notice"></div>
+      </div>
+      <div class="subgroup">
+        <p class="subgroup-label">errors</p>
+        <div class="grid" id="g-status-error"></div>
+      </div>
+    </div>
+    <div class="subgroup" style="margin-bottom:0;">
+      <p class="subgroup-label">on / off switch &middot; green means "running", not "primary action"</p>
+      <div class="grid grid-gradients" id="g-status-switch"></div>
+    </div>
+  </section>
+
+  <section id="sem-surfaces">
+    <div class="section-head">
+      <span class="section-title">Surfaces</span>
+      <span class="section-count" data-count="g-surfaces:page · card · panel · field"></span>
+    </div>
+    <div class="grid" id="g-surfaces"></div>
+  </section>
+
+  <section id="sem-lines">
+    <div class="section-head">
+      <span class="section-title">Borders and dividers</span>
+      <span class="section-count" data-count="g-line-warm:warm,g-line-cool:cool,g-line-neutral:neutral,g-line-hover:hover"></span>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">warm</p>
+      <div class="grid" id="g-line-warm"></div>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">cool</p>
+      <div class="grid" id="g-line-cool"></div>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">neutral</p>
+      <div class="grid" id="g-line-neutral"></div>
+    </div>
+    <div class="subgroup" style="margin-bottom:0;">
+      <p class="subgroup-label">hover state &mdash; not a weight</p>
+      <div class="grid" id="g-line-hover"></div>
+    </div>
+  </section>
+
+  <section id="sem-text">
+    <div class="section-head">
+      <span class="section-title">Text</span>
+      <span class="section-count" data-count="g-text-warm:warm,g-text-cool:cool,g-text-neutral:neutral"></span>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">cool &middot; the default on glass and on the page</p>
+      <div class="grid" id="g-text-cool"></div>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">warm &middot; content on a warm surface only</p>
+      <div class="grid" id="g-text-warm"></div>
+    </div>
+    <div class="subgroup" style="margin-bottom:0;">
+      <p class="subgroup-label">neutral &middot; offline and disabled</p>
+      <div class="grid" id="g-text-neutral"></div>
+    </div>
+  </section>
+
+  <section id="sem-ring">
+    <div class="section-head">
+      <span class="section-title">Hover ring</span>
+      <span class="section-count">ring-only — do not use for fills or text — <span data-count="g-ring:"></span></span>
+    </div>
+    <div class="grid" id="g-ring"></div>
+  </section>
+
+  <section id="sem-glass">
+    <div class="section-head">
+      <span class="section-title">Glass panels</span>
+      <span class="section-count" data-count="g-glass-shell:shell,g-glass-contents:contents,g-glass-nav:nav"></span>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">shell &mdash; fill + its edge, outer then inner</p>
+      <div class="grid" id="g-glass-shell"></div>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">contents &mdash; pill, divider, label, card, control</p>
+      <div class="grid" id="g-glass-contents"></div>
+    </div>
+    <div class="subgroup" style="margin-bottom:0;">
+      <p class="subgroup-label">floating nav &mdash; on the page, not in the rail</p>
+      <div class="grid" id="g-glass-nav"></div>
+    </div>
+  </section>
+
+  <section id="sem-graph">
+    <div class="section-head">
+      <span class="section-title">Network graph nodes</span>
+      <span class="section-count" data-count="g-graph-grey:grey,g-graph-human:human,g-graph-mind:mind,g-graph-you:you"></span>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">grey (offline)</p>
+      <div class="grid" id="g-graph-grey"></div>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">human</p>
+      <div class="grid" id="g-graph-human"></div>
+    </div>
+    <div class="subgroup">
+      <p class="subgroup-label">mind · mind-alt</p>
+      <div class="grid" id="g-graph-mind"></div>
+    </div>
+    <div class="subgroup" style="margin-bottom:0;">
+      <p class="subgroup-label">you</p>
+      <div class="grid" id="g-graph-you"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ TYPE AND LAYOUT ══════════════════════════ -->
+  <p class="group-title">Type and Layout</p>
+
+  <section id="f-type">
+    <div class="section-head">
+      <span class="section-title">Typography</span>
+      <span class="section-count">Manrope &middot; sizes as this screen renders them</span>
+    </div>
+    <p class="story-dek">Marketing scale for landing pages and campaign heroes; product scale for app surfaces. Both step down at 1024px and 767px. Headlines are 800 and track tight. Body copy is cool grey, not black. At most one highlighted phrase per headline, in <code>--blue-lit</code>.</p>
+    <div class="subgroup">
+      <p class="subgroup-label">marketing &middot; text-h1 … text-caption</p>
+      <div class="canvas v2 pv">
+        <div>
+          <div class="type-row"><span class="type-tag" data-size>text-h1</span><span style="font-size:var(--font-size-h1);font-weight:800;line-height:var(--line-height-heading);letter-spacing:var(--letter-spacing-h1)">Your Mind, <span style="color:var(--blue-lit)">on it</span></span></div>
+          <div class="type-row"><span class="type-tag" data-size>text-h2</span><span style="font-size:var(--font-size-h2);font-weight:800;line-height:var(--line-height-heading);letter-spacing:var(--letter-spacing-h2)">Works while you sleep</span></div>
+          <div class="type-row"><span class="type-tag" data-size>text-h3</span><span style="font-size:var(--font-size-h3);font-weight:800;line-height:var(--line-height-heading)">Three things it handles</span></div>
+          <div class="type-row"><span class="type-tag" data-size>text-h4</span><span style="font-size:var(--font-size-h4);font-weight:800;line-height:var(--line-height-heading)">How to get started</span></div>
+          <div class="type-row"><span class="type-tag" data-size>text-h5</span><span style="font-size:var(--font-size-h5);font-weight:700;line-height:var(--line-height-heading)">Questions people ask</span></div>
+          <div class="type-row"><span class="type-tag" data-size>text-caption-large</span><span style="font-size:var(--font-size-caption-large);font-weight:500;letter-spacing:var(--letter-spacing-caption);color:var(--text-muted-cool)">EYEBROW · CAPTION LARGE</span></div>
+          <div class="type-row"><span class="type-tag" data-size>text-body-xlarge</span><span style="font-size:var(--font-size-body-xlarge);line-height:var(--line-height-body);color:var(--text-body-cool)">Lead copy under a hero headline.</span></div>
+          <div class="type-row"><span class="type-tag" data-size>text-body-large</span><span style="font-size:var(--font-size-body-large);line-height:var(--line-height-body);color:var(--text-body-cool)">Body copy on a marketing page.</span></div>
+          <div class="type-row"><span class="type-tag" data-size>text-body-default</span><span style="font-size:var(--font-size-body-default);line-height:var(--line-height-body);color:var(--text-body-cool)">Default body. 16px on mobile.</span></div>
+          <div class="type-row"><span class="type-tag" data-size>text-body-small</span><span style="font-size:var(--font-size-body-small);line-height:var(--line-height-body);color:var(--text-body-cool)">Small print and helper text.</span></div>
+          <div class="type-row"><span class="type-tag" data-size>text-caption</span><span style="font-size:var(--font-size-caption);letter-spacing:var(--letter-spacing-caption);color:var(--text-muted-cool)">CAPTION</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="subgroup" style="margin-bottom:0;">
+      <p class="subgroup-label">product &middot; .t-display … .t-label</p>
+      <div class="canvas v2 pv">
+        <div>
+          <div class="type-row"><span class="type-tag" data-size>.t-display</span><span class="t-display">Welcome back</span></div>
+          <div class="type-row"><span class="type-tag" data-size>.t-h1</span><span class="t-h1">My Minds</span></div>
+          <div class="type-row"><span class="type-tag" data-size>.t-h1-sm</span><span class="t-h1-sm">Street.Fashion</span></div>
+          <div class="type-row"><span class="type-tag" data-size>.t-h2</span><span class="t-h2">Recent activities</span></div>
+          <div class="type-row"><span class="type-tag" data-size>.t-h3</span><span class="t-h3">Mastermind Companion</span></div>
+          <div class="type-row"><span class="type-tag" data-size>.t-body</span><span class="t-body" style="color:var(--text-body-cool)">Body on a cool surface stays a step quieter than the title.</span></div>
+          <div class="type-row"><span class="type-tag" data-size>.t-sm</span><span class="t-sm" style="color:var(--text-muted-cool)">Supporting copy and metadata.</span></div>
+          <div class="type-row"><span class="type-tag" data-size>.t-xs</span><span class="t-xs" style="color:var(--text-muted-cool)">Last used 2d ago</span></div>
+          <div class="type-row"><span class="type-tag" data-size>.t-label</span><span class="t-label" style="color:var(--text-label-cool)">Section label</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="f-space">
+    <div class="section-head">
+      <span class="section-title">Spacing</span>
+      <span class="section-count">21 steps &middot; literal pixels</span>
+    </div>
+    <p class="story-dek">These are the only valid spacing numbers, and they are pixels: <code>gap-8</code> is 8px, not 32px. Any other number silently falls back to Tailwind's 4px scale — <code>py&#45;10</code> renders 40px with no error. When a value falls between steps, round down.</p>
+    <div id="spacing"></div>
+  </section>
+
+  <section id="f-radius">
+    <div class="section-head">
+      <span class="section-title">Radius</span>
+      <span class="section-count" id="radius-count"></span>
+    </div>
+    <p class="story-dek">Pill for buttons, chips and avatars. <code>--r-xl</code> for large glass shells, <code>--r-lg</code> for cards, <code>--r-md</code> for inputs and images, <code>--r-sm</code> for micro surfaces.</p>
+    <div class="tiles" id="radius"></div>
+  </section>
+
+  <section id="f-elev">
+    <div class="section-head">
+      <span class="section-title">Elevation</span>
+      <span class="section-count" id="elev-count"></span>
+    </div>
+    <p class="story-dek">Drops are blue-grey, not neutral — a grey drop under glass reads as dirt. Do not invent a second shadow to separate sections. <code>--shadow-lit-*</code> belongs only on its matching lit button (see Buttons above).</p>
+    <div class="tiles" id="elevation"></div>
+  </section>
+
+  <section id="f-logo">
+    <div class="section-head">
+      <span class="section-title">Logo</span>
+      <span class="section-count">assets/brand/logo/</span>
+    </div>
+    <p class="story-dek">Blue on the wash, white, or glass; white on photography and dark surfaces. Below 120px wide, use the mark alone. Never retype the wordmark, recolour it, or put the blue logo on orange. Rules: <code>spec/brand-logo.md</code>.</p>
+    <div class="logo-grid">
+      <div class="logo-tile"><div class="stage"><img src="../assets/brand/logo/logo-minds-blue.svg" alt="Minds logo, blue"></div><div class="label"><div class="varname">logo-minds-blue.svg</div><div class="hex">default</div></div></div>
+      <div class="logo-tile"><div class="stage dark"><img src="../assets/brand/logo/logo-minds-white.svg" alt="Minds logo, white"></div><div class="label"><div class="varname">logo-minds-white.svg</div><div class="hex">photography, dark surfaces</div></div></div>
+      <div class="logo-tile"><div class="stage"><img src="../assets/brand/logo/logo-mark-blue.svg" alt="Minds mark, blue"></div><div class="label"><div class="varname">logo-mark-blue.svg</div><div class="hex">favicon, under 120px</div></div></div>
+      <div class="logo-tile"><div class="stage dark"><img src="../assets/brand/logo/logo-mark-white.svg" alt="Minds mark, white"></div><div class="label"><div class="varname">logo-mark-white.svg</div><div class="hex">mark on dark</div></div></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ COMPONENTS ══════════════════════════ -->
+  <p class="group-title">Components</p>
+  <p class="dek" style="margin-top:-6px;margin-bottom:28px;">Each component in <code>ui/react/components/ui/</code>, previewed as it renders, with the code to use it. Previews sit on the canvas wash because glass needs it.</p>
+
+  <section class="story" id="c-button">
+    <div class="section-head"><span class="section-title">Button</span><span class="section-count">button.jsx</span></div>
+    <p class="story-dek">Every button is a pill and its label is one line — <code>whitespace-nowrap</code> is load-bearing. One lit orange per view; other filled actions are lit blue; the white button sits beside a primary. Inside a card, use blue. If a label overflows at 390px, shorten the copy — never shrink the padding or type.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="vrow"><p class="vlabel">variant · primary / secondary / quiet — use these</p>
+        <div class="vitems">
+          <button class="pv-btn pv-md btn-lit-orange">Launch a Mind</button>
+          <button class="pv-btn pv-md btn-lit-blue">Chat</button>
+          <button class="pv-btn pv-md btn-secondary-v2">Log in</button>
+        </div></div>
+      <div class="vrow"><p class="vlabel">variant · link-secondary / link-primary</p>
+        <div class="vitems">
+          <button class="pv-btn pv-link secondary">See how it works</button>
+          <button class="pv-btn pv-link primary">Get your link</button>
+        </div></div>
+      <div class="vrow"><p class="vlabel">size · sm / md / lg / xl</p>
+        <div class="vitems">
+          <button class="pv-btn pv-sm btn-lit-blue">Small</button>
+          <button class="pv-btn pv-md btn-lit-blue">Medium</button>
+          <button class="pv-btn pv-lg btn-lit-blue">Large</button>
+          <button class="pv-btn pv-xl btn-lit-blue">Extra large</button>
+        </div></div>
+      <div class="vrow"><p class="vlabel">disabled</p>
+        <div class="vitems">
+          <button class="pv-btn pv-md btn-lit-blue" disabled>Chat</button>
+          <button class="pv-btn pv-md btn-secondary-v2" disabled>Log in</button>
+        </div></div>
+      <div class="vrow"><p class="vlabel">a pair on mobile · stacks full width</p>
+        <div class="pv-stack">
+          <button class="pv-btn pv-md btn-lit-orange">Start free</button>
+          <button class="pv-btn pv-md btn-secondary-v2">See how it works</button>
+        </div></div>
+      <div class="vrow"><p class="vlabel">variant · glass — over a photograph only, when quiet doesn't hold</p>
+        <div class="vitems" style="padding:var(--space-48) var(--space-24);border-radius:var(--r-md);background:url('../assets/artwork/illustrations/minds-only/home-hero-idle.webp') center/cover">
+          <button class="pv-btn pv-md btn-lit-orange">Launch a Mind</button>
+          <button class="pv-btn pv-md pv-glass">See how it works</button>
+        </div></div>
+    </div>
+    <div class="code"><pre>import { Button } from "@/components/ui/button";
+
+&lt;div className="flex flex-col items-stretch gap-12 sm:flex-row sm:flex-wrap sm:items-center"&gt;
+  &lt;Button&gt;Launch a Mind&lt;/Button&gt;                     {/* variant="primary" size="md" */}
+  &lt;Button variant="quiet"&gt;Log in&lt;/Button&gt;
+&lt;/div&gt;
+&lt;Button variant="secondary" size="sm"&gt;Chat&lt;/Button&gt;
+&lt;Button variant="link-secondary" size="none"&gt;See how it works&lt;/Button&gt;
+
+&lt;!-- HTML lane: tokens.css recipe classes --&gt;
+&lt;a class="btn btn-lit-orange"&gt;Launch a Mind&lt;/a&gt;</pre><button class="copy">Copy</button></div>
+    <table class="props">
+      <tr><th>prop</th><th>values</th><th>when</th></tr>
+      <tr><td>variant</td><td><code>primary</code> · <code>secondary</code> · <code>quiet</code> · <code>glass</code> · <code>link-primary</code> · <code>link-secondary</code></td><td>primary = lit orange, the action the screen exists for. secondary = lit blue. quiet = white beside a primary. glass = translucent, over photography only.</td></tr>
+      <tr><td>size</td><td><code>sm</code> 8/24 · <code>md</code> 12/36 · <code>lg</code> 16/40 · <code>xl</code> 16/48 · <code>none</code></td><td>md is the default. none is for link variants.</td></tr>
+      <tr><td>asChild</td><td>boolean</td><td>Render as the child element, e.g. an <code>&lt;a&gt;</code>.</td></tr>
+    </table>
+  </section>
+
+  <section class="story" id="c-card">
+    <div class="section-head"><span class="section-title">Card</span><span class="section-count">card.jsx &middot; .glass-shell recipe</span></div>
+    <p class="story-dek">Frosted glass on the wash: white at 0.85, a lit top edge and a blue-grey drop. Needs a non-flat ground behind it — on a flat colour the blur is invisible. The nested shell has no component; it is the <code>.glass-shell</code> + <code>.glass-shell-inner</code> recipe in tokens.css, for the rail and any panel that needs a lit rim.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="vrow"><p class="vlabel">Card · Header · Title · Description · Content · Footer</p>
+        <div class="vitems">
+          <div class="glass-card pv-card">
+            <h3>Sales Mind</h3>
+            <p class="desc">Follows up on every lead so none go cold.</p>
+            <div class="content">Drafts the reply, books the call, and tells you who's ready to buy.</div>
+            <div class="foot"><button class="pv-btn pv-sm btn-lit-blue">Launch</button><button class="pv-btn pv-sm btn-secondary-v2">Details</button></div>
+          </div>
+        </div></div>
+      <div class="vrow"><p class="vlabel">.glass-shell + .glass-shell-inner</p>
+        <div class="vitems">
+          <div class="glass-shell"><div class="glass-shell-inner pv-shell-body">The 3px gap is the rim. One bordered div flattens it.</div></div>
+        </div></div>
+    </div>
+    <div class="code"><pre>import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+
+&lt;Card&gt;
+  &lt;CardHeader&gt;
+    &lt;CardTitle&gt;Sales Mind&lt;/CardTitle&gt;
+    &lt;CardDescription&gt;Follows up on every lead so none go cold.&lt;/CardDescription&gt;
+  &lt;/CardHeader&gt;
+  &lt;CardContent&gt;…&lt;/CardContent&gt;
+  &lt;CardFooter&gt;&lt;Button variant="secondary" size="sm"&gt;Launch&lt;/Button&gt;&lt;/CardFooter&gt;
+&lt;/Card&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-input">
+    <div class="section-head"><span class="section-title">Input, Textarea, Label</span><span class="section-count">input.jsx &middot; textarea.jsx &middot; label.jsx</span></div>
+    <p class="story-dek"><code>Input</code> is a bare field — no fill, no border — meant to sit inside a field shell that the page draws: <code>--bg-field-cool</code>, a <code>--line-cool</code> hairline, <code>--r-md</code> (pill for search), and a 1px <code>--blue</code> ring on focus. Fields render at 16px or more on mobile so iOS Safari doesn't zoom.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="vrow"><p class="vlabel">Label + Input in a field shell · click to focus</p>
+        <div class="pv-field-col">
+          <label class="pv-label" for="pv-in-1">Mind name</label>
+          <div class="pv-field"><input class="pv-input" id="pv-in-1" placeholder="Street.Fashion"></div>
+        </div></div>
+      <div class="vrow"><p class="vlabel">search · pill shell</p>
+        <div class="pv-field pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input class="pv-input" placeholder="Search Minds…" aria-label="Search Minds"></div></div>
+      <div class="vrow"><p class="vlabel">Textarea</p>
+        <textarea class="pv-textarea" placeholder="What should this Mind handle for you?" aria-label="Brief"></textarea></div>
+    </div>
+    <div class="code"><pre>import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+
+&lt;Label htmlFor="name"&gt;Mind name&lt;/Label&gt;
+&lt;div className="flex items-center gap-12 rounded-md px-16 py-12 bg-[var(--bg-field-cool)]
+                shadow-[inset_0_0_0_1px_var(--line-cool)] focus-within:shadow-[0_0_0_1px_var(--blue)]"&gt;
+  &lt;Input id="name" className="text-[16px] md:text-body-default" placeholder="Street.Fashion" /&gt;
+&lt;/div&gt;
+&lt;Textarea placeholder="What should this Mind handle for you?" /&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-radio">
+    <div class="section-head"><span class="section-title">Radio group</span><span class="section-count">radio-group.jsx</span></div>
+    <p class="story-dek">A list of choices, or a selectable card row (the redeem flow). A checked circle is a lit blue solid — never orange. A selected card flips to a solid <code>--blue-lit</code> fill with white text, and its circle inverts to white so it stays visible.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="vrow"><p class="vlabel">RadioGroup + RadioGroupItem · click to choose</p>
+        <div class="pv-radio-group" data-radio>
+          <div class="pv-radio-row on"><span class="pv-radio"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Send rewards to my default Mind</div>
+          <div class="pv-radio-row"><span class="pv-radio"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Choose a Mind each time</div>
+        </div></div>
+      <div class="vrow"><p class="vlabel">RadioGroupCard · click to choose</p>
+        <div class="pv-radio-group" data-rcard>
+          <button class="pv-rcard on" type="button"><span class="pv-radio on"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span><span class="txt"><span class="t">1,000 Energy</span><span class="s">Credited to your default Mind</span></span><span class="end"><span class="tr">500 pts</span><span class="tl">cost</span></span></button>
+          <button class="pv-rcard" type="button"><span class="pv-radio"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span><span class="txt"><span class="t">5,000 Energy</span><span class="s">Credited to your default Mind</span></span><span class="end"><span class="tr">2,200 pts</span><span class="tl">cost</span></span></button>
+        </div></div>
+    </div>
+    <div class="code"><pre>import { RadioGroup, RadioGroupItem, RadioGroupCard } from "@/components/ui/radio-group";
+
+&lt;RadioGroup value={v} onValueChange={setV}&gt;
+  &lt;label className="flex items-center gap-12"&gt;&lt;RadioGroupItem value="default" /&gt; Send rewards to my default Mind&lt;/label&gt;
+&lt;/RadioGroup&gt;
+
+&lt;RadioGroupCard value="1k" selected={v === "1k"} onSelect={setV}
+  title="1,000 Energy" subtitle="Credited to your default Mind" trailing="500 pts" trailingLabel="cost" /&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-checkbox">
+    <div class="section-head"><span class="section-title">Checkbox</span><span class="section-count">checkbox.jsx</span></div>
+    <p class="story-dek">An independent yes/no, like a setting. Unchecked is a white square with a cool hairline; checked is a lit blue solid with a white check. Never orange. Always pair it with a label.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="vrow"><p class="vlabel">checked / unchecked · click</p>
+        <div class="pv-radio-group">
+          <div class="pv-check-row on" data-toggle><span class="pv-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>Top up automatically from your plan</div>
+          <div class="pv-check-row" data-toggle><span class="pv-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>Can use purchased Energy</div>
+        </div></div>
+      <div class="vrow"><p class="vlabel">disabled</p>
+        <div class="pv-check-row on"><span class="pv-check disabled"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>Managed by your plan</div></div>
+    </div>
+    <div class="code"><pre>import { Checkbox } from "@/components/ui/checkbox";
+
+&lt;label className="flex items-center gap-12"&gt;
+  &lt;Checkbox checked={autoTopUp} onCheckedChange={setAutoTopUp} /&gt;
+  Top up automatically from your plan
+&lt;/label&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-switch">
+    <div class="section-head"><span class="section-title">Switch</span><span class="section-count">switch.jsx</span></div>
+    <p class="story-dek">An on/off for a "running" state, like a Mind being online. On is the green lit gradient — a status, not a primary action, so neither blue nor orange. Don't use it for a choice among options; that's a segmented filter, marked in <code>--blue-lit</code>.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="vrow"><p class="vlabel">on / off · click</p>
+        <div class="pv-radio-group">
+          <div class="pv-check-row on" data-toggle><span class="pv-switch"></span>Online</div>
+          <div class="pv-check-row" data-toggle><span class="pv-switch"></span>Offline</div>
+        </div></div>
+    </div>
+    <div class="code"><pre>import { Switch } from "@/components/ui/switch";
+
+&lt;label className="flex items-center gap-12"&gt;
+  &lt;Switch checked={online} onCheckedChange={setOnline} /&gt;
+  Online
+&lt;/label&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-tabs">
+    <div class="section-head"><span class="section-title">Tabs</span><span class="section-count">tabs.jsx</span></div>
+    <p class="story-dek">Two shapes on one Radix root. Pill tabs switch a card's or panel's content. Underline tabs are page or section navigation — <code>sm</code> for a secondary row, <code>lg</code> when the tabs must hold their own next to a headline. The current tab is <code>--blue-lit</code>, never orange. Don't mix shapes in one group.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="vrow"><p class="vlabel">TabsList + TabsTrigger · pill · click</p>
+        <div class="vitems"><div class="pv-tabs-pill" data-tabs><button class="on">Skills</button><button>Apps</button><button>Artifacts</button></div></div></div>
+      <div class="vrow"><p class="vlabel">TabsListUnderline · size sm</p>
+        <div class="pv-tabs-line" data-tabs><button class="on">Refer a friend</button><button>Affiliate</button><button>History</button></div></div>
+      <div class="vrow"><p class="vlabel">TabsListUnderline · size lg</p>
+        <div class="pv-tabs-line lg" data-tabs><button class="on">Minds (21)</button><button>My Network</button></div></div>
+    </div>
+    <div class="code"><pre>import { Tabs, TabsList, TabsTrigger, TabsListUnderline, TabsTriggerUnderline, TabsContent } from "@/components/ui/tabs";
+
+&lt;Tabs defaultValue="skills"&gt;
+  &lt;TabsList&gt;
+    &lt;TabsTrigger value="skills"&gt;Skills&lt;/TabsTrigger&gt;
+    &lt;TabsTrigger value="apps"&gt;Apps&lt;/TabsTrigger&gt;
+  &lt;/TabsList&gt;
+  &lt;TabsContent value="skills"&gt;…&lt;/TabsContent&gt;
+&lt;/Tabs&gt;
+
+&lt;TabsListUnderline size="lg"&gt;
+  &lt;TabsTriggerUnderline size="lg" value="minds"&gt;Minds (21)&lt;/TabsTriggerUnderline&gt;
+&lt;/TabsListUnderline&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-dropdown">
+    <div class="section-head"><span class="section-title">Sort and filter dropdowns</span><span class="section-count">sort-dropdown.jsx &middot; filter-dropdown.jsx &middot; dropdown-menu.jsx</span></div>
+    <p class="story-dek">A pill trigger that opens a white menu. In the sort menu the current option is <code>--blue-lit</code> and semibold — no fill, no check. In the filter menu each group's current option gets a <code>--blue-soft</code> tint and a check. The trigger's count badge shows how many groups moved off their default. Menus are shown open here.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="vitems" style="align-items:flex-start;gap:24px">
+        <div class="pv-dd">
+          <p class="vlabel">SortDropdown</p>
+          <button class="pv-trigger" type="button"><span class="pre">Sort:</span><span>Recently created</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="pv-menu">
+            <div class="pv-menu-item on">Recently created</div>
+            <div class="pv-menu-item">Last used</div>
+            <div class="pv-menu-item">Name A–Z</div>
+          </div>
+        </div>
+        <div class="pv-dd">
+          <p class="vlabel">FilterDropdown · activeCount 2</p>
+          <button class="pv-trigger" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></svg><span>Filters</span><span class="pv-count">2</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="pv-menu pv-filter">
+            <div class="grp">Status</div>
+            <div class="opt">All</div>
+            <div class="opt on">Online<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div class="opt">Offline</div>
+            <div class="div"></div>
+            <div class="grp">Auth</div>
+            <div class="opt">All types</div>
+            <div class="opt on">API key<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="code"><pre>import { SortDropdown } from "@/components/ui/sort-dropdown";
+import { FilterDropdown } from "@/components/ui/filter-dropdown";
+
+&lt;SortDropdown value={sort} onChange={setSort}
+  options={[{ value: "created", label: "Recently created" }, { value: "used", label: "Last used" }]} /&gt;
+
+&lt;FilterDropdown activeCount={2} groups={[
+  { label: "Status", value: status, onChange: setStatus,
+    options: [{ value: "all", label: "All" }, { value: "online", label: "Online" }] },
+]} /&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-badge">
+    <div class="section-head"><span class="section-title">Badge</span><span class="section-count">badge.jsx</span></div>
+    <p class="story-dek">Always a pill, always uppercase caption. A badge is a label, never an action — tint surfaces only.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="vrow"><p class="vlabel">variant · blue (default) / orange / neutral / outline / success</p>
+        <div class="vitems">
+          <span class="pv-badge blue">Master Mind</span>
+          <span class="pv-badge orange">Limited</span>
+          <span class="pv-badge neutral">Draft</span>
+          <span class="pv-badge outline">Beta</span>
+          <span class="pv-badge success">Online</span>
+        </div></div>
+    </div>
+    <div class="code"><pre>import { Badge } from "@/components/ui/badge";
+
+&lt;Badge&gt;Master Mind&lt;/Badge&gt;
+&lt;Badge variant="orange"&gt;Limited&lt;/Badge&gt;
+&lt;Badge variant="outline"&gt;Beta&lt;/Badge&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-avatar">
+    <div class="section-head"><span class="section-title">Avatar</span><span class="section-count">avatar.jsx</span></div>
+    <p class="story-dek">Always fully round. Use the square portraits in <code>assets/artwork/avatars/</code>. The fallback is the initial on <code>--blue-soft</code>.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="vrow"><p class="vlabel">size · sm 24 / md 40 / lg 48</p>
+        <div class="vitems">
+          <span class="pv-avatar sm"><img src="../assets/artwork/avatars/minds/avatar-mind-general-assistant.webp" alt=""></span>
+          <span class="pv-avatar md"><img src="../assets/artwork/avatars/minds/avatar-mind-general-assistant.webp" alt=""></span>
+          <span class="pv-avatar lg"><img src="../assets/artwork/avatars/minds/avatar-mind-general-assistant.webp" alt=""></span>
+          <span class="pv-avatar lg"><img src="../assets/artwork/avatars/humans/avatar-human-aiko.webp" alt=""></span>
+        </div></div>
+      <div class="vrow"><p class="vlabel">AvatarFallback</p>
+        <div class="vitems"><span class="pv-avatar sm">D</span><span class="pv-avatar md">D</span><span class="pv-avatar lg">D</span></div></div>
+    </div>
+    <div class="code"><pre>import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+
+&lt;Avatar size="lg"&gt;
+  &lt;AvatarImage src={kaiPortrait} alt="" /&gt;
+  &lt;AvatarFallback&gt;K&lt;/AvatarFallback&gt;
+&lt;/Avatar&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-pagination">
+    <div class="section-head"><span class="section-title">Pagination</span><span class="section-count">pagination.jsx</span></div>
+    <p class="story-dek">Rounded-square page buttons. The current page fills <code>--blue-lit</code> — a selected state, not a call to action, so not orange. More than 7 pages collapse to first, last and current ±1. <code>lg</code> for a page's main list, <code>sm</code> inside a dense card.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="vrow"><p class="vlabel">size sm · 9 pages · click</p><div class="vitems"><nav class="pv-pages" data-pages="9" data-page="1" aria-label="Pagination"></nav></div></div>
+      <div class="vrow"><p class="vlabel">size lg · 9 pages · click</p><div class="vitems"><nav class="pv-pages lg" data-pages="9" data-page="5" aria-label="Pagination"></nav></div></div>
+    </div>
+    <div class="code"><pre>import { Pagination } from "@/components/ui/pagination";
+
+&lt;Pagination page={page} pageCount={9} onPageChange={setPage} size="lg" /&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-accordion">
+    <div class="section-head"><span class="section-title">Accordion</span><span class="section-count">accordion.jsx</span></div>
+    <p class="story-dek">FAQ rows. White, a soft drop; hover adds a hairline. The open row takes a <code>--blue-lit</code> edge and title, and swaps plus for minus.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="pv-acc" data-acc>
+        <div class="pv-acc-item open"><button type="button">What is a Mind?<svg class="minus" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg><svg class="plus" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></button><div class="pv-acc-body"><hr><p>A personal AI that does a job for you, remembers what you told it, and keeps working while you're away.</p></div></div>
+        <div class="pv-acc-item"><button type="button">How much does it cost?<svg class="minus" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg><svg class="plus" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></button><div class="pv-acc-body"><hr><p>You pay for the Energy a Mind uses. Every plan includes some each month.</p></div></div>
+      </div>
+    </div>
+    <div class="code"><pre>import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+
+&lt;Accordion type="single" collapsible&gt;
+  &lt;AccordionItem value="what"&gt;
+    &lt;AccordionTrigger&gt;What is a Mind?&lt;/AccordionTrigger&gt;
+    &lt;AccordionContent&gt;A personal AI that does a job for you…&lt;/AccordionContent&gt;
+  &lt;/AccordionItem&gt;
+&lt;/Accordion&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-separator">
+    <div class="section-head"><span class="section-title">Separator</span><span class="section-count">separator.jsx</span></div>
+    <p class="story-dek">A 1px <code>--line-cool</code> rule, inside a component. Never between page sections — sections are separated by a background change and whitespace.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="vrow"><p class="vlabel">horizontal</p><div class="pv-sep h"></div></div>
+      <div class="vrow"><p class="vlabel">vertical</p><div class="vitems" style="height:24px;font-size:var(--font-size-body-small);color:var(--text-muted-cool)">622.02 Energy<div class="pv-sep v"></div>Auto top-up on</div></div>
+    </div>
+    <div class="code"><pre>import { Separator } from "@/components/ui/separator";
+
+&lt;Separator /&gt;
+&lt;Separator orientation="vertical" /&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <section class="story" id="c-nav">
+    <div class="section-head"><span class="section-title">Nav</span><span class="section-count">nav.jsx</span></div>
+    <p class="story-dek">The v2 site header: a translucent glass bar (<code>--nav-glass</code>, <code>--nav-liquid-filter</code>, a <code>--nav-glass-line</code> hairline) with cool grey links, the language pill, the lit orange CTA and the account initial as a small lit blue disc. Links collapse to a menu button below 1024px — resize the window to see it. Compare <code>sample-screens/</code>.</p>
+    <div class="canvas v2 canvas-blooms pv">
+      <div class="pv-nav">
+        <img src="../assets/brand/logo/logo-minds-blue.svg" alt="Minds">
+        <ul><li><a href="#c-nav">For Builders</a></li><li><a href="#c-nav">About Minds</a></li><li><a href="#c-nav">Minds Bazaar</a></li><li><a href="#c-nav">Pricing</a></li></ul>
+        <div class="right">
+          <span class="lang"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>EN</span>
+          <a class="pv-btn pv-sm btn-lit-orange" href="#c-nav">Launch a Mind</a>
+          <span class="initial">D</span>
+        </div>
+        <span class="burger"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+      </div>
+    </div>
+    <div class="code"><pre>import { Nav } from "@/components/ui/nav";
+
+&lt;Nav logo={&lt;img src={logoBlue} alt="Minds" className="h-36" /&gt;}
+  links={[{ label: "Pricing", href: "/pricing" }]}
+  cta={{ label: "Launch a Mind", href: "/launch" }} avatarInitial="D" /&gt;</pre><button class="copy">Copy</button></div>
+  </section>
+
+  <footer>
+    Swatch values, type sizes, radius and shadows are read from ui/tokens.css when this page loads — edit the tokens and this page follows. Each semantic swatch also names the base step it should point to; if that ever stops matching tokens.css, the swatch shows it in red. Component previews are hand-built to mirror ui/react/components/ui/ — when a component changes, update its preview here.
+  </footer>
+</main>
+</div>
+
+<div class="toast" id="toast">copied</div>
+
+<script>
+// Token NAMES and the base step each should point at. Values are read from
+// tokens.css at load, never typed here. A 3rd entry draws a sample instead of
+// a block: a word for text colours, '@shadow' for a shadow.
+const DATA = {
+  'g-blue': [['--blue-50'],['--blue-200'],['--blue-400'],['--blue-500'],['--blue-600'],['--blue-700'],['--blue-800'],['--blue-900']],
+  'g-orange': [['--orange-50'],['--orange-300'],['--orange-500'],['--orange-600'],['--orange-700']],
+  'g-gradients': [['--gradient-blue'],['--gradient-orange']],
+  'g-absolute': [['--white'],['--black']],
+  'g-ramps': [
+    ['--grey-warm-50'],['--grey-warm-100'],['--grey-warm-200'],['--grey-warm-400'],['--grey-warm-600'],['--grey-warm-700'],['--grey-warm-950'],
+    ['--grey-cool-50'],['--grey-cool-100'],['--grey-cool-200'],['--grey-cool-400'],['--grey-cool-600'],['--grey-cool-700'],['--grey-cool-950'],
+    ['--grey-neutral-50'],['--grey-neutral-100'],['--grey-neutral-200'],['--grey-neutral-400'],['--grey-neutral-600'],['--grey-neutral-700'],['--grey-neutral-950'],
+  ],
+  'g-green': [['--light-green-01'],['--light-green-02'],['--primary-green-01'],['--secondary-green-01'],['--secondary-green-02']],
+  'g-red': [['--light-red-01'],['--light-red-02'],['--primary-red-01'],['--secondary-red-01'],['--secondary-red-02']],
+  'g-yellow': [['--light-yellow-01'],['--light-yellow-02'],['--primary-yellow-01'],['--secondary-yellow-01'],['--secondary-yellow-02']],
+  'g-brand-blue': [['--blue','blue-800'],['--blue-hover','blue-900'],['--blue-lit','blue-600'],['--blue-tint','blue-400'],['--blue-soft','blue-50']],
+  'g-brand-orange': [['--orange','orange-600'],['--orange-hover','orange-700'],['--orange-lit','orange-500'],['--orange-tint','orange-300'],['--orange-soft','orange-50']],
+  'g-btn-blue': [['--btn-primary-blue-bg','gradient-blue'],['--btn-primary-blue-shadow','shadow-lit-blue','@shadow']],
+  'g-btn-orange': [['--btn-primary-orange-bg','gradient-orange'],['--btn-primary-orange-shadow','shadow-lit-orange','@shadow']],
+  'g-btn-secondary': [['--btn-secondary-ink','blue-lit','Log in'],['--btn-secondary-bg'],['--btn-secondary-bg-hover','bg-panel-cool'],['--btn-secondary-line','line-cool'],['--btn-secondary-line-hover','line-hover-cool'],['--btn-secondary-shadow','','@shadow']],
+  'g-btn-text': [['--btn-text-blue','blue-lit','Text button'],['--btn-text-blue-hover','blue-tint','Text button'],['--btn-text-orange','orange','Text button'],['--btn-text-orange-hover','orange-hover','Text button']],
+  'g-status-success': [['--success','primary-green-01'],['--success-soft','light-green-01']],
+  'g-status-warning': [['--warning','orange-700'],['--warning-soft']],
+  'g-status-notice': [['--yellow','primary-yellow-01'],['--yellow-soft','light-yellow-01']],
+  'g-status-error': [['--error','primary-red-01'],['--error-soft','light-red-01']],
+  'g-status-switch': [['--gradient-switch-on'],['--gradient-switch-off']],
+  'g-surfaces': [['--canvas-top'],['--canvas-bottom'],['--bg-card'],['--bg-page-neutral','grey-neutral-50'],['--bg-panel-cool','grey-cool-50'],['--bg-skeleton-cool','grey-cool-100'],['--bg-field-cool'],['--bg-field-neutral'],['--bg-field-warm'],['--bg-subtle-warm','grey-warm-50'],['--bg-hover-warm','grey-warm-50'],['--bg-portrait-foot','bg-card']],
+  'g-line-warm': [['--line-light-warm','grey-warm-50'],['--line-warm','grey-warm-100'],['--line-strong-warm','grey-warm-200']],
+  'g-line-cool': [['--line-light-cool','grey-cool-50'],['--line-cool','grey-cool-100'],['--line-strong-cool','grey-cool-200']],
+  'g-line-neutral': [['--line-light-neutral','grey-neutral-50'],['--line-neutral','grey-neutral-100'],['--line-strong-neutral','grey-neutral-200']],
+  'g-line-hover': [['--line-hover-cool']],
+  'g-text-cool': [['--text-title-cool','grey-cool-950','Aa'],['--text-body-cool','grey-cool-700','Aa'],['--text-muted-cool','grey-cool-600','Aa'],['--text-label-cool','grey-cool-400','Aa']],
+  'g-text-warm': [['--text-title-warm','grey-warm-950','Aa'],['--text-body-warm','grey-warm-700','Aa'],['--text-muted-warm','grey-warm-600','Aa'],['--text-label-warm','grey-warm-400','Aa']],
+  'g-text-neutral': [['--text-title-neutral','grey-neutral-950','Aa'],['--text-body-neutral','grey-neutral-700','Aa'],['--text-muted-neutral','grey-neutral-600','Aa'],['--text-label-neutral','grey-neutral-400','Aa']],
+  'g-ring': [['--ring-blue-pale','blue-200'],['--ring-grey','line-strong-cool']],
+  'g-glass-shell': [['--glass-outer'],['--glass-rim'],['--glass-inner'],['--glass-edge']],
+  'g-glass-contents': [['--glass-pill'],['--glass-divider'],['--glass-label','text-label-cool'],['--glass-card'],['--glass-card-line'],['--glass-ctl'],['--glass-ctl-hover']],
+  'g-glass-nav': [['--nav-glass'],['--nav-glass-line']],
+  'g-graph-grey': [['--graph-node-grey-1','grey-cool-200'],['--graph-node-grey-2','grey-cool-400'],['--graph-node-grey-3','grey-cool-600']],
+  'g-graph-human': [['--graph-node-human-1'],['--graph-node-human-2'],['--graph-node-human-3']],
+  'g-graph-mind': [['--graph-node-mind-1','blue-500'],['--graph-node-mind-2','blue-700'],['--graph-node-mind-3','blue-900'],['--graph-node-mind-alt-1','blue-200'],['--graph-node-mind-alt-2','blue-400'],['--graph-node-mind-alt-3','blue-500']],
+  'g-graph-you': [['--graph-node-you-1','orange-300'],['--graph-node-you-2','orange-600'],['--graph-node-you-3','orange-700']],
+};
+const BASE_IDS = ['g-blue','g-orange','g-gradients','g-absolute','g-ramps','g-green','g-red','g-yellow'];
+
+const css = getComputedStyle(document.documentElement);
+const live = name => css.getPropertyValue(name).trim();
+
+function relativeLuma(v){
+  const m = v.match(/rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)(?:,\s*([\d.]+))?\)/);
+  if (m) {
+    const [r, g, b] = m.slice(1, 4).map(Number), a = m[4] === undefined ? 1 : Number(m[4]);
+    const blend = c => (c * a + 255 * (1 - a)) / 255;
+    return 0.2126 * blend(r) + 0.7152 * blend(g) + 0.0722 * blend(b);
+  }
+  const h = v.replace('#', '');
+  if (!/^[0-9a-f]{6}$/i.test(h)) return 0;
+  return [0, 2, 4].map(i => parseInt(h.substr(i, 2), 16) / 255).reduce((s, c, i) => s + c * [0.2126, 0.7152, 0.0722][i], 0);
+}
+
+const toast = document.getElementById('toast');
+function flash(text, el){
+  el && el.classList.add('copied');
+  toast.textContent = 'copied ' + text;
+  toast.classList.add('show');
+  setTimeout(() => { el && el.classList.remove('copied'); toast.classList.remove('show'); }, 1200);
+}
+function copy(text, el){
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => flash(text.length > 40 ? 'snippet' : text, el), () => flash(text, el));
+  else flash(text, el);
+}
+
+Object.keys(DATA).forEach(id => {
+  const grid = document.getElementById(id);
+  DATA[id].forEach(([name, aliasOf, sample]) => {
+    const value = live(name);
+    const isGradient = value.indexOf('linear-gradient') === 0;
+    const btn = document.createElement('button');
+    btn.className = 'swatch';
+    btn.type = 'button';
+    const chip = document.createElement('div');
+    if (sample === '@shadow') {
+      chip.className = 'chip chip-btn light-line';
+      const d = document.createElement('span');
+      d.className = 'demo-drop';
+      d.style.boxShadow = value;
+      chip.appendChild(d);
+    } else if (sample) {
+      chip.className = 'chip light-line ' + (sample === 'Aa' ? 'chip-aa' : 'chip-text');
+      chip.style.color = value;
+      chip.textContent = sample;
+    } else {
+      chip.className = 'chip' + (!isGradient && relativeLuma(value) > 0.9 ? ' light-line' : '');
+      // Gradients run top-to-bottom in tokens.css; drawn left-to-right here only
+      // because the swatch is wide and short.
+      chip.style.background = isGradient ? value.replace('180deg', '90deg') : value;
+    }
+    const label = document.createElement('div');
+    label.className = 'label';
+    const vn = document.createElement('div');
+    vn.className = 'varname';
+    vn.textContent = name.replace(/^--/, '');
+    const hx = document.createElement('div');
+    hx.className = 'hex';
+    hx.textContent = !value ? 'missing from tokens.css'
+      : isGradient ? (value.match(/#[0-9a-f]{6}/gi) || []).join(' → ')
+      : sample === '@shadow' ? 'box-shadow'
+      : value;
+    hx.title = value;
+    label.append(vn, hx);
+    if (aliasOf) {
+      const al = document.createElement('div');
+      al.className = 'hex';
+      al.textContent = '→ --' + aliasOf;
+      if (live('--' + aliasOf) !== value) { btn.classList.add('stale'); al.textContent += ' (no longer matches)'; }
+      label.appendChild(al);
+    }
+    if (!value) btn.classList.add('stale');
+    btn.setAttribute('aria-label', name + (aliasOf ? ', points at --' + aliasOf : '') + ', ' + value);
+    btn.append(chip, label);
+    btn.addEventListener('click', () => copy('var(' + name + ')', btn));
+    grid.appendChild(btn);
+  });
+});
+
+// Section counts and the stats row, from DATA so they can't be wrong.
+document.querySelectorAll('[data-count]').forEach(el => {
+  const parts = el.dataset.count.split(',').map(p => p.split(':'));
+  el.textContent = parts.length === 1 && !parts[0][1]
+    ? DATA[parts[0][0]].length
+    : parts.map(([id, lbl]) => lbl + ' — ' + DATA[id].length).join(', ');
+});
+const count = ids => ids.reduce((s, id) => s + DATA[id].length, 0);
+document.getElementById('stat-base').textContent = count(BASE_IDS);
+document.getElementById('stat-semantic').textContent = count(Object.keys(DATA).filter(id => !BASE_IDS.includes(id)));
+document.getElementById('stat-components').textContent = document.querySelectorAll('.story').length;
+
+// Spacing, radius, elevation
+const SPACING = [1,2,3,4,8,12,16,20,24,36,40,48,60,72,84,96,108,120,160,200,240];
+const sp = document.getElementById('spacing');
+SPACING.forEach(n => {
+  const row = document.createElement('div');
+  row.className = 'space-row';
+  row.innerHTML = '<span></span><span class="space-bar"></span>';
+  row.firstChild.textContent = n + 'px';
+  row.lastChild.style.width = 'var(--space-' + n + ')';
+  sp.appendChild(row);
+});
+function tiles(id, names, style){
+  const host = document.getElementById(id);
+  names.forEach(n => {
+    const t = document.createElement('div');
+    t.innerHTML = '<div class="tile"></div><div class="tile-name"></div><div class="tile-val"></div>';
+    Object.assign(t.firstChild.style, style(n));
+    t.children[1].textContent = n;
+    t.children[2].textContent = live(n) || 'missing from tokens.css';
+    host.appendChild(t);
+  });
+  return names.length;
+}
+document.getElementById('radius-count').textContent = tiles('radius', ['--r-sm','--r-md','--r-lg','--r-xl','--r-pill'],
+  n => ({ borderRadius: 'var(' + n + ')', boxShadow: 'inset 0 0 0 1px var(--line-strong-cool)' }));
+document.getElementById('elev-count').textContent = tiles('elevation', ['--elev-card','--elev-card-hover','--elev-card-selected','--elev-lg','--glass-shadow'],
+  n => ({ borderRadius: 'var(--r-lg)', boxShadow: 'var(' + n + ')' }));
+
+// Type sizes as this screen renders them
+function sizes(){
+  document.querySelectorAll('[data-size]').forEach(tag => {
+    let i = tag.querySelector('i');
+    if (!i) { i = document.createElement('i'); tag.appendChild(i); }
+    const cs = getComputedStyle(tag.nextElementSibling);
+    i.textContent = Math.round(parseFloat(cs.fontSize)) + 'px · ' + cs.fontWeight;
+  });
+}
+sizes();
+addEventListener('resize', sizes);
+document.fonts && document.fonts.ready.then(sizes);
+
+// Code copy buttons
+document.querySelectorAll('.code .copy').forEach(b => b.addEventListener('click', () => copy(b.previousElementSibling.textContent, null)));
+
+// Sidebar: mobile copy + current-section highlight
+const sideList = document.getElementById('side-list');
+document.querySelector('.jump').appendChild(sideList.cloneNode(true));
+const links = [...sideList.querySelectorAll('a')];
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+  });
+}, { rootMargin: '0px 0px -75% 0px' });
+links.forEach(a => { const s = document.querySelector(a.getAttribute('href')); s && spy.observe(s); });
+
+// Preview interactions
+document.querySelectorAll('[data-tabs]').forEach(g => g.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  g.querySelectorAll('button').forEach(o => o.classList.toggle('on', o === b));
+}));
+document.querySelectorAll('[data-radio]').forEach(g => g.addEventListener('click', e => {
+  const r = e.target.closest('.pv-radio-row'); if (!r) return;
+  g.querySelectorAll('.pv-radio-row').forEach(o => o.classList.toggle('on', o === r));
+}));
+document.querySelectorAll('[data-rcard]').forEach(g => g.addEventListener('click', e => {
+  const c = e.target.closest('.pv-rcard'); if (!c) return;
+  g.querySelectorAll('.pv-rcard').forEach(o => { o.classList.toggle('on', o === c); o.querySelector('.pv-radio').classList.toggle('on', o === c); });
+}));
+document.querySelectorAll('[data-toggle]').forEach(el => el.addEventListener('click', () => el.classList.toggle('on')));
+document.querySelectorAll('[data-acc]').forEach(g => g.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const item = b.parentElement, wasOpen = item.classList.contains('open');
+  g.querySelectorAll('.pv-acc-item').forEach(o => o.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}));
+// Pagination: same collapse rule as pagination.jsx's getPageNumbers()
+const CHEV = d => '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="' + d + '"/></svg>';
+function renderPages(nav){
+  const page = +nav.dataset.page, count = +nav.dataset.pages;
+  const pages = count <= 7 ? Array.from({ length: count }, (_, i) => i + 1)
+    : [...new Set([1, count, page, page - 1, page + 1])].filter(p => p >= 1 && p <= count).sort((a, b) => a - b);
+  let html = '<button type="button" data-go="' + (page - 1) + '"' + (page <= 1 ? ' disabled' : '') + ' aria-label="Previous page">' + CHEV('m15 18-6-6 6-6') + '</button>';
+  pages.forEach((p, i) => {
+    if (i && p - pages[i - 1] > 1) html += '<span>…</span>';
+    html += '<button type="button" data-go="' + p + '"' + (p === page ? ' aria-current="page"' : '') + '>' + p + '</button>';
+  });
+  html += '<button type="button" data-go="' + (page + 1) + '"' + (page >= count ? ' disabled' : '') + ' aria-label="Next page">' + CHEV('m9 18 6-6-6-6') + '</button>';
+  nav.innerHTML = html;
+}
+document.querySelectorAll('[data-pages]').forEach(nav => {
+  renderPages(nav);
+  nav.addEventListener('click', e => {
+    const b = e.target.closest('[data-go]'); if (!b || b.disabled) return;
+    nav.dataset.page = b.dataset.go; renderPages(nav);
+  });
+});
+</script>
+</body>
+</html>

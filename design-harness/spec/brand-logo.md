@@ -2,13 +2,14 @@
 
 Read this when a page has a header, footer, or any logo placement.
 
-Files are in `assets/logo/`:
+Files are in `assets/brand/logo/`:
 
 | File | Use |
 |---|---|
-| `minds-blue.svg` | Default. On the cool wash, on white, on glass. |
-| `minds-white.svg` | On photography and on any dark surface. The homepage hero uses this. |
-| `mark.svg` | The antenna head alone. Favicon, and any lockup below 120px wide. |
+| `logo-minds-blue.svg` | Default. On the cool wash, on white, on glass. |
+| `logo-minds-white.svg` | On photography and on any dark surface. |
+| `logo-mark-blue.svg` | The antenna head alone. Favicon, and any lockup below 120px wide. |
+| `logo-mark-white.svg` | The mark in white. Same uses, on photography and on any dark surface. |
 
 Prefer the SVG everywhere on the web — it stays sharp at every size.
 

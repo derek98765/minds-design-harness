@@ -1,0 +1,1124 @@
+/* ==========================================================================
+   Minds — Design Tokens v2
+   Source of truth: the shipped homepage and Profile surfaces in
+   animocaminds-frontend (src/assets/styles/tokens-v2.css).
+
+   v1 of this harness used a warm beige canvas, flat fills, and a 50–900
+   brand ramp (brand-orange-500, beige-100). That ramp is retired. The
+   values below are the v2 scale and the semantic aliases components use.
+
+   THREE LAYERS, in this order:
+     1. SCALE    — --grey-*, --blue-*, --orange-*, status hues. How light.
+                   Never referenced from a component.
+     2. ALIASES  — --text-*, --line-*, --bg-*, --blue, --orange, --btn-*.
+                   What components use.
+     3. RECIPES  — .glass-card, .btn-lit-*, .t-*, the page wash. Shared
+                   constructions, not page-specific CSS.
+
+   Spacing is still literal pixels. Only the 21 steps at the bottom exist.
+   ========================================================================== */
+
+:root {
+  /* ── Scale — absolute (hue-agnostic) ─────────────────────────────────────
+        The endpoints every warm/cool/neutral ramp approaches but never
+        reaches — each ramp's own 50 and 950 are already tinted. Shared
+        across all three rather than duplicated per-ramp, since true white
+        and true black carry no hue to disagree on. ──────────────────────── */
+  --white: #ffffff;
+  --black: #000000;
+
+  /* ── Scale — warm (hue ~38°) ─────────────────────────────────────────── */
+  --grey-warm-50: #f6f3ee;
+  --grey-warm-100: #e9e3da;
+  --grey-warm-200: #d9d1c5;
+  --grey-warm-400: #a8a39a;
+  --grey-warm-600: #767066; /* was #726c62 (L42) — lifted 1.5pt to widen the body(700)/muted(600) gap; 4.91:1 on white, 4.43:1 on warm-50 */
+  --grey-warm-700: #5f5a53;
+  --grey-warm-950: #1a1815;
+
+  /* ── Scale — cool (hue ~224°).
+        Carries MORE saturation than warm at the same lightness — a cool grey
+        needs it to still read as cool up near white. ──────────────────── */
+  --grey-cool-50: #f7f9fd;
+  --grey-cool-100: #e6eaf3;
+  --grey-cool-200: #ccd5e8;
+  --grey-cool-400: #9aa0b8;
+  --grey-cool-600: #6f7791;
+  --grey-cool-700: #4f5670;
+  --grey-cool-950: #1e2330;
+
+  /* ── Scale — neutral (achromatic) ────────────────────────────────────── */
+  --grey-neutral-50: #fafafa;
+  --grey-neutral-100: #e8e8e9;
+  --grey-neutral-200: #d4d4d8;
+  --grey-neutral-400: #a6a6ab;
+  --grey-neutral-600: #747479;
+  --grey-neutral-700: #57575e;
+  --grey-neutral-950: #18181b;
+
+  /* ── Scale — blue (hue ~228°), intensity only ─────────────────────────────
+        NUMBERED BY LIGHTNESS, not by importance — 50 is near-white, 900 is
+        the darkest step, matching the convention every other ramp in this
+        file already uses. The number IS the position on the ramp, so
+        inserting a step later doesn't renumber its neighbours; the old
+        primary-/secondary- split numbered by call-site count instead, which
+        meant every added or folded step shifted the ones after it.
+
+        Nothing outside this file names a step directly — every call site
+        goes through a semantic alias in the Brand block below (--blue,
+        --blue-lit, --blue-tint, --blue-soft, --blue-hover). That is the
+        layer split: a step says HOW LIGHT, an alias says WHAT FOR. Retune a
+        role by repointing its alias, not by editing a step other roles share.
+
+        THE RAMP IS NOT UNIFORMLY SATURATED, deliberately. Hue holds at ~228°
+        throughout; saturation does not, and the exceptions are all on
+        purpose. -400 and -700 are the vivid pair at ~65%. -500 was resaturated
+        DOWN to 55% — it is a network-graph node fill (--graph-node-mind-1 and
+        -mind-alt-3), and at 65% it read as the loudest thing in a panel where
+        it should sit behind the centre node. -200 (#b9c9ea) is at 54% because
+        --ring-blue-pale's job is receding, not reading as "blue", and -50
+        (#eaefff) is a near-white wash. Don't "fix" any of these into line
+        with their neighbours.
+
+        THE DARK END IS SPACED AROUND A FIXED POINT. -800 is #394f95, the
+        brand navy (--color-brand-blue-01 in tokens.css) — it is NOT ours to
+        retune, and it sits at 45% saturation, well off the ramp's own 65%.
+        That dip is why the dark end reads tighter than its lightness numbers
+        suggest, and why -700 (L44) and -800 (L40) sit only four points apart.
+        -900 was moved from #213a9c, which at L37 was only three points darker
+        than -800 and did not read as a darkest step at all. It landed briefly
+        at #1d2e72 (L28), which overshot — dark enough to start reading as a
+        near-black rather than a deep blue — and settled at #1c3187 (L32):
+        8 points below -800, and back at the ramp's own 66% saturation so it
+        stays BLUE at the dark end rather than going grey, which is what the
+        lower saturation was costing it. It backs --blue-hover, so it also has
+        to stay darker than --blue for a hover to read as a deepening — at
+        11.4:1 on white it clears that comfortably.
+
+        WORTH WATCHING: --blue-tint (-400) has a job description ("recedes
+        behind a Mind's name") that assumed a MUTED tone — it was 45%
+        saturation before an earlier resaturation pass, now 65% like its
+        vivid neighbours. If it stops reading as receding once seen live,
+        that is the one alias most likely to need its own exception rather
+        than inheriting the ramp's flat rule.
+
+        DELIBERATELY EXCLUDES the network graph's human/offline rings. Those
+        read as desaturated blue-greys near-identical to --grey-cool-*'s own
+        steps, and folding them in here just re-created that ramp under a
+        different name a few points off. They stay their own literals next to
+        --graph-mind-* below. ──────────────────────────────────────────────── */
+  --blue-50: #eaefff;
+  --blue-200: #b9c9ea;
+  --blue-400: #7d91d4;
+  --blue-500: #6076be;
+  /* RESTORED. This value backed --blue-lit as the old --secondary-blue-05
+     until the scales were recoloured, when --blue-lit was repointed at
+     --primary-blue-02 (now -700, #3d55a4) — 8.8 lightness points darker. That
+     darkened every blue label on the page at once, since Nudge, Subscribe,
+     Explore Bazaar and the text links all resolve through --blue-lit, and the
+     labels lost the brighter, more saturated blue they were drawn with.
+     Slotted at -600 because that is where L52.7 falls between -500 and -700,
+     and the slot was empty. */
+  --blue-600: #425cb3;
+  --blue-700: #3d55a4;
+  --blue-800: #394f95;
+  --blue-900: #1c3187;
+
+  /* ── Scale — orange (hue ~30°), intensity only ────────────────────────────
+        NUMBERED BY LIGHTNESS, same rule as blue above — 50 near-white, 700
+        the darkest step. Hue ~30°, saturation 90-100% across the ramp; this
+        one IS uniform, unlike blue's -50/-200 exceptions.
+
+        Same layer split too: every call site goes through --orange,
+        --orange-hover, --orange-tint or --orange-soft in the Brand block
+        below, never through a step directly. -600 (#fd8d1d) is the brand
+        orange itself; -700 (#db7006) backs both --orange-hover and
+        --warning; -300 (#fbb36a) is the network graph's --graph-node-you-1;
+        -50 (#fff4e6) is the wash behind --orange-soft.
+
+        THE RAMP IS SPARSE ON PURPOSE — five steps, with real gaps at 100/200
+        and 400. Lightness numbering leaves those slots open rather than
+        pretending the ramp is denser than the page needs, and a future step
+        drops into its gap without renumbering anything. -500 is exactly that
+        happening: it was #fca044, a bare literal living in --gradient-orange
+        as its start stop, deliberately tuned to "split the difference"
+        between -300 and -600. That is the -500 slot's own job description, so
+        it stopped being a literal and became the step it already was.
+
+        A FORMER STEP (#fa9129) backed --orange-tint, but read too close to
+        the brand orange at -600 (#fd8d1d) to earn its own place. --orange-tint
+        now points at -300, the lighter "recedes" tone that mirrors what
+        --blue-tint does on the blue ramp.
+
+        THE NOTICE PANEL'S BAR GRADIENT IS NOT IN HERE, and no longer wants
+        to be. An earlier pass borrowed two of its values for this group and
+        got the point backwards: those stops were deliberately different
+        HUES, not lighter/darker steps of one orange, so folding them into a
+        lightness-only scale destroyed the thing they were for.
+
+        That is now settled in the other direction — the notice bar is not an
+        orange gradient at all. Its stops ran yellow -> amber -> pink (hue
+        12), then were corrected to end on a true orange (hue 34), and both
+        versions read as a second colour arriving at the panel's far edge
+        rather than the same one settling. The travel itself was the problem.
+        The bar now moves a single step inside the YELLOW scale, and points
+        at --light-yellow-01/-02 rather than at anything here. See the note
+        above .inline-notice-warning-v2.
+        See the note above .inline-notice-warning-v2 for the gradient's own
+        reasoning.
+
+        --notice-tint-2-v2 (#fcb62b) is in NONE of these groups for the same
+        reason: it sits at hue 40, a genuine shift toward yellow/amber rather
+        than a lighter or darker orange. It now points at --yellow (see the
+        Status section) rather than its own literal — a real status colour,
+        not an orange variant — the same move --notice-tint-v2 already made
+        to --orange. ──────────────────────────────────────────────────── */
+  --orange-50: #fff4e6;
+  --orange-300: #fbb36a;
+  --orange-500: #fca044;
+  --orange-600: #fd8d1d;
+  --orange-700: #db7006;
+
+  /* ── Scale — status hues (green/red/yellow) ───────────────────────────────
+        These backed --success/--error/--yellow (and the toast panel's own
+        success/error tints) as bare literals for a long time — three status
+        hues with no scale under them at all, unlike blue/orange above. Same
+        light/primary/secondary shape as those two, but SMALLER: each hue
+        here has exactly one broad-reuse job (a status colour) plus the one
+        component that deliberately runs its own hue-shifted variant of it
+        (the toast panel), so there's no room for — or need of — a 6-7-step
+        ramp.
+
+        THE TOAST'S OWN TINTS ARE NOT DUPLICATES, DO NOT COLLAPSE THEM INTO
+        PRIMARY. The "States" comment block below .toast-success-v2 /
+        .toast-error-v2 already explains why they differ: hues are pulled a
+        few degrees toward the page's own blue/orange bias (success 146° ->
+        158°, error 0° -> 6°) specifically so a toast doesn't read as a
+        framework's textbook red/green dropped onto the page, and each
+        state's WASH is systematically derived from that state's OWN tint at
+        ~96% lightness — which is why light-green-02/light-red-02 differ
+        slightly from light-green-01/light-red-01 too. That is a rule, not
+        drift. They get their own secondary-* / light-*-02 steps for exactly
+        the reason --blue-tint and --blue-lit get their own steps on the blue
+        ramp instead of both being forced to equal --blue.
+
+        YELLOW NOW CARRIES THE FULL FIVE-SLOT SET, same as green and red:
+        light-01 / light-02 / primary-01 / secondary-01 / secondary-02. It
+        used to be a lone pair, on the reasoning that only one thing ever
+        needed a near-yellow accent at a time — but that left .toast-warning-v2
+        borrowing --orange-hover and --orange-soft for its tint and wash while
+        the other three toast states each ran their own status hue. The set is
+        built by the same rules green and red follow: secondary-01 is the
+        primary hue pulled a few degrees (40 -> 43) at near-identical
+        lightness, secondary-02 is secondary-01 + ~14L so the badge reads as a
+        lit solid, and light-02 is the toast wash at ~96% lightness off the
+        secondary hue.
+
+        ANCHORED ON HUE 40, NOT THE 34 THE STATES COMMENT NAMES for warning.
+        34 is orange's own territory — a secondary-yellow built there lands
+        within four degrees of --orange-hover and is a near-duplicate of it,
+        which is exactly why warning ended up borrowing orange in the first
+        place. Hue 40 is --yellow's own, keeps the set clear of every orange
+        step, and makes "warning" a yellow rather than a second orange. */
+  --light-green-01: #e9f8ef;
+  --light-green-02: #edfaf5;
+  --primary-green-01: #12a150;
+  --secondary-green-01: #1ba774;
+  --secondary-green-02: #36d399;
+  --light-red-01: #fdeded;
+  --light-red-02: #fbeeec;
+  --primary-red-01: #d33a3a;
+  --secondary-red-01: #d84231;
+  --secondary-red-02: #dc7f74;
+  --light-yellow-01: #fbf5e9;
+  --light-yellow-02: #fdf9ee;
+  --primary-yellow-01: #fcb62b;
+  --secondary-yellow-01: #f2ba2e;
+  --secondary-yellow-02: #fad26d;
+
+  /* ── Floating nav ────────────────────────────────────────────────────────
+     ON :root WITH THE SCALE, not with the aliases below — the nav is a sibling
+     ABOVE .v2 in the DOM, so a token scoped to .v2 never reaches it. These
+     were four hardcoded literals in the .nav-*-v2 rules, kept in sync by
+     comment. */
+  /* The scroll fade — the page dissolving into the canvas as it rises under
+     the bar. Canvas-coloured by definition, so it tracks the page background
+     rather than carrying its own value. */
+  --nav-fade: var(--grey-neutral-50);
+  /* Non-home fixed-header offset: 10px inset + 60px control bar. */
+  --nav-h-v2: 70px;
+  /* Scrolled pill fill. OpenDesign's condensed nav is 0.42 white over a
+     7px blur — enough body that labels stay readable, thin enough that the
+     page still tints the glass. Raising this toward 0.8 is the rest bar,
+     not this pill. */
+  --nav-glass: rgba(255, 255, 255, 0.42);
+  --nav-glass-line: rgba(199, 207, 226, 0.7);
+  /* Shared by rest and the pill. Keep brightness() out of this list —
+     Lightning CSS minifies brightness(1) to brightness(), which Chrome
+     then drops. url(#nav-liquid-glass) is added in JS: the CSS minifier
+     strips url() from backdrop-filter. */
+  --nav-liquid-filter: blur(6px) saturate(1.4);
+
+  /* ── Brand ───────────────────────────────────────────────────────────────
+     THIS IS THE LAYER THAT COMPONENTS USE. Each of these is a NAMED ROLE
+     pointing at one step of the --blue-* / --orange-* ramps above, not its
+     own literal. The ramps say HOW LIGHT; these say WHAT FOR — which is why
+     both layers exist and why a call site should never reach past one of
+     these to a numbered step. Retuning "the CTA blue" means repointing
+     --blue-lit here, not editing a ramp step other roles also share.
+     --blue itself is still
+     the same value as --color-brand-blue-01 / --color-brand-orange-01 in
+     tokens.css, just reached through --blue-800 instead of restating
+     the hex. Declared on :root (not .v2) because these must resolve outside
+     .v2 too, same as the ramp itself. */
+  --blue: var(--blue-800); /* brand navy — text on white */
+  --blue-hover: var(--blue-900);
+  /* The RAIL's brighter blue. --blue is tuned for text on white and goes muddy
+     over a blue-tinted fill; this is the same hue pushed brighter and more
+     saturated, and it is what every blue CTA and active state uses.
+
+     BACK ON -600 (#425cb3). It briefly pointed at -700 (#3d55a4) when the
+     scales were recoloured — 8.8 lightness points darker — which made every
+     blue label on the page read heavy: Nudge, Subscribe, Explore Bazaar and
+     the text links all resolve through here. -700 is the right value for the
+     dark end of the ramp, but not for this role; the sentence above is the
+     spec, and only -600 satisfies "brighter and more saturated". */
+  --blue-lit: var(--blue-600);
+  --blue-tint: var(--blue-400); /* light blue — recedes behind a Mind's name */
+  --blue-soft: var(--blue-50); /* near-white wash — the blue scale's lightest step */
+  --orange: var(--orange-600);
+  --orange-hover: var(--orange-700);
+  /* Orange's counterpart to --blue-lit, and it works differently on purpose.
+     --blue-lit exists because --blue is DESATURATED (S45) and goes muddy over
+     a tinted fill, so its lit sibling is the same hue pushed brighter AND ~20
+     points more saturated. --orange is already S98 — there is no saturation
+     headroom — so the lit tone is a step LIGHTER at the same intensity
+     instead. Same role either way: the tone that reads as the hue catching
+     light rather than sitting flat. */
+  --orange-lit: var(--orange-500);
+  /* The lighter "recedes behind something else" tone, mirroring --blue-tint's
+     job on the blue ramp. It used to point at --orange-600 — i.e. at --orange
+     itself, a self-alias with no call sites and no distinct value; it now
+     carries -300, which is a real step. */
+  --orange-tint: var(--orange-300);
+  --orange-soft: var(--orange-50);
+
+  /* ── Status ──────────────────────────────────────────────────────────── */
+  --success: var(--primary-green-01);
+  --success-soft: var(--light-green-01);
+  /* Pulled from the orange scale rather than its own literal — same value
+     --orange-hover already resolves to (--orange-700). Two roles,
+     one token: a "your Mind is running low" warning and a button's pressed/
+     hover state happen to want the same dark, still-legible-as-orange step. */
+  --warning: var(--orange-700);
+  --warning-soft: #fdf3e6;
+  /* Promoted from the Inline Notice panel's own --notice-tint-2-v2, which
+     used to carry this value as its own literal (#fcb62b, hue ~40° — a real
+     shift toward yellow the 6-step orange ramp deliberately doesn't cover,
+     see that ramp's header note). It's a genuine status colour hiding in a
+     single component's token, same as --notice-tint-v2 already was before
+     it became var(--orange) — --notice-tint-2-v2 now points here the same
+     way. */
+  --yellow: var(--primary-yellow-01);
+  --yellow-soft: var(--light-yellow-01);
+  --error: var(--primary-red-01);
+  --error-soft: var(--light-red-01);
+
+  /* ── Lit solids — the page's filled-control vocabulary ───────────────────
+     One construction in three hues: a top-lit gradient (light -> base -> dark),
+     an inset white rim along the top edge, an inset hairline of the base colour
+     darkened, and a tinted drop. That combination is what reads as a solid with
+     THICKNESS rather than a flat fill, and it is shared by the Chat button, the
+     nav CTA, the menu's Top up row and the online switch's capsule.
+
+     THE RIM IS NOT A WHITE LINE. `inset 0 1px 0 rgba(255,255,255,0.4)` over a
+     SATURATED fill composites to a lighter tint of that fill. Over a pale fill
+     it composites to literal white and reads as a border — which is why these
+     belong on saturated controls only. */
+  --gradient-blue: linear-gradient(180deg, #637ac5 0%, var(--blue-lit) 55%, #324890 100%);
+  --shadow-lit-blue:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 0 0 1px rgba(40, 58, 125, 0.35),
+    0 3px 10px rgba(52, 72, 144, 0.32);
+  /* Start stop lightened from #fa9129 — it sat too close to the 55% mid stop
+     (var(--orange), #fd8d1d) to read as a rim highlight. First pass tried
+     #fbb36a (--orange-300), but that overshot — light enough to read as a
+     separate pale tone rather than the same orange catching light. The value
+     that splits the difference is now a named step, --orange-500, reached
+     here through --orange-lit — the role it always was. (--gradient-blue's
+     mid stop names --blue-lit the same way; its two END stops stay literal.) */
+  --gradient-orange: linear-gradient(180deg, var(--orange-lit) 0%, var(--orange) 55%, #e87c0c 100%);
+  --shadow-lit-orange:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45), inset 0 0 0 1px rgba(190, 100, 10, 0.32),
+    0 2px 6px rgba(216, 120, 20, 0.26);
+  /* GREEN, not blue, on the switch: ON is a status, and --success is the token
+     the Online pill and status dots already use for it. A blue capsule read as
+     "primary action" rather than "this Mind is running". */
+  --gradient-switch-on: linear-gradient(180deg, #6ee0a0 0%, #3dd47f 42%, #1fa860 100%);
+  /* NEUTRAL, not warm. OFF is the absence of a status, so the capsule should
+     be colourless — the warm ramp it used to run (hue ~37) read as a faintly
+     tan knob against the card's cool white, as if it carried a tone of its
+     own. Same three lightnesses as before (77 / 81 / 65, the light->mid->dark
+     bevel the ON gradient mirrors), moved onto the neutral hue; the dark stop
+     lands on --grey-neutral-400 exactly, so only the two literals stay. */
+  --gradient-switch-off: linear-gradient(
+    180deg,
+    #c2c2c7 0%,
+    var(--grey-neutral-200) 42%,
+    var(--grey-neutral-400) 100%
+  );
+
+  /* ── Buttons ─────────────────────────────────────────────────────────────
+     THE PAGE'S PRIMARY BUTTON, in its two hues. Each is a PAIR — a fill and
+     the shadow that goes with it — because the "lit solid" look is one
+     construction, not a background: the gradient alone is a flat-ish fill,
+     and the rim + hairline + drop in the shadow are what give it thickness
+     (see the Lit solids note above). Set both or neither; a button that took
+     the fill without the shadow is the drift these tokens exist to prevent.
+
+     BLUE IS THE DEFAULT primary — the Rail's CTA, Chat on a Mind card, the
+     confirm button in every bind dialog. ORANGE is the louder one, used
+     where the action is the point of the screen rather than one option among
+     several (HomeHero's send, HomeTab's copy, MindDetail's primary).
+
+     These point at --gradient-* / --shadow-lit-* rather than restating them
+     so the button vocabulary can be retuned in one place, the same way the
+     Brand block above points at the ramps. Non-button things that borrow the
+     same gradient — the step-number badges in the WeChat and Telegram
+     dialogs, kit.jsx's active pagination chip — deliberately keep using
+     --gradient-blue / --gradient-orange DIRECTLY: they are not buttons, and
+     naming them as such would put back exactly the mislabelling the base
+     ramps just got rid of. */
+  --btn-primary-blue-bg: var(--gradient-blue);
+  --btn-primary-blue-shadow: var(--shadow-lit-blue);
+  --btn-primary-orange-bg: var(--gradient-orange);
+  --btn-primary-orange-shadow: var(--shadow-lit-orange);
+
+  /* TEXT BUTTONS — no fill, no shadow: the label IS the control, so a text
+     button needs one token per colour rather than the primary pair's bg +
+     shadow. Same two-colour split as above: BLUE for an action offered
+     alongside others, ORANGE where it is the point of the screen.
+
+     The blue one names a colour the page was already using — .text-link-v2
+     (kit.jsx's Btn variant="link") already read --blue-lit, by way of a
+     --glass-pill-ink alias since removed. Naming it here puts the value under
+     the button vocabulary rather than leaving a button's label to borrow a
+     glass-panel token.
+
+     HOVER GOES LIGHTER FOR BLUE AND DARKER FOR ORANGE, which looks
+     inconsistent written down and is correct on screen: --blue-lit is already
+     a deep blue, so it lifts toward --blue-tint, while --orange sits mid-ramp
+     and has --orange-hover below it. Each moves to the step its own ramp
+     leaves room for. */
+  --btn-text-blue: var(--blue-lit);
+  --btn-text-blue-hover: var(--blue-tint);
+  --btn-text-orange: var(--orange);
+  --btn-text-orange-hover: var(--orange-hover);
+
+  /* SECONDARY — the white button beside a primary ("Nudge" next to Chat now,
+     "Link"/"Open" on the Channels rows, Subscribe on the plan card). A real
+     button, unlike the text pair above: it has a fill, a hairline and a drop,
+     so it holds its own box next to a filled primary while staying clearly
+     the quieter of the two.
+
+     WHITE, NOT TINTED. Only one action per view carries a solid, and the
+     primary has it; the blue LABEL is what marks this as an action rather
+     than a fill competing with the one beside it.
+
+     The hairline is an INSET box-shadow, not a border, so the button's box
+     stays exactly the primary's 38px — a real border would add 2px and make
+     the pair sit at different heights. --btn-secondary-line is consumed that
+     way at the call site; it is a colour, not a border shorthand.
+
+     HOVER DEEPENS both the fill and the hairline, unlike the text buttons
+     above which lighten. A filled control reads as pressing in; only bare
+     type lifts. */
+  --btn-secondary-ink: var(--blue-lit);
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-bg-hover: var(--bg-panel-cool);
+  --btn-secondary-line: var(--line-cool);
+  --btn-secondary-line-hover: var(--line-hover-cool);
+  --btn-secondary-shadow: 0 2px 6px rgba(96, 118, 200, 0.16);
+
+  /* ── Radius ──────────────────────────────────────────────────────────── */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-pill: 999px;
+
+  /* ── Elevation ───────────────────────────────────────────────────────────
+     Card drops are BLUE-GREY (~225deg), not neutral: a grey drop at the same
+     alpha reads as dirt under glass rather than light through it. sm/md are
+     `none` — cards were once flat and those call sites still exist.
+
+     NAMED --elev-*, NOT --shadow-*: Tailwind v4 reads --shadow-sm/md/lg as its
+     own theme variables, so those names would silently rebind every shadow-*
+     utility inside .v2 to none. */
+  --elev-sm: none;
+  --elev-md: none;
+  --elev-lg: 0 8px 32px rgba(72, 58, 42, 0.12);
+  --elev-card: 0 1px 2px rgba(96, 108, 145, 0.06), 0 6px 18px rgba(96, 108, 145, 0.08);
+  --elev-card-hover: 0 2px 4px rgba(96, 108, 145, 0.08), 0 12px 28px rgba(96, 108, 145, 0.12);
+  /* THE CHOSEN CARD, one step above hover. Same two-layer construction as the
+     pair above — a tight contact shadow plus a wide soft one — but deeper and
+     BLUE-TINTED rather than the neutral 96,108,145: the selected state is
+     already marked in blue (border, radio, name colour), so its drop carries
+     the same hue instead of a grey that reads as a different system.
+
+     It has to out-rank --elev-card-hover, or the card the cursor happens to be
+     over floats above the one actually chosen. */
+  --elev-card-selected: 0 2px 6px rgba(66, 92, 179, 0.1), 0 16px 36px rgba(66, 92, 179, 0.18);
+  --glass-shadow: 0 14px 40px rgba(96, 118, 200, 0.09), 0 3px 10px rgba(96, 118, 200, 0.06);
+  /* ── Aliases — text ──────────────────────────────────────────────────────
+     ONE 4x3 GRID: four roles across the three grey ramps, same names on every
+     ramp so a component can swap temperature without swapping vocabulary.
+       title  950  headings, names, the thing you read first
+       body   700  main copy, field values, control labels, tab text
+       muted  600  supporting copy, metadata, secondary icons — recedes behind
+                   the body step it sits under, still AA (>= 4.45:1 on white)
+       label  400  the fixed word that introduces a value, placeholders,
+                   separators, decorative glyphs, the inactive pole of a toggle.
+                   ~2.5:1 — a deliberate sub-AA step for hints and state
+                   markers. The ONE read-copy exception is empty-state
+                   sentences (owner's call: muted read too dark for an empty
+                   panel). Never for copy that carries real information.
+     Cut from 17 names / 10 values (2026-09). Old name -> new: field-value ->
+     body; body, icon -> muted; field-label, placeholder, icon-muted -> label;
+     empty -> muted; inactive -> label. */
+  --text-title-warm: var(--grey-warm-950);
+  --text-body-warm: var(--grey-warm-700);
+  --text-muted-warm: var(--grey-warm-600);
+  --text-label-warm: var(--grey-warm-400);
+
+  /* Cool: the Mind card's lower panel, glass, graph tray. Body sits at 700
+     because cool-600 measures 4.22:1 on the panel — under AA for the small
+     text that lives there — so it is the muted step, not the readable one. */
+  --text-title-cool: var(--grey-cool-950);
+  --text-body-cool: var(--grey-cool-700);
+  --text-muted-cool: var(--grey-cool-600);
+  --text-label-cool: var(--grey-cool-400);
+
+  /* Neutral: supporting copy that must not carry the warm ramp's beige cast,
+     and offline/disabled states beside a portrait drained to grey.
+     --text-muted-neutral holds a 4.65:1 floor tuned for 16px offline names;
+     do not lighten. */
+  --text-title-neutral: var(--grey-neutral-950);
+  --text-body-neutral: var(--grey-neutral-700);
+  --text-muted-neutral: var(--grey-neutral-600);
+  --text-label-neutral: var(--grey-neutral-400);
+  /* ── Aliases — lines ─────────────────────────────────────────────────────
+     A 3x3 GRID: three weights (light / default / strong) across the three
+     temperatures, each mapping straight onto a grey ramp step — light = -50,
+     default = -100, strong = -200. Pick the temperature from the surface the
+     line sits on, then the weight from how much separation it has to do:
+     light for a rule inside an already-bordered container, default for the
+     hairline that outlines a card or divides rows, strong for an input edge
+     or anything that has to hold its own on the open canvas.
+
+     Everything here resolves through the ramp rather than carrying a literal,
+     so retuning a grey moves its lines with it. */
+  --line-light-warm: var(--grey-warm-50);
+  --line-warm: var(--grey-warm-100);
+  --line-strong-warm: var(--grey-warm-200);
+
+  --line-light-cool: var(--grey-cool-50);
+  --line-cool: var(--grey-cool-100);
+  --line-strong-cool: var(--grey-cool-200);
+
+  --line-light-neutral: var(--grey-neutral-50);
+  --line-neutral: var(--grey-neutral-100);
+  --line-strong-neutral: var(--grey-neutral-200);
+
+  /* OUTSIDE THE GRID, deliberately: this is an interaction STATE, not a
+     weight. It is the hover edge on the Mind card's footer controls, and it
+     is a saturated brand-hued blue (224deg) rather than a grey ramp step —
+     --line-strong-cool is 8 lightness points lighter and a lighter candidate
+     (#d5dcef) was already tried and disappeared into the pale hover fill it
+     sits on. Sits between --line-cool at rest and --blue-tint. */
+  --line-hover-cool: #aab8df;
+
+  /* ── Aliases — backgrounds ───────────────────────────────────────────── */
+  --bg-card: #ffffff;
+  --bg-page-neutral: var(--grey-neutral-50);
+  --bg-subtle-warm: var(--grey-warm-50); /* icon tiles, neutral chips */
+  --bg-hover-warm: var(--grey-warm-50); /* row + ghost-button hover */
+  /* THE SEARCH FIELD IS NOT YET ON THE SCALE — see review item 4 in the plan.
+     #f0eeea is ~10 points below the canvas and is the lightest fill that still
+     holds an edge against it; --grey-warm-50 (#f6f3ee) was tried there and
+     VANISHED, because the canvas carries two soft blooms that wash out any fill
+     that close to it. Held at the shipping value rather than regressing a
+     documented fix. Promote to a warm step near L 93% when that is decided. */
+  --bg-field-warm: #f0eeea;
+  /* Cool twin for the SEARCH bars (owner's call: search sits on the cool ramp).
+     Off-scale like --bg-field-warm, and for the same reason: --grey-cool-50
+     vanishes against the canvas blooms and --grey-cool-100 read too dark, so
+     this sits between them (~L95). Paired with --line-cool. */
+  --bg-field-cool: #eef1f8;
+  /* The NEUTRAL field fill, for search inputs that sit on the page canvas
+     rather than inside a cool-tinted panel. Off-scale for the same reason as
+     its warm and cool siblings: --grey-neutral-50 (L98) vanishes against the
+     canvas and -100 (L91.2) reads as a disabled control, so this sits between
+     them at the cool fill's own L95.3 — same weight, no blue cast. Paired
+     with --line-neutral. */
+  --bg-field-neutral: #f2f2f4;
+  --bg-panel-cool: var(--grey-cool-50); /* Mind card's lower panel */
+  --bg-skeleton-cool: var(--grey-cool-100); /* loading bars */
+  /* The surface a Mind portrait's foot fade dissolves INTO (MindPortrait in
+     kit.jsx). White on a card, but the Mind detail hero rebinds it to
+     `transparent` so the fade is a no-op over its blue gradient stage — see
+     .hero-stage-v2. It is a SEPARATE token from --bg-card for exactly that
+     reason: the override has to be able to neutralise the fade without
+     turning every card surface transparent along with it. */
+  --bg-portrait-foot: var(--bg-card);
+
+  /* ── Aliases — gradients ─────────────────────────────────────────────────
+     The online switch's capsule, defined once here rather than repeated as a
+     literal in both MindCard and MindDetail (they had drifted apart before).
+
+     THE OUTER STOPS ARE NOT ON THE GREY SCALE, deliberately. #cfc7ba and
+     #b3aa9a sit 13-18 RGB away from the nearest step; snapping them would
+     flatten the bevel this gradient exists to draw — the light->mid->dark
+     relationship is what gives the capsule its thickness (see the long note at
+     OnlineSwitch). Only the MIDDLE stop is a token, since it is the one that
+     matches --line-strong-warm exactly. */
+  /* Green when ON: a status colour, built around --success. */
+
+  /* ── Graph node ramps ────────────────────────────────────────────────────
+     The force-graph node colours — My Circle (NetworkTab), the Mind detail
+     Mind Circle card (CircleGraph) and its legend. Every one of these feeds
+     drawLitNode()'s 3-stop canvas gradient (light rim → mid body → dark
+     base), which is what makes a disc read as a lit sphere rather than a
+     flat dot — so each ramp needs three genuinely distinct steps, not two
+     that happen to differ. `node` in every name because that's what they
+     mostly are: node colours tied to a role (online Mind, ring-two Mind,
+     you), not a species of their own — `grey` (offline) and `human` are the
+     two exceptions, named for what they represent since each is its own
+     hue with no brand token to borrow from. */
+  --graph-node-grey-1: var(--grey-cool-200);
+  --graph-node-grey-2: var(--grey-cool-400);
+  --graph-node-grey-3: var(--grey-cool-600);
+  /* Humans get their own green ramp now, split off the grey one above (still
+     `offline`'s ramp). Same three stops as --gradient-switch-on, not the
+     --primary-green-* / --secondary-green-* scale — those are tuned for flat
+     UI fills, not a lit-sphere bevel, and the switch's ON state is the
+     existing "alive/active" green this page already trades on. */
+  --graph-node-human-1: #6ee0a0;
+  --graph-node-human-2: #3dd47f;
+  --graph-node-human-3: #1fa860;
+  /* Brand-hued node types — these DO belong on the blue scale, unlike the
+     grey ramp above: they are genuinely saturated blue, not a grey with a
+     hue lean. EVERY STOP NAMES A BASE RAMP STEP DIRECTLY, never a semantic
+     brand role: a graph node is not "the CTA blue" or "the brand orange", it
+     is a position on the ramp, so retuning a button must not silently move a
+     node. (mind-2 read --blue-lit and you-2/-3 read --orange/--orange-hover
+     until they were repointed at -700 / -600 / -700; same values, no
+     dependency on a role that exists for a different reason.) Mid stops sit
+     at the dark end (--blue-700/-800); the lit rim reaches to the lighter end
+     of the same ramp (--blue-200/-400/-500) — one ramp, picked by lightness,
+     rather than a separate tier for one-off steps. `mind-alt` is a ring-two Mind —
+     a Mind that shows up as a MEMBER of another Mind's circle, not that
+     graph's own centre; it can be a Mind you own just as easily as one you
+     don't, "alt" is about ring position, not ownership. It reads LIGHTER
+     than `mind` now — each stop one level lighter on the scale, rim
+     reaching into the pale-wash pair (same role --ring-blue-pale already
+     puts -02 to) — so a centre Mind still reads as the most saturated
+     thing on the graph without the ring-two Minds disappearing into grey
+     or falsely reading as a confirmed-online status (NetworkGraph.jsx
+     never fetches online/offline for ring two — see its own note). */
+  --graph-node-mind-1: var(--blue-500);
+  --graph-node-mind-2: var(--blue-700);
+  --graph-node-mind-3: var(--blue-900);
+  --graph-node-mind-alt-1: var(--blue-200);
+  --graph-node-mind-alt-2: var(--blue-400);
+  --graph-node-mind-alt-3: var(--blue-500);
+  --graph-node-you-1: var(--orange-300);
+  --graph-node-you-2: var(--orange-600);
+  --graph-node-you-3: var(--orange-700);
+
+  /* ── Hover ring — pale blue at the top-left, light cool grey mid-ramp,
+        white at the bottom-right. One 135deg gradient covers it: read from the
+        bottom the same ramp is white -> grey -> pale blue.
+        Ring-only: do NOT use these for fills or text. ─────────────────────── */
+  --ring-blue-pale: var(--blue-200); /* top-left stop — pale blue, 225deg */
+  --ring-grey: var(--line-strong-cool); /* = #ccd5e8 */
+
+  /* HUE IS THE CONSTRAINT: both stops stay at ~225deg, the SAME hue as --blue
+     (225.7) and --blue-tint (224.8), just far lighter. An earlier pass used a cyan
+     stop at 183deg, which read as teal and off-brand — if these are ever
+     retuned, keep them within a few degrees of 225.
+
+     HISTORY: the ring ran blue->orange on four stops (those two are
+     near-complementary, so the sRGB blend passed through a dark #ada5a1 at the
+     midpoint — on a 135deg ramp that landed right on the corners, and two extra
+     light stops were needed to stop them going dark). Then blue->grey->blue,
+     which made the extra stops unnecessary, then white->grey->white (which
+     retired --ring-blue). Now pale-blue -> grey -> white: only the bottom-right
+     end is white, so the ring carries a hint of brand at the top-left again.
+     --ring-grey is darker than the #dfe3ee used back when blue endpoints
+     carried the visibility — it has to hold the mid-ramp largely on its own. */
+
+  /* ── Status — NEW ────────────────────────────────────────────────────── */
+
+  /* ── Radius — NEW (no radius tokens exist in tokens.css today) ───────── */
+
+  /* ── Elevation — NEW.
+        SUPERSEDED FOR CARDS: cards used to be flat, separated by the --line
+        hairline alone. They are now elevated — see --elev-card / --line-card
+        above, which is what Card and MindCard use.
+        sm/md remain `none` so the existing shadow-[var(--elev-*)] call sites
+        stay valid while rendering nothing. --elev-lg is retained for genuinely
+        floating layers (popovers/menus).
+
+        NAMED --elev-*, NOT --shadow-*: Tailwind v4 reads --shadow-sm/md/lg
+        as its own theme variables, so defining those names here would
+        silently rebind every `shadow-sm` utility inside .v2 to `none`. ──── */
+
+  /* ── Liquid glass.
+        These are deliberately COOL (hue ~225, the brand blue's hue) and break
+        the warm ramp above. That is the point: glass surfaces float over the
+        warm canvas and pick up the blue of the brand rather than the beige of
+        the page. Began as the nav rail's treatment only; the owner then asked
+        for the page content to go glass too, so cards and toolbar controls
+        now share the vocabulary via --glass-card / --glass-ctl below —
+        content glass is one step quieter than the rail (single panel, no
+        nested rim).
+
+        The rail is built as TWO nested panels. The outer one is the lens rim:
+        a brighter, more opaque edge. The inner one is the body of the glass,
+        slightly more transparent and inset by 3px, so the rim reads as a
+        highlight running around the whole panel. A single panel with one
+        border cannot produce that double edge. ─────────────────────────── */
+  /* Near-solid WHITE. This was 0.55 — at that alpha the canvas and (once they
+     were strengthened) the page's blue bloom showed straight through, and the
+     owner read the rim as grey rather than white. The rim is the panel's
+     brightest element by design, so it needs to sit at essentially full white
+     regardless of what the canvas behind it is doing. Do not drop this back
+     toward 0.5 to "let the glass breathe" — the INNER panel is where the
+     translucency lives. */
+  --glass-outer: rgba(255, 255, 255, 0.97);
+  /* Composited over the canvas this lands at ~#f6f7fb.
+     History, so this is not re-tuned blindly:
+       #f8f8fa (orig)  too light — the 3px white rim between panels vanished
+       #e2e8f4         too dark
+       #eef1f9         too dark
+       #f3f5fa         called too light, but on a later pass the owner asked
+                       for PALER again — so that verdict did not hold
+       #f0f3f9         too dark
+       #f1f5fa         no visible change from #f0f3f9 (1pt/channel — too small
+                       a step to see; do not bother with deltas this fine)
+     Now deliberately paler than the old #f3f5fa ceiling. This sits close to
+     the original #f8f8fa that made the rim vanish, so --glass-rim is doing the
+     work of keeping the nested edge readable: if the rim stops reading, raise
+     its alpha rather than darkening this back down. */
+  /* COOL, and it must stay cool. A pass briefly made this warm off-white
+     (250,249,246) by misapplying an owner note about the PAGE centre going
+     beige — the rail's inner panel was never in scope for that, and it read
+     warm against the white rim immediately. Blue channel stays the highest
+     of the three here, same ~225 hue as the rest of the glass vocabulary. */
+  --glass-inner: rgba(244, 246, 252, 0.72);
+  /* Rim + inner edge are LIGHTER than their fills, not darker — a glass edge
+     catches light, it does not draw a dark outline. Both pushed to near-solid
+     white: at 0.9/0.66 the rim was too faint to read as the crisp bright
+     hairline the reference has. */
+  --glass-rim: rgba(255, 255, 255, 0.98);
+  --glass-edge: rgba(255, 255, 255, 0.85);
+  /* Ambient drop — BLUE, not grey. Two layers: a wide diffuse bloom that tints
+     the canvas around the panel, plus a tighter contact shadow that seats it.
+     Saturation matters more than opacity here; a grey drop at the same alpha
+     reads as dirt under the glass rather than light through it.
+     Softened from 0.16/0.10 — once the canvas gained its own ambient blooms
+     the combined tint around the rail got heavy enough to read as a hard
+     colour cut where the rail passes under the transparent nav. */
+  /* Active nav lozenge. The fill is BLUE-TINTED glass, not white: a white pill
+     on a white-ish panel reads as a faint smudge, which is exactly what a
+     rgba(255,255,255,0.72) fill produced here. The tint is what makes the
+     selected row legible as selected.
+     Still translucent, so the panel's blur shows through — a solid fill would
+     read as a flat chip sitting on the glass rather than part of it. */
+  /* Renders ~#e4eaf9 over the inner panel (~#f0f4f9) — 15% lighter than the
+     previous ~#dfe7f9, achieved by dropping alpha 0.5 -> 0.36 and keeping the
+     same base tint.
+     This is close to the floor. The fill is the ONLY thing marking the active
+     row (no border, no shadow), and it now sits just ~6 points off the panel
+     behind it; lighten much further and the selection stops reading at all. */
+  --glass-pill: rgba(205, 218, 248, 0.36);
+  /* The active lozenge is FILL ONLY — no --glass-pill-edge and no
+     --glass-pill-glow token, both deliberately deleted. A white border was
+     rejected at 0.85 (hard outline) and again at 0.45 (still a line), and the
+     blue drop shadow was rejected too. The tint alone marks the selection. */
+  /* NO --glass-pill-ink TOKEN. It was `var(--blue-lit)` and nothing else --
+     one definition, never overridden -- so it added a name without adding a
+     value. Worse, it had stopped being about pills: of its ~50 call sites
+     only three were the active lozenge; the rest were white dialog buttons,
+     focus rings and icon hovers borrowing it as a generic saturated blue,
+     which is how a glass-panel token ended up colouring a text button's
+     label. Call sites read --blue-lit directly now.
+
+     The reason the active row wants that blue is still worth keeping: --blue
+     (#394f95) is a deep navy tuned for text on white, and over the
+     blue-tinted pill it goes muddy and loses the lift. --blue-lit is the same
+     hue pushed brighter and more saturated. See its own note. */
+  --glass-divider: rgba(140, 155, 195, 0.22);
+  /* Group headings inside the glass. Cool to match the surface, and lighter
+     than --ink-label, which is a warm beige-grey and muddies against blue. */
+  --glass-label: var(--text-label-cool); /* was #9aa2b8 — 1pt off, now exact */
+
+  /* ── Content glass — cards and toolbar controls (see .glass-card-v2 /
+        .glass-ctl-v2 at the bottom of this file).
+        Alphas are HIGH on purpose: content sits on these surfaces, so they
+        frost rather than dissolve — text contrast stays effectively what it
+        was on solid white. The card keeps --elev-card as its drop; the inset
+        white line is the lit top edge every glass panel here carries.
+
+        CARD ALPHA FLOOR — 0.85, do not lower it. The Mind portrait's foot
+        fade dissolves the figure into SOLID white (--surface); below ~0.85
+        that band starts reading as a bright patch against the translucent
+        fill around it. (An earlier 0.6 pass also leaked the portrait's
+        white video backdrop through the fill — that part is now solved
+        structurally by .glass-noblur-v2, but the foot-fade constraint
+        stands on its own.) The toolbar controls below carry the stronger
+        frost, since nothing blends or fades on them. */
+  --glass-card: rgba(255, 255, 255, 0.85);
+  --glass-card-line: rgba(255, 255, 255, 0.9);
+  --glass-ctl: rgba(255, 255, 255, 0.55);
+  --glass-ctl-hover: rgba(255, 255, 255, 0.85);
+
+}
+
+/* ==========================================================================
+   Spacing — LITERAL PIXELS, not Tailwind's 4× scale.
+   gap-8 = 8px. gap-16 = 16px.
+   These 21 values are the ONLY valid spacing numbers.
+   ========================================================================== */
+:root {
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-3: 3px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-36: 36px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-60: 60px;
+  --space-72: 72px;
+  --space-84: 84px;
+  --space-96: 96px;
+  --space-108: 108px;
+  --space-120: 120px;
+  --space-160: 160px;
+  --space-200: 200px;
+  --space-240: 240px;
+
+  /* Marketing type — landing pages and campaign heroes.
+     Product surfaces use the .t-* classes below instead. These steps are
+     the large end the homepage needs; the app scale tops out at 34px. */
+  --font-family-primary: "Manrope", sans-serif;
+  --font-size-h1: 56px;
+  --font-size-h2: 44px;
+  --font-size-h3: 34px;
+  --font-size-h4: 28px;
+  --font-size-h5: 22px;
+  --font-size-body-xlarge: 18px;
+  --font-size-body-large: 16px;
+  --font-size-body-default: 14px;
+  --font-size-body-small: 13px;
+  --font-size-body-xsmall: 12px;
+  --font-size-caption-large: 16px;
+  --font-size-caption: 12px;
+  --line-height-heading: 1.15;
+  --line-height-body: 1.55;
+  --line-height-caption: 1.4;
+  --letter-spacing-h1: -0.02em;
+  --letter-spacing-h2: -0.02em;
+  --letter-spacing-caption: 0.04em;
+
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-xl: var(--r-xl);
+  --radius-full: var(--r-pill);
+
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-layout: 300ms;
+  --duration-reveal: 700ms;
+
+  /* Page wash stops. Cool. Do not warm these — the wash is every v2 surface. */
+  --canvas-top: #f6f7fa;
+  --canvas-bottom: #fbfcfe;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --font-size-h1: 48px;
+    --font-size-h2: 36px;
+    --font-size-h3: 28px;
+    --font-size-h4: 24px;
+    --font-size-h5: 20px;
+    --font-size-body-xlarge: 17px;
+    --font-size-caption-large: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --font-size-h1: 40px;
+    --font-size-h2: 30px;
+    --font-size-h3: 24px;
+    --font-size-h4: 20px;
+    --font-size-h5: 18px;
+    --font-size-body-xlarge: 16px;
+    --font-size-body-large: 16px;
+    --font-size-body-default: 16px;
+    --font-size-caption-large: 14px;
+    --font-size-caption: 12px;
+  }
+}
+
+/* ==========================================================================
+   Page ground
+   Cool top-to-bottom wash. Glass is invisible over a flat colour, so a
+   marketing page may add .canvas-blooms for the soft blue and orange pools
+   the homepage paints behind its sections.
+   ========================================================================== */
+.v2,
+body:has(.v2),
+.v2-canvas {
+  background: linear-gradient(180deg, var(--canvas-top) 0%, var(--canvas-bottom) 100%);
+  background-attachment: fixed;
+  color: var(--text-title-cool);
+  font-family: var(--font-family-primary);
+}
+
+.canvas-blooms {
+  background-image:
+    radial-gradient(60% 30% at 10% 18%, rgba(120, 142, 226, 0.28), transparent),
+    radial-gradient(50% 26% at 92% 42%, rgba(251, 179, 106, 0.30), transparent),
+    radial-gradient(60% 28% at 15% 72%, rgba(120, 142, 226, 0.24), transparent),
+    radial-gradient(50% 24% at 85% 92%, rgba(251, 179, 106, 0.24), transparent),
+    linear-gradient(180deg, var(--canvas-top) 0%, var(--canvas-bottom) 100%);
+  background-attachment: fixed;
+}
+
+/* ==========================================================================
+   Type — product surfaces (.t-*)
+   Marketing headlines keep text-h1 / --font-size-h1. These are the app scale
+   used on Profile: compact, extrabold at the top, regular below t-h3.
+   ========================================================================== */
+.t-display { font-size: 34px; line-height: 1.15; letter-spacing: -0.5px; font-weight: 800; }
+.t-h1 { font-size: 32px; line-height: 1.18; letter-spacing: -0.5px; font-weight: 800; }
+.t-h1-sm { font-size: 24px; line-height: 1.2; letter-spacing: -0.24px; font-weight: 800; }
+.t-h2 { font-size: 19px; line-height: 1.25; letter-spacing: -0.2px; font-weight: 700; }
+.t-h3 { font-size: 15px; line-height: 1.35; font-weight: 700; }
+.t-body { font-size: 14px; line-height: 1.55; font-weight: 400; }
+.t-sm { font-size: 13px; line-height: 1.5; font-weight: 400; }
+.t-xs { font-size: 12px; line-height: 1.45; font-weight: 500; }
+.t-label {
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.t-num { font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+
+@media (max-width: 1024px) {
+  .t-display { font-size: 30px; }
+  .t-h1 { font-size: 28px; letter-spacing: -0.4px; }
+  .t-h1-sm { font-size: 21px; letter-spacing: -0.2px; }
+  .t-h2 { font-size: 18px; }
+}
+@media (max-width: 767px) {
+  .t-display { font-size: 26px; letter-spacing: -0.4px; }
+  .t-h1 { font-size: 24px; letter-spacing: -0.3px; }
+  .t-h1-sm { font-size: 19px; letter-spacing: -0.16px; }
+  .t-h2 { font-size: 17px; letter-spacing: -0.1px; }
+}
+
+/* ==========================================================================
+   Lit solids and glass
+   A filled control is a gradient plus its shadow. Set both. The shadow
+   carries the inset rim that makes the pill read as thick, not flat.
+   ========================================================================== */
+.btn-lit-orange {
+  color: var(--white);
+  background: var(--btn-primary-orange-bg);
+  box-shadow: var(--btn-primary-orange-shadow);
+  border: 0;
+}
+.btn-lit-orange:hover { filter: brightness(1.06); }
+.btn-lit-blue {
+  color: var(--white);
+  background: var(--btn-primary-blue-bg);
+  box-shadow: var(--btn-primary-blue-shadow);
+  border: 0;
+}
+.btn-lit-blue:hover { filter: brightness(1.06); }
+
+.btn-secondary-v2 {
+  color: var(--btn-secondary-ink);
+  background: var(--btn-secondary-bg);
+  box-shadow: inset 0 0 0 1px var(--btn-secondary-line), var(--btn-secondary-shadow);
+  border: 0;
+}
+.btn-secondary-v2:hover {
+  background: var(--btn-secondary-bg-hover);
+  box-shadow: inset 0 0 0 1px var(--btn-secondary-line-hover), var(--btn-secondary-shadow);
+}
+
+.glass-card {
+  background: var(--glass-card);
+  -webkit-backdrop-filter: blur(14px) saturate(1.35);
+  backdrop-filter: blur(14px) saturate(1.35);
+  box-shadow: inset 0 1px 0 var(--glass-card-line), var(--elev-card);
+  border-radius: var(--r-lg);
+}
+.glass-card:hover {
+  box-shadow: inset 0 1px 0 var(--glass-card-line), var(--elev-card-hover);
+}
+
+/* Nested liquid glass — outer rim, inner body, 3px gap. */
+.glass-shell {
+  background: var(--glass-outer);
+  border-radius: var(--r-xl);
+  padding: 3px;
+  box-shadow: var(--glass-shadow);
+}
+.glass-shell-inner {
+  background: var(--glass-inner);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border-radius: calc(var(--r-xl) - 3px);
+  box-shadow: inset 0 1px 0 var(--glass-edge);
+}
+
+.v2 :focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--blue);
+}
+
+/* ==========================================================================
+   Tailwind v4 bridge
+   New names are the v2 vocabulary. The brand-orange-* / beige-* / neutral-*
+   names are compatibility aliases so ui/ components written against v1 keep
+   resolving. New work should use the aliases (--blue-lit, --text-body-cool,
+   --line-cool) or the recipe classes above, not the compatibility names.
+   ========================================================================== */
+@theme inline {
+  --color-white: var(--white);
+  --color-black: var(--black);
+
+  --color-blue: var(--blue);
+  --color-blue-lit: var(--blue-lit);
+  --color-blue-tint: var(--blue-tint);
+  --color-blue-soft: var(--blue-soft);
+  --color-blue-hover: var(--blue-hover);
+  --color-orange: var(--orange);
+  --color-orange-lit: var(--orange-lit);
+  --color-orange-hover: var(--orange-hover);
+  --color-orange-soft: var(--orange-soft);
+
+  --color-grey-warm-50: var(--grey-warm-50);
+  --color-grey-warm-100: var(--grey-warm-100);
+  --color-grey-warm-200: var(--grey-warm-200);
+  --color-grey-warm-400: var(--grey-warm-400);
+  --color-grey-warm-600: var(--grey-warm-600);
+  --color-grey-warm-700: var(--grey-warm-700);
+  --color-grey-warm-950: var(--grey-warm-950);
+
+  --color-grey-cool-50: var(--grey-cool-50);
+  --color-grey-cool-100: var(--grey-cool-100);
+  --color-grey-cool-200: var(--grey-cool-200);
+  --color-grey-cool-400: var(--grey-cool-400);
+  --color-grey-cool-600: var(--grey-cool-600);
+  --color-grey-cool-700: var(--grey-cool-700);
+  --color-grey-cool-950: var(--grey-cool-950);
+
+  --color-grey-neutral-50: var(--grey-neutral-50);
+  --color-grey-neutral-100: var(--grey-neutral-100);
+  --color-grey-neutral-200: var(--grey-neutral-200);
+  --color-grey-neutral-400: var(--grey-neutral-400);
+  --color-grey-neutral-600: var(--grey-neutral-600);
+  --color-grey-neutral-700: var(--grey-neutral-700);
+  --color-grey-neutral-950: var(--grey-neutral-950);
+
+  --font-primary: var(--font-family-primary);
+  --text-h1: var(--font-size-h1);
+  --text-h2: var(--font-size-h2);
+  --text-h3: var(--font-size-h3);
+  --text-h4: var(--font-size-h4);
+  --text-h5: var(--font-size-h5);
+  --text-body-xlarge: var(--font-size-body-xlarge);
+  --text-body-large: var(--font-size-body-large);
+  --text-body-default: var(--font-size-body-default);
+  --text-body-small: var(--font-size-body-small);
+  --text-body-xsmall: var(--font-size-body-xsmall);
+  --text-caption-large: var(--font-size-caption-large);
+  --text-caption: var(--font-size-caption);
+
+  --spacing-1: var(--space-1);
+  --spacing-2: var(--space-2);
+  --spacing-3: var(--space-3);
+  --spacing-4: var(--space-4);
+  --spacing-8: var(--space-8);
+  --spacing-12: var(--space-12);
+  --spacing-16: var(--space-16);
+  --spacing-20: var(--space-20);
+  --spacing-24: var(--space-24);
+  --spacing-36: var(--space-36);
+  --spacing-40: var(--space-40);
+  --spacing-48: var(--space-48);
+  --spacing-60: var(--space-60);
+  --spacing-72: var(--space-72);
+  --spacing-84: var(--space-84);
+  --spacing-96: var(--space-96);
+  --spacing-108: var(--space-108);
+  --spacing-120: var(--space-120);
+  --spacing-160: var(--space-160);
+  --spacing-200: var(--space-200);
+  --spacing-240: var(--space-240);
+
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-xl: var(--r-xl);
+  --radius-full: var(--r-pill);
+
+  --shadow-card: var(--elev-card);
+  --shadow-card-hover: var(--elev-card-hover);
+
+  /* v1 names → v2 values. Compatibility only. */
+  --color-brand-orange-50: var(--orange-soft);
+  --color-brand-orange-100: var(--orange-soft);
+  --color-brand-orange-300: var(--orange-tint);
+  --color-brand-orange-500: var(--orange);
+  --color-brand-orange-800: var(--orange-hover);
+  --color-brand-blue-50: var(--blue-soft);
+  --color-brand-blue-100: var(--blue-soft);
+  --color-brand-blue-200: var(--blue-200);
+  --color-brand-blue-400: var(--blue-tint);
+  --color-brand-blue-500: var(--blue-lit);
+  --color-brand-blue-700: var(--blue);
+  --color-brand-blue-01: var(--blue);
+  --color-beige-100: var(--grey-cool-50);
+  --color-neutral-50: var(--grey-neutral-50);
+  --color-neutral-100: var(--grey-cool-50);
+  --color-neutral-200: var(--line-cool);
+  --color-neutral-400: var(--grey-cool-400);
+  --color-neutral-600: var(--text-muted-cool);
+  --color-neutral-700: var(--text-body-cool);
+  --color-neutral-900: var(--text-title-cool);
+  --color-base-white: var(--white);
+  --color-text: var(--text-title-cool);
+  --color-text-muted: var(--text-body-cool);
+  --color-bg: var(--canvas-top);
+  --color-bg-alt: var(--white);
+  --color-border: var(--line-cool);
+  --color-primary: var(--orange);
+  --color-accent: var(--blue-lit);
+}
