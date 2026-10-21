@@ -81,7 +81,7 @@ Walk this before calling a page done. It takes about two minutes.
 
 ## 8. Last look
 
-- [ ] Compare against `ui/style-guide.html`. Does your page look like it belongs in
+- [ ] Compare against `styles-and-components/style-guide.html`. Does your page look like it belongs in
       the same family?
 - [ ] If something feels off but you can't name it, it is usually **spacing** or
       **too much orange**. Check those first.

@@ -44,7 +44,7 @@ Key characteristics:
 
 ## 2. Color Palette & Roles
 
-> Source of truth: `design-harness/ui/tokens.css`. Never hardcode these hexes.
+> Source of truth: `design-harness/styles-and-components/tokens.css`. Never hardcode these hexes.
 > Components use aliases (`--text-body-cool`, `--blue-lit`, `--orange`).
 > Numbered ramp steps (`--blue-600`, `--grey-warm-400`) stay inside the token file.
 
@@ -128,7 +128,7 @@ Profile and other app surfaces. Classes: `.t-display`, `.t-h1`, `.t-h1-sm`, `.t-
 
 ## 4. Component Stylings
 
-Reuse `design-harness/ui/` before writing a new control.
+Reuse `design-harness/styles-and-components/` before writing a new control.
 
 ### Buttons
 Every button is a pill (`--r-pill`). Label is one line (`whitespace-nowrap`).
@@ -284,4 +284,4 @@ Button rows stack before labels wrap. Split sections stack image below text. The
 | A UI icon | [brand-iconography.md](design-harness/spec/brand-iconography.md) |
 | Headlines and body copy | [voice-and-copy.md](design-harness/spec/voice-and-copy.md) |
 
-`design-harness/ui/style-guide.html` renders the v2 tokens, glass, and lit controls. Compare against that, and against the full-page captures in `sample-screens/`.
+`design-harness/styles-and-components/style-guide.html` renders the v2 tokens, glass, and lit controls. Compare against that, and against the full-page captures in `sample-screens/`.

@@ -36,8 +36,8 @@ or about someone making their own Mind.
 Costume is fixed: olive beanie, orange utility vest over a white puffer,
 cargo pants, sneakers, walkie-talkie. The cutout is
 `assets/minds-mascot/idle-pose/master-mind.webp`. His living-room scenes are
-`assets/artwork/illustrations/minds-only/home-hero-idle.webp` and
-`illustrations/with-human/home-hero-walk.webp`.
+`assets/artwork/illustrations/minds-only/master-mind-waving-in-living-room-with-minds-behind.webp` and
+`illustrations/with-human/man-welcoming-master-mind-into-living-room.webp`.
 
 Do not invent a new pose.
 
@@ -73,7 +73,7 @@ The file list is in [../assets/README.md](../assets/README.md).
 ## How many figures
 
 One hero figure per section. A scene may show other Minds in the background
-of a single illustration, the way `home-hero-idle.webp` does. A row
+of a single illustration, the way `master-mind-waving-in-living-room-with-minds-behind.webp` does. A row
 of cards is a catalogue, not a crowd of loose figures. Do not drop a character
 into a corner to fill space.
 

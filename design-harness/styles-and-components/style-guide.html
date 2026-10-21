@@ -251,8 +251,10 @@ section{margin-bottom:44px;scroll-margin-top:24px;}
 .bm-head span,.bm-name{font-family:var(--mono);font-size:10px;color:var(--text-muted-cool);text-transform:uppercase;letter-spacing:.05em;}
 .bm-name{color:var(--text-title-cool);font-size:11px;max-width:108px;}
 .bm-head i,.bm-name i{display:block;font-style:normal;text-transform:none;letter-spacing:0;color:var(--text-muted-cool);margin-top:2px;}
-/* The photo starts after the label column, so the label stays on the plain ground. */
-.bm-photo::before{content:"";grid-row:1;grid-column:2/-1;justify-self:stretch;align-self:stretch;margin:-12px -12px -12px -8px;border-radius:var(--r-md);background:url('../assets/artwork/illustrations/minds-only/home-hero-idle.webp') center/cover;}
+/* The photo starts after the label column, so the label stays on the plain ground.
+   Blurred like a shallow depth of field so the buttons, not the scene, are the subject;
+   it is drawn 12px oversize and clipped back, which trims the blur's faded edge. */
+.bm-photo::before{content:"";grid-row:1;grid-column:2/-1;justify-self:stretch;align-self:stretch;margin:-24px -24px -24px -20px;background:url('../assets/artwork/illustrations/with-human/man-welcoming-master-mind-into-living-room.webp') center/cover;filter:blur(10px) saturate(1.1);clip-path:inset(12px round var(--r-md));}
 .bm-photo > *{grid-row:1;position:relative;}
 .bm-photo > :nth-child(1){grid-column:1;}
 .bm-photo > :nth-child(2){grid-column:2;}
@@ -396,7 +398,7 @@ footer{
 <main class="wrap" id="top">
   <p class="crumb">design-harness<span class="sep">/</span>ui<span class="sep">/</span><span style="color:var(--ink)">style-guide.html</span></p>
   <h1>Minds Style Guide</h1>
-  <p class="dek">Every token in <code>ui/tokens.css</code> and every component in <code>ui/react/</code>, on one page. Tokens come in two layers. BASE COLORS are raw ramps numbered by lightness (50 near-white &rarr; 900 darkest), saying only <em>how light</em>. SEMANTIC TOKENS say <em>what for</em>, each pointing at one base step, e.g. <code>--blue-lit</code> → <code>var(--blue-600)</code>. Pages use the semantic layer only — retune a role by repointing its token, never by editing a shared ramp step. Click a swatch to copy its <code>var(--name)</code>.</p>
+  <p class="dek">Every token in <code>styles-and-components/tokens.css</code> and every component in <code>styles-and-components/react/</code>, on one page. Tokens come in two layers. BASE COLORS are raw ramps numbered by lightness (50 near-white &rarr; 900 darkest), saying only <em>how light</em>. SEMANTIC TOKENS say <em>what for</em>, each pointing at one base step, e.g. <code>--blue-lit</code> → <code>var(--blue-600)</code>. Pages use the semantic layer only — retune a role by repointing its token, never by editing a shared ramp step. Click a swatch to copy its <code>var(--name)</code>.</p>
 
   <details class="jump"><summary>Jump to a section</summary></details>
 
@@ -710,7 +712,7 @@ footer{
 
   <!-- ══════════════════════════ COMPONENTS ══════════════════════════ -->
   <p class="group-title">Components</p>
-  <p class="dek" style="margin-top:-6px;margin-bottom:28px;">Each component in <code>ui/react/components/ui/</code>, matched to how it ships on the Profile pages and the Launch a Mind modal in animocaminds-frontend. Every preview below is drawn with the same <code>tokens.css</code> recipe classes the React components use, so what you see is what a page gets.</p>
+  <p class="dek" style="margin-top:-6px;margin-bottom:28px;">Each component in <code>styles-and-components/react/components/ui/</code>, matched to how it ships on the Profile pages and the Launch a Mind modal in animocaminds-frontend. Every preview below is drawn with the same <code>tokens.css</code> recipe classes the React components use, so what you see is what a page gets.</p>
 
   <section class="story" id="c-button">
     <div class="section-head"><span class="section-title">Button</span><span class="section-count">button.jsx</span></div>
@@ -718,50 +720,50 @@ footer{
     <div class="canvas v2 pv">
       <div class="vrow"><p class="vlabel">marketing sizes · landing pages and campaign heroes</p>
       <div class="bm" role="table" aria-label="Button variants by marketing size">
-        <div class="bm-row bm-head" role="row"><span role="columnheader">variant</span><span role="columnheader">sm<i>8 / 24 · 16px</i></span><span role="columnheader">md · default<i>12 / 36 · 18px</i></span><span role="columnheader">lg<i>16 / 40 · 18px</i></span><span role="columnheader">xl<i>16 / 48 · 20px</i></span><span role="columnheader">disabled<i>md</i></span></div>
+        <div class="bm-row bm-head" role="row"><span role="columnheader">variant</span><span role="columnheader">sm<i>8 / 24 · 16px</i></span><span role="columnheader">md · default<i>12 / 36 · 18px</i></span><span role="columnheader">lg<i>16 / 40 · 18px</i></span><span role="columnheader">xl<i>16 / 48 · 20px</i></span><span role="columnheader">disabled<i>xl</i></span></div>
         <div class="bm-row" role="row"><span class="bm-name" role="rowheader">primary<i>lit orange · one per view</i></span>
           <button class="pv-btn pv-sm btn-lit-orange">Start</button>
           <button class="pv-btn pv-md btn-lit-orange">Start</button>
           <button class="pv-btn pv-lg btn-lit-orange">Start</button>
           <button class="pv-btn pv-xl btn-lit-orange">Start</button>
-          <button class="pv-btn pv-md btn-lit-orange" disabled>Start</button></div>
+          <button class="pv-btn pv-xl btn-lit-orange" disabled>Start</button></div>
         <div class="bm-row" role="row"><span class="bm-name" role="rowheader">secondary<i>lit blue · in cards</i></span>
           <button class="pv-btn pv-sm btn-lit-blue">Chat</button>
           <button class="pv-btn pv-md btn-lit-blue">Chat</button>
           <button class="pv-btn pv-lg btn-lit-blue">Chat</button>
           <button class="pv-btn pv-xl btn-lit-blue">Chat</button>
-          <button class="pv-btn pv-md btn-lit-blue" disabled>Chat</button></div>
+          <button class="pv-btn pv-xl btn-lit-blue" disabled>Chat</button></div>
         <div class="bm-row" role="row"><span class="bm-name" role="rowheader">quiet<i>white · beside a primary</i></span>
           <button class="pv-btn pv-sm btn-secondary-v2">Log in</button>
           <button class="pv-btn pv-md btn-secondary-v2">Log in</button>
           <button class="pv-btn pv-lg btn-secondary-v2">Log in</button>
           <button class="pv-btn pv-xl btn-secondary-v2">Log in</button>
-          <button class="pv-btn pv-md btn-secondary-v2" disabled>Log in</button></div>
+          <button class="pv-btn pv-xl btn-secondary-v2" disabled>Log in</button></div>
         <div class="bm-row bm-photo" role="row"><span class="bm-name" role="rowheader">glass<i>over a photograph only</i></span>
           <button class="pv-btn pv-sm pv-glass">View</button>
           <button class="pv-btn pv-md pv-glass">View</button>
           <button class="pv-btn pv-lg pv-glass">View</button>
           <button class="pv-btn pv-xl pv-glass">View</button>
-          <button class="pv-btn pv-md pv-glass" disabled>View</button></div>
+          <button class="pv-btn pv-xl pv-glass" disabled>View</button></div>
       </div></div>
       <div class="vrow"><p class="vlabel">app sizes · product surfaces like the Profile pages</p>
       <div class="bm bm-app" role="table" aria-label="Button variants by app size">
-        <div class="bm-row bm-head" role="row"><span role="columnheader">variant</span><span role="columnheader">app-sm<i>32 tall · 13px</i></span><span role="columnheader">app-md<i>38 tall · 13px</i></span><span role="columnheader">app-lg<i>44 tall · 15px</i></span><span role="columnheader">disabled<i>app-md</i></span></div>
+        <div class="bm-row bm-head" role="row"><span role="columnheader">variant</span><span role="columnheader">app-sm<i>32 tall · 13px</i></span><span role="columnheader">app-md<i>38 tall · 13px</i></span><span role="columnheader">app-lg<i>44 tall · 15px</i></span><span role="columnheader">disabled<i>app-lg</i></span></div>
         <div class="bm-row" role="row"><span class="bm-name" role="rowheader">primary<i>lit orange · one per view</i></span>
           <button class="btn-app-sm-v2 btn-lit-orange">Create now</button>
           <button class="btn-app-md-v2 btn-lit-orange">Create now</button>
           <button class="btn-app-lg-v2 btn-lit-orange">Create now</button>
-          <button class="btn-app-md-v2 btn-lit-orange" disabled>Create now</button></div>
+          <button class="btn-app-lg-v2 btn-lit-orange" disabled>Create now</button></div>
         <div class="bm-row" role="row"><span class="bm-name" role="rowheader">secondary<i>lit blue</i></span>
           <button class="btn-app-sm-v2 btn-lit-blue"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat</button>
           <button class="btn-app-md-v2 btn-lit-blue"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat</button>
           <button class="btn-app-lg-v2 btn-lit-blue"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat</button>
-          <button class="btn-app-md-v2 btn-lit-blue" disabled>Chat</button></div>
+          <button class="btn-app-lg-v2 btn-lit-blue" disabled>Chat</button></div>
         <div class="bm-row" role="row"><span class="bm-name" role="rowheader">quiet<i>white</i></span>
           <button class="btn-app-sm-v2 btn-secondary-v2">Plan &amp; Energy</button>
           <button class="btn-app-md-v2 btn-secondary-v2">Plan &amp; Energy</button>
           <button class="btn-app-lg-v2 btn-secondary-v2">Plan &amp; Energy</button>
-          <button class="btn-app-md-v2 btn-secondary-v2" disabled>Plan &amp; Energy</button></div>
+          <button class="btn-app-lg-v2 btn-secondary-v2" disabled>Plan &amp; Energy</button></div>
       </div></div>
       <div class="vrow"><p class="vlabel">text links · link-secondary / link-primary, size none — a hairline appears on hover</p>
         <div class="vitems">

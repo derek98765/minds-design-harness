@@ -29,12 +29,12 @@ Never write "Animoca Minds" in body copy, headlines, or UI. The lockup
    Common mistakes: `py-5`, `gap-6`, `py-10`, `gap-10`, `py-14`, `gap-14`, `gap-28`, `py-28`.
 
 2. **Never hardcode a color, size, radius, or shadow.** Everything lives in
-   [design-harness/ui/tokens.css](design-harness/ui/tokens.css). Use `var(--orange)` or `bg-orange`, not `#fd8d1d`.
+   [design-harness/styles-and-components/tokens.css](design-harness/styles-and-components/tokens.css). Use `var(--orange)` or `bg-orange`, not `#fd8d1d`.
 
 3. **Never use inline `style={{}}` for anything in the token system.** It overrides
    responsive classes and causes bugs that look like design mistakes.
 
-4. **Reuse what's in `design-harness/ui/`.** Do not build a one-off button, card, or input.
+4. **Reuse what's in `design-harness/styles-and-components/`.** Do not build a one-off button, card, or input.
 
 5. **Orange is for action only.** Exactly one orange CTA per section. If there are two,
    one of them is wrong. Orange is never a section/large-block background and never a heading
@@ -109,8 +109,8 @@ script cannot judge. Verify the page at 390px wide before calling it finished.
 
 | Situation | Lane |
 |---|---|
-| Static one-pager, no form logic, needs to open in a browser | `design-harness/ui/html/starter.html` |
-| Has forms, state, routing, or data | `design-harness/ui/react/` |
+| Static one-pager, no form logic, needs to open in a browser | `design-harness/styles-and-components/html/starter.html` |
+| Has forms, state, routing, or data | `design-harness/styles-and-components/react/` |
 
 ## Read these only when the task calls for it
 
@@ -132,8 +132,8 @@ See [design-harness/brand-guideline/README.md](design-harness/brand-guideline/RE
 
 ## What "good" looks like
 
-[design-harness/ui/style-guide.html](design-harness/ui/style-guide.html) shows every token and every component in
-`design-harness/ui/react/`, with how to use each one. When unsure whether your output is
+[design-harness/styles-and-components/style-guide.html](design-harness/styles-and-components/style-guide.html) shows every token and every component in
+`design-harness/styles-and-components/react/`, with how to use each one. When unsure whether your output is
 on-brand, compare it against the style guide rather than guessing.
 
 ## Before starting a new page's UI

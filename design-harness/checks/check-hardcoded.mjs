@@ -3,13 +3,13 @@
  * check-hardcoded.mjs — catch values that should be tokens.
  *
  * Flags:
- *   1. Hex color literals            → use a token from ui/tokens.css
+ *   1. Hex color literals            → use a token from styles-and-components/tokens.css
  *   2. Raw px font sizes             → use text-h1 / text-body-large etc.
  *   3. Inline style={{}} in JSX      → overrides responsive classes, causes bugs
  *   4. "Animoca Minds" in copy       → the brand is "Minds"
  *   5. Arbitrary Tailwind values     → bg-[#fd8d1d], text-[22px]
  *
- * ui/tokens.css is exempt — it is where the raw values are allowed to live.
+ * styles-and-components/tokens.css is exempt — it is where the raw values are allowed to live.
  *
  * Usage:
  *   node checks/check-hardcoded.mjs <file-or-dir> [...more]
