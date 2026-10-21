@@ -3,13 +3,13 @@
  * check-hardcoded.mjs — catch values that should be tokens.
  *
  * Flags:
- *   1. Hex color literals            → use a token from kit/tokens.css
+ *   1. Hex color literals            → use a token from ui/tokens.css
  *   2. Raw px font sizes             → use text-h1 / text-body-large etc.
  *   3. Inline style={{}} in JSX      → overrides responsive classes, causes bugs
  *   4. "Animoca Minds" in copy       → the brand is "Minds"
  *   5. Arbitrary Tailwind values     → bg-[#fd8d1d], text-[22px]
  *
- * kit/tokens.css is exempt — it is where the raw values are allowed to live.
+ * ui/tokens.css is exempt — it is where the raw values are allowed to live.
  *
  * Usage:
  *   node checks/check-hardcoded.mjs <file-or-dir> [...more]
@@ -26,8 +26,10 @@ const EXTS = new Set(['.html', '.jsx', '.tsx', '.js', '.ts', '.css', '.vue', '.s
 const PROSE_EXTS = new Set(['.md']);
 const PROSE_RULES = new Set(['brand-name']);
 const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'build', '.next', 'coverage', 'brand', 'assets']);
-// Files allowed to contain raw values, because they define them.
-const EXEMPT = new Set(['tokens.css']);
+// Files allowed to contain raw values: tokens.css defines them, and
+// style-guide.html is the reference page that documents them — its own
+// reading layout is not a brand surface.
+const EXEMPT = new Set(['tokens.css', 'style-guide.html']);
 
 const RULES = [
   {

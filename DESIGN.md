@@ -44,7 +44,7 @@ Key characteristics:
 
 ## 2. Color Palette & Roles
 
-> Source of truth: `design-harness/kit/tokens.css`. Never hardcode these hexes.
+> Source of truth: `design-harness/ui/tokens.css`. Never hardcode these hexes.
 > Components use aliases (`--text-body-cool`, `--blue-lit`, `--orange`).
 > Numbered ramp steps (`--blue-600`, `--grey-warm-400`) stay inside the token file.
 
@@ -128,7 +128,7 @@ Profile and other app surfaces. Classes: `.t-display`, `.t-h1`, `.t-h1-sm`, `.t-
 
 ## 4. Component Stylings
 
-Reuse `design-harness/kit/` before writing a new control.
+Reuse `design-harness/ui/` before writing a new control.
 
 ### Buttons
 Every button is a pill (`--r-pill`). Label is one line (`whitespace-nowrap`).
@@ -146,7 +146,7 @@ Sizes stay generous: `sm` 8/24, `md` 12/36 (default), `lg` 16/40, `xl` 16/48. Do
 
 `flex flex-col items-stretch gap-12 sm:flex-row sm:flex-wrap sm:items-center`
 
-Over photography, the secondary control may be a translucent white pill if the white secondary button does not hold. Check it against the image at the button's actual position.
+Over photography, the secondary control may be a translucent white pill (`Button variant="glass"`) if the white secondary button does not hold. Check it against the image at the button's actual position.
 
 ### Glass
 - **Content card** — `.glass-card`. One panel. White at 0.85, 14px blur, saturate 1.35, inset white top edge, `--elev-card` drop. Radius `--r-lg` (16px). Hover lifts to `--elev-card-hover`.
@@ -284,4 +284,4 @@ Button rows stack before labels wrap. Split sections stack image below text. The
 | A UI icon | [brand-iconography.md](design-harness/spec/brand-iconography.md) |
 | Headlines and body copy | [voice-and-copy.md](design-harness/spec/voice-and-copy.md) |
 
-`design-harness/style-guide/index.html` renders the v2 tokens, glass, and lit controls. Compare against that, and against the full-page captures in `ui-examples/`.
+`design-harness/ui/style-guide.html` renders the v2 tokens, glass, and lit controls. Compare against that, and against the full-page captures in `sample-screens/`.

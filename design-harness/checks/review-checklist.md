@@ -57,7 +57,7 @@ Walk this before calling a page done. It takes about two minutes.
 ## 6. Imagery
 
 - [ ] **No placeholder boxes, and no generated stand-in characters.** A Mind
-      on the page is a file from `assets/master-mind/` or `assets/one-click/`.
+      on the page is a file from `assets/minds-mascot/` or `assets/artwork/`.
 - [ ] The figure is the current 3D cast. Not the flat Abby, not a hand sticker,
       not a photo of a person with a character composited in.
 - [ ] Collector cards are used whole. Names on text-free figurines are HTML.
@@ -81,7 +81,7 @@ Walk this before calling a page done. It takes about two minutes.
 
 ## 8. Last look
 
-- [ ] Compare against `style-guide/index.html`. Does your page look like it belongs in
+- [ ] Compare against `ui/style-guide.html`. Does your page look like it belongs in
       the same family?
 - [ ] If something feels off but you can't name it, it is usually **spacing** or
       **too much orange**. Check those first.

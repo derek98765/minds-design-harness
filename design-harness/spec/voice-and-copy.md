@@ -17,7 +17,7 @@ A single agent is **"a Mind."** Several are **"Minds."** Capitalised, always —
 a product name, not a common noun. "Your Mind books the table," not "your mind books
 the table."
 
-Never translate "Minds", "AWS", "AFC Virtual League" or other brand terms into another
+Never translate "Minds" or any other brand or product name into another
 language, even mid-sentence.
 
 ---
@@ -82,7 +82,7 @@ Drawn from the brand guideline and shipped pages:
 
 Uppercase, medium weight, indigo, two to four words. They orient, they don't sell.
 
-> ONE-CLICK MINDS · WHAT YOUR MIND CAN DO · QUESTIONS · HOW IT WORKS
+> MEET YOUR MIND · WHAT YOUR MIND CAN DO · QUESTIONS · HOW IT WORKS
 
 Not a sentence, no full stop, no exclamation.
 
@@ -128,7 +128,7 @@ nouns in a row, no specific thing the reader gets, and a competitor could publis
 verbatim.
 
 **After**
-> ONE-CLICK MINDS
+> MEET YOUR MIND
 > ## Your Mind handles it, *while you get on with the day*
 > Set it up once through email or the apps you already use. No prompt engineering,
 > no dashboard to learn.

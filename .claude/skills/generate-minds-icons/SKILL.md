@@ -1,6 +1,6 @@
 ---
 name: generate-minds-icons
-description: Use when generating a NEW Minds Mind-persona icon that doesn't already exist in assets/icons/. Produces a brand-compliant 240x240px, dual-tone (indigo + orange), transparent-background PNG icon. Do not use codex-image-gen directly for icons; this skill wraps it with the required post-processing. Triggers include "generate an icon for [Mind]", "make a new Mind icon", "we need an icon for [persona] that isn't in assets/icons/".
+description: Use when generating a NEW Minds Mind-persona icon that doesn't already exist in assets/brand/icons/. Produces a brand-compliant 240x240px, dual-tone (indigo + orange), transparent-background PNG icon. Do not use codex-image-gen directly for icons; this skill wraps it with the required post-processing. Triggers include "generate an icon for [Mind]", "make a new Mind icon", "we need an icon for [persona] that isn't in assets/brand/icons/".
 ---
 
 # Generate Minds icons
@@ -13,9 +13,12 @@ icon, never place the raw PNG/WEBP on a page.
 
 ## When to use
 
-Only after confirming the icon doesn't already exist — check `assets/icons/` and
-`assets/README.md` first (30 named Mind-persona icons plus `app-icon-default.svg` /
-`skill-icon-default.svg`). See [../../../design-harness/spec/brand-iconography.md](../../../design-harness/spec/brand-iconography.md)
+Only when the user asks for a new icon. Claude never generates one on its own — if
+a page needs an icon that doesn't exist, stop and ask.
+
+Only after confirming the icon doesn't already exist — check `assets/brand/icons/` and
+`assets/README.md` first (30 named Mind-persona icons, `icon-<name>.webp`, plus
+`icon-app-default.svg` / `icon-skill-default.svg`). See [../../../design-harness/spec/brand-iconography.md](../../../design-harness/spec/brand-iconography.md)
 for the full "check before drawing" order and the color rules this pipeline enforces.
 
 ## Prerequisites
@@ -32,7 +35,7 @@ for the full "check before drawing" order and the color rules this pipeline enfo
 
 ## Pipeline
 
-1. **Pick a reference.** Find the closest existing file in `assets/icons/` (same or
+1. **Pick a reference.** Find the closest existing file in `assets/brand/icons/` (same or
    adjacent category to the new Mind) to use as the generation reference — this keeps
    the new icon's silhouette weight and style consistent with the shipped set.
 
@@ -41,7 +44,7 @@ for the full "check before drawing" order and the color rules this pipeline enfo
 
    ```bash
    codex exec --skip-git-repo-check -s workspace-write \
-     -i design-harness/assets/icons/<closest-match>.webp \
+     -i design-harness/assets/brand/icons/<closest-match>.webp \
      'Generate an icon: a single flat illustrated icon for "<Mind name / concept>",
       in the same illustrated dual-tone style as the attached reference — an indigo
       (#5568A7) base shape with one orange (#FC8F1E) accent picking out a single
@@ -71,7 +74,7 @@ for the full "check before drawing" order and the color rules this pipeline enfo
    - **PASS** → done. Move `icon.png` to its destination (the consuming project's
      `src/images/`, matching the convention in
      [brand-imagery.md](../../../design-harness/spec/brand-imagery.md) — not into
-     `design-harness/assets/icons/`, which is the fixed library) and report the path.
+     `design-harness/assets/brand/icons/`, which is the fixed library) and report the path.
    - **FAIL** → read the printed reasons and retry step 2 **once** with an adjusted
      prompt (e.g. "background may not be transparent" → the generation likely filled
      in a white or colored background, emphasize "PNG with true alpha transparency,
@@ -90,8 +93,7 @@ for the full "check before drawing" order and the color rules this pipeline enfo
   needs real alpha transparency; a solid background must be regenerated, not composited
   away, since this pipeline has no background-removal step.
 - Skipping the reference image (`-i`) — produces an icon that doesn't match the
-  existing set's weight and style, the same problem `brand-imagery.md` calls out for
-  Abby and toy-figurine generation.
+  existing set's weight and style.
 - Treating a FAIL as a pass because "it looks close enough" — the validator exists so
   a subtly-off icon (three colors instead of two, an opaque background, wrong canvas
   size) doesn't ship.

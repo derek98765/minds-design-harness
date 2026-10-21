@@ -36,9 +36,9 @@ checked against the rules before it's handed to you.
 
 | You want | Start from |
 |---|---|
-| A static one-page site | `design-harness/kit/html/starter.html` — copy it, replace the content |
-| Something with forms or logic | `design-harness/kit/react/` |
-| To see what's available | Open `design-harness/style-guide/index.html` in a browser |
+| A static one-page site | `design-harness/ui/html/starter.html` — copy it, replace the content |
+| Something with forms or logic | `design-harness/ui/react/` |
+| To see what's available | Open `design-harness/ui/style-guide.html` in a browser |
 
 Then check your work — point it at what you changed, not the whole project:
 
@@ -65,12 +65,13 @@ renders at 40px and the layout breaks with no error. When in doubt, round down.
 ```
 spec/             The design rules. Brand-*.md files cover logo, characters,
                   imagery, icons, and copy voice. The core rules live in ../DESIGN.md.
-kit/              The parts — tokens.css, HTML starter, React components.
-style-guide/      One HTML page of the v2 tokens, glass, and lit controls.
+ui/               What you build with — tokens.css, the HTML starter, the React
+                  components, and style-guide.html (every token and component).
 checks/           Scripts that catch mistakes, plus a human review checklist.
-assets/           Logo, the Master Mind, and the one-click Mind characters.
-ui-examples/      A frame of the current homepage hero. The old page screenshots
-                  are gone.
+assets/           artwork/ (info-graphics, avatars, illustrations),
+                  minds-mascot/ (clean Mind cutouts, toy cards), brand/ (logos, icons, fonts).
+sample-screens/   Full-page screenshots of shipped pages: homepage, launch modal,
+                  and the signed-in profile pages.
 ```
 
 ## Questions a designer would ask you

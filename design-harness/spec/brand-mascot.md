@@ -1,59 +1,70 @@
 # Characters
 
-Read this when a page uses the Master Mind or a one-click Mind.
+Read this when a page uses the Master Mind or a specialist Mind.
 
-The cast is 3D. A glossy blue body, three ball-tipped antennae, simple limbs,
-and a costume that says the job. The old flat Abby, the hand stickers, and the
-beige blister packs are retired. Do not place those, and do not generate a
-new character to fill a gap.
+The cast is 3D. A big glossy blue round head on a small body, a cluster of
+ball-tipped antennae fanning out from the back of the head, glossy blue hands,
+and a costume that says the job. The head is most of the figure. The old flat
+Abby, the hand stickers, and the beige blister packs are retired. Do not place
+those, and do not generate a new character to fill a gap.
+
+---
+
+## The face
+
+Every Mind has a face. It is what makes the character read as alive and
+not as a blue ball.
+
+- **Eyes:** two big round white eyes with black pupils, set close together
+  high on the front of the head.
+- **Mouth:** at rest, a small round "o", as in `idle-pose/` and the avatars.
+  In action, the face changes: a wink, an open grin, a laugh. See
+  `dynamic-pose/` and the scenes in `artwork/`.
+
+A Mind with no eyes, or a plain sphere with antennae, is the old look. Do not
+use it. Do not redraw the eyes, swap the expression, or add a mouth to a
+file that does not have one. If a page needs a different expression, pick
+the file that already has it.
 
 ---
 
 ## Master Mind
 
-`assets/master-mind/`. He is the homepage hero and the figure in the
-launch-a-Mind modal when someone is making their own Mind.
+The flagship character. Use him when a page talks about Minds as a whole,
+or about someone making their own Mind.
 
 Costume is fixed: olive beanie, orange utility vest over a white puffer,
-cargo pants, sneakers, walkie-talkie. The homepage plays `hero-idle.mp4` and
-`hero-walk.mp4` inside the living-room scene. The launch modal plays
-`launch-idle.mp4`, which is the same idle framed tighter on him.
+cargo pants, sneakers, walkie-talkie. The cutout is
+`assets/minds-mascot/idle-pose/master-mind.webp`. His living-room scenes are
+`assets/artwork/illustrations/minds-only/home-hero-idle.webp` and
+`illustrations/with-human/home-hero-walk.webp`.
 
-Use a still (`full-body.webp`, `profile.png`, a poster) when the page cannot
-play video. Do not invent a new pose.
+Do not invent a new pose.
 
 ---
 
-## One-click Minds
+## Specialist Minds
 
-`assets/one-click/`. Nineteen specialists have a collector card. Each also has
-a full-body cutout, a side-view still, and a side-view clip.
+Nineteen specialists, each dressed for one job. Each has a full-body cutout and a collector card.
 
 | You need | Use |
 |---|---|
-| A tile or a chooser, the card is the point | `cards/toycard-<id>.webp`, or `-s` when the card is small |
-| The figure with the name set in HTML | `figurines/<name>-notext.webp` |
-| A portrait on a page, no packaging | `full-body/<id>.webp` or `side-view/` |
-| Motion | The matching `.mp4` in `side-view/` |
+| A portrait on a page, no packaging | `assets/minds-mascot/idle-pose/mind-<id>.webp` |
+| A figure with energy, mid-action | `assets/minds-mascot/dynamic-pose/` (three Minds only) |
+| A tile or a chooser, the card is the point | `assets/minds-mascot/toy-card/card-<id>.webp` |
 
 The card is a finished picture: blue card, blister, accessory pockets, orange
-edition block. Ship the file. Do not redraw the pockets, recolor the card, or
-typeset a new name on top of a card that already has one.
-
-`toycard-new.webp` is the generic card. Use it only for a Mind that has no
-card of its own.
+edition block. It has no name on it. Set the name in HTML. Do not redraw the
+pockets or recolor the card.
 
 ---
 
 ## Marketing scenes
 
-`assets/characters/`. These are the figures and rooms from the homepage,
-About, Everyday Examples, and For Everyone. The product cuts above are for
-UI. These files are for a marketing page that needs the same scene the site
-already ships.
-
-`characters/poses/` is the uncostumed character. Reach for a pose when a
-section needs the figure alone, with no job costume and no room around it.
+`assets/artwork/`. These are the shipped Minds scenes. The cutouts above are
+for UI. These files are for a marketing page. They are split by use: `info-graphics/`, `avatars/`
+(split into `humans/` and `minds/`), `illustrations/` (split into
+`with-human/` and `minds-only/`).
 
 The file list is in [../assets/README.md](../assets/README.md).
 
@@ -61,8 +72,8 @@ The file list is in [../assets/README.md](../assets/README.md).
 
 ## How many figures
 
-One hero figure per section. A homepage scene may show the cast in the
-background of a single illustration, the way the living-room hero does. A row
+One hero figure per section. A scene may show other Minds in the background
+of a single illustration, the way `home-hero-idle.webp` does. A row
 of cards is a catalogue, not a crowd of loose figures. Do not drop a character
 into a corner to fill space.
 
@@ -71,8 +82,9 @@ into a corner to fill space.
 ## What not to do
 
 - Do not redraw, recolor, or restyle a shipped character.
+- Do not use a faceless Mind. Every Mind has eyes and a mouth.
 - Do not composite the old photography of real people with a flat Abby.
 - Do not use hand stickers. That accent system is gone.
 - Do not generate a new Mind image from a prompt when a file in `assets/`
-  already exists. New character art is produced with the app's own pipeline,
-  not from this harness.
+  already exists. New character art comes from the Minds team, not from this
+  harness.

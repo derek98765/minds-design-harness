@@ -1,144 +1,88 @@
 # Assets
 
-The current Minds character library, copied from the shipped app. These are 3D
-cartoon characters. The old flat Abby poses, hand stickers, lifestyle photos,
-and dual-tone persona icons are gone.
+| Folder | What's in it |
+|---|---|
+| `artwork/` | Images for pages: info-graphics, avatars, illustrations. |
+| `minds-mascot/` | Clean cutouts of the Minds, and their toy cards. |
+| `brand/` | Logos, Mind icons, and the Manrope font. |
 
-Marketing scenes live in `characters/`. Product cuts of the Master Mind and
-the one-click catalogue live in `master-mind/` and `one-click/`.
+Use every file whole. Do not crop a figure out of a scene, redraw a
+character, or recolor one. Compress a large file before you ship it.
 
-Compress before you ship a large file on a page. Several side-view clips are
-the full source.
+Rules: [../spec/brand-mascot.md](../spec/brand-mascot.md),
+[../spec/brand-imagery.md](../spec/brand-imagery.md),
+[../spec/brand-logo.md](../spec/brand-logo.md).
 
 ---
 
-## Logo — `logo/`
+## `artwork/`
+
+| Folder | Use for | Files |
+|---|---|---|
+| `info-graphics/` | Info-graphic and explainer sections. Clean, on transparent or plain ground. | `minds-toolkit-01` … `-04` (a Mind with its props floating around it), `minds-ecosystem-flywheel` (four Minds in a loop), `about-digital-hands` (Master Mind with floating panels) |
+| `avatars/humans/` | Profile pictures and small portraits of people: beside a quote, a story, a chat message, a user list. | `avatar-human-<name>.webp`: 23 square portraits on soft gradients (256px). |
+| `avatars/minds/` | Profile pictures for Minds. | `avatar-mind-<id>.webp`: 24 square Mind portraits on soft gradients (256px). Same ids as `minds-mascot/` except `chief-of-staff`, plus `master-mind`, `founder`, `assistant-coach`, `classic`, `classic-skin`, `classic-default`. |
+| `illustrations/minds-only/` | Heroes, section backgrounds, and story images with Minds only. | `home-hero-idle` (Master Mind in the living room), `home-tour-idle-1` … `-6` (living room, kitchen, gym, and the rooms between), `home-minds-neighbours` (five Minds looking down at the camera), and three collages to use as one block: `about-hero`, `everyday-hero`, `home-footer` |
+| `illustrations/with-human/` | The same, where a person shares the scene with Minds. | `home-hero-walk` (a man welcoming the Master Mind home), `home-late-night-bed` (a girl and a Mind on a bed at night), `home-studio-planning` (two people planning with Minds in a studio) |
+
+---
+
+## `minds-mascot/`
+
+| Folder | Files |
+|---|---|
+| `idle-pose/` | `master-mind.webp` (olive beanie, orange vest, walkie-talkie) and `mind-<id>.webp`, each specialist Mind standing in its job costume. |
+| `dynamic-pose/` | `mind-bizz-action`, `mind-email-manager-action`, `mind-general-assistant-action`: half-body action poses with a livelier face (wink, open grin). Small files (270×225). |
+| `toy-card/` | `card-<id>.webp`: the Mind in a blister with accessory pockets. No name on it — set the name in HTML. |
+
+Mind ids: `bizz`, `chief-of-staff`, `content`, `decision`, `email-manager`,
+`fitness-coach`, `follow-up`, `football`, `game-designer`,
+`general-assistant`, `gtm`, `learning-coach`, `personal-chef`,
+`product-builder`, `recruiter`, `research`, `sales`, `scrum-master`,
+`superior-trader`.
+
+---
+
+## `brand/`
+
+### `logo/`
 
 | File | Use |
 |---|---|
-| `minds-blue.svg` | Default on the cool wash, on white, on glass. |
-| `minds-white.svg` | On photography and on any dark surface. |
-| `mark.svg` | The antenna head alone. Favicon and sizes below 120px wide. |
+| `logo-minds-blue.svg` | Default. On the cool wash, on white, on glass. |
+| `logo-minds-white.svg` | On photography and on any dark surface. |
+| `logo-mark-blue.svg` | The antenna head alone. Favicon and sizes below 120px wide. |
+| `logo-mark-white.svg` | The mark in white, for photography and dark surfaces. |
+| `logo-minds-blue.png`, `logo-minds-white.png` | PNG copies, for places that can't take SVG. |
 
-Rules: [../spec/brand-logo.md](../spec/brand-logo.md).
-
----
-
-## Master Mind — `master-mind/`
-
-The flagship character. Glossy blue, three antennae, large eyes, olive beanie
-with a mountain patch, white puffer, orange utility vest, cargo pants, chunky
-sneakers, a walkie-talkie in one hand. This is the figure on the homepage hero
-and in the launch modal's custom-Mind column.
+### `icons/`
 
 | File | Use |
 |---|---|
-| `hero-idle.mp4` + `hero-idle-poster.webp` | Homepage hero, idle. |
-| `hero-walk.mp4` + `hero-walk-poster.webp` | Homepage hero, walk. |
-| `launch-idle.mp4` + `launch-idle-poster.webp` | Launch-a-Mind modal. A crop of the hero idle, framed on the figure. |
-| `full-body.webp` | Cutout on black. Product UI, cards, empty states. |
-| `side-view.webp` + `side-view.mp4` | Three-quarter still and clip. |
-| `profile.png` | The still used on Profile. |
+| `icon-<name>.webp` | Dual-tone app icon for a named Mind: indigo base, orange on one detail. Use when a page names that Mind. |
+| `icon-app-default.svg` | Generic Mind icon, for a Mind with no icon of its own. |
+| `icon-skill-default.svg` | Generic skill icon. |
 
-Do not redraw him, recolor him, or swap the costume. If a page needs the
-Master Mind, use one of these files.
+Reuse an existing icon. Do not draw a new one for a Mind that already has one.
 
----
+### `fonts/`
 
-## One-click Minds — `one-click/`
+Manrope, the brand typeface, from Google Fonts. Free to use and ship under
+the SIL Open Font License (`OFL.txt`) — keep that file with the fonts.
 
-Each specialist is the same blue character in a job costume. Four cuts:
-
-| Folder | What it is |
+| File | Use |
 |---|---|
-| `full-body/` | Transparent-style full figure, one file per Mind. |
-| `side-view/` | Three-quarter still (`.webp`) and clip (`.mp4`). |
-| `figurines/` | Text-free figure art (`*-notext.webp`). The product draws the name in CSS. |
-| `cards/` | Collector cards, full size and a `-s` cut (480px wide) for small tiles. |
-| `transparent/` | Extra cutouts for General Assistant and Sales, used by the launch modal. |
+| `Manrope-Variable.woff2` | Web pages. One file covers every weight, 200–800. |
+| `Manrope-Variable.ttf` | Install on your computer for Figma and other design tools. |
+| `static/Manrope-<Weight>.ttf` | One file per weight, ExtraLight to ExtraBold. For apps that don't handle variable fonts, like some slide and office tools. |
 
-**Cards** are finished compositions: blue backing, the figure in a blister,
-accessory pockets down the side, an orange edition block. Use the file whole.
-Do not rebuild the card in CSS and do not edit the type baked into it.
+To self-host instead of loading from Google Fonts:
 
-**Figurines** (`*-notext.webp`) are the figure without the card typography.
-Use these when the name is set in HTML.
-
-| Card id | Mind |
-|---|---|
-| `general-assistant` | General Assistant |
-| `sales-mind` | Sales |
-| `bizz-mind` | Bizz |
-| `superior-trader` | Superior Trader |
-| `game-designer` | Game Designer |
-| `email-manager` | Email Manager |
-| `scrum-master` | Scrum Master |
-| `fitness-coach` | Fitness Coach |
-| `chef-mind` | Personal Chef |
-| `recruiter-mind` | Recruiter |
-| `football-mind` | Football |
-| `decision-mind` | Decision |
-| `content-mind` | Content |
-| `research-mind` | Research |
-| `product-builder-mind` | Product Builder |
-| `learning-coach-mind` | Learning Coach |
-| `follow-up-mind` | Follow-Up |
-| `gtm-mind` | GTM |
-| `chief-of-staff-mind` | Chief of Staff |
-| `toycard-new` | Generic card, for a Mind that does not have its own yet |
-
-`cards/toycard-<id>.webp` is the full card. `toycard-<id>-s.webp` is the small
-cut for a tile around 110–160px tall. Four extra figurines have no card yet:
-`mind_brit_wit`, `mind_formula_1`, `mind_legal_assistant`, `mind_mystic`.
-
-Rules: [../spec/brand-mascot.md](../spec/brand-mascot.md).
-
----
-
-## Marketing cast — `characters/`
-
-The 3D figures used on the homepage, About, Everyday Examples, and For
-Everyone. Same blue body and antennae as the product cast. Use the file
-whole. Do not crop a person out of a scene and do not restage it.
-
-Lifestyle photos of real people with a small character dropped beside them
-are not in this folder. Those compositions are retired.
-
-### Poses — `characters/poses/`
-
-The character with no costume, on a plain ground. Eight turns (`abby-01` to
-`abby-08`), a wave (`build-your-own-mind-avatar.webp`), a figure holding an
-object (`hero-object.webp`), and the gift hands (`gift.webp`).
-
-### Homepage — `characters/homepage/`
-
-| Files | What they are |
-|---|---|
-| `what-are-minds-*.webp` | Chef, email manager, fitness coach, general assistant, with their props. |
-| `pic-bizz.webp`, `pic-email-manager.webp`, `pic-general-ass.webp`, `pic-small-chef.webp` | Tight cutouts for the "meet them" row. |
-| `flywheel-relay.webp` | Four costumed figures in a loop. |
-| `minds-neighbours.webp` | Five figures looking down into the camera. |
-| `footer.webp`, `footer-mobile.webp` | The footer strip: work, making, play, a group. |
-| `idle-1-poster.webp` … `idle-6-poster.webp` | Homepage tour stills. Living room, kitchen, gym, and the rooms between. |
-| `transition-1-poster.webp` … `transition-7-poster.webp` | The frames between those rooms. |
-| `hero-everyday.webp` | Everyday-life collage. |
-| `cine-02-late-night-bed.webp` | Late-night scene. |
-| `rolla-and-sticks-figma-scene.webp` | Studio planning scene. |
-
-### About — `characters/about/`
-
-`about-hero-img.png` is the About hero collage (kitchen and desk).
-`abby-digital-hands.webp` is the Master Mind with the floating panels.
-
-### Everyday examples — `characters/everyday/`
-
-`everyday-hero.webp` is the page hero. The six stories are
-`collaboration.webp`, `care.webp`, `wellbeing.webp`, `shop.webp`,
-`event.webp`, and `game.webp`.
-
-### For everyone — `characters/for-everyone/`
-
-`laptop-hands.webp` is the hero (the blue hands at a laptop).
-`scenarios/scenario-left.webp`, `scenario-center.webp`, and
-`scenario-right.webp` are the room scenes. `scenarios/avatar-*.webp` are the
-three portrait circles beside those stories.
+```css
+@font-face {
+  font-family: "Manrope";
+  src: url("Manrope-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+```
