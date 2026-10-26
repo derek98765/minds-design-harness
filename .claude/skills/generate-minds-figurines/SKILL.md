@@ -1,9 +1,9 @@
 ---
-name: generate-one-click-mind-images
-description: Use when generating a NEW one-click Mind toy-card image that doesn't already exist in assets/minds-mascot/toy-card/. Interviews the user for the Mind's outfit and 4 accessory items (or proposes them for approval if the user hasn't specified), then generates an 800x994px PNG matching the shipped collector-card art direction. Do not use image-gen directly for this; this skill supplies the reference image, prompt structure, and dimension/format constraints image-gen needs. Triggers include "generate a one-click Mind image for [name]", "make a toy card for [Mind]", "we need a collector card for a Mind that isn't in toy-card".
+name: generate-minds-figurines
+description: Use when generating a NEW one-click Mind toy-card image that doesn't already exist in assets/minds-mascot/toy-card/. Interviews the user for the Mind's outfit and 4 accessory items (or proposes them for approval if the user hasn't specified), then generates an 800x994px PNG matching the shipped collector-card art direction. Do not use image-gen directly for this; this skill supplies the reference image, prompt structure, and dimension/format constraints image-gen needs. Triggers include "generate a Minds figurine for [name]", "generate a one-click Mind image for [name]", "make a toy card for [Mind]", "we need a collector card for a Mind that isn't in toy-card".
 ---
 
-# Generate one-click Mind images
+# Generate Minds figurines
 
 Produces a new collector card in the shipped one-click Mind style (see
 [../../../design-harness/spec/brand-mascot.md](../../../design-harness/spec/brand-mascot.md)): the Mind dressed and posed for its

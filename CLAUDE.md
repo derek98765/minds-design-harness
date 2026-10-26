@@ -86,7 +86,7 @@ Never write "Animoca Minds" in body copy, headlines, or UI. The lockup
     logos and icons. If nothing fits, **stop and ask the user**: say what the page needs
     and which files came closest. Do not generate an image yourself. If the user then
     asks for a new icon or toy card, use the `generate-minds-icons` or
-    `generate-one-click-mind-images` skill, and save the result to the consuming
+    `generate-minds-figurines` skill, and save the result to the consuming
     project's own `src/images/` (not into `design-harness/assets/`, which is the fixed
     brand library).
 
