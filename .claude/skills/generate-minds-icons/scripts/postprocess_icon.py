@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Turn a raw codex-image-gen PNG into a brand-compliant Minds icon PNG.
+"""Turn a raw image-gen PNG into a brand-compliant Minds icon PNG.
 
 Pipeline: load -> quantize opaque pixels to {indigo, orange} while preserving
 transparency -> resize/pad to 240x240 on a transparent canvas.

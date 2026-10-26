@@ -1,14 +1,14 @@
 ---
 name: generate-one-click-mind-images
-description: Use when generating a NEW one-click Mind toy-card image that doesn't already exist in assets/minds-mascot/toy-card/. Interviews the user for the Mind's outfit and 4 accessory items (or proposes them for approval if the user hasn't specified), then generates an 800x994px PNG matching the shipped collector-card art direction. Do not use codex-image-gen directly for this; this skill supplies the reference image, prompt structure, and dimension/format constraints codex-image-gen needs. Triggers include "generate a one-click Mind image for [name]", "make a toy card for [Mind]", "we need a collector card for a Mind that isn't in toy-card".
+description: Use when generating a NEW one-click Mind toy-card image that doesn't already exist in assets/minds-mascot/toy-card/. Interviews the user for the Mind's outfit and 4 accessory items (or proposes them for approval if the user hasn't specified), then generates an 800x994px PNG matching the shipped collector-card art direction. Do not use image-gen directly for this; this skill supplies the reference image, prompt structure, and dimension/format constraints image-gen needs. Triggers include "generate a one-click Mind image for [name]", "make a toy card for [Mind]", "we need a collector card for a Mind that isn't in toy-card".
 ---
 
 # Generate one-click Mind images
 
 Produces a new collector card in the shipped one-click Mind style (see
 [../../../design-harness/spec/brand-mascot.md](../../../design-harness/spec/brand-mascot.md)): the Mind dressed and posed for its
-job, packaged as a collector toy. Wraps `codex-image-gen`: this skill supplies the
-reference image and the constraints codex-image-gen can't guarantee on its own
+job, packaged as a collector toy. Wraps `image-gen`: this skill supplies the
+reference image and the constraints image-gen can't guarantee on its own
 (exact canvas size, transparent corners, keeping the Mind's face and body unchanged).
 
 ## When to use
@@ -21,7 +21,7 @@ If the Mind is in the list, reuse the existing file; do not regenerate it.
 
 ## Prerequisites
 
-`codex` CLI — see the `codex-image-gen` skill's Prerequisites for the install check
+`codex` CLI — see the `image-gen` skill's Prerequisites for the install check
 (`npm install -g @openai/codex`). No other dependencies; this skill does not
 post-process the output (unlike `generate-minds-icons`) because a card only needs
 dimension and transparency checks, not color snapping.
@@ -59,7 +59,7 @@ category (or the closest analog if nothing matches closely) — this keeps propo
 lighting, card layout, and the Mind's head and face consistent with the shipped set.
 See `assets/README.md` for the full list of Mind ids.
 
-## Step 3 — Generate via codex-image-gen
+## Step 3 — Generate via image-gen
 
 ```bash
 codex exec --skip-git-repo-check -s workspace-write \

@@ -1,13 +1,13 @@
 ---
 name: generate-minds-icons
-description: Use when generating a NEW Minds Mind-persona icon that doesn't already exist in assets/brand/icons/. Produces a brand-compliant 240x240px, dual-tone (indigo + orange), transparent-background PNG icon. Do not use codex-image-gen directly for icons; this skill wraps it with the required post-processing. Triggers include "generate an icon for [Mind]", "make a new Mind icon", "we need an icon for [persona] that isn't in assets/brand/icons/".
+description: Use when generating a NEW Minds Mind-persona icon that doesn't already exist in assets/brand/icons/. Produces a brand-compliant 240x240px, dual-tone (indigo + orange), transparent-background PNG icon. Do not use image-gen directly for icons; this skill wraps it with the required post-processing. Triggers include "generate an icon for [Mind]", "make a new Mind icon", "we need an icon for [persona] that isn't in assets/brand/icons/".
 ---
 
 # Generate Minds icons
 
-Wraps `codex-image-gen` with the post-processing Minds icons require: forcing exactly
+Wraps `image-gen` with the post-processing Minds icons require: forcing exactly
 240×240px, a transparent background, and exactly two flat colors (`brand-blue-500` /
-`#5568A7` and `brand-orange-500` / `#FC8F1E`). Raw `codex-image-gen` output cannot
+`#5568A7` and `brand-orange-500` / `#FC8F1E`). Raw `image-gen` output cannot
 guarantee any of this on its own — always run it through this pipeline for a Mind
 icon, never place the raw PNG/WEBP on a page.
 
@@ -23,7 +23,7 @@ for the full "check before drawing" order and the color rules this pipeline enfo
 
 ## Prerequisites
 
-- `codex` CLI — see the `codex-image-gen` skill's Prerequisites for the install check
+- `codex` CLI — see the `image-gen` skill's Prerequisites for the install check
   (`npm install -g @openai/codex`).
 - Python package `Pillow`:
 
@@ -39,7 +39,7 @@ for the full "check before drawing" order and the color rules this pipeline enfo
    adjacent category to the new Mind) to use as the generation reference — this keeps
    the new icon's silhouette weight and style consistent with the shipped set.
 
-2. **Generate the raw icon** via `codex-image-gen`, requesting a flat, dual-tone icon
+2. **Generate the raw icon** via `image-gen`, requesting a flat, dual-tone icon
    on a **transparent background**.
 
    ```bash
@@ -87,7 +87,7 @@ for the full "check before drawing" order and the color rules this pipeline enfo
 
 ## Common mistakes
 
-- Using `codex-image-gen` directly and placing its raw PNG/WEBP on a page — skips
+- Using `image-gen` directly and placing its raw PNG/WEBP on a page — skips
   every guarantee this skill exists to provide. Always run the full pipeline.
 - Asking for a white or solid-color background in the generation prompt — the output
   needs real alpha transparency; a solid background must be regenerated, not composited
