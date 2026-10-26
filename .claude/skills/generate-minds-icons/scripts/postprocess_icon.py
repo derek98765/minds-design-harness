@@ -13,8 +13,8 @@ from PIL import Image
 
 CANVAS = 240
 
-INDIGO = (85, 104, 167)      # #5568A7 — assets/brand/icons brand indigo
-ORANGE = (252, 143, 30)      # #FC8F1E — assets/brand/icons brand orange
+INDIGO = (85, 104, 167)      # #5568A7 — generate-minds-icons/assets/icons brand indigo
+ORANGE = (252, 143, 30)      # #FC8F1E — generate-minds-icons/assets/icons brand orange
 
 PALETTE = [INDIGO, ORANGE]
 

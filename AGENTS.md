@@ -88,7 +88,8 @@ Never write "Animoca Minds" in body copy, headlines, or UI. The lockup
     asks for a new icon or toy card, use the `generate-minds-icons` or
     `generate-minds-figurines` skill, and save the result to the consuming
     project's own `src/images/` (not into `design-harness/assets/`, which is the fixed
-    brand library).
+    brand library). Both skills need the `image-gen` skill installed
+    (https://github.com/derek98765/image-gen); if it's missing, point the user there.
 
 ## Before you say you're done
 
