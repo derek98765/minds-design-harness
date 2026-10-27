@@ -5,11 +5,11 @@
 > Light mode only.
 
 **This is the core spec — read it before any UI work.** It describes the system
-that ships on the homepage and on Profile. For logo, mascot, imagery, icons, or
-copy voice, see the routing table at the end.
+that ships on the homepage and on Profile. Brand specs (logo, mascot, imagery,
+icons, copy voice) are separate documents kept in the Minds design harness.
 
-v1 of this harness (warm beige canvas, flat orange pills, near-zero shadow) is
-retired. Do not build new pages in that language.
+v1 (warm beige canvas, flat orange pills, near-zero shadow) is retired. Do not
+build new pages in that language.
 
 ## 1. Overview & Brand Vibe
 
@@ -22,9 +22,8 @@ with colour used as light rather than as flat paint.
 **The name is "Minds."** Never write "Animoca Minds" in a headline, body copy,
 or UI label. The lockup "By Animoca Brands" exists only inside the logo artwork.
 
-The ground is a cool off-white wash (`#f6f7fa` → `#fbfcfe`), not a warm beige
-and not a cool gray slab. Soft blue and orange blooms sit behind marketing
-pages so glass has something to frost. Profile adds a faint blue spotlight
+The ground is a cool off-white wash (`#f6f7fa` → `#fbfcfe`, top to bottom),
+not a warm beige and not a cool gray slab. Profile adds a faint blue spotlight
 that follows the pointer. Surfaces float: cards are translucent white with a
 lit top edge and a blue-grey drop. Filled buttons are top-lit gradients with
 an inset rim, so they read as thick, not flat.
@@ -35,18 +34,27 @@ Orange is the loud action — the thing the screen is asking for. Blue is the
 working action and the selected state.
 
 Key characteristics:
-- Cool wash ground, with optional blue and orange radial blooms on marketing pages
+- Cool wash ground on every v2 page, fixed behind the content
 - Frosted glass cards and, where a panel needs a rim, nested glass (outer lens, inner body, 3px gap)
 - Lit solids for filled controls: top-lit gradient, inset highlight, tinted drop
-- Manrope. Marketing headlines are extrabold and large. Product UI uses the compact `.t-*` scale
+- Manrope. Marketing headlines are extrabold and large. Product UI uses the smaller steps of the same `text-*` scale
 - Orange for the page's primary ask. Blue (`--blue-lit`) for in-context actions and for selection
 - Light mode only. No dark theme
 
 ## 2. Color Palette & Roles
 
-> Source of truth: `design-harness/styles-and-components/tokens.css`. Never hardcode these hexes.
+> Source of truth: `src/assets/styles/tokens-v2.css`. Never hardcode these hexes.
 > Components use aliases (`--text-body-cool`, `--blue-lit`, `--orange`).
 > Numbered ramp steps (`--blue-600`, `--grey-warm-400`) stay inside the token file.
+
+### Scope
+The scale and the aliases are on `:root`, so any page can use them. The
+component classes (`.btn-lit-orange-v2`, `.checkbox-v2`, …) are scoped
+`.v2 .x-v2` and do nothing without a `.v2` ancestor. A v2 page imports
+`tokens-v2.css` and wraps its content in `<div className="v2">`. Anything
+portalled to `<body>` (Radix menus and dialogs, the toast) sits outside that
+subtree: put `v2` on the portalled content, or use the literals in
+`glass/glassMenuStyles.js`.
 
 ### Brand
 - **Orange** `#fd8d1d` — `--orange` (`--orange-600`). The loud action.
@@ -70,10 +78,15 @@ Cool is the default on glass and on the page. Warm is for content that sits on a
 
 Lines follow the same temperatures: `--line-light-*`, `--line-*`, `--line-strong-*` (steps 50, 100, 200).
 
+The legacy `--ink-*` / `--line-card` / `--tray-*` names are a `.v2`-scoped
+migration shim for Profile. New code uses the aliases above.
+
 ### Ground
-- `--canvas-top` `#f6f7fa` → `--canvas-bottom` `#fbfcfe`. The page wash. It stays cool.
+- **The wash** — `linear-gradient(180deg, #f6f7fa, #fbfcfe)`, painted on `body:has(.v2)` with `background-attachment: fixed`, so it runs unbroken behind the floating nav. It applies to every v2 page at once and stays cool. If one page needs a different ground, give that page's sections a background; don't edit the wash.
+- `--canvas` `#fafafa` (`--bg-page-neutral`) — the flat canvas colour under it.
 - `--bg-card` white. Opaque cards and the secondary button.
-- `--bg-panel-cool` — the cool panel fill (a Mind card's lower section).
+- `--bg-modal` `#fbfcfe` — the modal surface.
+- `--bg-panel-cool` — the cool panel fill (a Mind card's lower section, a hover fill).
 - `--glass-card` — white at 0.85 alpha. Do not lower it; content has to stay readable.
 
 ### Status
@@ -81,7 +94,7 @@ Lines follow the same temperatures: `--line-light-*`, `--line-*`, `--line-strong
 
 ### Usage
 - Do not paint a section in flat brand orange or flat brand navy. The inverted indigo band from v1 is not part of v2.
-- Orange is a control, a small status, or a bloom in the background. It is not a heading colour and not a large fill.
+- Orange is a control or a small status. It is not a heading colour and not a large fill.
 - On glass, text is cool (`--text-title-cool`, `--text-body-cool`). Warm grey reads brown on a cool panel.
 - One loud orange action per view. Other actions in that view are blue lit, or the white secondary button.
 
@@ -122,16 +135,12 @@ One scale for every page — marketing and product alike. Defined in `tokens.css
 Use these classes, never raw px. The responsive steps are built in, so one class scales across all three breakpoints. Heading **tags** follow the page outline (one `<h1>` per page, sections `<h2>`, …), not the visual size — choose the class for the size and the tag for the structure.
 
 ### Principles
-- **Extrabold or quiet, nothing between.** Headlines sit at 800; body sits at 400. The gap between them is the hierarchy. Mid-weights (500/600) appear only on eyebrows, buttons, and small labels.
-- **Tracking runs opposite by scale.** Large headlines tighten (display −0.28px, h1 −0.22px, h2 −0.5px); labels and eyebrows open up (+0.06em / +0.24px). Everything between sits at zero.
-- **Headlines may highlight one phrase.** One phrase per headline, colored `brand-blue-500`
-  by default. On the indigo section canvas, the highlight may instead be orange — the same
-  exception as the eyebrow, and for the same reason: blue-on-blue disappears there. It does
-  not apply on warm canvas or white; there, the highlight stays blue.
-- **Body text stays muted.** `neutral-600` on light surfaces, a light neutral on indigo. Readable but never competing with the headline.
-- **Eyebrows are uppercase medium.** `text-body-lg uppercase`, weight 500, +0.24px tracking, colored
-  `brand-blue-500` by default. On the indigo section canvas, the eyebrow may instead be
-  orange — the same exception as the headline highlight above.
+- **Extrabold or quiet, nothing between.** Headlines sit at 800; body sits at 400. The gap between them is the hierarchy. Mid-weights (500/600) appear only on eyebrows and small labels; buttons are 700.
+- **Tracking runs opposite by scale.** Large headlines tighten (display −0.28px, h1 −0.22px, h2 −0.5px); labels and eyebrows open up (+0.06em). Everything between sits at zero.
+- **Headlines may highlight one phrase.** One phrase per headline, in `--blue-lit`. Never orange.
+- **Body text stays muted.** `--text-body-cool` on the wash and on glass. Readable but never competing with the headline.
+- **Eyebrows are small and uppercase.** `text-label` (or `text-body-lg uppercase` on marketing pages) in `--text-muted-cool`.
+- **Buttons are sentence case.** Bold, no tracking, never `text-label` or uppercase.
 
 ### Don'ts
 - **No all-caps headlines.** Eyebrows are uppercase; headlines never are.
@@ -140,51 +149,89 @@ Use these classes, never raw px. The responsive steps are built in, so one class
 
 ## 4. Component Stylings
 
-Reuse `design-harness/styles-and-components/` before writing a new control.
+Reuse what ships before writing a new control: `src/components/ui/`, the
+Profile kit (`src/app/pages/Profile/components/kit.jsx`), and the v2 components
+listed below. The `/style-guide` page (dev only) renders every one of them with
+its source file — check it first.
 
 ### Buttons
-Every button is a pill (`--r-pill`). Label is one line (`whitespace-nowrap`).
+Every button is a pill (`--r-pill`), bold, sentence case, one line (`whitespace-nowrap`).
 
-| Variant | What it is | When |
+**Product UI — `Action`** (`components/billing/ui.jsx`, built on the kit's `Btn`):
+
+| `look` | What it is | When |
 |---------|------------|------|
-| `.btn-lit-orange` | `--btn-primary-orange-bg` + `--btn-primary-orange-shadow` | The action the screen exists to get. One per view. |
-| `.btn-lit-blue` | `--btn-primary-blue-bg` + `--btn-primary-blue-shadow` | The default filled action when several actions share a view (Chat, confirm). |
-| `.btn-secondary-v2` | White fill, cool hairline, `--blue-lit` label | The quiet button beside a lit primary. |
-| Text | `--btn-text-blue` or `--btn-text-orange`, no fill, no shadow | Inline actions. |
+| `primary` | `.btn-lit-orange-v2`: `--btn-primary-orange-bg` + `--btn-primary-orange-shadow` | The action the screen exists to get. One per view. |
+| `primary-blue` | `.btn-lit-blue-v2`: `--btn-primary-blue-bg` + `--btn-primary-blue-shadow` | The default filled action when several actions share a view (Chat, confirm). |
+| `secondary` | `.btn-outline-blue-v2`: white fill, cool hairline, `--blue-lit` label | The quiet button beside a lit primary. Add `.btn-danger-v2` for a destructive one. |
+| `text` | Grey label, underline on hover, no fill | Dismissals ("Not now"). |
+| `link` | `.text-link-v2`, `--blue-lit` | Inline links. |
+| `muted` + `disabled` | Flat cool grey pill at full opacity | A status, not an action ("Current plan"). |
+| `buy` | `primary` or `primary-blue`, per the buy-colour setting | Upgrade and purchase buttons. |
+
+Sizes (height · type): `sm` 32px · 13px, `md` 38px · 13px (default), `lg` 44px · 15px.
+
+**Marketing pages** — `.btn-grad-orange-v2` / `.btn-grad-blue-v2` (in
+`pages/Home/home.css`, scoped `.v2.home-v2`): the same lit tokens at 48px tall,
+24px side padding, 15px bold.
 
 A lit button is the pair: gradient **and** shadow. The shadow holds the inset rim. A gradient without the shadow is a flat fill and is wrong. Disabled lit buttons drop the gradient and the shadow and sit pale and flat.
 
-Sizes stay generous: `sm` 8/24, `md` 12/36 (default), `lg` 16/40, `xl` 16/48. Do not shrink padding or type to fit a long label. Stack the row on small screens:
+`components/ui/button.jsx` (`Button`) is the v1 button and is still on some
+marketing sections. Don't use it for new v2 UI.
+
+Do not shrink padding or type to fit a long label. Stack the row on small screens:
 
 `flex flex-col items-stretch gap-12 sm:flex-row sm:flex-wrap sm:items-center`
 
-Over photography, the secondary control may be a translucent white pill (`Button variant="glass"`) if the white secondary button does not hold. Check it against the image at the button's actual position.
-
 ### Glass
-- **Content card** — `.glass-card`. One panel. White at 0.85, 14px blur, saturate 1.35, inset white top edge, `--elev-card` drop. Radius `--r-lg` (16px). Hover lifts to `--elev-card-hover`.
-- **Nested shell** — `.glass-shell` + `.glass-shell-inner`. The rail and any panel that needs a lit rim. The 3px padding is the rim. Collapsing it to one bordered div flattens the glass.
-- Glass needs a non-flat ground behind it. On a marketing page, add `.canvas-blooms`. On a flat colour, blur is invisible.
+- **Content card** — `.glass-card-v2` (the kit's `Card` uses it). One panel. White at 0.85, 14px blur, saturate 1.35, inset white top edge, `--elev-card` drop; hover lifts to `--elev-card-hover`. Radius `--r-lg` (16px). Not `.v2`-scoped, so it works anywhere.
+- **No-blur variant** — add `.glass-noblur-v2` on a card that hosts `mix-blend-multiply` media (the Mind portraits). Backdrop blur isolates the blend and leaves white corners.
+- **Nested shell** — the rail and the glass menus: an outer lens (`--glass-outer`, `--glass-rim`) around an inner body (`--glass-inner`) with a 3px gap. The gap is the rim. Collapsing it to one bordered div flattens the glass. Portalled menus take their values from `glass/glassMenuStyles.js`.
+- Glass needs the v2 wash behind it. On a flat colour, blur is invisible.
 - Do not put warm-grey text on a cool glass surface.
 
 ### Cards that are not glass
-An opaque white card is allowed on the wash, with `--elev-card` and `--line-cool` if it needs an edge. Do not alternate beige cards and white cards. That was the v1 rule.
+An opaque white card is allowed on the wash, with `.card-elev-v2` for the drop
+and `--line-cool` if it needs an edge. Do not alternate beige cards and white
+cards. That was the v1 rule.
 
 ### Inputs
-- Fill: `--bg-field-cool` (or `--bg-field-neutral` on the open canvas). `--grey-cool-50` disappears into the wash.
-- Edge: `--line-cool` at rest, `--blue` on focus (1px box-shadow ring, not an outline that squares the radius).
-- Radius: `--r-md`, or pill for search.
-- Font size ≥16px on mobile.
-- Checkbox, radio, and switch: the on state is a lit solid. A switch that means "on / running" is green. A checked checkbox is lit blue.
+- Fill: white, or `--bg-field-neutral` / `--bg-field-cool` for a field that sits on the open canvas (the v2 `SearchBar` goes white on focus). `--grey-cool-50` disappears into the wash.
+- Edge: `--line-strong-cool` or `--line-cool` at rest; on focus a 1px `--blue-lit` ring (box-shadow / `ring-1`), not an outline that squares the radius.
+- Radius: pill for single-line fields and search; large corners for `Textarea`.
+- Font size: 16px on mobile, 14px from md up (`text-[16px] md:text-[14px]`).
+- Components: `Textarea`, `SearchSelect`, `LimitInput` (number with save), `SearchBar v2`.
+
+### Checkbox, radio, switch
+- **Checkbox** — `Checkbox` + `.checkbox-v2`: a glass box at rest; checked is lit blue, the same `--btn-primary-blue-*` tokens as the button.
+- **Radio / pick tile** — `.pick-tile-v2` + `.pick-radio-v2`: selection lives on `aria-pressed`, and the tile and its radio both read it. Checked is a plain blue gradient disc.
+- **Switch** — `OnlineSwitch`: green `--gradient-switch-on` when on, because "on" here means "running". Vertical on the Mind card, horizontal on Mind detail.
+- **Step disc** — `.step-disc-v2`: a lit orange ordinal. Every disc looks the same; no checkmarks.
 
 ### Selection
-Tabs, dropdowns, and segmented filters mark the current choice in `--blue-lit`, not orange. The active rail item is a translucent blue pill (`--glass-pill`) with `--blue-lit` ink and no border.
+Tabs, dropdowns, and segmented filters mark the current choice in `--blue-lit`, not orange.
+- Tabs come in three shapes: pill (`LaunchTabs`), segment (`Segmented`, My Minds) and line (`ModeTabs`, Referral). Don't mix shapes within one group.
+- Dropdowns: `GlassTrigger` + `GlassMenuRow` (`glass/GlassMenu.jsx`), or `MindSelectMenu` to pick a Mind.
+- Multi-pick answers: `ChoiceChip`, selection on `aria-pressed`.
+- The active rail item is a translucent blue pill (`--glass-pill`) with `--blue-lit` ink and no border.
 
 ### Icon buttons
-Round, glass or white, cool hairline. Hover may fill with the lit blue or lit orange gradient and flip the icon to white.
+`IconBtn` (kit): 32px (or 40), `--r-sm` corners, `--text-muted-cool` icon that
+goes `--text-title-cool` over `--bg-panel-cool` on hover. Repeated secondary
+actions down a list are always icons, never text buttons.
+
+### Feedback and overlays
+- **Modal** — `Modal` / `SplitModal` (`components/ui/modal.jsx`): a bottom sheet on phones, a centred card from md, on `--bg-modal`. Only the body scrolls, with a fade over the bottom edge while more is hidden.
+- **Toast** — `toast` from `Profile/toastV2.jsx` (sonner's call shape): success / error / info / warning / loading, optional action.
+- **Inline notice** — `.inline-notice-v2` with `-info` / `-success` / `-warning` / `-error`.
+- **Status pill** — the kit's `Pill`, tones neutral / cool / success / blue / warning / error.
+- **Loading** — `LoadingMark` for a view waiting on one thing with no shape yet; skeletons for content that has a shape.
+- **Scrollbar** — `.scroll-cool-v2` (dialogs, launch modal) or `.scroll-neutral-v2` (Profile rail) on the element that scrolls.
 
 ## 5. Layout & Spacing
 
-Marketing pages are full-bleed sections stacked vertically. The ground is the wash; a section changes by what it contains (a photograph, a glass band, a bloom), not by swapping beige and white.
+Marketing pages are full-bleed sections stacked vertically. The ground is the wash; a section changes by what it contains (a photograph, a glass band, its own background), not by swapping beige and white.
 
 Product pages are an app frame: floating nav, optional fixed rail, content column capped near `--max-w` (1680px).
 
@@ -195,16 +242,16 @@ Literal pixels. Only these values:
 1, 2, 3, 4, 8, 12, 16, 20, 24, 36, 40, 48, 60, 72, 84, 96, 108, 120, 160, 200, 240
 ```
 
-`gap-12` is 12px. A number outside the list falls through to Tailwind's 4px scale with no error. Round down. `checks/check-spacing.mjs` catches it.
+`gap-12` is 12px. A number outside the list falls through to Tailwind's 4px scale with no error. Round down. The scale is defined in `tokens.css`; v2 has no scale of its own.
 
 ### Radius
 | Token | Value | Use |
 |-------|-------|-----|
-| `--r-pill` | pill | Buttons, chips, avatars |
+| `--r-pill` | pill | Buttons, chips, avatars, single-line fields |
 | `--r-xl` | 20px | Large glass shells, feature surfaces |
 | `--r-lg` | 16px | Cards |
-| `--r-md` | 12px | Inputs, images, small tiles |
-| `--r-sm` | 8px | Micro surfaces |
+| `--r-md` | 12px | Images, small tiles |
+| `--r-sm` | 8px | Micro surfaces, icon buttons |
 
 ### Breakpoints
 Type steps at 1024px and 767px. Layout uses Tailwind defaults. Verify at 390px.
@@ -218,7 +265,7 @@ Elevation is part of the language. Drops are blue-grey, not neutral grey — a g
 | `--elev-card` | Resting cards and glass cards |
 | `--elev-card-hover` | The card under the pointer |
 | `--elev-card-selected` | The chosen card. Deeper and bluer than hover |
-| `--shadow-lit-blue` / `--shadow-lit-orange` | Only on the matching lit button |
+| `--shadow-lit-blue` / `--shadow-lit-orange` | Only on the matching lit button (via `--btn-primary-*-shadow`) |
 | `--glass-shadow` | The nested glass shell |
 
 Do not invent a second shadow to separate sections. Do not stack shadows for hierarchy that spacing should be doing.
@@ -227,23 +274,25 @@ Do not invent a second shadow to separate sections. Do not stack shadows for hie
 
 Motion confirms that something arrived or changed. It does not perform.
 
-- Hover and colour: ~160–200ms, ease.
-- Scroll reveal, when used: fade and a short rise, `cubic-bezier(0.22, 1, 0.36, 1)`, once.
+- Hover and colour: ~140–200ms, ease.
+- Reveals: fade and a short rise, `cubic-bezier(0.22, 1, 0.36, 1)`, once (`.card-appear-v2`, `.card-reveal-v2`, `useScrollReveal`). Reveal an image on its own `onLoad`, never on `img.decode()`.
+- Respect `prefers-reduced-motion`.
 - No parallax, no scroll-jacking, no bounce.
 
 ## 8. Do's and Don'ts
 
 ### Do
-- Use the v2 aliases and the recipe classes.
-- Put the page on the cool wash. Add blooms when the page has glass over a marketing ground.
+- Import `tokens-v2.css`, wrap the page in `.v2`, and use the v2 aliases and classes.
 - Use lit orange for the one primary ask, lit blue for the other filled actions.
 - Set glass text in cool grey.
 - Keep button labels on one line. Stack the row before shortening type.
-- Run `checks/` and walk `checks/review-checklist.md`.
+- Check `/style-guide` for an existing component first.
 - Verify at 390px.
 
 ### Don't
 - Don't revive the beige canvas, the flat orange pill, or the indigo section band.
+- Don't use a `.x-v2` class outside a `.v2` ancestor, and don't expect `.v2` styles inside a portal.
+- Don't edit the `body:has(.v2)` wash for one page — it restyles every v2 page.
 - Don't hardcode a hex that already has a token.
 - Don't reference a ramp step from a component. Repoint the alias.
 - Don't use warm grey on cool glass.
@@ -258,35 +307,50 @@ Motion confirms that something arrived or changed. It does not perform.
 
 | Name | Width | What changes |
 |------|-------|----------------|
-| Mobile | ≤767px | Smallest type step. Single column. Inputs at 16px. |
+| Mobile | ≤767px | Smallest type step. Single column. Inputs at 16px. Modals become bottom sheets. |
 | Tablet | 768–1024px | Middle marketing type. Grids open. |
-| Desktop | ≥1025px | Full type. Split sections sit side by side. |
-| Wide | ≥1536px | Content caps. The wash and blooms stay fixed. |
+| Desktop | ≥1025px | Full type. Split sections sit side by side. The Profile rail appears from lg. |
+| Wide | ≥1536px | Content caps at `--max-w`. The wash stays fixed. |
 
 Button rows stack before labels wrap. Split sections stack image below text. The nav may collapse to a sheet. Check 390px for overflow, especially button edges.
 
 ## 10. Agent Prompt Guide
 
 ### Quick reference
-- Ground: `.v2` or `.v2-canvas`, plus `.canvas-blooms` on marketing pages
-- Loud CTA: `.btn-lit-orange`
-- Other filled CTA: `.btn-lit-blue`
-- Quiet pair: `.btn-secondary-v2`
-- Card: `.glass-card`
-- Page title (product): `text-h4` in `--text-title-cool`
+- Ground: `import "@/assets/styles/tokens-v2.css"` and a `.v2` wrapper
+- Loud CTA: `<Action look="primary">` (product) or `.btn-grad-orange-v2` (marketing)
+- Other filled CTA: `<Action look="primary-blue">` or `.btn-grad-blue-v2`
+- Quiet pair: `<Action look="secondary">`
+- Card: the kit's `Card` (`.glass-card-v2`)
+- Page title (product): `text-h4` in `--text-title-cool` (`PageTitle`)
 - Page title (marketing): `text-display`, one phrase in `--blue-lit`
 - Body: `--text-body-cool`
-- Eyebrow: `text-label` or `text-body-lg uppercase`, `--text-muted-cool`
+- Eyebrow: `text-label` in `--text-muted-cool`
 
 ### Iteration
-1. Set the cool wash, and blooms if the page is glass over a marketing ground.
+1. Import the v2 tokens and wrap the page in `.v2`.
 2. Set type before decoration. Marketing headlines stay large.
 3. Add one lit orange action. Everything else is blue or secondary.
 4. Check every spacing number against the token list.
 5. Verify at 390px.
-6. Run `checks/` and walk the review checklist.
 
-## Where to look next
+## Reference
+
+The `/style-guide` page (dev only) renders the v2 tokens, glass, and every
+component, each with its source file. Compare against it.
+
+<!-- harness-only:start -->
+<!-- Everything above this block is synced from animocaminds-frontend's
+     DESIGN.md by its update-design-harness skill: edit it there, not here.
+     This block belongs to the harness: edit it here; the sync keeps it. -->
+
+## In this harness
+
+`design-harness/styles-and-components/tokens.css` is the frontend's
+`tokens-v2.css`, plus an appendix of the legacy tokens the synced components
+still use. `react/` holds the synced component library and v2 components.
+
+### Where to look next
 
 | If the page involves… | Read |
 |---|---|
@@ -296,4 +360,18 @@ Button rows stack before labels wrap. Split sections stack image below text. The
 | A UI icon | [brand-iconography.md](design-harness/spec/brand-iconography.md) |
 | Headlines and body copy | [voice-and-copy.md](design-harness/spec/voice-and-copy.md) |
 
-`design-harness/styles-and-components/style-guide.html` renders the v2 tokens, glass, and lit controls. Compare against that, and against the full-page captures in `sample-screens/`.
+### Checks
+
+Before calling a page done, run the scripts in [checks/](design-harness/checks/)
+and walk [review-checklist.md](design-harness/checks/review-checklist.md).
+`check-spacing.mjs` catches spacing numbers outside the 21-step scale;
+`check-button-text.mjs` catches wrapping button labels; `check-hardcoded.mjs`
+catches hardcoded values that have a token.
+
+### Visual reference
+
+[style-guide.html](design-harness/styles-and-components/style-guide.html) is a
+snapshot of the frontend's `/style-guide` page: the v2 tokens, glass, and every
+component. Compare against it, and against the full-page captures in
+[sample-screens/](design-harness/sample-screens/).
+<!-- harness-only:end -->
