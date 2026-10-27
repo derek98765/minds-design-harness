@@ -192,7 +192,7 @@ export function IconBtn({ label, className, size = 32, children, ...rest }) {
       style={size == null ? undefined : { width: size, height: size }}
       className={cn(
         "inline-flex items-center justify-center shrink-0 rounded-[var(--r-sm)]",
-        "text-[var(--text-muted-neutral)] hover:text-[var(--text-title-neutral)] hover:bg-[var(--bg-hover-warm)]",
+        "text-[var(--text-muted-cool)] hover:text-[var(--text-title-cool)] hover:bg-[var(--bg-panel-cool)]",
         "transition-colors cursor-pointer",
         className
       )}

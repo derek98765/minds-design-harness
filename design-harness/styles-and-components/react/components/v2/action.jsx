@@ -1,5 +1,5 @@
 import { Link } from "@/shims/router";
-import { Dialog, DialogBody, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Modal } from "@/components/ui/modal";
 import { Btn } from "@/components/v2/kit";
 import { useBuyColor } from "@/shims/billing";
 import { cn } from "@/lib/utils";
@@ -37,33 +37,7 @@ export function Action({ look = "secondary", to, className, ...rest }) {
   );
 }
 
-/** Shared dialog: bottom sheet on mobile, centred card from md up. Same shell
-    as the referral "Choose a Mind" picker: the shared dialog's own header with
-    a centred title and note, the v2 canvas fill, and a padded body. */
-export function BillingDialog({ wide, open, onOpenChange, title, description, descriptionClassName, footer, children }) {
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent
-        {...(!description && { "aria-describedby": undefined })}
-        className={cn("v2 !bg-[#fbfcfe] !gap-36 !pb-40 !pt-36", wide ? "md:!max-w-[1040px]" : "md:!max-w-[520px]")}
-      >
-        <DialogHeader className="gap-16">
-          <DialogTitle>{title}</DialogTitle>
-          {description && (
-            <DialogDescription className={cn("m-0 text-center text-[var(--text-label-cool)]", descriptionClassName ?? "text-body-sm leading-normal font-normal")}>
-              {description}
-            </DialogDescription>
-          )}
-        </DialogHeader>
-        {/* The scroller clips whatever overflows it, so it is padded out and pulled back with
-            negative margins: drop shadows (the pack cards') get room to spill past the content. */}
-        {children && (
-          <DialogBody className="scroll-cool-v2 -my-16 py-16 max-md:-mx-20 max-md:px-20 md:-mx-24 md:px-24">
-            {children}
-          </DialogBody>
-        )}
-        {footer && <div className="flex flex-wrap items-center justify-center gap-x-24 gap-y-12">{footer}</div>}
-      </DialogContent>
-    </Dialog>
-  );
+/** Shared dialog: the standard Modal, with the billing screens' `wide` flag mapped to its sizes. */
+export function BillingDialog({ wide, ...props }) {
+  return <Modal size={wide ? "lg" : "sm"} {...props} />;
 }

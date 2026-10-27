@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Minds design tokens — synced from animocaminds-frontend @ bc270a55
+   Minds design tokens — synced from animocaminds-frontend @ 34e53d70
    (src/assets/styles/tokens-v2.css). Do not edit here: change the frontend
    and rerun the update-design-harness skill.
    ========================================================================== */
@@ -614,6 +614,7 @@
 
   /* ── Aliases — backgrounds ───────────────────────────────────────────── */
   --bg-card: #ffffff;
+  --bg-modal: #fbfcfe; /* modal surface: a hair off white, the canvas wash's lightest stop */
   --bg-page-neutral: var(--grey-neutral-50);
   --bg-subtle-warm: var(--grey-warm-50); /* icon tiles, neutral chips */
   --bg-hover-warm: var(--grey-warm-50); /* row + ghost-button hover */
@@ -5092,6 +5093,7 @@ body:has(.composer-dock-v2) [data-sonner-toaster][data-y-position="bottom"] {
   --space-40: 40px;
   --space-48: 48px;
   --space-60: 60px;
+  --space-72: 72px;
   --space-96: 96px;
   --space-120: 120px;
   --space-200: 200px;
@@ -5248,6 +5250,7 @@ body:has(.composer-dock-v2) [data-sonner-toaster][data-y-position="bottom"] {
   --spacing-40: var(--space-40);
   --spacing-48: var(--space-48);
   --spacing-60: var(--space-60);
+  --spacing-72: var(--space-72);
   --spacing-96: var(--space-96);
   --spacing-120: var(--space-120);
   --spacing-200: var(--space-200);
