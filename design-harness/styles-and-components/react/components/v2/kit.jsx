@@ -54,12 +54,12 @@ export function SectionHead({ title, count, action, sub, className }) {
     <div className={cn("flex items-end justify-between gap-16 mb-12", className)}>
       <div className="min-w-0">
         <div className="flex items-center gap-8">
-          <h2 className="text-h6 text-[var(--text-title-warm)] m-0">{title}</h2>
+          <h2 className="text-item-title !font-medium text-[var(--text-body-cool)] m-0">{title}</h2>
           {count != null && (
             <span className="text-body-xs leading-[1.45] font-medium t-num text-[var(--text-muted-warm)] tabular-nums">{count}</span>
           )}
         </div>
-        {sub && <p className="text-body-sm leading-normal font-normal text-[var(--text-muted-warm)] m-0 mt-2">{sub}</p>}
+        {sub && <p className="text-body-sm leading-normal font-normal text-[var(--text-label-cool)] m-0 mt-2">{sub}</p>}
       </div>
       {action}
     </div>
@@ -214,7 +214,7 @@ const PILL_TONE = {
   error: "bg-[var(--error-soft)] text-[var(--error)]",
 };
 
-export function Pill({ tone = "neutral", dot = false, className, children }) {
+export function Pill({ tone = "neutral", className, children }) {
   return (
     <span
       className={cn(
@@ -227,7 +227,6 @@ export function Pill({ tone = "neutral", dot = false, className, children }) {
         className
       )}
     >
-      {dot && <span className="w-[6px] h-[6px] rounded-full bg-current" />}
       {children}
     </span>
   );
@@ -648,23 +647,6 @@ export function LogoTile({ src, name, size = 32, className }) {
         </span>
       )}
     </span>
-  );
-}
-
-/* ── Stat tile ───────────────────────────────────────────────────────────── */
-
-export function Stat({ label, value, sub, tone }) {
-  return (
-    <div className="min-w-0">
-      <div
-        className="t-num text-[22px] font-extrabold leading-none"
-        style={{ color: tone === "blue" ? "var(--blue)" : "var(--text-title-warm)" }}
-      >
-        {value}
-      </div>
-      <div className="text-body-xs leading-[1.45] font-medium text-[var(--text-muted-warm)] mt-4 truncate">{label}</div>
-      {sub && <div className="text-body-xs leading-[1.45] font-medium text-[var(--text-muted-warm)] opacity-70">{sub}</div>}
-    </div>
   );
 }
 

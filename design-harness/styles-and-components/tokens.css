@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Minds design tokens — synced from animocaminds-frontend @ defb8a61-dirty
+   Minds design tokens — synced from animocaminds-frontend @ bc270a55
    (src/assets/styles/tokens-v2.css). Do not edit here: change the frontend
    and rerun the update-design-harness skill.
    ========================================================================== */
@@ -2948,22 +2948,29 @@ button.glass-ctl-v2:hover:not(:disabled) {
    ::-webkit-scrollbar nor any of its parts, so without the standard properties
    it keeps the full default bar. The two are declared together everywhere.
 
-   .scroll-v2 — WARM. The rail's, matched to the warm greys around it.
+   .scroll-neutral-v2 — NEUTRAL. The rail's.
    .scroll-cool-v2 — COOL. Same geometry against the cool glass surfaces (the
-   launch modal's two columns), where the warm thumb read faintly beige. */
-.scroll-v2 {
+   launch modal's two columns). There is no warm variant: a warm thumb read
+   faintly beige. */
+.scroll-neutral-v2 {
   scrollbar-width: thin;
-  scrollbar-color: var(--line-strong-warm) transparent;
+  scrollbar-color: var(--line-strong-neutral) transparent;
 }
-.scroll-v2::-webkit-scrollbar {
+.scroll-neutral-v2::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
-.scroll-v2::-webkit-scrollbar-thumb {
-  background: var(--line-strong-warm);
+.scroll-neutral-v2::-webkit-scrollbar-thumb {
+  background: var(--line-strong-neutral);
   border-radius: 999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
 }
-.scroll-v2::-webkit-scrollbar-track {
+.scroll-neutral-v2::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted-neutral);
+  background-clip: padding-box;
+}
+.scroll-neutral-v2::-webkit-scrollbar-track {
   background: transparent;
 }
 
@@ -5084,6 +5091,7 @@ body:has(.composer-dock-v2) [data-sonner-toaster][data-y-position="bottom"] {
   --space-36: 36px;
   --space-40: 40px;
   --space-48: 48px;
+  --space-60: 60px;
   --space-96: 96px;
   --space-120: 120px;
   --space-200: 200px;
@@ -5239,6 +5247,7 @@ body:has(.composer-dock-v2) [data-sonner-toaster][data-y-position="bottom"] {
   --spacing-36: var(--space-36);
   --spacing-40: var(--space-40);
   --spacing-48: var(--space-48);
+  --spacing-60: var(--space-60);
   --spacing-96: var(--space-96);
   --spacing-120: var(--space-120);
   --spacing-200: var(--space-200);
