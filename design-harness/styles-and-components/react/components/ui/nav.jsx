@@ -110,7 +110,7 @@ function Nav({
               {cta.label}
             </a>
           )}
-          {avatarInitial && <span className="avatar-initial-v2 size-36 text-body-default">{avatarInitial}</span>}
+          {avatarInitial && <span className="avatar-initial-v2 size-36 text-body">{avatarInitial}</span>}
         </div>
 
         <button
@@ -129,14 +129,14 @@ function Nav({
           {links.map((link) =>
             link.dropdown ? (
               <div key={link.label} className="flex flex-col">
-                <span className="px-12 py-12 text-body-large font-medium text-[var(--text-title-cool)]">
+                <span className="px-12 py-12 text-body-lg font-medium text-[var(--text-title-cool)]">
                   {link.label}
                 </span>
                 {link.dropdown.map((item) => (
                   <a
                     key={item.label}
                     href={item.href}
-                    className="rounded-md px-24 py-8 text-body-default font-medium text-[var(--text-muted-cool)]"
+                    className="rounded-md px-24 py-8 text-body font-medium text-[var(--text-muted-cool)]"
                   >
                     {item.label}
                   </a>
@@ -148,7 +148,7 @@ function Nav({
                 href={link.href}
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noopener noreferrer" : undefined}
-                className="inline-flex items-center gap-4 rounded-md px-12 py-12 text-body-large font-medium text-[var(--text-title-cool)]"
+                className="inline-flex items-center gap-4 rounded-md px-12 py-12 text-body-lg font-medium text-[var(--text-title-cool)]"
               >
                 {link.label}
                 {link.external && <ArrowUpRight size={16} className="shrink-0" />}

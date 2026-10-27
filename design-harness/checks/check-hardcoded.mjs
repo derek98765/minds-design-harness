@@ -4,7 +4,7 @@
  *
  * Flags:
  *   1. Hex color literals            → use a token from styles-and-components/tokens.css
- *   2. Raw px font sizes             → use text-h1 / text-body-large etc.
+ *   2. Raw px font sizes             → use text-h1 / text-body-lg etc.
  *   3. Inline style={{}} in JSX      → overrides responsive classes, causes bugs
  *   4. "Animoca Minds" in copy       → the brand is "Minds"
  *   5. Arbitrary Tailwind values     → bg-[#fd8d1d], text-[22px]
@@ -45,7 +45,7 @@ const RULES = [
     re: /font-size\s*:\s*\d+(?:\.\d+)?px/g,
     skipLine: l => /--font-size-/.test(l),
     msg: 'raw px font size',
-    fix: 'use a type token — text-h2, text-body-large, var(--font-size-h3)',
+    fix: 'use a type token — text-h2, text-body-lg, var(--font-size-h3)',
   },
   {
     id: 'arbitrary',

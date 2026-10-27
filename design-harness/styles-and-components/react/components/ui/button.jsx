@@ -3,78 +3,94 @@ import { cva } from "class-variance-authority";
 import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 
-/**
- * Minds button.
- *
- * Every variant is a pill — there is no square button in this design system.
- * Text is extrabold at all sizes; the generous horizontal padding is part of
- * the brand silhouette, not an accident.
- *
- * `primary` is the lit orange CTA — one per view, the thing the screen asks for.
- * `secondary` is the lit blue CTA for the other filled actions.
- * `quiet` is the white secondary button beside a primary.
- * `glass` is a translucent white pill, only for a secondary action over a
- * photograph where the white `quiet` button doesn't hold.
- * `link-primary` / `link-secondary` are text buttons.
- *
- * Sizes: `sm`–`xl` are for marketing pages. `app-sm` / `app-md` / `app-lg` are
- * the compact sizes product surfaces use (the Profile pages' Chat, Nudge,
- * Manage Circle…). Repeated secondary actions down a list are icon buttons
- * (icon-button.jsx), never a text button repeated per row.
- *
- * Label text is always ONE line — `whitespace-nowrap` below is load-bearing.
- * A wrapped label inflates the pill into a lozenge and destroys the silhouette.
- * Do not remove it, and do not override it with `whitespace-normal`.
- *
- * Because the text cannot wrap, a too-long label overflows instead. The row is
- * what has to give, so stack a pair of buttons on mobile rather than letting
- * them share a line:
- *
- *   <div className="flex flex-col items-stretch gap-12
- *                   sm:flex-row sm:flex-wrap sm:items-center">
- *     <Button>Start free</Button>
- *     <Button variant="quiet">See how it works</Button>
- *   </div>
- *
- * If a single button still overflows at 390px when stacked, the label is too
- * long — shorten the copy. Never shrink the padding or the type to make it fit.
- */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-extrabold rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
   {
     variants: {
       variant: {
-        // The loud action. One per view. Gradient and shadow travel together.
-        primary: "btn-lit-orange",
-        // The working filled action when the view already has its orange.
-        secondary: "btn-lit-blue",
-        // White pill beside a primary.
-        quiet: "btn-secondary-v2",
-        // Over photography only. Check it against the image at its real position.
-        glass:
-          "bg-[var(--glass-ctl)] text-[var(--text-title-cool)] shadow-[inset_0_0_0_1px_var(--glass-edge)] backdrop-blur-md hover:bg-[var(--glass-ctl-hover)]",
+        // ── Filled ──────────────────────────────────────────────────────────
+        // Primary: orange — use on any background
+        primary:
+          "rounded-full bg-brand-orange-01 text-base-white hover:brightness-110",
+        // Secondary: blue — use on light backgrounds
+        secondary:
+          "rounded-full bg-brand-blue-01 text-base-white hover:brightness-125",
+        // Tertiary dark: black — use on light backgrounds
+        tertiary:
+          "rounded-full bg-neutral-900 text-base-white hover:bg-neutral-600",
+        // Tertiary light: white — use on dark/coloured backgrounds
+        "tertiary-light":
+          "rounded-full bg-base-white text-neutral-900 hover:bg-neutral-50",
 
-        // Text links: no underline at rest, a hairline under them on hover
-        // (.text-link-v2 in tokens.css). Pair with size="none".
-        "link-primary": "text-link-orange-v2",
-        "link-secondary": "text-link-v2",
+        // ── Outline ─────────────────────────────────────────────────────────
+        // Matches the outlined row in Figma
+        "outline-primary":
+          "rounded-full border border-brand-orange-01 bg-transparent text-brand-orange-01 hover:bg-brand-orange-01 hover:text-base-white",
+        "outline-secondary":
+          "rounded-full border border-brand-blue-01 bg-transparent text-brand-blue-01 hover:bg-brand-blue-01 hover:text-base-white",
+        "outline-tertiary":
+          "rounded-full border border-neutral-900 bg-transparent text-neutral-900 hover:bg-neutral-900 hover:text-base-white",
+        // Muted outline — "View all minds" style (neutral-400 border)
+        "outline-muted":
+          "rounded-full border border-neutral-400 bg-transparent text-semantic-text hover:border-neutral-900 hover:text-neutral-900",
+        // Light outline — for dark/coloured backgrounds
+        "outline-light":
+          "rounded-full border border-neutral-50 bg-transparent text-neutral-50 hover:bg-base-white hover:text-neutral-900",
+
+        // ── Disabled ────────────────────────────────────────────────────────
+        // A flat grey status pill ("Current plan"), not a faded button: no
+        // border and no opacity drop, so it reads as a state, not an action.
+        // Pair it with the `disabled` attribute.
+        disabled:
+          "rounded-full bg-neutral-100 text-neutral-400 cursor-default disabled:opacity-100",
+
+        // ── Link / text ──────────────────────────────────────────────────────
+        "link-primary":
+          "bg-transparent font-semibold !px-0 text-brand-orange-01 underline underline-offset-4 hover:brightness-110",
+        "link-secondary":
+          "bg-transparent font-semibold !px-0 text-brand-blue-01 underline underline-offset-4 hover:text-brand-blue-02",
+        "link-dark":
+          "bg-transparent font-semibold !px-0 text-neutral-900 underline underline-offset-4 hover:text-neutral-600",
+        "link-muted":
+          "bg-transparent font-semibold !px-0 text-neutral-600 underline underline-offset-4 hover:text-neutral-900",
+
+        // ── Legacy brand aliases (ProfilePage) ──────────────────────────────
+        "brand-primary":
+          "rounded-full bg-brand-blue-01 text-base-white hover:bg-brand-blue-02",
+        "brand-outline-blue":
+          "rounded-full border border-brand-blue-01 bg-transparent text-brand-blue-01 hover:bg-brand-blue-01 hover:text-base-white",
+        "brand-ghost-blue":
+          "rounded-full border border-neutral-400 bg-transparent text-semantic-text hover:border-brand-blue-01 hover:text-brand-blue-01",
+        "brand-ghost-orange":
+          "rounded-full border border-neutral-400 bg-transparent text-semantic-text hover:border-brand-orange-01 hover:text-brand-orange-01",
+        "brand-chip":
+          "rounded-full bg-base-white text-brand-blue-01 border border-neutral-200 hover:bg-brand-blue-01 hover:text-base-white hover:border-brand-blue-01",
+        "brand-arrow":
+          "rounded-full bg-base-white text-semantic-text border border-neutral-200 hover:bg-brand-blue-01 hover:text-base-white hover:border-brand-blue-01",
+        "icon-circle":
+          "rounded-full bg-base-white text-brand-orange-01 border border-neutral-200 hover:bg-brand-orange-01 hover:text-base-white hover:border-brand-orange-01",
+
+        // ── Legacy shadcn (kept for non-homepage usage) ──────────────────────
+        default: "rounded-md bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        destructive: "rounded-md bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        outline: "rounded-md border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        ghost: "rounded-md hover:bg-accent hover:text-accent-foreground",
+        link: "rounded-md text-primary underline-offset-4 hover:underline",
       },
       size: {
-        // MARKETING sizes — landing pages and campaign heroes.
-        // sm -> lg grow in both height and width. xl holds lg's vertical padding
-        // and gains width and type instead: bumping both would make it tower,
-        // because the larger font adds line-box height on top of the padding.
-        sm: "px-24 py-8 text-[16px]",
-        md: "px-36 py-12 text-[18px]",
-        lg: "px-40 py-16 text-[18px]",
-        xl: "px-48 py-16 text-[20px]",
-        // APP sizes — product surfaces like Profile: 32 / 38 / 44px tall,
-        // 13-15px bold (the frontend's kit.jsx Btn).
-        "app-sm": "btn-app-sm-v2",
-        "app-md": "btn-app-md-v2",
-        "app-lg": "btn-app-lg-v2",
-        // Link variants carry no padding.
-        none: "p-0 text-[16px]",
+        // Brand pill sizes
+        md: "px-[32px] py-[16px] text-[18px] leading-[26px]",
+        sm: "px-[32px] py-[8px] text-[16px] leading-[24px]",
+        "sm-tall": "px-[32px] py-[12px] text-[16px] leading-[24px]",
+        lg: "px-[40px] py-[12px] text-[18px] leading-[26px]",
+        xl: "px-[64px] py-[20px] text-[20px] leading-[28px]",
+        // No padding — for link/text variants
+        none: "p-0 text-[16px] leading-[24px]",
+        // Legacy shadcn sizes
+        default: "h-9 px-4 py-2 text-sm",
+        "legacy-sm": "h-8 rounded-md px-3 text-xs",
+        "legacy-lg": "h-10 rounded-md px-8",
+        icon: "h-9 w-9 rounded-md",
       },
     },
     defaultVariants: {

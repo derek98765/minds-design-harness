@@ -87,44 +87,56 @@ Lines follow the same temperatures: `--line-light-*`, `--line-*`, `--line-strong
 
 ## 3. Typography
 
-Manrope only, for Latin. `Noto Sans TC` / `Noto Sans SC` for Chinese. No second display face.
+Type is the primary visual device. Layouts rely on big, confident text and generous whitespace rather than dividing lines or boxes.
 
-### Marketing scale
-Landing pages and campaign heroes. Token classes: `text-h1` … `text-h5`, `text-body-*`, `text-caption-*`.
+### Font Family
+- Primary: `Manrope`, fallback `sans-serif` — `--font-family-primary`. Used for every piece of Latin text. There is no secondary or display family.
+- Chinese: `Noto Sans TC` (traditional) and `Noto Sans SC` (simplified).
 
-| Role | Desktop → ≤1024 → ≤767 | Weight |
-|------|-------------------------|--------|
-| H1 | 56 / 48 / 40 | 800 |
-| H2 | 44 / 36 / 30 | 800 |
-| H3 | 34 / 28 / 24 | 800 |
-| H4 | 28 / 24 / 20 | 800 |
-| H5 | 22 / 20 / 18 | 700 |
-| Body large | 16 | 400 |
-| Body default | 14, and **16 on mobile** | 400 |
+### Weights
+300 light · 400 regular · 500 medium · 600 semibold · 700 bold · 800 extrabold.
 
-Headlines track tight (`-0.02em`). Eyebrows are caption-large, weight 500, open tracking, and on v2 they are cool grey (`--text-muted-cool`), not brand blue — unless a single phrase in a headline is the highlight, in which case that phrase is `--blue-lit`.
+### Hierarchy
 
-The homepage hero line is smaller than H1 on purpose (`clamp(22px, 2.4vw, 36px)`), so the statement stays one line above the scene. Use that size for a line that has to sit over photography. Do not set a marketing H1 in the product scale.
+One scale for every page — marketing and product alike. Defined in `tokens.css`.
 
-### Product scale
-Profile and other app surfaces. Classes: `.t-display`, `.t-h1`, `.t-h1-sm`, `.t-h2`, `.t-h3`, `.t-body`, `.t-sm`, `.t-xs`, `.t-label`.
+| Class | Size (desktop → ≤1024px → ≤767px) | Weight | Line height | Tracking | Use |
+|-------|-----------------------------------|--------|-------------|----------|-----|
+| `text-display` | 56 → 48 → 40 | set at call site (800) | **1.05** | −0.28px | Hero headlines |
+| `text-h1` | 44 → 36 → 30 | set at call site (800) | **1.1** | −0.22px | Page-level marketing headlines |
+| `text-h2` | 32 → 28 → 24 | **800** | **1.18** | **−0.5 → −0.4 → −0.3px** | Section headlines, big figures |
+| `text-h3` | 28 → 24 → 20 | set at call site (800) | **1.2** | 0 | Feature titles |
+| `text-h4` | 24 → 21 → 19 | **800** | **1.2** | **−0.24 → −0.2 → −0.16px** | Product page titles (`PageTitle`) |
+| `text-h5` | 22 → 20 → 18 | set at call site (700) | **1.25** | 0 | Small headings |
+| `text-h6` | 19 → 18 → 17 | **700** | **1.25** | **−0.2 → −0.2 → −0.1px** | Card headings — smallest heading |
+| `text-title` | 15 | **700** | **1.35** | 0 | Card / row / empty-state titles. Not a heading |
+| `text-body-xl` | 18 → 18 → 16 | set at call site | `leading-body` | 0 | Lede paragraphs |
+| `text-body-lg` | 16 → 16 → 15 | set at call site | `leading-body` | 0 | Reading text |
+| `text-body` | 14 → 14 → 13 | set at call site | `leading-body` | 0 | Default UI copy |
+| `text-body-sm` | 13 | set at call site | `leading-body` / `leading-normal` | 0 | Secondary text |
+| `text-body-xs` | 12 | set at call site | `leading-body` | 0 | Fine print, meta |
+| `text-label` | 11 | **700** | **1.3** | **+0.06em, uppercase** | Section labels |
 
-| Class | Desktop | Use |
-|-------|---------|-----|
-| `.t-display` | 34px / 800 | The largest product heading |
-| `.t-h1` | 32px / 800 | Page title |
-| `.t-h1-sm` | 24px / 800 | Section title when the page title is gone |
-| `.t-h2` | 19px / 700 | Card titles |
-| `.t-body` | 14px / 400 | Reading copy |
-| `.t-label` | 11px / 700, uppercase | Eyebrows on cards. Cool grey, not blue |
+**Bold values are built into the class.** Every heading class carries its own line-height — don't add `leading-*` to a heading. `text-h2`, `text-h4`, `text-h6`, `text-title` and `text-label` also carry their weight; give `text-display`, `text-h1`, `text-h3` and `text-h5` a weight at the call site. Body tiers set size only: pair them with `leading-body`. Every tier is a Tailwind utility, so `font-*`, `leading-*`, `tracking-*` and `md:`-style variants on the same element override it. Add `t-num` for tabular figures.
 
-`.t-label` is uppercase. Headlines are not.
+Use these classes, never raw px. The responsive steps are built in, so one class scales across all three breakpoints. Heading **tags** follow the page outline (one `<h1>` per page, sections `<h2>`, …), not the visual size — choose the class for the size and the tag for the structure.
 
 ### Principles
-- Extrabold or quiet. Headlines 800 (700 on `.t-h2` / `.t-h3`). Body 400. Mid weights are for eyebrows, buttons, and labels.
-- Body copy is muted cool or warm grey, not pure black.
-- At most one highlighted phrase per headline, in `--blue-lit`.
-- Mobile form fields render at ≥16px. iOS Safari zooms below that.
+- **Extrabold or quiet, nothing between.** Headlines sit at 800; body sits at 400. The gap between them is the hierarchy. Mid-weights (500/600) appear only on eyebrows, buttons, and small labels.
+- **Tracking runs opposite by scale.** Large headlines tighten (display −0.28px, h1 −0.22px, h2 −0.5px); labels and eyebrows open up (+0.06em / +0.24px). Everything between sits at zero.
+- **Headlines may highlight one phrase.** One phrase per headline, colored `brand-blue-500`
+  by default. On the indigo section canvas, the highlight may instead be orange — the same
+  exception as the eyebrow, and for the same reason: blue-on-blue disappears there. It does
+  not apply on warm canvas or white; there, the highlight stays blue.
+- **Body text stays muted.** `neutral-600` on light surfaces, a light neutral on indigo. Readable but never competing with the headline.
+- **Eyebrows are uppercase medium.** `text-body-lg uppercase`, weight 500, +0.24px tracking, colored
+  `brand-blue-500` by default. On the indigo section canvas, the eyebrow may instead be
+  orange — the same exception as the headline highlight above.
+
+### Don'ts
+- **No all-caps headlines.** Eyebrows are uppercase; headlines never are.
+- No cramped line height — headings run 1.05 (display) to 1.25 (h5/h6), never below 1.0; body sits at 155%.
+- No manual letter-spacing beyond the tokens.
 
 ## 4. Component Stylings
 
@@ -261,10 +273,10 @@ Button rows stack before labels wrap. Split sections stack image below text. The
 - Other filled CTA: `.btn-lit-blue`
 - Quiet pair: `.btn-secondary-v2`
 - Card: `.glass-card`
-- Page title (product): `.t-h1` in `--text-title-cool`
-- Page title (marketing): `text-h1`, one phrase in `--blue-lit`
+- Page title (product): `text-h4` in `--text-title-cool`
+- Page title (marketing): `text-display`, one phrase in `--blue-lit`
 - Body: `--text-body-cool`
-- Eyebrow: `.t-label` or caption-large, `--text-muted-cool`
+- Eyebrow: `text-label` or `text-body-lg uppercase`, `--text-muted-cool`
 
 ### Iteration
 1. Set the cool wash, and blooms if the page is glass over a marketing ground.

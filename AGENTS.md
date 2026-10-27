@@ -70,7 +70,7 @@ Never write "Animoca Minds" in body copy, headlines, or UI. The lockup
 8. **No dark mode.** Do not add `prefers-color-scheme` blocks or dark variants.
 
 9. **Mobile inputs must render at ≥16px.** iOS Safari auto-zooms below that. Use
-   `text-[16px] md:text-body-default` on any `input`, `textarea`, or `select`.
+   `text-[16px] md:text-body` on any `input`, `textarea`, or `select`.
 
 10. **Button text is always one line.** Every button carries `whitespace-nowrap` — never
     remove it. Since the label then overflows instead of wrapping, the row has to give:

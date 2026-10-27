@@ -17,11 +17,20 @@ tailwind.config = {
       fontFamily: { sans: ['Manrope', 'sans-serif'] },
       spacing: scale(1,2,3,4,8,12,16,20,24,36,40,48,60,72,84,96,108,120,160,200,240),
       fontSize: {
-        'h1':['var(--font-size-h1)',{lineHeight:'var(--line-height-heading)',letterSpacing:'var(--letter-spacing-h1)',fontWeight:'800'}],
-        'h2':['var(--font-size-h2)',{lineHeight:'var(--line-height-heading)',letterSpacing:'var(--letter-spacing-h2)',fontWeight:'800'}],
-        'body-xlarge':['var(--font-size-body-xlarge)',{lineHeight:'var(--line-height-body)'}],
-        'body-large':['var(--font-size-body-large)',{lineHeight:'var(--line-height-body)'}],
-        'caption-large':['var(--font-size-caption-large)',{lineHeight:'var(--line-height-caption)',letterSpacing:'var(--letter-spacing-caption)'}],
+        'display':['var(--font-size-display)',{lineHeight:'var(--line-height-display)'}],
+        'h1':['var(--font-size-h1)',{lineHeight:'var(--line-height-h1)'}],
+        'h2':['var(--font-size-h2)',{lineHeight:'var(--line-height-h2)',letterSpacing:'var(--letter-spacing-h2)',fontWeight:'800'}],
+        'h3':['var(--font-size-h3)',{lineHeight:'var(--line-height-h3)'}],
+        'h4':['var(--font-size-h4)',{lineHeight:'var(--line-height-h4)',letterSpacing:'var(--letter-spacing-h4)',fontWeight:'800'}],
+        'h5':['var(--font-size-h5)',{lineHeight:'var(--line-height-h5)'}],
+        'h6':['var(--font-size-h6)',{lineHeight:'var(--line-height-h6)',letterSpacing:'var(--letter-spacing-h6)',fontWeight:'700'}],
+        'title':['var(--font-size-title)',{lineHeight:'var(--line-height-title)',fontWeight:'700'}],
+        'body-xl':['var(--font-size-body-xl)'],
+        'body-lg':['var(--font-size-body-lg)'],
+        'body':['var(--font-size-body)'],
+        'body-sm':['var(--font-size-body-sm)'],
+        'body-xs':['var(--font-size-body-xs)'],
+        'label':['var(--font-size-label)',{lineHeight:'var(--line-height-label)',letterSpacing:'var(--letter-spacing-label)',fontWeight:'700'}],
       },
       maxWidth: { 'page':'1120px', 'prose':'60ch' },
     },
@@ -43,11 +52,11 @@ tailwind.config = {
 
 <section class="px-24 py-96 md:py-120">
   <div class="mx-auto max-w-page">
-    <p class="text-caption-large font-medium mb-16" style="color: var(--text-muted-cool)">Eyebrow</p>
-    <h1 class="text-h1 max-w-[16ch]" style="color: var(--text-title-cool)">
+    <p class="text-body-lg uppercase font-medium mb-16" style="color: var(--text-muted-cool)">Eyebrow</p>
+    <h1 class="text-display font-extrabold max-w-[16ch]" style="color: var(--text-title-cool)">
       Your headline goes here, with <span style="color: var(--blue-lit)">one phrase in blue</span>
     </h1>
-    <p class="text-body-xlarge max-w-prose mt-24 mb-40" style="color: var(--text-body-cool)">
+    <p class="text-body-xl leading-body max-w-prose mt-24 mb-40" style="color: var(--text-body-cool)">
       One or two plain sentences saying what the reader actually gets.
     </p>
     <div class="flex flex-col items-stretch gap-12 sm:flex-row sm:flex-wrap sm:items-center">
@@ -59,19 +68,19 @@ tailwind.config = {
 
 <section class="px-24 pb-120">
   <div class="mx-auto max-w-page">
-    <h2 class="text-h2 max-w-[20ch] mb-40" style="color: var(--text-title-cool)">A section that earns its size</h2>
+    <h2 class="text-h1 font-extrabold max-w-[20ch] mb-40" style="color: var(--text-title-cool)">A section that earns its size</h2>
     <div class="grid gap-24 md:grid-cols-3">
       <article class="glass-card p-24">
-        <h3 class="t-h2 mb-12" style="color: var(--text-title-cool)">First benefit</h3>
-        <p class="text-body-large m-0" style="color: var(--text-body-cool)">What it does for the reader, in one plain sentence.</p>
+        <h3 class="text-h6 mb-12" style="color: var(--text-title-cool)">First benefit</h3>
+        <p class="text-body-lg leading-body m-0" style="color: var(--text-body-cool)">What it does for the reader, in one plain sentence.</p>
       </article>
       <article class="glass-card p-24">
-        <h3 class="t-h2 mb-12" style="color: var(--text-title-cool)">Second benefit</h3>
-        <p class="text-body-large m-0" style="color: var(--text-body-cool)">What it does for the reader, in one plain sentence.</p>
+        <h3 class="text-h6 mb-12" style="color: var(--text-title-cool)">Second benefit</h3>
+        <p class="text-body-lg leading-body m-0" style="color: var(--text-body-cool)">What it does for the reader, in one plain sentence.</p>
       </article>
       <article class="glass-card p-24">
-        <h3 class="t-h2 mb-12" style="color: var(--text-title-cool)">Third benefit</h3>
-        <p class="text-body-large m-0" style="color: var(--text-body-cool)">What it does for the reader, in one plain sentence.</p>
+        <h3 class="text-h6 mb-12" style="color: var(--text-title-cool)">Third benefit</h3>
+        <p class="text-body-lg leading-body m-0" style="color: var(--text-body-cool)">What it does for the reader, in one plain sentence.</p>
       </article>
     </div>
   </div>

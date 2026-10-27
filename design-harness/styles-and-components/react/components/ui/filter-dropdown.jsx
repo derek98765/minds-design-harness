@@ -27,7 +27,7 @@ function FilterDropdown({ groups, activeCount = 0, label = "Filters", className 
           <SlidersHorizontal size={14} strokeWidth={2.4} />
           {label}
           {activeCount > 0 && (
-            <span className="flex h-16 min-w-16 items-center justify-center rounded-full bg-[image:var(--gradient-blue)] px-4 text-caption font-bold leading-none text-white">
+            <span className="flex h-16 min-w-16 items-center justify-center rounded-full bg-[image:var(--gradient-blue)] px-4 text-body-xs font-bold leading-none text-white">
               {activeCount}
             </span>
           )}

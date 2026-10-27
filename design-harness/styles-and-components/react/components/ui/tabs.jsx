@@ -1,81 +1,80 @@
-import * as React from "react";
-import * as TabsPrimitive from "@radix-ui/react-tabs";
-import { cn } from "@/lib/utils";
+import * as React from "react"
+import { cva } from "class-variance-authority";
+import * as TabsPrimitive from "@radix-ui/react-tabs"
 
-/**
- * Minds tabs — four shapes on one Radix root, matching the shipped pages in
- * animocaminds-frontend. The look lives in tokens.css (.tabs-*-v2 / .tab-*-v2).
- * Selected is always blue, never orange. Pick the shape by the job:
- *
- *  - "pill"    — two or three big choices (Launch modal: Templates | Custom).
- *                A soft grey track; blue labels; the selected pill is the blue
- *                gradient with white ink. Icons go solid when selected. Full
- *                width on phones.
- *  - "segment" — filters over a list (My Minds: All / Online / Offline).
- *                Free-standing pills, no track; only the selected one has a
- *                faint blue tint and edge. Takes `count` and `dot`.
- *  - "track"   — a small switcher inside a card (Mind detail: Skills | Apps).
- *                A frosted track; the selected option is a --glass-pill tint.
- *                `size="sm"` for a chart's range (1w 1m 3m).
- *  - "line"    — page sections (Referral: Refer a friend | Affiliate). Labels
- *                on a shared hairline; the selected one sits on a 2px gradient
- *                bar.
- *
- * Set `variant` on TabsList; every TabsTrigger inside follows it.
- */
-const VariantContext = React.createContext("pill");
+import { cn } from "@/lib/utils"
 
-const LIST = {
-  pill: "tabs-pill-v2",
-  segment: "tabs-segment-v2",
-  track: "tabs-track-v2",
-  line: "tabs-line-v2",
-};
-const TRIGGER = {
-  pill: "tab-pill-v2",
-  segment: "tab-segment-v2",
-  track: "tab-track-v2",
-  line: "tab-line-v2",
-};
-
-const Tabs = React.forwardRef(({ className, ...props }, ref) => (
-  <TabsPrimitive.Root ref={ref} className={cn("flex flex-col gap-24", className)} {...props} />
-));
-Tabs.displayName = "Tabs";
-
-const TabsList = React.forwardRef(({ className, variant = "pill", size, ...props }, ref) => (
-  <VariantContext.Provider value={variant}>
-    <TabsPrimitive.List
-      ref={ref}
-      className={cn(LIST[variant], variant === "track" && size === "sm" && "tabs-track-v2-sm", className)}
-      {...props}
-    />
-  </VariantContext.Provider>
-));
-TabsList.displayName = "TabsList";
-
-/** `count` (segment, track) shows a quieter number after the label.
- *  `dot` (segment) leads with a status dot: "online" | "offline". */
-const TabsTrigger = React.forwardRef(({ className, count, dot, children, ...props }, ref) => {
-  const variant = React.useContext(VariantContext);
+function Tabs({
+  className,
+  orientation = "horizontal",
+  ...props
+}) {
   return (
-    <TabsPrimitive.Trigger ref={ref} className={cn(TRIGGER[variant], className)} {...props}>
-      {dot && <span className={`dot-${dot}-v2`} />}
-      {children}
-      {count != null && <span className="tab-count-v2">{count}</span>}
-    </TabsPrimitive.Trigger>
+    <TabsPrimitive.Root
+      data-slot="tabs"
+      data-orientation={orientation}
+      className={cn("group/tabs flex gap-2 data-horizontal:flex-col", className)}
+      {...props} />
   );
-});
-TabsTrigger.displayName = "TabsTrigger";
+}
 
-const TabsContent = React.forwardRef(({ className, ...props }, ref) => (
-  <TabsPrimitive.Content ref={ref} className={cn("outline-none", className)} {...props} />
-));
-TabsContent.displayName = "TabsContent";
+const tabsListVariants = cva(
+  "group/tabs-list inline-flex w-fit items-center justify-center rounded-lg p-[3px] text-muted-foreground group-data-horizontal/tabs:h-8 group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col data-[variant=line]:rounded-none",
+  {
+    variants: {
+      variant: {
+        default: "bg-muted",
+        line: "gap-1 bg-transparent",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
 
-// Kept so pages written against the older API still work.
-const TabsListUnderline = React.forwardRef((props, ref) => <TabsList ref={ref} variant="line" {...props} />);
-TabsListUnderline.displayName = "TabsListUnderline";
-const TabsTriggerUnderline = TabsTrigger;
+function TabsList({
+  className,
+  variant = "default",
+  ...props
+}) {
+  return (
+    <TabsPrimitive.List
+      data-slot="tabs-list"
+      data-variant={variant}
+      className={cn(tabsListVariants({ variant }), className)}
+      {...props} />
+  );
+}
 
-export { Tabs, TabsList, TabsTrigger, TabsContent, TabsListUnderline, TabsTriggerUnderline };
+function TabsTrigger({
+  className,
+  ...props
+}) {
+  return (
+    <TabsPrimitive.Trigger
+      data-slot="tabs-trigger"
+      className={cn(
+        "relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 dark:text-muted-foreground dark:hover:text-foreground group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=line]/tabs-list:data-active:shadow-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent dark:group-data-[variant=line]/tabs-list:data-active:border-transparent dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent",
+        "data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground",
+        "after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-vertical/tabs:after:inset-y-0 group-data-vertical/tabs:after:-right-1 group-data-vertical/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
+        className
+      )}
+      {...props} />
+  );
+}
+
+function TabsContent({
+  className,
+  ...props
+}) {
+  return (
+    <TabsPrimitive.Content
+      data-slot="tabs-content"
+      className={cn("flex-1 text-sm outline-none", className)}
+      {...props} />
+  );
+}
+
+export { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants }
