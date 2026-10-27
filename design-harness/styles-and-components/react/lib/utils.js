@@ -4,7 +4,7 @@ import { extendTailwindMerge } from "tailwind-merge";
 /**
  * Custom tailwind-merge instance that knows about our `tokens.css` values.
  *
- * The default twMerge can't tell `text-body` (font-size token) apart
+ * The default twMerge can't tell `text-body-md` (font-size token) apart
  * from `text-brand-blue-01` (color token) — both look like `text-*` utilities,
  * so it treats them as conflicting and keeps the last one. That strips the
  * variant's text color whenever a className passes a font-size utility.
@@ -18,8 +18,8 @@ import { extendTailwindMerge } from "tailwind-merge";
 // The type scale in tokens.css. Every tier must be listed: an unlisted
 // text-* is read as a colour and merged away against the element's colour.
 const FONT_SIZES = [
-  "display", "h1", "h2", "h3", "h4", "h5", "h6", "title",
-  "body-xl", "body-lg", "body", "body-sm", "body-xs", "label",
+  "display", "h1", "h2", "h3", "h4", "h5", "h6", "item-title",
+  "body-xl", "body-lg", "body-md", "body-sm", "body-xs", "label",
 ];
 
 const COLORS = [

@@ -102,22 +102,22 @@ One scale for every page — marketing and product alike. Defined in `tokens.css
 
 | Class | Size (desktop → ≤1024px → ≤767px) | Weight | Line height | Tracking | Use |
 |-------|-----------------------------------|--------|-------------|----------|-----|
-| `text-display` | 56 → 48 → 40 | set at call site (800) | **1.05** | −0.28px | Hero headlines |
-| `text-h1` | 44 → 36 → 30 | set at call site (800) | **1.1** | −0.22px | Page-level marketing headlines |
-| `text-h2` | 32 → 28 → 24 | **800** | **1.18** | **−0.5 → −0.4 → −0.3px** | Section headlines, big figures |
-| `text-h3` | 28 → 24 → 20 | set at call site (800) | **1.2** | 0 | Feature titles |
-| `text-h4` | 24 → 21 → 19 | **800** | **1.2** | **−0.24 → −0.2 → −0.16px** | Product page titles (`PageTitle`) |
-| `text-h5` | 22 → 20 → 18 | set at call site (700) | **1.25** | 0 | Small headings |
-| `text-h6` | 19 → 18 → 17 | **700** | **1.25** | **−0.2 → −0.2 → −0.1px** | Card headings — smallest heading |
-| `text-title` | 15 | **700** | **1.35** | 0 | Card / row / empty-state titles. Not a heading |
+| `text-display` | 56 → 48 → 40 | set at call site (800) | **59 → 51 → 42px** | −0.28px | Hero headlines |
+| `text-h1` | 44 → 36 → 30 | set at call site (800) | **49 → 40 → 33px** | −0.22px | Page-level marketing headlines |
+| `text-h2` | 32 → 28 → 24 | **800** | **38 → 34 → 29px** | **−0.5 → −0.4 → −0.3px** | Section headlines, big figures |
+| `text-h3` | 28 → 24 → 20 | set at call site (800) | **34 → 29 → 24px** | 0 | Feature titles |
+| `text-h4` | 24 → 21 → 19 | **800** | **29 → 26 → 23px** | **−0.24 → −0.2 → −0.16px** | Product page titles (`PageTitle`) |
+| `text-h5` | 22 → 20 → 18 | set at call site (700) | **28 → 25 → 23px** | 0 | Small headings |
+| `text-h6` | 19 → 18 → 17 | **700** | **24 → 23 → 22px** | **−0.2 → −0.2 → −0.1px** | Card headings — smallest heading |
+| `text-item-title` | 15 | **700** | **21px** | 0 | Item, card and row names, empty-state titles. Not a heading |
 | `text-body-xl` | 18 → 18 → 16 | set at call site | `leading-body` | 0 | Lede paragraphs |
 | `text-body-lg` | 16 → 16 → 15 | set at call site | `leading-body` | 0 | Reading text |
-| `text-body` | 14 → 14 → 13 | set at call site | `leading-body` | 0 | Default UI copy |
+| `text-body-md` | 14 → 14 → 13 | set at call site | `leading-body` | 0 | Default UI copy |
 | `text-body-sm` | 13 | set at call site | `leading-body` / `leading-normal` | 0 | Secondary text |
 | `text-body-xs` | 12 | set at call site | `leading-body` | 0 | Fine print, meta |
-| `text-label` | 11 | **700** | **1.3** | **+0.06em, uppercase** | Section labels |
+| `text-label` | 11 | **700** | **15px** | **+0.06em, uppercase** | Section labels |
 
-**Bold values are built into the class.** Every heading class carries its own line-height — don't add `leading-*` to a heading. `text-h2`, `text-h4`, `text-h6`, `text-title` and `text-label` also carry their weight; give `text-display`, `text-h1`, `text-h3` and `text-h5` a weight at the call site. Body tiers set size only: pair them with `leading-body`. Every tier is a Tailwind utility, so `font-*`, `leading-*`, `tracking-*` and `md:`-style variants on the same element override it. Add `t-num` for tabular figures.
+**Bold values are built into the class.** Every heading class carries its own whole-pixel line-height, stepping down with its size — don't add `leading-*` to a heading. `text-h2`, `text-h4`, `text-h6`, `text-item-title` and `text-label` also carry their weight; give `text-display`, `text-h1`, `text-h3` and `text-h5` a weight at the call site. Body tiers set size only: pair them with `leading-body`. Every tier is a Tailwind utility, so `font-*`, `leading-*`, `tracking-*` and `md:`-style variants on the same element override it. Add `t-num` for tabular figures.
 
 Use these classes, never raw px. The responsive steps are built in, so one class scales across all three breakpoints. Heading **tags** follow the page outline (one `<h1>` per page, sections `<h2>`, …), not the visual size — choose the class for the size and the tag for the structure.
 
@@ -135,7 +135,7 @@ Use these classes, never raw px. The responsive steps are built in, so one class
 
 ### Don'ts
 - **No all-caps headlines.** Eyebrows are uppercase; headlines never are.
-- No cramped line height — headings run 1.05 (display) to 1.25 (h5/h6), never below 1.0; body sits at 155%.
+- No cramped line height — heading line heights are whole pixels (display 59px down to h6 22px); body sits at 155%.
 - No manual letter-spacing beyond the tokens.
 
 ## 4. Component Stylings

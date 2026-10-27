@@ -131,7 +131,7 @@ export function PageTitle({ children, sub, action, titleAction, size = "lg", sub
         {sub && (
           <p
             className={cn(
-              "text-body leading-body font-normal text-[var(--text-label-cool)] m-0 mt-8 md:mt-12",
+              "text-body-md leading-body font-normal text-[var(--text-label-cool)] m-0 mt-8 md:mt-12",
               subTruncate && "md:truncate"
             )}
           >
@@ -230,15 +230,6 @@ export function Pill({ tone = "neutral", dot = false, className, children }) {
       {dot && <span className="w-[6px] h-[6px] rounded-full bg-current" />}
       {children}
     </span>
-  );
-}
-
-export function Dot({ on }) {
-  return (
-    <span
-      className="w-[7px] h-[7px] rounded-full shrink-0"
-      style={{ background: on ? "var(--success)" : "var(--line-strong-cool)" }}
-    />
   );
 }
 
@@ -817,7 +808,7 @@ export function Empty({ title, body, action, icon, art }) {
           {icon}
         </div>
       ) : null}
-      <p className="text-title text-[var(--text-title-cool)] m-0">{title}</p>
+      <p className="text-item-title text-[var(--text-title-cool)] m-0">{title}</p>
       {body && <p className="text-body-sm leading-normal font-normal text-[var(--text-label-cool)] m-0 mt-4 max-w-[380px]">{body}</p>}
       {action && <div className="mt-16">{action}</div>}
     </div>

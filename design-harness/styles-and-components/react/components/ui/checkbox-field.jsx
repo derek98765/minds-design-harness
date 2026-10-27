@@ -49,7 +49,7 @@ export function CheckboxField({
         )}
         {...props}
       />
-      <span className={cn("text-body text-neutral-900 leading-body", labelClassName)}>
+      <span className={cn("text-body-md text-neutral-900 leading-body", labelClassName)}>
         {children}
       </span>
     </label>

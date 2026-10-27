@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Minds design tokens — synced from animocaminds-frontend @ f0eaed2a
+   Minds design tokens — synced from animocaminds-frontend @ defb8a61-dirty
    (src/assets/styles/tokens-v2.css). Do not edit here: change the frontend
    and rerun the update-design-harness skill.
    ========================================================================== */
@@ -1774,7 +1774,7 @@ body:has(.nav-white-v2):not(:has(.v2)) {
 
 /* ── Type scale ──────────────────────────────────────────────────────────
    Lives in tokens.css now — one scale for the whole app (text-display,
-   text-h1…h6, text-title, text-body-*, text-label). Only .t-num stays here:
+   text-h1…h6, text-item-title, text-body-*, text-label). Only .t-num stays here:
    it is a figure style, not a size, and composes with any tier. */
 .v2 .t-num {
   font-variant-numeric: tabular-nums;
@@ -5101,23 +5101,23 @@ body:has(.composer-dock-v2) [data-sonner-toaster][data-y-position="bottom"] {
   --font-size-h4: 24px;
   --font-size-h5: 22px;
   --font-size-h6: 19px;
-  --font-size-title: 15px;
+  --font-size-item-title: 15px;
   --font-size-body-xl: 18px;
   --font-size-body-lg: 16px;
-  --font-size-body: 14px;
+  --font-size-body-md: 14px;
   --font-size-body-sm: 13px;
   --font-size-body-xs: 12px;
   --font-size-label: 11px;
+  --line-height-display: 59px;
+  --line-height-h1: 49px;
+  --line-height-h2: 38px;
+  --line-height-h3: 34px;
+  --line-height-h4: 29px;
+  --line-height-h5: 28px;
+  --line-height-h6: 24px;
+  --line-height-item-title: 21px;
+  --line-height-label: 15px;
   --line-height-body: 155%;
-  --line-height-display: 1.05;
-  --line-height-h1: 1.1;
-  --line-height-h2: 1.18;
-  --line-height-h3: 1.2;
-  --line-height-h4: 1.2;
-  --line-height-h5: 1.25;
-  --line-height-h6: 1.25;
-  --line-height-title: 1.35;
-  --line-height-label: 1.3;
   --letter-spacing-h2: -0.5px;
   --letter-spacing-h4: -0.24px;
   --letter-spacing-h6: -0.2px;
@@ -5136,6 +5136,13 @@ body:has(.composer-dock-v2) [data-sonner-toaster][data-y-position="bottom"] {
     --font-size-h4: 21px;
     --font-size-h5: 20px;
     --font-size-h6: 18px;
+    --line-height-display: 51px;
+    --line-height-h1: 40px;
+    --line-height-h2: 34px;
+    --line-height-h3: 29px;
+    --line-height-h4: 26px;
+    --line-height-h5: 25px;
+    --line-height-h6: 23px;
     --letter-spacing-h2: -0.4px;
     --letter-spacing-h4: -0.2px;
   }
@@ -5152,7 +5159,14 @@ body:has(.composer-dock-v2) [data-sonner-toaster][data-y-position="bottom"] {
     --font-size-h6: 17px;
     --font-size-body-xl: 16px;
     --font-size-body-lg: 15px;
-    --font-size-body: 13px;
+    --font-size-body-md: 13px;
+    --line-height-display: 42px;
+    --line-height-h1: 33px;
+    --line-height-h2: 29px;
+    --line-height-h3: 24px;
+    --line-height-h4: 23px;
+    --line-height-h5: 23px;
+    --line-height-h6: 22px;
     --letter-spacing-h2: -0.3px;
     --letter-spacing-h4: -0.16px;
     --letter-spacing-h6: -0.1px;
@@ -5199,12 +5213,12 @@ body:has(.composer-dock-v2) [data-sonner-toaster][data-y-position="bottom"] {
   --text-h6--line-height: var(--line-height-h6);
   --text-h6--letter-spacing: var(--letter-spacing-h6);
   --text-h6--font-weight: 700;
-  --text-title: var(--font-size-title);
-  --text-title--line-height: var(--line-height-title);
-  --text-title--font-weight: 700;
+  --text-item-title: var(--font-size-item-title);
+  --text-item-title--line-height: var(--line-height-item-title);
+  --text-item-title--font-weight: 700;
   --text-body-xl: var(--font-size-body-xl);
   --text-body-lg: var(--font-size-body-lg);
-  --text-body: var(--font-size-body);
+  --text-body-md: var(--font-size-body-md);
   --text-body-sm: var(--font-size-body-sm);
   --text-body-xs: var(--font-size-body-xs);
   --font-weight-light: var(--font-weight-light);
