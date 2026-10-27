@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import emptyArt from "@/assets/empty-result.webp";
 import { mindAvatar, fullBodyFor } from "@/shims/mind-avatar";
+import masterMindArt from "@/assets/master-mind.webp";
 
 /* ── Surface ─────────────────────────────────────────────────────────────── */
 
@@ -888,7 +889,7 @@ function FullBodyHeadAvatar({ src, size, name }) {
 export function MasterMindAvatar({ size = 48 }) {
   return (
     <FullBodyHeadAvatar
-      src="/images/mindsTemplate/full-body/master-mind.webp"
+      src={masterMindArt}
       size={size}
       name="Master Mind"
     />
