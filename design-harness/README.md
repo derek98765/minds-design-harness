@@ -18,6 +18,22 @@ your-project/
 from there, never from inside a subfolder. That file is what makes everything else apply
 automatically. (`AGENTS.md` is the same content, for tools that look for that name.)
 
+## Requirements
+
+Only needed if you want Claude to generate new Mind images (icons, cutouts, toy cards).
+Everything else works without them.
+
+- **The `image-gen` skill** — runs the actual generation. Install it from
+  [derek98765/image-gen](https://github.com/derek98765/image-gen), then start a new
+  Claude Code session:
+  ```bash
+  git clone https://github.com/derek98765/image-gen /tmp/image-gen \
+    && cp -r /tmp/image-gen/skills/image-gen ~/.claude/skills/
+  ```
+- **Codex CLI or Grok CLI** — `image-gen` drives one of them. Codex needs v0.115 or
+  later and a one-time `codex login`. The `image-gen` skill has the install steps for both.
+- **Python package `Pillow`** — for the image checks: `pip3 install pillow`.
+
 ## Use it
 
 Open Claude Code in your project and describe the page you want:
