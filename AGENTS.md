@@ -91,6 +91,12 @@ Never write "Animoca Minds" in body copy, headlines, or UI. The lockup
     brand library). Both skills need the `image-gen` skill installed
     (https://github.com/derek98765/image-gen); if it's missing, point the user there.
 
+**Required skills.** Building pages needs the `responsive-design`
+(https://github.com/derek98765/responsive-design) and `image-optimization`
+(https://github.com/derek98765/image-optimization) skills installed. Use
+`responsive-design` when adapting a layout to tablet or mobile, and `image-optimization`
+before shipping any new image. If either is missing, point the user to its repo.
+
 ## Before you say you're done
 
 Run the checks and fix anything they report:

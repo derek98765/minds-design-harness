@@ -20,12 +20,25 @@ automatically. (`AGENTS.md` is the same content, for tools that look for that na
 
 ## Requirements
 
-Only needed if you want Claude to generate new Mind images (icons, cutouts, toy cards).
-Everything else works without them.
+Two Claude Code skills are needed to build pages. Install them once, then start a new
+Claude Code session:
 
-- **The `image-gen` skill** — runs the actual generation. Install it from
-  [derek98765/image-gen](https://github.com/derek98765/image-gen), then start a new
-  Claude Code session:
+- **`responsive-design`** — adapts a desktop layout to tablet and mobile. From
+  [derek98765/responsive-design](https://github.com/derek98765/responsive-design):
+  ```bash
+  git clone https://github.com/derek98765/responsive-design ~/.claude/skills/responsive-design
+  ```
+- **`image-optimization`** — converts images to `.webp` at the size they render. From
+  [derek98765/image-optimization](https://github.com/derek98765/image-optimization):
+  ```bash
+  git clone https://github.com/derek98765/image-optimization /tmp/image-optimization \
+    && cp -r /tmp/image-optimization/skills/image-optimization ~/.claude/skills/
+  ```
+
+To generate new Mind images (icons, cutouts, toy cards) you also need:
+
+- **The `image-gen` skill** — runs the actual generation. From
+  [derek98765/image-gen](https://github.com/derek98765/image-gen):
   ```bash
   git clone https://github.com/derek98765/image-gen /tmp/image-gen \
     && cp -r /tmp/image-gen/skills/image-gen ~/.claude/skills/
