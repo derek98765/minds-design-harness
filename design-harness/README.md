@@ -99,7 +99,7 @@ styles-and-components/   What you build with — tokens.css, the HTML starter, t
 checks/                  Scripts that catch mistakes, plus a human review checklist.
 assets/                  artwork/ (info-graphics, avatars, illustrations),
                          minds-mascot/ (clean Mind cutouts, toy cards), brand/ (logos, icons, fonts).
-sample-screens/          Full-page screenshots of shipped pages: homepage, launch modal,
+sample-screens/          Full-page screenshots of shipped pages: homepage, onboarding (launch modal),
                          and the signed-in profile pages.
 ```
 
